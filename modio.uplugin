@@ -1,0 +1,23 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "modio",
+	"Description": "Powerful Mod API",
+	"Category": "Other",
+	"CreatedBy": "mod.io",
+	"CreatedByURL": "mod.io",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": true,
+	"IsBetaVersion": true,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "modio",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}
