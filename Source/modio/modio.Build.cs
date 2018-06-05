@@ -35,7 +35,6 @@ public class modio : ModuleRules
 				// ... add public include paths required here ...
 			}
 			);
-				
 		
 		PrivateIncludePaths.AddRange(
 			new string[] {
@@ -43,7 +42,6 @@ public class modio : ModuleRules
 				// ... add other private include paths required here ...
 			}
 			);
-			
 		
 		PublicDependencyModuleNames.AddRange(
 			new string[]
@@ -56,7 +54,6 @@ public class modio : ModuleRules
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);
-			
 		
 		PrivateDependencyModuleNames.AddRange(
 			new string[]
@@ -64,7 +61,6 @@ public class modio : ModuleRules
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);
-		
 		
 		DynamicallyLoadedModuleNames.AddRange(
 			new string[]
@@ -85,7 +81,7 @@ public class modio : ModuleRules
 			string DLLPath = Path.Combine(ThirdPartyPath, "modioSDK", "bin", "visualc++", "x64");
 
 			PublicLibraryPaths.Add(LibrariesPath);
-            PublicAdditionalLibraries.Add("modio.lib");
+			PublicAdditionalLibraries.Add("modio.lib");
 			RuntimeDependencies.Add(Path.Combine(DLLPath, "modio.dll"));
 
 			string ProjectBinariesDirectory = Path.Combine(ProjectPath, "Binaries", "Win64");
