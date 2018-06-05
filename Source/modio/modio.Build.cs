@@ -11,9 +11,13 @@ public class modio : ModuleRules
         get { return ModuleDirectory; }
     }
 
+	private string ProjectPath
+	{
+		get { return Path.GetFullPath(Path.Combine(ModuleDirectory, "..", "..", "..", "..")); }
+	}
+
     private string ThirdPartyPath
     {
-	
         get { return Path.GetFullPath(Path.Combine(ModulePath, "../../ThirdParty/")); }
     }
 
@@ -77,12 +81,20 @@ public class modio : ModuleRules
         {
             isLibrarySupported = true;
 
-            //string PlatformString = (Target.Platform == UnrealTargetPlatform.Win64) ? "x64" : "x86";
             string LibrariesPath = Path.Combine(ThirdPartyPath, "modioSDK", "lib", "visualc++", "x64");
             string DLLPath = Path.Combine(ThirdPartyPath, "modioSDK", "bin", "visualc++", "x64");
 
-            PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "modio.lib"));
+			PublicLibraryPaths.Add(LibrariesPath);
+            PublicAdditionalLibraries.Add("modio.lib");
 			RuntimeDependencies.Add(Path.Combine(DLLPath, "modio.dll"));
+
+			string ProjectBinariesDirectory = Path.Combine(ProjectPath, "Binaries", "Win64");
+			if (!Directory.Exists(ProjectBinariesDirectory))
+				System.IO.Directory.CreateDirectory(ProjectBinariesDirectory);
+			
+			string ModioDLLDestination = System.IO.Path.Combine(ProjectBinariesDirectory, "modio.dll");
+			CopyFile(Path.Combine(DLLPath, "modio.dll"), ModioDLLDestination);
+			PublicDelayLoadDLLs.AddRange(new string[] { "modio.dll" });
         }
 
         if (isLibrarySupported)
@@ -92,5 +104,22 @@ public class modio : ModuleRules
         }
 
         return isLibrarySupported;
+    }
+
+	private void CopyFile(string source, string dest)
+    {
+        System.Console.WriteLine("Copying {0} to {1}", source, dest);
+        if (System.IO.File.Exists(dest))
+        {
+            System.IO.File.SetAttributes(dest, System.IO.File.GetAttributes(dest) & ~System.IO.FileAttributes.ReadOnly);
+        }
+        try
+        {
+            System.IO.File.Copy(source, dest, true);
+        }
+        catch (System.Exception ex)
+        {
+            System.Console.WriteLine("Failed to copy file: {0}", ex.Message);
+        }
     }
 }
