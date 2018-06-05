@@ -7,27 +7,27 @@ using UnrealBuildTool;
 public class modio : ModuleRules
 {
 	private string ModulePath
-    {
-        get { return ModuleDirectory; }
-    }
+	{
+		get { return ModuleDirectory; }
+	}
 
 	private string ProjectPath
 	{
 		get { return Path.GetFullPath(Path.Combine(ModuleDirectory, "..", "..", "..", "..")); }
 	}
-
-    private string ThirdPartyPath
-    {
-        get { return Path.GetFullPath(Path.Combine(ModulePath, "../../ThirdParty/")); }
-    }
+	
+	private string ThirdPartyPath
+	{
+		get { return Path.GetFullPath(Path.Combine(ModulePath, "../../ThirdParty/")); }
+	}
 
 	public modio(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
-        PrivateDependencyModuleNames.AddRange(new string[] { });
+		PrivateDependencyModuleNames.AddRange(new string[] { });
 
-        LoadModio(Target);
+		LoadModio(Target);
 		
 		PublicIncludePaths.AddRange(
 			new string[] {
@@ -75,14 +75,14 @@ public class modio : ModuleRules
 	}
 
 	public bool LoadModio(ReadOnlyTargetRules Target)
-    {
-        bool isLibrarySupported = false;
-        if ((Target.Platform == UnrealTargetPlatform.Win64) || (Target.Platform == UnrealTargetPlatform.Win32))
-        {
-            isLibrarySupported = true;
-
-            string LibrariesPath = Path.Combine(ThirdPartyPath, "modioSDK", "lib", "visualc++", "x64");
-            string DLLPath = Path.Combine(ThirdPartyPath, "modioSDK", "bin", "visualc++", "x64");
+	{
+		bool isLibrarySupported = false;
+		if ((Target.Platform == UnrealTargetPlatform.Win64) || (Target.Platform == UnrealTargetPlatform.Win32))
+		{
+			isLibrarySupported = true;
+			
+			string LibrariesPath = Path.Combine(ThirdPartyPath, "modioSDK", "lib", "visualc++", "x64");
+			string DLLPath = Path.Combine(ThirdPartyPath, "modioSDK", "bin", "visualc++", "x64");
 
 			PublicLibraryPaths.Add(LibrariesPath);
             PublicAdditionalLibraries.Add("modio.lib");
@@ -95,31 +95,31 @@ public class modio : ModuleRules
 			string ModioDLLDestination = System.IO.Path.Combine(ProjectBinariesDirectory, "modio.dll");
 			CopyFile(Path.Combine(DLLPath, "modio.dll"), ModioDLLDestination);
 			PublicDelayLoadDLLs.AddRange(new string[] { "modio.dll" });
-        }
-
-        if (isLibrarySupported)
-        {
-            string IncludesPath = Path.Combine(ThirdPartyPath, "modioSDK", "include");
-            PublicIncludePaths.Add(IncludesPath);
-        }
-
-        return isLibrarySupported;
-    }
+		}
+		
+		if (isLibrarySupported)
+		{
+			string IncludesPath = Path.Combine(ThirdPartyPath, "modioSDK", "include");
+			PublicIncludePaths.Add(IncludesPath);
+		}
+		
+		return isLibrarySupported;
+	}
 
 	private void CopyFile(string source, string dest)
-    {
-        System.Console.WriteLine("Copying {0} to {1}", source, dest);
-        if (System.IO.File.Exists(dest))
-        {
-            System.IO.File.SetAttributes(dest, System.IO.File.GetAttributes(dest) & ~System.IO.FileAttributes.ReadOnly);
-        }
-        try
-        {
-            System.IO.File.Copy(source, dest, true);
-        }
-        catch (System.Exception ex)
-        {
-            System.Console.WriteLine("Failed to copy file: {0}", ex.Message);
-        }
-    }
+	{
+		System.Console.WriteLine("Copying {0} to {1}", source, dest);
+		if (System.IO.File.Exists(dest))
+		{
+			System.IO.File.SetAttributes(dest, System.IO.File.GetAttributes(dest) & ~System.IO.FileAttributes.ReadOnly);
+		}
+		try
+		{
+			System.IO.File.Copy(source, dest, true);
+		}
+		catch (System.Exception ex)
+		{
+			System.Console.WriteLine("Failed to copy file: {0}", ex.Message);
+		}
+	}
 }
