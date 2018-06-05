@@ -13,7 +13,7 @@ namespace modio
     u32 mod_id;
     u32 user_id;
     u32 event_type;
-    long date_added;
+    u32 date_added;
 
     void initialize(ModioEvent event);
     json toJson();

@@ -12,6 +12,7 @@ namespace modio
     ModEditor();
     void setVisible(u32 status);
     void setStatus(u32 status);
+    void setMaturityOption(u32 maturity_option);
     void setName(const std::string& name);
     void setNameid(const std::string& name_id);
     void setSummary(const std::string& summary);

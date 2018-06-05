@@ -97,8 +97,8 @@ public:
 
   //Metadata KVP methods
   void getMetadataKVP(u32 mod_id, const std::function<void(const modio::Response &response, std::vector<modio::MetadataKVP> metadata_kvp)> &callback);
-  void addMetadataKVP(u32 mod_id, std::vector<std::pair<std::string, std::string>> metadata_kvp, const std::function<void(const modio::Response &response)> &callback);
-  void deleteMetadataKVP(u32 mod_id, std::vector<std::pair<std::string, std::string>> metadata_kvp, const std::function<void(const modio::Response &response)> &callback);
+  void addMetadataKVP(u32 mod_id, std::map<std::string, std::string> metadata_kvp, const std::function<void(const modio::Response &response)> &callback);
+  void deleteMetadataKVP(u32 mod_id, std::map<std::string, std::string> metadata_kvp, const std::function<void(const modio::Response &response)> &callback);
 
   //Ratings Methods
   void addModRating(u32 mod_id, bool vote_up, const std::function<void(const modio::Response &response)> &callback);

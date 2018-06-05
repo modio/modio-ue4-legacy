@@ -22,9 +22,10 @@ namespace modio
     u32 game_id;
     u32 status;
     u32 visible;
-    long date_added;
-    long date_updated;
-    long date_live;
+    u32 maturity_option;
+    u32 date_added;
+    u32 date_updated;
+    u32 date_live;
     std::string homepage_url;
     std::string name;
     std::string name_id;

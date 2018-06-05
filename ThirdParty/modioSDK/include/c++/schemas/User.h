@@ -11,7 +11,7 @@ namespace modio
   {
   public:
     u32 id;
-    long date_online;
+    u32 date_online;
     std::string username;
     std::string name_id;
     std::string timezone;

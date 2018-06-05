@@ -21,8 +21,6 @@ public class modio : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
-        //PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
-
         PrivateDependencyModuleNames.AddRange(new string[] { });
 
         LoadModio(Target);
@@ -50,7 +48,6 @@ public class modio : ModuleRules
 				"CoreUObject",
 				"Engine",
 				"InputCore",
-				"modio",
 				"Projects"
 				// ... add other public dependencies that you statically link with here ...
 			}
@@ -80,10 +77,12 @@ public class modio : ModuleRules
         {
             isLibrarySupported = true;
 
-            string PlatformString = (Target.Platform == UnrealTargetPlatform.Win64) ? "x64" : "x86";
+            //string PlatformString = (Target.Platform == UnrealTargetPlatform.Win64) ? "x64" : "x86";
             string LibrariesPath = Path.Combine(ThirdPartyPath, "modioSDK", "lib", "visualc++", "x64");
+            string DLLPath = Path.Combine(ThirdPartyPath, "modioSDK", "bin", "visualc++", "x64");
 
             PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "modio.lib"));
+			RuntimeDependencies.Add(Path.Combine(DLLPath, "modio.dll"));
         }
 
         if (isLibrarySupported)

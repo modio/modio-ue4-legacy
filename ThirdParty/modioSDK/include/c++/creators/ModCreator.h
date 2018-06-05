@@ -11,6 +11,7 @@ namespace modio
   public:
     ModCreator();
     void setVisible(u32 visible);
+    void setMaturityOption(u32 maturity_option);
     void setLogoPath(const std::string& path);
     void setName(const std::string& name);
     void setNameid(const std::string& name_id);

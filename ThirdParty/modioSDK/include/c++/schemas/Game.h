@@ -25,6 +25,7 @@ namespace modio
     u32 curation_option;
     u32 revenue_options;
     u32 api_access_options;
+    u32 maturity_options;
     std::string ugc_name;
     std::string instructions_url;
     std::string name;

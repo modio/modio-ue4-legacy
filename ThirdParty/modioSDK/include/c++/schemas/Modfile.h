@@ -15,8 +15,8 @@ namespace modio
     u32 mod_id;
     u32 virus_status;
     u32 virus_positive;
-    long date_added;
-    long date_scanned;
+    u32 date_added;
+    u32 date_scanned;
     long filesize;
     std::string filename;
     std::string version;
