@@ -52,6 +52,7 @@ public:
   //General Methods
   void sleep(u32 milliseconds);
   void process();
+  void setDebugLevel(u32 debug_level);
 
   //Events
   void getEvents(u32 mod_id, modio::FilterCreator &filter, const std::function<void(const modio::Response &, const std::vector<modio::Event> &events)> &callback);
@@ -61,7 +62,6 @@ public:
   //Authentication Methods
   bool isLoggedIn() const;
   void logout() const;
-  void setDebugLevel(u32 debug_level);
   void emailRequest(const std::string &email, const std::function<void(const modio::Response &)> &callback);
   void emailExchange(const std::string &security_code, const std::function<void(const modio::Response &)> &callback);
 

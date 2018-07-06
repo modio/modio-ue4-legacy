@@ -16,10 +16,31 @@ void FmodioModule::StartupModule()
 
 void FmodioModule::ShutdownModule()
 {
-	// This function may be called during shutdown to clean up your module.  For modules that support dynamic reloading,
-	// we call this function before unloading the module.
-
 	delete modio_instance;
+}
+
+UModioBPFunctionLibrary::UModioBPFunctionLibrary(const FObjectInitializer &ObjectInitializer)
+	: Super(ObjectInitializer)
+{
+}
+
+void UModioBPFunctionLibrary::modioProcess()
+{
+	modio_instance->process();
+}
+
+void UModioBPFunctionLibrary::modioEmailRequest(FString email)
+{
+	modio_instance->emailRequest(std::string(TCHAR_TO_UTF8(*email)), [&](const modio::Response &response) {
+		UModioPluginComponent::OnEmailRequestDelegate.Broadcast((int32)response.code);
+	});
+}
+
+void UModioBPFunctionLibrary::modioEmailExchange(FString security_code)
+{
+	modio_instance->emailExchange(std::string(TCHAR_TO_UTF8(*security_code)), [&](const modio::Response &response) {
+		UModioPluginComponent::OnEmailExchangeDelegate.Broadcast((int32)response.code);
+	});
 }
 
 #undef LOCTEXT_NAMESPACE

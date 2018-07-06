@@ -46,6 +46,7 @@
 
 #ifdef WINDOWS
 #include <windows.h>
+#include <strsafe.h>
 #include "dependencies/dirent/dirent.h"
 #endif
 

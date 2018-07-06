@@ -77,8 +77,8 @@ public class modio : ModuleRules
 		{
 			isLibrarySupported = true;
 			
-			string LibrariesPath = Path.Combine(ThirdPartyPath, "modioSDK", "lib", "visualc++", "x64");
-			string DLLPath = Path.Combine(ThirdPartyPath, "modioSDK", "bin", "visualc++", "x64");
+			string LibrariesPath = Path.Combine(ThirdPartyPath, "modioSDK", "lib", "nmake", "x64");
+			string DLLPath = Path.Combine(ThirdPartyPath, "modioSDK", "bin", "nmake", "x64");
 
 			PublicLibraryPaths.Add(LibrariesPath);
 			PublicAdditionalLibraries.Add("modio.lib");

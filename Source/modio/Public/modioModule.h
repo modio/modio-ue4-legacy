@@ -4,6 +4,8 @@
 
 #include "ModuleManager.h"
 #include "modio.h"
+#include "ModioPluginComponent.h"
+#include "modioModule.generated.h"
 
 extern modio::Instance *modio_instance;
 
@@ -16,4 +18,19 @@ public:
 	virtual void ShutdownModule() override;
 
 private:
+};
+
+UCLASS()
+class UModioBPFunctionLibrary : public UBlueprintFunctionLibrary
+{
+	GENERATED_UCLASS_BODY()
+
+	UFUNCTION(BlueprintCallable, Category="mod.io")
+	static void modioProcess();
+
+	UFUNCTION(BlueprintCallable, Category="mod.io")
+	static void modioEmailRequest(FString email);
+
+	UFUNCTION(BlueprintCallable, Category="mod.io")
+	static void modioEmailExchange(FString security_code);
 };
