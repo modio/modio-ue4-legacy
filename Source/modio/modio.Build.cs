@@ -6,6 +6,8 @@ using UnrealBuildTool;
 
 public class modio : ModuleRules
 {
+	private String modio_directory = "mod.io-sdk-v0.10.1";
+
 	private string ModulePath
 	{
 		get { return ModuleDirectory; }
@@ -77,8 +79,8 @@ public class modio : ModuleRules
 		{
 			isLibrarySupported = true;
 			
-			string LibrariesPath = Path.Combine(ThirdPartyPath, "modioSDK", "lib", "nmake", "x64");
-			string DLLPath = Path.Combine(ThirdPartyPath, "modioSDK", "bin", "nmake", "x64");
+			string LibrariesPath = Path.Combine(ThirdPartyPath, modio_directory, "lib", "visualc++", "x64");
+			string DLLPath = Path.Combine(ThirdPartyPath, modio_directory, "bin", "visualc++", "x64");
 
 			PublicLibraryPaths.Add(LibrariesPath);
 			PublicAdditionalLibraries.Add("modio.lib");
@@ -95,8 +97,10 @@ public class modio : ModuleRules
 		
 		if (isLibrarySupported)
 		{
-			string IncludesPath = Path.Combine(ThirdPartyPath, "modioSDK", "include");
-			PublicIncludePaths.Add(IncludesPath);
+			string ModioIncludePath = Path.Combine(ThirdPartyPath, modio_directory, "include");
+			string AdditionalDependenciesPath = Path.Combine(ThirdPartyPath, modio_directory, "additional_dependencies");
+			PublicIncludePaths.Add(ModioIncludePath);
+			PublicIncludePaths.Add(AdditionalDependenciesPath);
 		}
 		
 		return isLibrarySupported;
