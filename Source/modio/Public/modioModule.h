@@ -5,6 +5,13 @@
 #include "ModuleManager.h"
 #include "modio.h"
 #include "ModioPluginComponent.h"
+
+// Settings
+#include "ModioGameSettings.h"
+#include "ISettingsModule.h"
+#include "ISettingsSection.h"
+#include "ISettingsContainer.h"
+
 #include "modioModule.generated.h"
 
 extern modio::Instance *modio_instance;
@@ -16,8 +23,13 @@ public:
 	/** IModuleInterface implementation */
 	virtual void StartupModule() override;
 	virtual void ShutdownModule() override;
+	virtual bool SupportsDynamicReloading() override;
 
 private:
+
+	bool HandleSettingsSaved();
+	void RegisterSettings();
+	void UnregisterSettings();
 };
 
 UCLASS()
