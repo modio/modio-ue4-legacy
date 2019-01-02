@@ -22,6 +22,11 @@ void FModioModule::StartupModule()
 	std::string api_key = std::string(TCHAR_TO_UTF8(*(Settings->ApiKey)));
 
 	modio_instance = new modio::Instance(environment, game_id, api_key);
+
+	modio_instance->setDownloadListener([&](u32 response_code, u32 mod_id) {
+		UModioPluginComponent::OnModDownloadDelegate.Broadcast((int32)response_code);
+	});
+
 	RegisterSettings();
 }
 
