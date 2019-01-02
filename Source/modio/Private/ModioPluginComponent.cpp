@@ -3,6 +3,7 @@
 
 UModioPluginComponent::FModioPlugin_OnEmailRequestDelegate UModioPluginComponent::OnEmailRequestDelegate;
 UModioPluginComponent::FModioPlugin_OnEmailExchangeDelegate UModioPluginComponent::OnEmailExchangeDelegate;
+UModioPluginComponent::FModioPlugin_OnModDownloadDelegate UModioPluginComponent::OnModDownloadDelegate;
 
 void UModioPluginComponent::OnRegister()
 {
@@ -15,6 +16,7 @@ void UModioPluginComponent::OnUnregister()
 {
 	OnEmailRequestDelegate.RemoveAll(this);
 	OnEmailExchangeDelegate.RemoveAll(this);
+	OnModDownloadDelegate.RemoveAll(this);
 	Super::OnUnregister();
 }
 
@@ -31,5 +33,13 @@ void UModioPluginComponent::OnEmailExchangeDelegate_Handler(int32 response_code)
 	FFunctionGraphTask::CreateAndDispatchWhenReady([=]()
 	{
 		OnEmailExchangeDynamicDelegate.Broadcast(response_code);
+	}, TStatId(), NULL, ENamedThreads::GameThread);
+}
+
+void UModioPluginComponent::OnModDownloadDelegate_Handler(int32 response_code)
+{
+	FFunctionGraphTask::CreateAndDispatchWhenReady([=]()
+	{
+		OnModDownloadDynamicDelegate.Broadcast(response_code);
 	}, TStatId(), NULL, ENamedThreads::GameThread);
 }
