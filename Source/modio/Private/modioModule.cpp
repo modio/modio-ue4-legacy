@@ -3,19 +3,29 @@
 #include "modioModule.h"
 #include "Core.h"
 #include "ModuleManager.h"
-#include "IPluginManager.h"
+#include "Runtime/Projects/Public/Interfaces/IPluginManager.h"
 
-#define LOCTEXT_NAMESPACE "FmodioModule"
+#define LOCTEXT_NAMESPACE "FModioModule"
 
 modio::Instance *modio_instance;
 
-void FmodioModule::StartupModule()
+void FModioModule::StartupModule()
 {
-	modio_instance = new modio::Instance(MODIO_ENVIRONMENT_TEST, 7, "e91c01b8882f4affeddd56c96111977b");
+	UModioGameSettings *Settings = GetMutableDefault<UModioGameSettings>();
+
+	u32 environment;
+	if (Settings->IsLiveEnvironment)
+		environment = MODIO_ENVIRONMENT_LIVE;
+	else
+		environment = MODIO_ENVIRONMENT_TEST;
+	u32 game_id = Settings->GameId;
+	std::string api_key = std::string(TCHAR_TO_UTF8(*(Settings->ApiKey)));
+
+	modio_instance = new modio::Instance(environment, game_id, api_key);
 	RegisterSettings();
 }
 
-void FmodioModule::ShutdownModule()
+void FModioModule::ShutdownModule()
 {
 	if (UObjectInitialized())
 	{
@@ -24,7 +34,7 @@ void FmodioModule::ShutdownModule()
 	delete modio_instance;
 }
 
-bool FmodioModule::SupportsDynamicReloading()
+bool FModioModule::SupportsDynamicReloading()
 {
 	return true;
 }
@@ -53,9 +63,9 @@ void UModioBPFunctionLibrary::modioEmailExchange(FString security_code)
 	});
 }
 
-bool FmodioModule::HandleSettingsSaved()
+bool FModioModule::HandleSettingsSaved()
 {
-	UModioGameSettings* Settings = GetMutableDefault<UModioGameSettings>();
+	UModioGameSettings *Settings = GetMutableDefault<UModioGameSettings>();
 	bool ResaveSettings = false;
 
 	// You can put any validation code in here and resave the settings in case an invalid
@@ -69,43 +79,42 @@ bool FmodioModule::HandleSettingsSaved()
 	return true;
 }
 
-void FmodioModule::RegisterSettings()
+void FModioModule::RegisterSettings()
 {
 	// Registering some settings is just a matter of exposing the default UObject of
 	// your desired class, feel free to add here all those settings you want to expose
 	// to your LDs or artists.
 
-	if (ISettingsModule* SettingsModule = FModuleManager::GetModulePtr<ISettingsModule>("Settings"))
+	if (ISettingsModule *SettingsModule = FModuleManager::GetModulePtr<ISettingsModule>("Settings"))
 	{
 		// Create the new category
 		ISettingsContainerPtr SettingsContainer = SettingsModule->GetContainer("Project");
 
 		SettingsContainer->DescribeCategory("mod.io settings",
-			LOCTEXT("RuntimeWDCategoryName", "mod.io settings"),
-			LOCTEXT("RuntimeWDCategoryDescription", "mod.io configuration settings"));
+											LOCTEXT("RuntimeWDCategoryName", "mod.io settings"),
+											LOCTEXT("RuntimeWDCategoryDescription", "mod.io configuration settings"));
 
 		// Register the settings
 		ISettingsSectionPtr SettingsSection = SettingsModule->RegisterSettings("Project", "mod.io settings", "General",
-			LOCTEXT("RuntimeGeneralSettingsName", "General"),
-			LOCTEXT("RuntimeGeneralSettingsDescription", "Base configuration for our game module"),
-			GetMutableDefault<UModioGameSettings>()
-			);
+																			   LOCTEXT("RuntimeGeneralSettingsName", "General"),
+																			   LOCTEXT("RuntimeGeneralSettingsDescription", "Base configuration for our game module"),
+																			   GetMutableDefault<UModioGameSettings>());
 
 		// Register the save handler to your settings, you might want to use it to
 		// validate those or just act to settings changes.
 		if (SettingsSection.IsValid())
 		{
-			SettingsSection->OnModified().BindRaw(this, &FmodioModule::HandleSettingsSaved);
+			SettingsSection->OnModified().BindRaw(this, &FModioModule::HandleSettingsSaved);
 		}
 	}
 }
 
-void FmodioModule::UnregisterSettings()
+void FModioModule::UnregisterSettings()
 {
 	// Ensure to unregister all of your registered settings here, hot-reload would
 	// otherwise yield unexpected results.
 
-	if (ISettingsModule* SettingsModule = FModuleManager::GetModulePtr<ISettingsModule>("Settings"))
+	if (ISettingsModule *SettingsModule = FModuleManager::GetModulePtr<ISettingsModule>("Settings"))
 	{
 		SettingsModule->UnregisterSettings("Project", "mod.io Settings", "General");
 	}
@@ -113,4 +122,4 @@ void FmodioModule::UnregisterSettings()
 
 #undef LOCTEXT_NAMESPACE
 
-IMPLEMENT_MODULE(FmodioModule, modio)
+IMPLEMENT_MODULE(FModioModule, modio)

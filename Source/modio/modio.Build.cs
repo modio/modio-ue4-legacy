@@ -25,15 +25,25 @@ public class modio : ModuleRules
 
 	public modio(ReadOnlyTargetRules Target) : base(Target)
 	{
+		PublicDefinitions.Add("JSON_NOEXCEPTION");
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
 		PrivateDependencyModuleNames.AddRange(new string[] { });
 
 		LoadModio(Target);
+
+		this.bEnableExceptions = true;
 		
 		PublicIncludePaths.AddRange(
 			new string[] {
 				"modio/Public"
+				/*,
+				"Runtime/Core/Public/Modules/",
+				"Editor/UnrealEd/Classes/Factories",
+				"Editor/UnrealEd/Classes",
+				"C:/Users/antar/Documents/Unreal Projects/ModioContainer21/Plugins/modio/Intermediate/Build/Win64/UE4Editor/Inc/modio",
+				"C:/Program Files/Epic Games/UE_4.21/Engine/Intermediate/Build/Win64/UE4Editor/Inc/UnrealEd"
+				*/
 				// ... add public include paths required here ...
 			}
 			);

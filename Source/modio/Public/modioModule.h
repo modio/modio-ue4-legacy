@@ -2,21 +2,21 @@
 
 #pragma once
 
-#include "ModuleManager.h"
+#include "Runtime/Core/Public/Modules/ModuleManager.h"
 #include "modio.h"
 #include "ModioPluginComponent.h"
 
 // Settings
 #include "ModioGameSettings.h"
-#include "ISettingsModule.h"
-#include "ISettingsSection.h"
-#include "ISettingsContainer.h"
+#include "Developer/Settings/Public/ISettingsModule.h"
+#include "Developer/Settings/Public/ISettingsSection.h"
+#include "Developer/Settings/Public/ISettingsContainer.h"
 
 #include "modioModule.generated.h"
 
 extern modio::Instance *modio_instance;
 
-class FmodioModule : public IModuleInterface
+class FModioModule : public IModuleInterface
 {
 public:
 
