@@ -49,23 +49,67 @@ UModioBPFunctionLibrary::UModioBPFunctionLibrary(const FObjectInitializer &Objec
 {
 }
 
-void UModioBPFunctionLibrary::modioProcess()
+void UModioBPFunctionLibrary::ModioProcess()
 {
 	modio_instance->process();
 }
 
-void UModioBPFunctionLibrary::modioEmailRequest(FString email)
+void UModioBPFunctionLibrary::ModioEmailRequest(FString email)
 {
 	modio_instance->emailRequest(std::string(TCHAR_TO_UTF8(*email)), [&](const modio::Response &response) {
 		UModioPluginComponent::OnEmailRequestDelegate.Broadcast((int32)response.code);
 	});
 }
 
-void UModioBPFunctionLibrary::modioEmailExchange(FString security_code)
+void UModioBPFunctionLibrary::ModioEmailExchange(FString security_code)
 {
 	modio_instance->emailExchange(std::string(TCHAR_TO_UTF8(*security_code)), [&](const modio::Response &response) {
 		UModioPluginComponent::OnEmailExchangeDelegate.Broadcast((int32)response.code);
 	});
+}
+
+void UModioBPFunctionLibrary::ModioGetAllInstalledMod(TArray<FModioInstalledMod>& installed_mods)
+{
+	// use mod.io C++ wrapper instead of C
+	u32 installed_mods_size = modioGetAllInstalledModsCount();
+	ModioInstalledMod* modio_installed_mods = (ModioInstalledMod*)malloc(installed_mods_size * sizeof(*modio_installed_mods));
+	modioGetAllInstalledMods(modio_installed_mods);
+
+	for(u32 i=0; i<installed_mods_size; i++)
+	{
+		FModioInstalledMod installed_mod;
+		installed_mod.Path = UTF8_TO_TCHAR(modio_installed_mods[i].path);
+		installed_mod.Id = modio_installed_mods[i].mod.id;
+		installed_mod.Name = UTF8_TO_TCHAR(modio_installed_mods[i].mod.name);
+		installed_mod.Summary = UTF8_TO_TCHAR(modio_installed_mods[i].mod.summary);
+		installed_mod.Description = UTF8_TO_TCHAR(modio_installed_mods[i].mod.description);
+		installed_mods.Add(installed_mod);
+	}
+
+	free(modio_installed_mods);
+}
+
+void UModioBPFunctionLibrary::ModioGetModDownloadQueue(TArray<FModioQueuedModDownload>& queued_mods)
+{
+	// use mod.io C++ wrapper instead of C
+	u32 download_queue_count = modioGetModDownloadQueueCount();
+	ModioQueuedModDownload* modio_queued_mods = (ModioQueuedModDownload*)malloc(download_queue_count * sizeof(*modio_queued_mods));
+	modioGetModDownloadQueue(modio_queued_mods);
+
+	for(u32 i=0; i<download_queue_count; i++)
+	{
+		FModioQueuedModDownload queued_mod;
+		queued_mod.Path = UTF8_TO_TCHAR(modio_queued_mods[i].path);
+		queued_mod.CurrentProgress = modio_queued_mods[i].current_progress;
+		queued_mod.TotalSize = modio_queued_mods[i].total_size;
+		queued_mod.Id = modio_queued_mods[i].mod.id;
+		queued_mod.Name = UTF8_TO_TCHAR(modio_queued_mods[i].mod.name);
+		queued_mod.Summary = UTF8_TO_TCHAR(modio_queued_mods[i].mod.summary);
+		queued_mod.Description = UTF8_TO_TCHAR(modio_queued_mods[i].mod.description);
+		queued_mods.Add(queued_mod);
+	}
+
+	free(modio_queued_mods);
 }
 
 bool FModioModule::HandleSettingsSaved()

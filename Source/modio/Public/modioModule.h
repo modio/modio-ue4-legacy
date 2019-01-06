@@ -16,6 +16,46 @@
 
 extern modio::Instance *modio_instance;
 
+USTRUCT(BlueprintType)
+struct FModioInstalledMod
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+	FString Path;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+	int32 Id;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+	FString Name;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+	FString Summary;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+	FString Description;
+};
+
+USTRUCT(BlueprintType)
+struct FModioQueuedModDownload
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+	FString Path;
+	// TODO: change to int64 unsupported by ue4
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+	int32 CurrentProgress;
+	// TODO: change to int64 unsupported by ue4
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+	int32 TotalSize;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+	int32 Id;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+	FString Name;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+	FString Summary;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+	FString Description;
+};
+
 class FModioModule : public IModuleInterface
 {
 public:
@@ -38,11 +78,17 @@ class UModioBPFunctionLibrary : public UBlueprintFunctionLibrary
 	GENERATED_UCLASS_BODY()
 
 	UFUNCTION(BlueprintCallable, Category="mod.io")
-	static void modioProcess();
+	static void ModioProcess();
 
 	UFUNCTION(BlueprintCallable, Category="mod.io")
-	static void modioEmailRequest(FString email);
+	static void ModioEmailRequest(FString email);
 
 	UFUNCTION(BlueprintCallable, Category="mod.io")
-	static void modioEmailExchange(FString security_code);
+	static void ModioEmailExchange(FString security_code);
+
+	UFUNCTION(BlueprintPure, Category="mod.io")
+	static void ModioGetAllInstalledMod(TArray<FModioInstalledMod>& installed_mods);
+
+	UFUNCTION(BlueprintPure, Category="mod.io")
+	static void ModioGetModDownloadQueue(TArray<FModioQueuedModDownload>& queued_mods);
 };
