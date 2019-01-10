@@ -15,6 +15,7 @@
 #include "modioModule.generated.h"
 
 extern modio::Instance *modio_instance;
+extern std::string current_user_username;
 
 USTRUCT(BlueprintType)
 struct FModioInstalledMod
@@ -91,4 +92,16 @@ class UModioBPFunctionLibrary : public UBlueprintFunctionLibrary
 
 	UFUNCTION(BlueprintPure, Category="mod.io")
 	static void ModioGetModDownloadQueue(TArray<FModioQueuedModDownload>& queued_mods);
+
+	UFUNCTION(BlueprintCallable, Category="mod.io")
+	static void ModioInstallDownloadedMods();
+
+	UFUNCTION(BlueprintCallable, Category="mod.io")
+	static void ModioLogout();
+
+	UFUNCTION(BlueprintCallable, Category="mod.io")
+	static void ModioIsLoggedIn(bool& is_logged_in);
+
+	UFUNCTION(BlueprintCallable, Category="mod.io")
+	static void ModioGetAuthenticatedUser(FString& username);
 };

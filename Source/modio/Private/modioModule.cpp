@@ -8,6 +8,7 @@
 #define LOCTEXT_NAMESPACE "FModioModule"
 
 modio::Instance *modio_instance;
+std::string current_user_username;
 
 void FModioModule::StartupModule()
 {
@@ -25,6 +26,13 @@ void FModioModule::StartupModule()
 
 	modio_instance->setDownloadListener([&](u32 response_code, u32 mod_id) {
 		UModioPluginComponent::OnModDownloadDelegate.Broadcast((int32)response_code);
+	});
+
+	current_user_username = "";
+
+	modio_instance->getAuthenticatedUser([&](const modio::Response& response, const modio::User& user)
+	{
+		current_user_username = user.username;
 	});
 
 	RegisterSettings();
@@ -64,18 +72,23 @@ void UModioBPFunctionLibrary::ModioEmailRequest(FString email)
 void UModioBPFunctionLibrary::ModioEmailExchange(FString security_code)
 {
 	modio_instance->emailExchange(std::string(TCHAR_TO_UTF8(*security_code)), [&](const modio::Response &response) {
+		modio_instance->getAuthenticatedUser([&](const modio::Response& response, const modio::User& user)
+		{
+			current_user_username = user.username;
+		});
+
 		UModioPluginComponent::OnEmailExchangeDelegate.Broadcast((int32)response.code);
 	});
 }
 
-void UModioBPFunctionLibrary::ModioGetAllInstalledMod(TArray<FModioInstalledMod>& installed_mods)
+void UModioBPFunctionLibrary::ModioGetAllInstalledMod(TArray<FModioInstalledMod> &installed_mods)
 {
 	// use mod.io C++ wrapper instead of C
 	u32 installed_mods_size = modioGetAllInstalledModsCount();
-	ModioInstalledMod* modio_installed_mods = (ModioInstalledMod*)malloc(installed_mods_size * sizeof(*modio_installed_mods));
+	ModioInstalledMod *modio_installed_mods = (ModioInstalledMod *)malloc(installed_mods_size * sizeof(*modio_installed_mods));
 	modioGetAllInstalledMods(modio_installed_mods);
 
-	for(u32 i=0; i<installed_mods_size; i++)
+	for (u32 i = 0; i < installed_mods_size; i++)
 	{
 		FModioInstalledMod installed_mod;
 		installed_mod.Path = UTF8_TO_TCHAR(modio_installed_mods[i].path);
@@ -89,14 +102,14 @@ void UModioBPFunctionLibrary::ModioGetAllInstalledMod(TArray<FModioInstalledMod>
 	free(modio_installed_mods);
 }
 
-void UModioBPFunctionLibrary::ModioGetModDownloadQueue(TArray<FModioQueuedModDownload>& queued_mods)
+void UModioBPFunctionLibrary::ModioGetModDownloadQueue(TArray<FModioQueuedModDownload> &queued_mods)
 {
 	// use mod.io C++ wrapper instead of C
 	u32 download_queue_count = modioGetModDownloadQueueCount();
-	ModioQueuedModDownload* modio_queued_mods = (ModioQueuedModDownload*)malloc(download_queue_count * sizeof(*modio_queued_mods));
+	ModioQueuedModDownload *modio_queued_mods = (ModioQueuedModDownload *)malloc(download_queue_count * sizeof(*modio_queued_mods));
 	modioGetModDownloadQueue(modio_queued_mods);
 
-	for(u32 i=0; i<download_queue_count; i++)
+	for (u32 i = 0; i < download_queue_count; i++)
 	{
 		FModioQueuedModDownload queued_mod;
 		queued_mod.Path = UTF8_TO_TCHAR(modio_queued_mods[i].path);
@@ -110,6 +123,26 @@ void UModioBPFunctionLibrary::ModioGetModDownloadQueue(TArray<FModioQueuedModDow
 	}
 
 	free(modio_queued_mods);
+}
+
+void UModioBPFunctionLibrary::ModioInstallDownloadedMods()
+{
+	modio_instance->installDownloadedMods();
+}
+
+void UModioBPFunctionLibrary::ModioLogout()
+{
+	modio_instance->logout();
+}
+
+void UModioBPFunctionLibrary::ModioIsLoggedIn(bool &is_logged_in)
+{
+	is_logged_in = modio_instance->isLoggedIn();
+}
+
+void UModioBPFunctionLibrary::ModioGetAuthenticatedUser(FString &username)
+{
+	username = UTF8_TO_TCHAR(current_user_username.c_str());
 }
 
 bool FModioModule::HandleSettingsSaved()

@@ -58,8 +58,27 @@ public:
 	UPROPERTY(BlueprintAssignable, meta = (DisplayName = "mod.io OnModDownload"))
 	FModioPlugin_OnModDownloadDynamicDelegate OnModDownloadDynamicDelegate;
 
+	/* onGetAuthenticatedUser */
+	DECLARE_MULTICAST_DELEGATE_TwoParams(
+		FModioPlugin_OnGetAuthenticatedUserDelegate,
+		int32,
+		FString
+	);
+	static FModioPlugin_OnGetAuthenticatedUserDelegate OnGetAuthenticatedUserDelegate;
+
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(
+		FModioPlugin_OnGetAuthenticatedUserDynamicDelegate,
+		int32,
+		response_code,
+		FString,
+		username
+	);
+	UPROPERTY(BlueprintAssignable, meta = (DisplayName = "mod.io OnGetAuthenticatedUser"))
+	FModioPlugin_OnGetAuthenticatedUserDynamicDelegate OnGetAuthenticatedUserDynamicDelegate;
+
 private:
 	void OnEmailRequestDelegate_Handler(int32 response_code);
 	void OnEmailExchangeDelegate_Handler(int32 response_code);
 	void OnModDownloadDelegate_Handler(int32 response_code);
+	void OnGetAuthenticatedUserDelegate_Handler(int32 response_code, FString username);
 };
