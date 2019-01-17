@@ -5,6 +5,7 @@ UModioPluginComponent::FModioPlugin_OnEmailRequestDelegate UModioPluginComponent
 UModioPluginComponent::FModioPlugin_OnEmailExchangeDelegate UModioPluginComponent::OnEmailExchangeDelegate;
 UModioPluginComponent::FModioPlugin_OnModDownloadDelegate UModioPluginComponent::OnModDownloadDelegate;
 UModioPluginComponent::FModioPlugin_OnGetAuthenticatedUserDelegate UModioPluginComponent::OnGetAuthenticatedUserDelegate;
+UModioPluginComponent::FModioPlugin_OnGetAllModsDelegate UModioPluginComponent::OnGetAllModsDelegate;
 
 void UModioPluginComponent::OnRegister()
 {
@@ -13,6 +14,7 @@ void UModioPluginComponent::OnRegister()
 	OnEmailExchangeDelegate.AddUObject(this, &UModioPluginComponent::OnEmailExchangeDelegate_Handler);
 	OnModDownloadDelegate.AddUObject(this, &UModioPluginComponent::OnModDownloadDelegate_Handler);
 	OnGetAuthenticatedUserDelegate.AddUObject(this, &UModioPluginComponent::OnGetAuthenticatedUserDelegate_Handler);
+	OnGetAllModsDelegate.AddUObject(this, &UModioPluginComponent::OnGetAllModsDelegate_Handler);
 }
 
 void UModioPluginComponent::OnUnregister()
@@ -21,6 +23,7 @@ void UModioPluginComponent::OnUnregister()
 	OnEmailExchangeDelegate.RemoveAll(this);
 	OnModDownloadDelegate.RemoveAll(this);
 	OnGetAuthenticatedUserDelegate.RemoveAll(this);
+	OnGetAllModsDelegate.RemoveAll(this);
 	Super::OnUnregister();
 }
 
@@ -31,6 +34,7 @@ void UModioPluginComponent::OnEmailRequestDelegate_Handler(int32 response_code)
 		OnEmailRequestDynamicDelegate.Broadcast(response_code);
 	}, TStatId(), NULL, ENamedThreads::GameThread);
 }
+
 
 void UModioPluginComponent::OnEmailExchangeDelegate_Handler(int32 response_code)
 {
@@ -53,5 +57,13 @@ void UModioPluginComponent::OnGetAuthenticatedUserDelegate_Handler(int32 respons
 	FFunctionGraphTask::CreateAndDispatchWhenReady([=]()
 	{
 		OnGetAuthenticatedUserDynamicDelegate.Broadcast(response_code, username);
+	}, TStatId(), NULL, ENamedThreads::GameThread);
+}
+
+void UModioPluginComponent::OnGetAllModsDelegate_Handler(int32 response_code, TArray<FModioMod> mods)
+{
+	FFunctionGraphTask::CreateAndDispatchWhenReady([=]()
+	{
+		OnGetAllModsDynamicDelegate.Broadcast(response_code, mods);
 	}, TStatId(), NULL, ENamedThreads::GameThread);
 }

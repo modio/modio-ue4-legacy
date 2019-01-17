@@ -2,6 +2,8 @@
 
 #include "CoreMinimal.h"
 #include "Runtime/Engine/Classes/Components/ActorComponent.h"
+#include "ModioSchemas.h"
+
 #include "ModioPluginComponent.generated.h"
 
 UCLASS(meta = (BlueprintSpawnableComponent), DisplayName = "ModioPlugin")
@@ -76,9 +78,27 @@ public:
 	UPROPERTY(BlueprintAssignable, meta = (DisplayName = "mod.io OnGetAuthenticatedUser"))
 	FModioPlugin_OnGetAuthenticatedUserDynamicDelegate OnGetAuthenticatedUserDynamicDelegate;
 
+	/* onGetAllMods */
+	DECLARE_MULTICAST_DELEGATE_TwoParams(
+		FModioPlugin_OnGetAllModsDelegate,
+		int32,
+		TArray<FModioMod>
+	);
+	static FModioPlugin_OnGetAllModsDelegate OnGetAllModsDelegate;
+
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(
+		FModioPlugin_OnGetAllModsDynamicDelegate,
+		int32,
+		response_code,
+		TArray<FModioMod>,
+		mods
+	);
+	UPROPERTY(BlueprintAssignable, meta = (DisplayName = "mod.io OnGetAllMods"))
+	FModioPlugin_OnGetAllModsDynamicDelegate OnGetAllModsDynamicDelegate;
 private:
 	void OnEmailRequestDelegate_Handler(int32 response_code);
 	void OnEmailExchangeDelegate_Handler(int32 response_code);
 	void OnModDownloadDelegate_Handler(int32 response_code);
 	void OnGetAuthenticatedUserDelegate_Handler(int32 response_code, FString username);
+	void OnGetAllModsDelegate_Handler(int32 response_code, TArray<FModioMod> mods);
 };
