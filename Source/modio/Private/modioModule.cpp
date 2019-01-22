@@ -14,15 +14,22 @@ void FModioModule::StartupModule()
 {
   UModioGameSettings *Settings = GetMutableDefault<UModioGameSettings>();
 
+  FString game_directory = FPaths::ConvertRelativePathToFull(FPaths::GameDir());
+  std::string game_directory_str = std::string(TCHAR_TO_UTF8(*game_directory));
+
   u32 environment;
   if (Settings->IsLiveEnvironment)
     environment = MODIO_ENVIRONMENT_LIVE;
   else
     environment = MODIO_ENVIRONMENT_TEST;
+  
+  if (Settings->RootDirectory != "")
+    game_directory_str += std::string(TCHAR_TO_UTF8(*Settings->RootDirectory));
+
   u32 game_id = Settings->GameId;
   std::string api_key = std::string(TCHAR_TO_UTF8(*(Settings->ApiKey)));
 
-  modio_instance = new modio::Instance(environment, game_id, api_key);
+  modio_instance = new modio::Instance(environment, game_id, api_key, game_directory_str);
 
   modio_instance->setDownloadListener([&](u32 response_code, u32 mod_id) {
     UModioPluginComponent::OnModDownloadDelegate.Broadcast((int32)response_code);
@@ -82,18 +89,16 @@ void UModioBPFunctionLibrary::ModioEmailExchange(FString security_code)
 void UModioBPFunctionLibrary::ModioGetAllInstalledMod(TArray<FModioInstalledMod> &installed_mods)
 {
   // use mod.io C++ wrapper instead of C
+  /*
   const std::vector<modio::InstalledMod> modio_installed_mods = modio_instance->getAllInstalledMods();
 
   for (u32 i = 0; i < modio_installed_mods.size(); i++)
   {
     FModioInstalledMod installed_mod;
-    installed_mod.Path = UTF8_TO_TCHAR(modio_installed_mods[i].path.c_str());
-    installed_mod.Id = modio_installed_mods[i].mod.id;
-    installed_mod.Name = UTF8_TO_TCHAR(modio_installed_mods[i].mod.name.c_str());
-    installed_mod.Summary = UTF8_TO_TCHAR(modio_installed_mods[i].mod.summary.c_str());
-    installed_mod.Description = UTF8_TO_TCHAR(modio_installed_mods[i].mod.description.c_str());
+    initializeInstalledModC(installed_mod, modio_installed_mods[i]);
     installed_mods.Add(installed_mod);
   }
+  */
 }
 
 void UModioBPFunctionLibrary::ModioGetModDownloadQueue(TArray<FModioQueuedModDownload> &queued_mods)
@@ -106,13 +111,7 @@ void UModioBPFunctionLibrary::ModioGetModDownloadQueue(TArray<FModioQueuedModDow
   for (u32 i = 0; i < download_queue_count; i++)
   {
     FModioQueuedModDownload queued_mod;
-    queued_mod.Path = UTF8_TO_TCHAR(modio_queued_mods[i].path);
-    queued_mod.CurrentProgress = modio_queued_mods[i].current_progress;
-    queued_mod.TotalSize = modio_queued_mods[i].total_size;
-    queued_mod.Id = modio_queued_mods[i].mod.id;
-    queued_mod.Name = UTF8_TO_TCHAR(modio_queued_mods[i].mod.name);
-    queued_mod.Summary = UTF8_TO_TCHAR(modio_queued_mods[i].mod.summary);
-    queued_mod.Description = UTF8_TO_TCHAR(modio_queued_mods[i].mod.description);
+    initializeQueuedModDownloadC(queued_mod, modio_queued_mods[i]);
     queued_mods.Add(queued_mod);
   }
 
@@ -150,10 +149,7 @@ void UModioBPFunctionLibrary::ModioGetAllMods(TEnumAsByte<ModioFilterEnum::Type>
     for (u32 i = 0; i < modio_mods.size(); i++)
     {
       FModioMod mod;
-      mod.Id = modio_mods[i].id;
-      mod.Name = UTF8_TO_TCHAR(modio_mods[i].name.c_str());
-      mod.Summary = UTF8_TO_TCHAR(modio_mods[i].summary.c_str());
-      mod.Description = UTF8_TO_TCHAR(modio_mods[i].description.c_str());
+      initializeMod(mod, modio_mods[i]);
       mods.Add(mod);
     }
     UModioPluginComponent::OnGetAllModsDelegate.Broadcast((int32)response.code, mods);
