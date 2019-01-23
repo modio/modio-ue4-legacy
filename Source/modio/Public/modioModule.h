@@ -71,5 +71,8 @@ class UModioBPFunctionLibrary : public UBlueprintFunctionLibrary
   static void ModioAddMod(FModioModCreator mod_creator);
 
   UFUNCTION(BlueprintCallable, Category = "mod.io")
+  static void ModioEditMod(int32 mod_id, FModioModEditor mod_editor);
+
+  UFUNCTION(BlueprintCallable, Category = "mod.io")
   static void ModioAddModfile(int32 mod_id, FModioModfileCreator modfile_creator);
 };

@@ -175,6 +175,19 @@ void UModioBPFunctionLibrary::ModioAddMod(FModioModCreator mod_creator)
   });
 }
 
+void UModioBPFunctionLibrary::ModioEditMod(int32 mod_id, FModioModEditor mod_editor)
+{
+  modio::ModEditor modio_mod_editor;
+  modio_mod_editor.setName(std::string(TCHAR_TO_UTF8(*mod_editor.Name)));
+
+  modio_instance->editMod(mod_id, modio_mod_editor, [&](const modio::Response& response, const modio::Mod& modio_mod)
+  {
+    FModioMod mod;
+    initializeMod(mod, modio_mod);
+    UModioPluginComponent::OnEditModDelegate.Broadcast((int32)response.code, mod);
+  });
+}
+
 void UModioBPFunctionLibrary::ModioAddModfile(int32 mod_id, FModioModfileCreator modfile_creator)
 {
   modio::ModfileCreator modio_modfile_creator;

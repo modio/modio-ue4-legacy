@@ -8,6 +8,7 @@ UModioPluginComponent::FModioPlugin_OnModUploadDelegate UModioPluginComponent::O
 UModioPluginComponent::FModioPlugin_OnGetAuthenticatedUserDelegate UModioPluginComponent::OnGetAuthenticatedUserDelegate;
 UModioPluginComponent::FModioPlugin_OnGetAllModsDelegate UModioPluginComponent::OnGetAllModsDelegate;
 UModioPluginComponent::FModioPlugin_OnAddModDelegate UModioPluginComponent::OnAddModDelegate;
+UModioPluginComponent::FModioPlugin_OnEditModDelegate UModioPluginComponent::OnEditModDelegate;
 
 void UModioPluginComponent::OnRegister()
 {
@@ -19,6 +20,7 @@ void UModioPluginComponent::OnRegister()
 	OnGetAuthenticatedUserDelegate.AddUObject(this, &UModioPluginComponent::OnGetAuthenticatedUserDelegate_Handler);
 	OnGetAllModsDelegate.AddUObject(this, &UModioPluginComponent::OnGetAllModsDelegate_Handler);
 	OnAddModDelegate.AddUObject(this, &UModioPluginComponent::OnAddModDelegate_Handler);
+	OnEditModDelegate.AddUObject(this, &UModioPluginComponent::OnEditModDelegate_Handler);
 }
 
 void UModioPluginComponent::OnUnregister()
@@ -30,6 +32,7 @@ void UModioPluginComponent::OnUnregister()
 	OnGetAuthenticatedUserDelegate.RemoveAll(this);
 	OnGetAllModsDelegate.RemoveAll(this);
 	OnAddModDelegate.RemoveAll(this);
+	OnEditModDelegate.RemoveAll(this);
 	Super::OnUnregister();
 }
 
@@ -87,5 +90,13 @@ void UModioPluginComponent::OnAddModDelegate_Handler(int32 response_code, FModio
 	FFunctionGraphTask::CreateAndDispatchWhenReady([=]()
 	{
 		OnAddModDynamicDelegate.Broadcast(response_code, mod);
+	}, TStatId(), NULL, ENamedThreads::GameThread);
+}
+
+void UModioPluginComponent::OnEditModDelegate_Handler(int32 response_code, FModioMod mod)
+{
+	FFunctionGraphTask::CreateAndDispatchWhenReady([=]()
+	{
+		OnEditModDynamicDelegate.Broadcast(response_code, mod);
 	}, TStatId(), NULL, ENamedThreads::GameThread);
 }
