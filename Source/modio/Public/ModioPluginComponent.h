@@ -95,10 +95,29 @@ public:
 	);
 	UPROPERTY(BlueprintAssignable, meta = (DisplayName = "mod.io OnGetAllMods"))
 	FModioPlugin_OnGetAllModsDynamicDelegate OnGetAllModsDynamicDelegate;
+	
+	/* onAddMod */
+	DECLARE_MULTICAST_DELEGATE_TwoParams(
+		FModioPlugin_OnAddModDelegate,
+		int32,
+		FModioMod
+	);
+	static FModioPlugin_OnAddModDelegate OnAddModDelegate;
+
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(
+		FModioPlugin_OnAddModDynamicDelegate,
+		int32,
+		response_code,
+		FModioMod,
+		mod
+	);
+	UPROPERTY(BlueprintAssignable, meta = (DisplayName = "mod.io OnAddMod"))
+	FModioPlugin_OnAddModDynamicDelegate OnAddModDynamicDelegate;
 private:
 	void OnEmailRequestDelegate_Handler(int32 response_code);
 	void OnEmailExchangeDelegate_Handler(int32 response_code);
 	void OnModDownloadDelegate_Handler(int32 response_code);
 	void OnGetAuthenticatedUserDelegate_Handler(int32 response_code, FString username);
 	void OnGetAllModsDelegate_Handler(int32 response_code, TArray<FModioMod> mods);
+	void OnAddModDelegate_Handler(int32 response_code, FModioMod mod);
 };

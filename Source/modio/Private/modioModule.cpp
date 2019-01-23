@@ -156,6 +156,21 @@ void UModioBPFunctionLibrary::ModioGetAllMods(TEnumAsByte<ModioFilterEnum::Type>
   });
 }
 
+void UModioBPFunctionLibrary::ModioAddMod(FModioModCreator mod_creator)
+{
+  modio::ModCreator modio_mod_creator;
+  modio_mod_creator.setLogoPath(std::string(TCHAR_TO_UTF8(*mod_creator.LogoPath)));
+  modio_mod_creator.setName(std::string(TCHAR_TO_UTF8(*mod_creator.Name)));
+  modio_mod_creator.setSummary(std::string(TCHAR_TO_UTF8(*mod_creator.Summary)));
+
+  modio_instance->addMod(modio_mod_creator, [&](const modio::Response& response, const modio::Mod& modio_mod)
+  {
+    FModioMod mod;
+    initializeMod(mod, modio_mod);
+    UModioPluginComponent::OnAddModDelegate.Broadcast((int32)response.code, mod);
+  });
+}
+
 bool FModioModule::HandleSettingsSaved()
 {
   UModioGameSettings *Settings = GetMutableDefault<UModioGameSettings>();

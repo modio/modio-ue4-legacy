@@ -58,6 +58,19 @@ struct FModioQueuedModDownload
   FModioMod mod;
 };
 
+USTRUCT(BlueprintType)
+struct FModioModCreator
+{
+  GENERATED_BODY()
+
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  FString LogoPath;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  FString Name;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  FString Summary;
+};
+
 extern void initializeMod(FModioMod &mod, modio::Mod modio_mod);
 extern void initializeModC(FModioMod &mod, ModioMod modio_mod);
 extern void initializeInstalledModC(FModioInstalledMod &installed_mod, ModioInstalledMod modio_installed_mod);

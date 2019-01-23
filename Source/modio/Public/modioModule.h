@@ -66,4 +66,7 @@ class UModioBPFunctionLibrary : public UBlueprintFunctionLibrary
 
   UFUNCTION(BlueprintCallable, Category = "mod.io")
   static void ModioGetAllMods(TEnumAsByte<ModioFilterEnum::Type> filter_type, int32 limit, int32 offset);
+
+  UFUNCTION(BlueprintCallable, Category = "mod.io")
+  static void ModioAddMod(FModioModCreator mod_creator);
 };
