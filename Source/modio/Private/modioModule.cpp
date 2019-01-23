@@ -35,6 +35,10 @@ void FModioModule::StartupModule()
     UModioPluginComponent::OnModDownloadDelegate.Broadcast((int32)response_code);
   });
 
+  modio_instance->setUploadListener([&](u32 response_code, u32 mod_id) {
+    UModioPluginComponent::OnModUploadDelegate.Broadcast((int32)response_code);
+  });
+
   current_user_username = "";
 
   modio_instance->getAuthenticatedUser([&](const modio::Response &response, const modio::User &user) {
@@ -169,6 +173,13 @@ void UModioBPFunctionLibrary::ModioAddMod(FModioModCreator mod_creator)
     initializeMod(mod, modio_mod);
     UModioPluginComponent::OnAddModDelegate.Broadcast((int32)response.code, mod);
   });
+}
+
+void UModioBPFunctionLibrary::ModioAddModfile(int32 mod_id, FModioModfileCreator modfile_creator)
+{
+  modio::ModfileCreator modio_modfile_creator;
+  modio_modfile_creator.setPath(std::string(TCHAR_TO_UTF8(*modfile_creator.Path)));
+  modio_instance->addModfile(mod_id, modio_modfile_creator);
 }
 
 bool FModioModule::HandleSettingsSaved()

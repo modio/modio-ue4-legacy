@@ -71,6 +71,15 @@ struct FModioModCreator
   FString Summary;
 };
 
+USTRUCT(BlueprintType)
+struct FModioModfileCreator
+{
+  GENERATED_BODY()
+  
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  FString Path;
+};
+
 extern void initializeMod(FModioMod &mod, modio::Mod modio_mod);
 extern void initializeModC(FModioMod &mod, ModioMod modio_mod);
 extern void initializeInstalledModC(FModioInstalledMod &installed_mod, ModioInstalledMod modio_installed_mod);
