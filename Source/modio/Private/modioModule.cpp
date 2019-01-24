@@ -92,7 +92,21 @@ void UModioBPFunctionLibrary::ModioEmailExchange(FString security_code)
 
 void UModioBPFunctionLibrary::ModioGetAllInstalledMod(TArray<FModioInstalledMod> &installed_mods)
 {
-  const std::vector<modio::InstalledMod> modio_installed_mods = modio_instance->getAllInstalledMods();
+  // use mod.io C++ wrapper instead of C
+  u32 installed_mods_count = modioGetAllInstalledModsCount();
+  ModioInstalledMod *modio_installed_mods = (ModioInstalledMod *)malloc(installed_mods_count * sizeof(*modio_installed_mods));
+  modioGetAllInstalledMods(modio_installed_mods);
+
+  for (u32 i = 0; i < installed_mods_count; i++)
+  {
+    FModioInstalledMod installed_mod;
+    initializeInstalledModC(installed_mod, modio_installed_mods[i]);
+    installed_mods.Add(installed_mod);
+  }
+
+  free(modio_installed_mods);
+
+  //const std::vector<modio::InstalledMod> modio_installed_mods = modio_instance->getAllInstalledMods();
 
   // use mod.io C++ wrapper instead of C
   /*
