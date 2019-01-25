@@ -29,3 +29,12 @@ void initializeQueuedModDownloadC(FModioQueuedModDownload &queued_mod_download, 
   queued_mod_download.TotalSize = modio_queued_mod_download.total_size;
   initializeModC(queued_mod_download.mod, modio_queued_mod_download.mod);
 }
+
+void initializeQueuedModfileUploadC(FModioQueuedModfileUpload &queued_modfile_upload, ModioQueuedModfileUpload modio_queued_modfile_upload)
+{
+  queued_modfile_upload.State = modio_queued_modfile_upload.state;
+  queued_modfile_upload.ModId = modio_queued_modfile_upload.mod_id;
+  queued_modfile_upload.CurrentProgress = modio_queued_modfile_upload.current_progress;
+  queued_modfile_upload.TotalSize = modio_queued_modfile_upload.total_size;
+  queued_modfile_upload.Path = UTF8_TO_TCHAR(modio_queued_modfile_upload.path);
+}

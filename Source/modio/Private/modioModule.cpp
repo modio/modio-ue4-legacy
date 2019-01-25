@@ -90,6 +90,21 @@ void UModioBPFunctionLibrary::ModioEmailExchange(FString security_code)
   });
 }
 
+void UModioBPFunctionLibrary::ModioLogout()
+{
+  modio_instance->logout();
+}
+
+void UModioBPFunctionLibrary::ModioIsLoggedIn(bool &is_logged_in)
+{
+  is_logged_in = modio_instance->isLoggedIn();
+}
+
+void UModioBPFunctionLibrary::ModioGetAuthenticatedUser(FString &username)
+{
+  username = UTF8_TO_TCHAR(current_user_username.c_str());
+}
+
 void UModioBPFunctionLibrary::ModioGetAllInstalledMod(TArray<FModioInstalledMod> &installed_mods)
 {
   // use mod.io C++ wrapper instead of C
@@ -143,21 +158,6 @@ void UModioBPFunctionLibrary::ModioInstallDownloadedMods()
   modio_instance->installDownloadedMods();
 }
 
-void UModioBPFunctionLibrary::ModioLogout()
-{
-  modio_instance->logout();
-}
-
-void UModioBPFunctionLibrary::ModioIsLoggedIn(bool &is_logged_in)
-{
-  is_logged_in = modio_instance->isLoggedIn();
-}
-
-void UModioBPFunctionLibrary::ModioGetAuthenticatedUser(FString &username)
-{
-  username = UTF8_TO_TCHAR(current_user_username.c_str());
-}
-
 void UModioBPFunctionLibrary::ModioGetAllMods(TEnumAsByte<ModioFilterEnum::Type> filter_type, int32 limit, int32 offset)
 {
   modio::FilterCreator filter_creator;
@@ -209,6 +209,23 @@ void UModioBPFunctionLibrary::ModioAddModfile(int32 mod_id, FModioModfileCreator
   modio::ModfileCreator modio_modfile_creator;
   modio_modfile_creator.setPath(std::string(TCHAR_TO_UTF8(*modfile_creator.Path)));
   modio_instance->addModfile(mod_id, modio_modfile_creator);
+}
+
+void UModioBPFunctionLibrary::ModioGetModfileUploadQueue(TArray<FModioQueuedModfileUpload> &upload_queue)
+{
+  // use mod.io C++ wrapper instead of C
+  u32 upload_queue_count = modioGetModfileUploadQueueCount();
+  ModioQueuedModfileUpload *modio_queued_mods = (ModioQueuedModfileUpload *)malloc(upload_queue_count * sizeof(*modio_queued_mods));
+  modioGetModfileUploadQueue(modio_queued_mods);
+
+  for (u32 i = 0; i < upload_queue_count; i++)
+  {
+    FModioQueuedModfileUpload queued_mod;
+    initializeQueuedModfileUploadC(queued_mod, modio_queued_mods[i]);
+    upload_queue.Add(queued_mod);
+  }
+
+  free(modio_queued_mods);
 }
 
 bool FModioModule::HandleSettingsSaved()

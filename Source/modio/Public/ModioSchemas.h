@@ -59,6 +59,23 @@ struct FModioQueuedModDownload
 };
 
 USTRUCT(BlueprintType)
+struct FModioQueuedModfileUpload
+{
+  GENERATED_BODY()
+
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  int32 State;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  int32 ModId;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  int32 CurrentProgress;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  int32 TotalSize;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  FString Path;
+};
+
+USTRUCT(BlueprintType)
 struct FModioModCreator
 {
   GENERATED_BODY()
@@ -93,3 +110,4 @@ extern void initializeMod(FModioMod &mod, modio::Mod modio_mod);
 extern void initializeModC(FModioMod &mod, ModioMod modio_mod);
 extern void initializeInstalledModC(FModioInstalledMod &installed_mod, ModioInstalledMod modio_installed_mod);
 extern void initializeQueuedModDownloadC(FModioQueuedModDownload &queued_mod_download, ModioQueuedModDownload modio_queued_mod_download);
+extern void initializeQueuedModfileUploadC(FModioQueuedModfileUpload &queued_modfile_upload, ModioQueuedModfileUpload modio_queued_modfile_upload);
