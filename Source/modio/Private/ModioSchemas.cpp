@@ -1,19 +1,79 @@
 #include "ModioSchemas.h"
 
+void initializeLogo(FModioLogo &Logo, modio::Logo modio_logo)
+{
+  Logo.Filename = UTF8_TO_TCHAR(modio_logo.filename.c_str());
+  Logo.Original = UTF8_TO_TCHAR(modio_logo.original.c_str());
+  Logo.Thumb320x180 = UTF8_TO_TCHAR(modio_logo.thumb_320x180.c_str());
+  Logo.Thumb640x360 = UTF8_TO_TCHAR(modio_logo.thumb_640x360.c_str());
+  Logo.Thumb1280x720 = UTF8_TO_TCHAR(modio_logo.thumb_1280x720.c_str());
+}
+
+void initializeLogoC(FModioLogo &Logo, ModioLogo modio_logo)
+{
+  Logo.Filename = UTF8_TO_TCHAR(modio_logo.filename);
+  Logo.Original = UTF8_TO_TCHAR(modio_logo.original);
+  Logo.Thumb320x180 = UTF8_TO_TCHAR(modio_logo.thumb_320x180);
+  Logo.Thumb640x360 = UTF8_TO_TCHAR(modio_logo.thumb_640x360);
+  Logo.Thumb1280x720 = UTF8_TO_TCHAR(modio_logo.thumb_1280x720);
+}
+
+void initializeAvatar(FModioAvatar &Avatar, modio::Avatar modio_avatar)
+{
+  Avatar.Filename = UTF8_TO_TCHAR(modio_avatar.filename.c_str());
+  Avatar.Original = UTF8_TO_TCHAR(modio_avatar.original.c_str());
+  Avatar.Thumb50x50 = UTF8_TO_TCHAR(modio_avatar.thumb_50x50.c_str());
+  Avatar.Thumb100x100 = UTF8_TO_TCHAR(modio_avatar.thumb_100x100.c_str());
+}
+
+void initializeAvatar(FModioAvatar &Avatar, ModioAvatar modio_avatar)
+{
+  Avatar.Filename = UTF8_TO_TCHAR(modio_avatar.filename);
+  Avatar.Original = UTF8_TO_TCHAR(modio_avatar.original);
+  Avatar.Thumb50x50 = UTF8_TO_TCHAR(modio_avatar.thumb_50x50);
+  Avatar.Thumb100x100 = UTF8_TO_TCHAR(modio_avatar.thumb_100x100);
+}
+
 void initializeMod(FModioMod &mod, modio::Mod modio_mod)
 {
   mod.Id = modio_mod.id;
+  mod.GameId = modio_mod.game_id;
+  mod.Status = modio_mod.status;
+  mod.Visible = modio_mod.visible;
+  mod.MaturityOption = modio_mod.maturity_option;
+  mod.DateAdded = modio_mod.date_added;
+  mod.DateUpdated = modio_mod.date_updated;
+  mod.DateLive = modio_mod.date_live;
+  mod.HomepageUrl = UTF8_TO_TCHAR(modio_mod.homepage_url.c_str());
   mod.Name = UTF8_TO_TCHAR(modio_mod.name.c_str());
+  mod.NameId = UTF8_TO_TCHAR(modio_mod.name_id.c_str());
   mod.Summary = UTF8_TO_TCHAR(modio_mod.summary.c_str());
   mod.Description = UTF8_TO_TCHAR(modio_mod.description.c_str());
+  mod.DescriptionPlainText = UTF8_TO_TCHAR(modio_mod.description_plaintext.c_str());
+  mod.MetadataBlob = UTF8_TO_TCHAR(modio_mod.metadata_blob.c_str());
+  mod.ProfileUrl = UTF8_TO_TCHAR(modio_mod.profile_url.c_str());
+  initializeLogo(mod.Logo, modio_mod.logo);
 }
 
 void initializeModC(FModioMod &mod, ModioMod modio_mod)
 {
   mod.Id = modio_mod.id;
+  mod.GameId = modio_mod.game_id;
+  mod.Status = modio_mod.status;
+  mod.Visible = modio_mod.visible;
+  mod.MaturityOption = modio_mod.maturity_option;
+  mod.DateAdded = modio_mod.date_added;
+  mod.DateUpdated = modio_mod.date_updated;
+  mod.DateLive = modio_mod.date_live;
+  mod.HomepageUrl = UTF8_TO_TCHAR(modio_mod.homepage_url);
   mod.Name = UTF8_TO_TCHAR(modio_mod.name);
+  mod.NameId = UTF8_TO_TCHAR(modio_mod.name_id);
   mod.Summary = UTF8_TO_TCHAR(modio_mod.summary);
   mod.Description = UTF8_TO_TCHAR(modio_mod.description);
+  mod.DescriptionPlainText = UTF8_TO_TCHAR(modio_mod.description_plaintext);
+  mod.MetadataBlob = UTF8_TO_TCHAR(modio_mod.metadata_blob);
+  mod.ProfileUrl = UTF8_TO_TCHAR(modio_mod.profile_url);
+  initializeLogoC(mod.Logo, modio_mod.logo);
 }
 
 void initializeInstalledModC(FModioInstalledMod &installed_mod, ModioInstalledMod modio_installed_mod)

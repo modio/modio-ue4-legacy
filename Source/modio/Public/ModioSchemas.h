@@ -17,17 +17,76 @@ enum Type
 }
 
 USTRUCT(BlueprintType)
+struct FModioLogo
+{
+  GENERATED_BODY()
+
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  FString Filename;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  FString Original;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  FString Thumb320x180;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  FString Thumb640x360;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  FString Thumb1280x720;
+};
+
+USTRUCT(BlueprintType)
+struct FModioAvatar
+{
+  GENERATED_BODY()
+
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  FString Filename;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  FString Original;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  FString Thumb50x50;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  FString Thumb100x100;
+};
+
+USTRUCT(BlueprintType)
 struct FModioMod
 {
   GENERATED_BODY()
 
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
   int32 Id;
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  int32 GameId;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  int32 Status;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  int32 Visible;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  int32 MaturityOption;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  int32 DateAdded;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  int32 DateUpdated;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  int32 DateLive;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  FString HomepageUrl;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
   FString Name;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  FString NameId;
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
   FString Summary;
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
   FString Description;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  FString DescriptionPlainText;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  FString MetadataBlob;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  FString ProfileUrl;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  FModioLogo Logo;
 };
 
 USTRUCT(BlueprintType)
@@ -106,6 +165,10 @@ struct FModioModEditor
   FString Name;
 };
 
+extern void initializeLogo(FModioLogo &Logo, modio::Logo modio_logo);
+extern void initializeLogoC(FModioLogo &Logo, ModioLogo modio_logo);
+extern void initializeAvatar(FModioAvatar &Avatar, modio::Avatar modio_avatar);
+extern void initializeAvatarC(FModioAvatar &Avatar, ModioAvatar modio_avatar);
 extern void initializeMod(FModioMod &mod, modio::Mod modio_mod);
 extern void initializeModC(FModioMod &mod, ModioMod modio_mod);
 extern void initializeInstalledModC(FModioInstalledMod &installed_mod, ModioInstalledMod modio_installed_mod);
