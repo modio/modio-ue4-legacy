@@ -72,6 +72,26 @@ struct FModioUser
 };
 
 USTRUCT(BlueprintType)
+struct FModioFilehash
+{
+  GENERATED_BODY()
+
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  FString Md5;
+};
+
+USTRUCT(BlueprintType)
+struct FModioDownload
+{
+  GENERATED_BODY()
+
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  int32 DateExpires;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  FString BinaryUrl;
+};
+
+USTRUCT(BlueprintType)
 struct FModioMod
 {
   GENERATED_BODY()
@@ -110,6 +130,8 @@ struct FModioMod
   FString ProfileUrl;
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
   FModioLogo Logo;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  FModioUser SubmittedBy;
 };
 
 USTRUCT(BlueprintType)
@@ -194,6 +216,10 @@ extern void initializeAvatar(FModioAvatar &Avatar, modio::Avatar modio_avatar);
 extern void initializeAvatarC(FModioAvatar &Avatar, ModioAvatar modio_avatar);
 extern void initializeUser(FModioUser &User, modio::User modio_user);
 extern void initializeUserC(FModioUser &User, ModioUser modio_user);
+extern void initializeFilehash(FModioFilehash &filehash, modio::Filehash modio_filehash);
+extern void initializeFileHashC(FModioFilehash &filehash, ModioFilehash modio_filehash);
+extern void initializeDownload(FModioDownload &download, modio::Download modio_download);
+extern void initializeDownloadC(FModioDownload &download, ModioDownload modio_download);
 extern void initializeMod(FModioMod &mod, modio::Mod modio_mod);
 extern void initializeModC(FModioMod &mod, ModioMod modio_mod);
 extern void initializeInstalledModC(FModioInstalledMod &installed_mod, ModioInstalledMod modio_installed_mod);

@@ -58,6 +58,28 @@ void initializeUserC(FModioUser &User, ModioUser modio_user)
   initializeAvatarC(User.Avatar, modio_user.avatar);
 }
 
+void initializeFilehash(FModioFilehash &Filehash, modio::Filehash modio_filehash)
+{
+  Filehash.Md5 = UTF8_TO_TCHAR(modio_filehash.md5.c_str());
+}
+
+void initializeFilehashC(FModioFilehash &Filehash, ModioFilehash modio_filehash)
+{
+  Filehash.Md5 = UTF8_TO_TCHAR(modio_filehash.md5);
+}
+
+void initializeDownload(FModioDownload &Download, modio::Download modio_download)
+{
+  Download.DateExpires = modio_download.date_expires;
+  Download.BinaryUrl = UTF8_TO_TCHAR(modio_download.binary_url.c_str());
+}
+
+void initializeDownloadC(FModioDownload &Download, ModioDownload modio_download)
+{
+  Download.DateExpires = modio_download.date_expires;
+  Download.BinaryUrl = UTF8_TO_TCHAR(modio_download.binary_url);
+}
+
 void initializeMod(FModioMod &mod, modio::Mod modio_mod)
 {
   mod.Id = modio_mod.id;
@@ -77,6 +99,7 @@ void initializeMod(FModioMod &mod, modio::Mod modio_mod)
   mod.MetadataBlob = UTF8_TO_TCHAR(modio_mod.metadata_blob.c_str());
   mod.ProfileUrl = UTF8_TO_TCHAR(modio_mod.profile_url.c_str());
   initializeLogo(mod.Logo, modio_mod.logo);
+  initializeUser(mod.SubmittedBy, modio_mod.submitted_by);
 }
 
 void initializeModC(FModioMod &mod, ModioMod modio_mod)
@@ -98,6 +121,7 @@ void initializeModC(FModioMod &mod, ModioMod modio_mod)
   mod.MetadataBlob = UTF8_TO_TCHAR(modio_mod.metadata_blob);
   mod.ProfileUrl = UTF8_TO_TCHAR(modio_mod.profile_url);
   initializeLogoC(mod.Logo, modio_mod.logo);
+  initializeUserC(mod.SubmittedBy, modio_mod.submitted_by);
 }
 
 void initializeInstalledModC(FModioInstalledMod &installed_mod, ModioInstalledMod modio_installed_mod)
