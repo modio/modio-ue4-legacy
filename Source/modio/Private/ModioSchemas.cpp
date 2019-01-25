@@ -26,12 +26,36 @@ void initializeAvatar(FModioAvatar &Avatar, modio::Avatar modio_avatar)
   Avatar.Thumb100x100 = UTF8_TO_TCHAR(modio_avatar.thumb_100x100.c_str());
 }
 
-void initializeAvatar(FModioAvatar &Avatar, ModioAvatar modio_avatar)
+void initializeAvatarC(FModioAvatar &Avatar, ModioAvatar modio_avatar)
 {
   Avatar.Filename = UTF8_TO_TCHAR(modio_avatar.filename);
   Avatar.Original = UTF8_TO_TCHAR(modio_avatar.original);
   Avatar.Thumb50x50 = UTF8_TO_TCHAR(modio_avatar.thumb_50x50);
   Avatar.Thumb100x100 = UTF8_TO_TCHAR(modio_avatar.thumb_100x100);
+}
+
+void initializeUser(FModioUser &User, modio::User modio_user)
+{
+  User.Id = modio_user.id;
+  User.DateOnline = modio_user.date_online;
+  User.Username = UTF8_TO_TCHAR(modio_user.username.c_str());
+  User.NameId = UTF8_TO_TCHAR(modio_user.name_id.c_str());
+  User.Timezone = UTF8_TO_TCHAR(modio_user.timezone.c_str());
+  User.Language = UTF8_TO_TCHAR(modio_user.language.c_str());
+  User.ProfileUrl = UTF8_TO_TCHAR(modio_user.profile_url.c_str());
+  initializeAvatar(User.Avatar, modio_user.avatar);
+}
+
+void initializeUserC(FModioUser &User, ModioUser modio_user)
+{
+  User.Id = modio_user.id;
+  User.DateOnline = modio_user.date_online;
+  User.Username = UTF8_TO_TCHAR(modio_user.username);
+  User.NameId = UTF8_TO_TCHAR(modio_user.name_id);
+  User.Timezone = UTF8_TO_TCHAR(modio_user.timezone);
+  User.Language = UTF8_TO_TCHAR(modio_user.language);
+  User.ProfileUrl = UTF8_TO_TCHAR(modio_user.profile_url);
+  initializeAvatarC(User.Avatar, modio_user.avatar);
 }
 
 void initializeMod(FModioMod &mod, modio::Mod modio_mod)

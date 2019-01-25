@@ -49,6 +49,29 @@ struct FModioAvatar
 };
 
 USTRUCT(BlueprintType)
+struct FModioUser
+{
+  GENERATED_BODY()
+
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  int32 Id;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  int32 DateOnline;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  FString Username;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  FString NameId;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  FString Timezone;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  FString Language;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  FString ProfileUrl;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  FModioAvatar Avatar;
+};
+
+USTRUCT(BlueprintType)
 struct FModioMod
 {
   GENERATED_BODY()
@@ -169,6 +192,8 @@ extern void initializeLogo(FModioLogo &Logo, modio::Logo modio_logo);
 extern void initializeLogoC(FModioLogo &Logo, ModioLogo modio_logo);
 extern void initializeAvatar(FModioAvatar &Avatar, modio::Avatar modio_avatar);
 extern void initializeAvatarC(FModioAvatar &Avatar, ModioAvatar modio_avatar);
+extern void initializeUser(FModioUser &User, modio::User modio_user);
+extern void initializeUserC(FModioUser &User, ModioUser modio_user);
 extern void initializeMod(FModioMod &mod, modio::Mod modio_mod);
 extern void initializeModC(FModioMod &mod, ModioMod modio_mod);
 extern void initializeInstalledModC(FModioInstalledMod &installed_mod, ModioInstalledMod modio_installed_mod);
