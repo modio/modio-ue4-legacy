@@ -128,6 +128,86 @@ struct FModioModfile
 };
 
 USTRUCT(BlueprintType)
+struct FModioImage
+{
+  GENERATED_BODY()
+
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  FString Filename;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  FString Original;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  FString Thumb320x180;
+};
+
+USTRUCT(BlueprintType)
+struct FModioMedia
+{
+  GENERATED_BODY()
+
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  TArray<FString> Youtube;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  TArray<FString> Sketchfab;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  TArray<FModioImage> Images;
+};
+
+USTRUCT(BlueprintType)
+struct FModioStats
+{
+  GENERATED_BODY()
+
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  int32 ModId;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  int32 PopularityRankPosition;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  int32 PopularityRankTotalMods;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  int32 DownloadsTotal;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  int32 SubscribersTotal;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  int32 RatingsTotal;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  int32 RatingsPositive;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  int32 RatingsNegative;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  int32 RatingsPercentagePositive;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  int32 DateExpires;
+  // TODO: should this be switched to double?
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  float RatingsWeightedAggregate;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  FString RatingsDisplayText;
+};
+
+USTRUCT(BlueprintType)
+struct FModioTag
+{
+  GENERATED_BODY()
+
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  int32 DateAdded;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  FString Name;
+};
+
+USTRUCT(BlueprintType)
+struct FModioMetadataKVP
+{
+  GENERATED_BODY()
+
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  FString Metakey;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  FString Metavalue;
+};
+
+USTRUCT(BlueprintType)
 struct FModioMod
 {
   GENERATED_BODY()
@@ -168,6 +248,16 @@ struct FModioMod
   FModioLogo Logo;
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
   FModioUser SubmittedBy;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  FModioModfile Modfile;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  FModioMedia Media;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  FModioStats Stats;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  TArray<FModioTag> Tags;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  TArray<FModioMetadataKVP> MetadataKVP;
 };
 
 USTRUCT(BlueprintType)
@@ -258,6 +348,16 @@ extern void initializeDownload(FModioDownload &download, modio::Download modio_d
 extern void initializeDownloadC(FModioDownload &download, ModioDownload modio_download);
 extern void initializeModfile(FModioModfile &modfile, modio::Modfile modio_modfile);
 extern void initializeModfileC(FModioModfile &modfile, ModioModfile modio_modfile);
+extern void initializeImage(FModioImage &image, modio::Image modio_image);
+extern void initializeImageC(FModioImage &image, ModioImage modio_image);
+extern void initializeMedia(FModioMedia &media, modio::Media modio_media);
+extern void initializeMediaC(FModioMedia &media, ModioMedia modio_media);
+extern void initializeStats(FModioStats &stats, modio::Stats modio_stats);
+extern void initializeStatsC(FModioStats &stats, ModioStats modio_stats);
+extern void initializeTag(FModioTag &tag, modio::Tag modio_tag);
+extern void initializeTagC(FModioTag &tag, ModioTag modio_tag);
+extern void initializeKVP(FModioMetadataKVP &metadata_kvp, modio::MetadataKVP modio_metadata_kvp);
+extern void initializeKVPC(FModioMetadataKVP &metadata_kvp, ModioMetadataKVP modio_metadata_kvp);
 extern void initializeMod(FModioMod &mod, modio::Mod modio_mod);
 extern void initializeModC(FModioMod &mod, ModioMod modio_mod);
 extern void initializeInstalledModC(FModioInstalledMod &installed_mod, ModioInstalledMod modio_installed_mod);

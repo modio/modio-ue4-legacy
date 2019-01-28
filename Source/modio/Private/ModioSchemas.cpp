@@ -116,6 +116,104 @@ void initializeModfileC(FModioModfile &Modfile, ModioModfile modio_modfile)
   initializeDownloadC(Modfile.Download, modio_modfile.download);
 }
 
+void initializeImage(FModioImage &Image, modio::Image modio_image)
+{
+  Image.Filename = UTF8_TO_TCHAR(modio_image.filename.c_str());
+  Image.Original = UTF8_TO_TCHAR(modio_image.original.c_str());
+  Image.Thumb320x180 = UTF8_TO_TCHAR(modio_image.thumb_320x180.c_str());
+}
+
+void initializeImageC(FModioImage &Image, ModioImage modio_image)
+{
+  Image.Filename = UTF8_TO_TCHAR(modio_image.filename);
+  Image.Original = UTF8_TO_TCHAR(modio_image.original);
+  Image.Thumb320x180 = UTF8_TO_TCHAR(modio_image.thumb_320x180);
+}
+
+void initializeMedia(FModioMedia &media, modio::Media modio_media)
+{
+  for (u32 i = 0; i < modio_media.youtube.size(); i++)
+    media.Youtube.Add(UTF8_TO_TCHAR(modio_media.youtube[i].c_str()));
+  for (u32 i = 0; i < modio_media.sketchfab.size(); i++)
+    media.Sketchfab.Add(UTF8_TO_TCHAR(modio_media.sketchfab[i].c_str()));
+  for (u32 i = 0; i < modio_media.images.size(); i++)
+  {
+    FModioImage image;
+    initializeImage(image, modio_media.images[i]);
+    media.Images.Add(image);
+  }
+}
+
+void initializeMediaC(FModioMedia &media, ModioMedia modio_media)
+{
+  for (u32 i = 0; i < modio_media.youtube_size; i++)
+    media.Youtube.Add(UTF8_TO_TCHAR(modio_media.youtube_array[i]));
+  for (u32 i = 0; i < modio_media.sketchfab_size; i++)
+    media.Sketchfab.Add(UTF8_TO_TCHAR(modio_media.sketchfab_array[i]));
+  for (u32 i = 0; i < modio_media.images_size; i++)
+  {
+    FModioImage image;
+    initializeImageC(image, modio_media.images_array[i]);
+    media.Images.Add(image);
+  }
+}
+
+void initializeStats(FModioStats &Stats, modio::Stats modio_stats)
+{
+  Stats.ModId = modio_stats.mod_id;
+  Stats.PopularityRankPosition = modio_stats.popularity_rank_position;
+  Stats.PopularityRankTotalMods = modio_stats.popularity_rank_total_mods;
+  Stats.DownloadsTotal = modio_stats.downloads_total;
+  Stats.SubscribersTotal = modio_stats.subscribers_total;
+  Stats.RatingsTotal = modio_stats.ratings_total;
+  Stats.RatingsPositive = modio_stats.ratings_positive;
+  Stats.RatingsNegative = modio_stats.ratings_negative;
+  Stats.RatingsPercentagePositive = modio_stats.ratings_percentage_positive;
+  Stats.RatingsWeightedAggregate = modio_stats.ratings_weighted_aggregate;
+  Stats.DateExpires = modio_stats.date_expires;
+  Stats.RatingsDisplayText = UTF8_TO_TCHAR(modio_stats.ratings_display_text.c_str());
+}
+
+void initializeStatsC(FModioStats &Stats, ModioStats modio_stats)
+{
+  Stats.ModId = modio_stats.mod_id;
+  Stats.PopularityRankPosition = modio_stats.popularity_rank_position;
+  Stats.PopularityRankTotalMods = modio_stats.popularity_rank_total_mods;
+  Stats.DownloadsTotal = modio_stats.downloads_total;
+  Stats.SubscribersTotal = modio_stats.subscribers_total;
+  Stats.RatingsTotal = modio_stats.ratings_total;
+  Stats.RatingsPositive = modio_stats.ratings_positive;
+  Stats.RatingsNegative = modio_stats.ratings_negative;
+  Stats.RatingsPercentagePositive = modio_stats.ratings_percentage_positive;
+  Stats.RatingsWeightedAggregate = modio_stats.ratings_weighted_aggregate;
+  Stats.DateExpires = modio_stats.date_expires;
+  Stats.RatingsDisplayText = UTF8_TO_TCHAR(modio_stats.ratings_display_text);
+}
+
+void initializeTag(FModioTag &Tag, modio::Tag modio_tag)
+{
+  Tag.DateAdded = modio_tag.date_added;
+  Tag.Name = UTF8_TO_TCHAR(modio_tag.name.c_str());
+}
+
+void initializeTagC(FModioTag &Tag, ModioTag modio_tag)
+{
+  Tag.DateAdded = modio_tag.date_added;
+  Tag.Name = UTF8_TO_TCHAR(modio_tag.name);
+}
+
+void initializeMetadataKVP(FModioMetadataKVP &MetadataKVP, modio::MetadataKVP modio_metadata_kvp)
+{
+  MetadataKVP.Metakey = UTF8_TO_TCHAR(modio_metadata_kvp.metakey.c_str());
+  MetadataKVP.Metavalue = UTF8_TO_TCHAR(modio_metadata_kvp.metavalue.c_str());
+}
+
+void initializeMetadataKVPC(FModioMetadataKVP &MetadataKVP, ModioMetadataKVP modio_metadata_kvp)
+{
+  MetadataKVP.Metakey = UTF8_TO_TCHAR(modio_metadata_kvp.metakey);
+  MetadataKVP.Metavalue = UTF8_TO_TCHAR(modio_metadata_kvp.metavalue);
+}
+
 void initializeMod(FModioMod &mod, modio::Mod modio_mod)
 {
   mod.Id = modio_mod.id;
@@ -136,6 +234,23 @@ void initializeMod(FModioMod &mod, modio::Mod modio_mod)
   mod.ProfileUrl = UTF8_TO_TCHAR(modio_mod.profile_url.c_str());
   initializeLogo(mod.Logo, modio_mod.logo);
   initializeUser(mod.SubmittedBy, modio_mod.submitted_by);
+  initializeModfile(mod.Modfile, modio_mod.modfile);
+  initializeMedia(mod.Media, modio_mod.media);
+  initializeStats(mod.Stats, modio_mod.stats);
+
+  for (u32 i = 0; i < modio_mod.tags.size(); i++)
+  {
+    FModioTag tag;
+    initializeTag(tag, modio_mod.tags[i]);
+    mod.Tags.Add(tag);
+  }
+
+  for (u32 i = 0; i < modio_mod.metadata_kvps.size(); i++)
+  {
+    FModioMetadataKVP metadata_kvp;
+    initializeMetadataKVP(metadata_kvp, modio_mod.metadata_kvps[i]);
+    mod.MetadataKVP.Add(metadata_kvp);
+  }
 }
 
 void initializeModC(FModioMod &mod, ModioMod modio_mod)
@@ -158,6 +273,23 @@ void initializeModC(FModioMod &mod, ModioMod modio_mod)
   mod.ProfileUrl = UTF8_TO_TCHAR(modio_mod.profile_url);
   initializeLogoC(mod.Logo, modio_mod.logo);
   initializeUserC(mod.SubmittedBy, modio_mod.submitted_by);
+  initializeModfileC(mod.Modfile, modio_mod.modfile);
+  initializeMediaC(mod.Media, modio_mod.media);
+  initializeStatsC(mod.Stats, modio_mod.stats);
+
+  for (u32 i = 0; i < modio_mod.tags_array_size; i++)
+  {
+    FModioTag tag;
+    initializeTagC(tag, modio_mod.tags_array[i]);
+    mod.Tags.Add(tag);
+  }
+
+  for (u32 i = 0; i < modio_mod.metadata_kvp_array_size; i++)
+  {
+    FModioMetadataKVP metadata_kvp;
+    initializeMetadataKVPC(metadata_kvp, modio_mod.metadata_kvp_array[i]);
+    mod.MetadataKVP.Add(metadata_kvp);
+  }
 }
 
 void initializeInstalledModC(FModioInstalledMod &installed_mod, ModioInstalledMod modio_installed_mod)
