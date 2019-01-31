@@ -1,0 +1,39 @@
+#pragma once
+
+#include "modio.h"
+#include "FModioStats.generated.h"
+
+USTRUCT(BlueprintType)
+struct FModioStats
+{
+  GENERATED_BODY()
+
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  int32 ModId;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  int32 PopularityRankPosition;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  int32 PopularityRankTotalMods;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  int32 DownloadsTotal;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  int32 SubscribersTotal;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  int32 RatingsTotal;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  int32 RatingsPositive;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  int32 RatingsNegative;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  int32 RatingsPercentagePositive;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  int32 DateExpires;
+  // TODO: should this be switched to double?
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  float RatingsWeightedAggregate;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  FString RatingsDisplayText;
+};
+
+extern void initializeStats(FModioStats &stats, modio::Stats modio_stats);
+extern void initializeStatsC(FModioStats &stats, ModioStats modio_stats);

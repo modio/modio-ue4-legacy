@@ -4,7 +4,7 @@
 
 #include "Runtime/Core/Public/Modules/ModuleManager.h"
 #include "modio.h"
-#include "ModioSchemas.h"
+#include "ModioUE4Utility.h"
 #include "ModioPluginComponent.h"
 
 // Settings
@@ -88,4 +88,9 @@ class UModioBPFunctionLibrary : public UBlueprintFunctionLibrary
 
   UFUNCTION(BlueprintPure, Category = "mod.io")
   static void ModioGetModfileUploadQueue(TArray<FModioQueuedModfileUpload> &upload_queue);
+
+  // Me
+
+  UFUNCTION(BlueprintCallable, Category = "mod.io")
+  static void ModioGetUserSubscriptions();
 };

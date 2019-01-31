@@ -7,6 +7,7 @@ UModioPluginComponent::FModioPlugin_OnModDownloadDelegate UModioPluginComponent:
 UModioPluginComponent::FModioPlugin_OnModUploadDelegate UModioPluginComponent::OnModUploadDelegate;
 UModioPluginComponent::FModioPlugin_OnGetAuthenticatedUserDelegate UModioPluginComponent::OnGetAuthenticatedUserDelegate;
 UModioPluginComponent::FModioPlugin_OnGetAllModsDelegate UModioPluginComponent::OnGetAllModsDelegate;
+UModioPluginComponent::FModioPlugin_OnGetUserSubscriptionsDelegate UModioPluginComponent::OnGetUserSubscriptionsDelegate;
 UModioPluginComponent::FModioPlugin_OnAddModDelegate UModioPluginComponent::OnAddModDelegate;
 UModioPluginComponent::FModioPlugin_OnEditModDelegate UModioPluginComponent::OnEditModDelegate;
 
@@ -19,6 +20,7 @@ void UModioPluginComponent::OnRegister()
 	OnModUploadDelegate.AddUObject(this, &UModioPluginComponent::OnModUploadDelegate_Handler);
 	OnGetAuthenticatedUserDelegate.AddUObject(this, &UModioPluginComponent::OnGetAuthenticatedUserDelegate_Handler);
 	OnGetAllModsDelegate.AddUObject(this, &UModioPluginComponent::OnGetAllModsDelegate_Handler);
+	OnGetUserSubscriptionsDelegate.AddUObject(this, &UModioPluginComponent::OnGetAllModsDelegate_Handler);
 	OnAddModDelegate.AddUObject(this, &UModioPluginComponent::OnAddModDelegate_Handler);
 	OnEditModDelegate.AddUObject(this, &UModioPluginComponent::OnEditModDelegate_Handler);
 }
@@ -31,6 +33,7 @@ void UModioPluginComponent::OnUnregister()
 	OnModUploadDelegate.RemoveAll(this);
 	OnGetAuthenticatedUserDelegate.RemoveAll(this);
 	OnGetAllModsDelegate.RemoveAll(this);
+	OnGetUserSubscriptionsDelegate.RemoveAll(this);
 	OnAddModDelegate.RemoveAll(this);
 	OnEditModDelegate.RemoveAll(this);
 	Super::OnUnregister();
@@ -82,6 +85,14 @@ void UModioPluginComponent::OnGetAllModsDelegate_Handler(int32 response_code, TA
 	FFunctionGraphTask::CreateAndDispatchWhenReady([=]()
 	{
 		OnGetAllModsDynamicDelegate.Broadcast(response_code, mods);
+	}, TStatId(), NULL, ENamedThreads::GameThread);
+}
+
+void UModioPluginComponent::OnGetUserSubscriptionsDelegate_Handler(int32 response_code, TArray<FModioMod> mods)
+{
+	FFunctionGraphTask::CreateAndDispatchWhenReady([=]()
+	{
+		OnGetUserSubscriptionsDynamicDelegate.Broadcast(response_code, mods);
 	}, TStatId(), NULL, ENamedThreads::GameThread);
 }
 

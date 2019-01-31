@@ -146,6 +146,25 @@ public:
 	);
 	UPROPERTY(BlueprintAssignable, meta = (DisplayName = "mod.io OnEditMod"))
 	FModioPlugin_OnEditModDynamicDelegate OnEditModDynamicDelegate;
+
+	/* onGetUserSubscriptions */
+	DECLARE_MULTICAST_DELEGATE_TwoParams(
+		FModioPlugin_OnGetUserSubscriptionsDelegate,
+		int32,
+		TArray<FModioMod>
+	);
+	static FModioPlugin_OnGetUserSubscriptionsDelegate OnGetUserSubscriptionsDelegate;
+
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(
+		FModioPlugin_OnGetUserSubscriptionsDynamicDelegate,
+		int32,
+		response_code,
+		TArray<FModioMod>,
+		mods
+	);
+	UPROPERTY(BlueprintAssignable, meta = (DisplayName = "mod.io OnGetUserSubscriptions"))
+	FModioPlugin_OnGetUserSubscriptionsDynamicDelegate OnGetUserSubscriptionsDynamicDelegate;
+
 private:
 	void OnEmailRequestDelegate_Handler(int32 response_code);
 	void OnEmailExchangeDelegate_Handler(int32 response_code);
@@ -153,6 +172,7 @@ private:
 	void OnModUploadDelegate_Handler(int32 response_code);
 	void OnGetAuthenticatedUserDelegate_Handler(int32 response_code, FString username);
 	void OnGetAllModsDelegate_Handler(int32 response_code, TArray<FModioMod> mods);
+	void OnGetUserSubscriptionsDelegate_Handler(int32 response_code, TArray<FModioMod> mods);	
 	void OnAddModDelegate_Handler(int32 response_code, FModioMod mod);
 	void OnEditModDelegate_Handler(int32 response_code, FModioMod mod);
 };

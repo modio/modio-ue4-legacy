@@ -164,15 +164,8 @@ void UModioBPFunctionLibrary::ModioGetAllMods(TEnumAsByte<ModioFilterEnum::Type>
   filter_creator.setLimit((u32)limit);
   filter_creator.setOffset((u32)offset);
 
-  modio_instance->getAllMods(filter_creator, [&](const modio::Response& response, const std::vector<modio::Mod> & modio_mods) {
-    TArray<FModioMod> mods;
-    for (u32 i = 0; i < modio_mods.size(); i++)
-    {
-      FModioMod mod;
-      initializeMod(mod, modio_mods[i]);
-      mods.Add(mod);
-    }
-    UModioPluginComponent::OnGetAllModsDelegate.Broadcast((int32)response.code, mods);
+  modio_instance->getAllMods(filter_creator, [&](const modio::Response& response, const std::vector<modio::Mod> & mods) {
+    UModioPluginComponent::OnGetAllModsDelegate.Broadcast((int32)response.code, toTArrayMods(mods));
   });
 }
 
@@ -226,6 +219,14 @@ void UModioBPFunctionLibrary::ModioGetModfileUploadQueue(TArray<FModioQueuedModf
   }
 
   free(modio_queued_mods);
+}
+
+void UModioBPFunctionLibrary::ModioGetUserSubscriptions()
+{
+  modio::FilterCreator filter_creator;
+  modio_instance->getUserSubscriptions(filter_creator, [&](const modio::Response &response, const std::vector<modio::Mod> &mods) {
+    UModioPluginComponent::OnGetUserSubscriptionsDelegate.Broadcast((int32)response.code, toTArrayMods(mods));
+  });
 }
 
 bool FModioModule::HandleSettingsSaved()
