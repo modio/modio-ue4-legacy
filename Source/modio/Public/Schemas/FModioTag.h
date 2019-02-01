@@ -1,3 +1,6 @@
+// Copyright 2019 modio. All Rights Reserved.
+// Released under MIT.
+
 #pragma once
 
 #include "modio.h"
@@ -14,5 +17,5 @@ struct FModioTag
   FString Name;
 };
 
-extern void initializeTag(FModioTag &tag, modio::Tag modio_tag);
-extern void initializeTagC(FModioTag &tag, ModioTag modio_tag);
+extern void InitializeTag(FModioTag &tag, modio::Tag modio_tag);
+extern void InitializeTagC(FModioTag &tag, ModioTag modio_tag);

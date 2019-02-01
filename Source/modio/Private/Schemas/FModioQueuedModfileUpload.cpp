@@ -1,6 +1,9 @@
+// Copyright 2019 modio. All Rights Reserved.
+// Released under MIT.
+
 #include "FModioQueuedModfileUpload.h"
 
-void initializeQueuedModfileUploadC(FModioQueuedModfileUpload &queued_modfile_upload, ModioQueuedModfileUpload modio_queued_modfile_upload)
+void InitializeQueuedModfileUploadC(FModioQueuedModfileUpload &queued_modfile_upload, ModioQueuedModfileUpload modio_queued_modfile_upload)
 {
   queued_modfile_upload.State = modio_queued_modfile_upload.state;
   queued_modfile_upload.ModId = modio_queued_modfile_upload.mod_id;

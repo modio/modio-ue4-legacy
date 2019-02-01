@@ -1,6 +1,9 @@
+// Copyright 2019 modio. All Rights Reserved.
+// Released under MIT.
+
 #include "FModioMod.h"
 
-void initializeMod(FModioMod &mod, modio::Mod modio_mod)
+void InitializeMod(FModioMod &mod, modio::Mod modio_mod)
 {
   mod.Id = modio_mod.id;
   mod.GameId = modio_mod.game_id;
@@ -18,28 +21,28 @@ void initializeMod(FModioMod &mod, modio::Mod modio_mod)
   mod.DescriptionPlainText = UTF8_TO_TCHAR(modio_mod.description_plaintext.c_str());
   mod.MetadataBlob = UTF8_TO_TCHAR(modio_mod.metadata_blob.c_str());
   mod.ProfileUrl = UTF8_TO_TCHAR(modio_mod.profile_url.c_str());
-  initializeLogo(mod.Logo, modio_mod.logo);
-  initializeUser(mod.SubmittedBy, modio_mod.submitted_by);
-  initializeModfile(mod.Modfile, modio_mod.modfile);
-  initializeMedia(mod.Media, modio_mod.media);
-  initializeStats(mod.Stats, modio_mod.stats);
+  InitializeLogo(mod.Logo, modio_mod.logo);
+  InitializeUser(mod.SubmittedBy, modio_mod.submitted_by);
+  InitializeModfile(mod.Modfile, modio_mod.modfile);
+  InitializeMedia(mod.Media, modio_mod.media);
+  InitializeStats(mod.Stats, modio_mod.stats);
 
   for (u32 i = 0; i < modio_mod.tags.size(); i++)
   {
     FModioTag tag;
-    initializeTag(tag, modio_mod.tags[i]);
+    InitializeTag(tag, modio_mod.tags[i]);
     mod.Tags.Add(tag);
   }
 
   for (u32 i = 0; i < modio_mod.metadata_kvps.size(); i++)
   {
     FModioMetadataKVP metadata_kvp;
-    initializeMetadataKVP(metadata_kvp, modio_mod.metadata_kvps[i]);
+    InitializeMetadataKVP(metadata_kvp, modio_mod.metadata_kvps[i]);
     mod.MetadataKVP.Add(metadata_kvp);
   }
 }
 
-void initializeModC(FModioMod &mod, ModioMod modio_mod)
+void InitializeModC(FModioMod &mod, ModioMod modio_mod)
 {
   mod.Id = modio_mod.id;
   mod.GameId = modio_mod.game_id;
@@ -57,23 +60,23 @@ void initializeModC(FModioMod &mod, ModioMod modio_mod)
   mod.DescriptionPlainText = UTF8_TO_TCHAR(modio_mod.description_plaintext);
   mod.MetadataBlob = UTF8_TO_TCHAR(modio_mod.metadata_blob);
   mod.ProfileUrl = UTF8_TO_TCHAR(modio_mod.profile_url);
-  initializeLogoC(mod.Logo, modio_mod.logo);
-  initializeUserC(mod.SubmittedBy, modio_mod.submitted_by);
-  initializeModfileC(mod.Modfile, modio_mod.modfile);
-  initializeMediaC(mod.Media, modio_mod.media);
-  initializeStatsC(mod.Stats, modio_mod.stats);
+  InitializeLogoC(mod.Logo, modio_mod.logo);
+  InitializeUserC(mod.SubmittedBy, modio_mod.submitted_by);
+  InitializeModfileC(mod.Modfile, modio_mod.modfile);
+  InitializeMediaC(mod.Media, modio_mod.media);
+  InitializeStatsC(mod.Stats, modio_mod.stats);
 
   for (u32 i = 0; i < modio_mod.tags_array_size; i++)
   {
     FModioTag tag;
-    initializeTagC(tag, modio_mod.tags_array[i]);
+    InitializeTagC(tag, modio_mod.tags_array[i]);
     mod.Tags.Add(tag);
   }
 
   for (u32 i = 0; i < modio_mod.metadata_kvp_array_size; i++)
   {
     FModioMetadataKVP metadata_kvp;
-    initializeMetadataKVPC(metadata_kvp, modio_mod.metadata_kvp_array[i]);
+    InitializeMetadataKVPC(metadata_kvp, modio_mod.metadata_kvp_array[i]);
     mod.MetadataKVP.Add(metadata_kvp);
   }
 }

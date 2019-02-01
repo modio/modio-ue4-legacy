@@ -1,6 +1,9 @@
+// Copyright 2019 modio. All Rights Reserved.
+// Released under MIT.
+
 #include "FModioStats.h"
 
-void initializeStats(FModioStats &Stats, modio::Stats modio_stats)
+void InitializeStats(FModioStats &Stats, modio::Stats modio_stats)
 {
   Stats.ModId = modio_stats.mod_id;
   Stats.PopularityRankPosition = modio_stats.popularity_rank_position;
@@ -16,7 +19,7 @@ void initializeStats(FModioStats &Stats, modio::Stats modio_stats)
   Stats.RatingsDisplayText = UTF8_TO_TCHAR(modio_stats.ratings_display_text.c_str());
 }
 
-void initializeStatsC(FModioStats &Stats, ModioStats modio_stats)
+void InitializeStatsC(FModioStats &Stats, ModioStats modio_stats)
 {
   Stats.ModId = modio_stats.mod_id;
   Stats.PopularityRankPosition = modio_stats.popularity_rank_position;

@@ -1,3 +1,6 @@
+// Copyright 2019 modio. All Rights Reserved.
+// Released under MIT.
+
 #pragma once
 
 #include "modio.h"
@@ -63,5 +66,5 @@ struct FModioMod
   TArray<FModioMetadataKVP> MetadataKVP;
 };
 
-extern void initializeMod(FModioMod &mod, modio::Mod modio_mod);
-extern void initializeModC(FModioMod &mod, ModioMod modio_mod);
+extern void InitializeMod(FModioMod &mod, modio::Mod modio_mod);
+extern void InitializeModC(FModioMod &mod, ModioMod modio_mod);

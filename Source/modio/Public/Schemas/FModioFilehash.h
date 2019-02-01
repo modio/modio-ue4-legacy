@@ -1,3 +1,6 @@
+// Copyright 2019 modio. All Rights Reserved.
+// Released under MIT.
+
 #pragma once
 
 #include "modio.h"
@@ -12,5 +15,5 @@ struct FModioFilehash
   FString Md5;
 };
 
-extern void initializeFilehash(FModioFilehash &filehash, modio::Filehash modio_filehash);
-extern void initializeFileHashC(FModioFilehash &filehash, ModioFilehash modio_filehash);
+extern void InitializeFilehash(FModioFilehash &filehash, modio::Filehash modio_filehash);
+extern void InitializeFileHashC(FModioFilehash &filehash, ModioFilehash modio_filehash);

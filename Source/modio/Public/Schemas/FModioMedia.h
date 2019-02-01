@@ -1,3 +1,6 @@
+// Copyright 2019 modio. All Rights Reserved.
+// Released under MIT.
+
 #pragma once
 
 #include "modio.h"
@@ -17,5 +20,5 @@ struct FModioMedia
   TArray<FModioImage> Images;
 };
 
-extern void initializeMedia(FModioMedia &media, modio::Media modio_media);
-extern void initializeMediaC(FModioMedia &media, ModioMedia modio_media);
+extern void InitializeMedia(FModioMedia &media, modio::Media modio_media);
+extern void InitializeMediaC(FModioMedia &media, ModioMedia modio_media);

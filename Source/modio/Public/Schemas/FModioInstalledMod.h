@@ -1,3 +1,6 @@
+// Copyright 2019 modio. All Rights Reserved.
+// Released under MIT.
+
 #pragma once
 
 #include "modio.h"
@@ -15,4 +18,4 @@ struct FModioInstalledMod
   FModioMod mod;
 };
 
-extern void initializeInstalledModC(FModioInstalledMod &installed_mod, ModioInstalledMod modio_installed_mod);
+extern void InitializeInstalledModC(FModioInstalledMod &installed_mod, ModioInstalledMod modio_installed_mod);

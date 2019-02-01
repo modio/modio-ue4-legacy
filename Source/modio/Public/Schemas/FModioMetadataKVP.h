@@ -1,3 +1,6 @@
+// Copyright 2019 modio. All Rights Reserved.
+// Released under MIT.
+
 #pragma once
 
 #include "modio.h"
@@ -14,5 +17,5 @@ struct FModioMetadataKVP
   FString Metavalue;
 };
 
-extern void initializeKVP(FModioMetadataKVP &metadata_kvp, modio::MetadataKVP modio_metadata_kvp);
-extern void initializeKVPC(FModioMetadataKVP &metadata_kvp, ModioMetadataKVP modio_metadata_kvp);
+extern void InitializeKVP(FModioMetadataKVP &metadata_kvp, modio::MetadataKVP modio_metadata_kvp);
+extern void InitializeKVPC(FModioMetadataKVP &metadata_kvp, ModioMetadataKVP modio_metadata_kvp);

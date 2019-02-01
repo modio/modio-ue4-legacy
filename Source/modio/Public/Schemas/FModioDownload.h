@@ -1,3 +1,6 @@
+// Copyright 2019 modio. All Rights Reserved.
+// Released under MIT.
+
 #pragma once
 
 #include "modio.h"
@@ -14,5 +17,5 @@ struct FModioDownload
   FString BinaryUrl;
 };
 
-extern void initializeDownload(FModioDownload &download, modio::Download modio_download);
-extern void initializeDownloadC(FModioDownload &download, ModioDownload modio_download);
+extern void InitializeDownload(FModioDownload &download, modio::Download modio_download);
+extern void InitializeDownloadC(FModioDownload &download, ModioDownload modio_download);

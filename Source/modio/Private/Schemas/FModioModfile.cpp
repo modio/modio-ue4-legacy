@@ -1,6 +1,9 @@
+// Copyright 2019 modio. All Rights Reserved.
+// Released under MIT.
+
 #include "FModioModfile.h"
 
-void initializeModfile(FModioModfile &Modfile, modio::Modfile modio_modfile)
+void InitializeModfile(FModioModfile &Modfile, modio::Modfile modio_modfile)
 {
   Modfile.Id = modio_modfile.id;
   Modfile.ModId = modio_modfile.mod_id;
@@ -14,11 +17,11 @@ void initializeModfile(FModioModfile &Modfile, modio::Modfile modio_modfile)
   Modfile.VirustotalHash = UTF8_TO_TCHAR(modio_modfile.virustotal_hash.c_str());
   Modfile.Changelog = UTF8_TO_TCHAR(modio_modfile.changelog.c_str());
   Modfile.MetadataBlob = UTF8_TO_TCHAR(modio_modfile.metadata_blob.c_str());
-  initializeFilehash(Modfile.Filehash, modio_modfile.filehash);
-  initializeDownload(Modfile.Download, modio_modfile.download);
+  InitializeFilehash(Modfile.Filehash, modio_modfile.filehash);
+  InitializeDownload(Modfile.Download, modio_modfile.download);
 }
 
-void initializeModfileC(FModioModfile &Modfile, ModioModfile modio_modfile)
+void InitializeModfileC(FModioModfile &Modfile, ModioModfile modio_modfile)
 {
   Modfile.Id = modio_modfile.id;
   Modfile.ModId = modio_modfile.mod_id;
@@ -32,6 +35,6 @@ void initializeModfileC(FModioModfile &Modfile, ModioModfile modio_modfile)
   Modfile.VirustotalHash = UTF8_TO_TCHAR(modio_modfile.virustotal_hash);
   Modfile.Changelog = UTF8_TO_TCHAR(modio_modfile.changelog);
   Modfile.MetadataBlob = UTF8_TO_TCHAR(modio_modfile.metadata_blob);
-  initializeFilehashC(Modfile.Filehash, modio_modfile.filehash);
-  initializeDownloadC(Modfile.Download, modio_modfile.download);
+  InitializeFilehashC(Modfile.Filehash, modio_modfile.filehash);
+  InitializeDownloadC(Modfile.Download, modio_modfile.download);
 }

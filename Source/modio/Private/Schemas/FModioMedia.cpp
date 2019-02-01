@@ -1,6 +1,9 @@
+// Copyright 2019 modio. All Rights Reserved.
+// Released under MIT.
+
 #include "FModioMedia.h"
 
-void initializeMedia(FModioMedia &media, modio::Media modio_media)
+void InitializeMedia(FModioMedia &media, modio::Media modio_media)
 {
   for (u32 i = 0; i < modio_media.youtube.size(); i++)
     media.Youtube.Add(UTF8_TO_TCHAR(modio_media.youtube[i].c_str()));
@@ -9,12 +12,12 @@ void initializeMedia(FModioMedia &media, modio::Media modio_media)
   for (u32 i = 0; i < modio_media.images.size(); i++)
   {
     FModioImage image;
-    initializeImage(image, modio_media.images[i]);
+    InitializeImage(image, modio_media.images[i]);
     media.Images.Add(image);
   }
 }
 
-void initializeMediaC(FModioMedia &media, ModioMedia modio_media)
+void InitializeMediaC(FModioMedia &media, ModioMedia modio_media)
 {
   for (u32 i = 0; i < modio_media.youtube_size; i++)
     media.Youtube.Add(UTF8_TO_TCHAR(modio_media.youtube_array[i]));
@@ -23,7 +26,7 @@ void initializeMediaC(FModioMedia &media, ModioMedia modio_media)
   for (u32 i = 0; i < modio_media.images_size; i++)
   {
     FModioImage image;
-    initializeImageC(image, modio_media.images_array[i]);
+    InitializeImageC(image, modio_media.images_array[i]);
     media.Images.Add(image);
   }
 }

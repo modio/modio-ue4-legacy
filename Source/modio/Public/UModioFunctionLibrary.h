@@ -1,39 +1,12 @@
-// Copyright 1998-2018 Epic Games, Inc. All Rights Reserved.
+// Copyright 2019 modio. All Rights Reserved.
+// Released under MIT.
 
 #pragma once
 
-#include "Runtime/Core/Public/Modules/ModuleManager.h"
-#include "modio.h"
-#include "ModioUE4Utility.h"
-#include "ModioPluginComponent.h"
-
-// Settings
-#include "ModioGameSettings.h"
-#include "Developer/Settings/Public/ISettingsModule.h"
-#include "Developer/Settings/Public/ISettingsSection.h"
-#include "Developer/Settings/Public/ISettingsContainer.h"
-
-#include "modioModule.generated.h"
-
-extern modio::Instance *modio_instance;
-extern std::string current_user_username;
-
-class FModioModule : public IModuleInterface
-{
-public:
-  /** IModuleInterface implementation */
-  virtual void StartupModule() override;
-  virtual void ShutdownModule() override;
-  virtual bool SupportsDynamicReloading() override;
-
-private:
-  bool HandleSettingsSaved();
-  void RegisterSettings();
-  void UnregisterSettings();
-};
+#include "UModioFunctionLibrary.generated.h"
 
 UCLASS()
-class UModioBPFunctionLibrary : public UBlueprintFunctionLibrary
+class MODIO_API UModioFunctionLibrary : public UBlueprintFunctionLibrary
 {
   GENERATED_UCLASS_BODY()
 

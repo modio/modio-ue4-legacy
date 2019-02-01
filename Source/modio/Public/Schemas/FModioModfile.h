@@ -1,3 +1,6 @@
+// Copyright 2019 modio. All Rights Reserved.
+// Released under MIT.
+
 #pragma once
 
 #include "modio.h"
@@ -41,5 +44,5 @@ struct FModioModfile
   FModioDownload Download;
 };
 
-extern void initializeModfile(FModioModfile &modfile, modio::Modfile modio_modfile);
-extern void initializeModfileC(FModioModfile &modfile, ModioModfile modio_modfile);
+extern void InitializeModfile(FModioModfile &modfile, modio::Modfile modio_modfile);
+extern void InitializeModfileC(FModioModfile &modfile, ModioModfile modio_modfile);

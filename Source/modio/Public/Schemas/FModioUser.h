@@ -1,3 +1,6 @@
+// Copyright 2019 modio. All Rights Reserved.
+// Released under MIT.
+
 #pragma once
 
 #include "modio.h"
@@ -27,5 +30,5 @@ struct FModioUser
   FModioAvatar Avatar;
 };
 
-extern void initializeUser(FModioUser &User, modio::User modio_user);
-extern void initializeUserC(FModioUser &User, ModioUser modio_user);
+extern void InitializeUser(FModioUser &User, modio::User modio_user);
+extern void InitializeUserC(FModioUser &User, ModioUser modio_user);

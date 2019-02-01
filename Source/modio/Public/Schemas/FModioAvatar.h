@@ -1,3 +1,6 @@
+// Copyright 2019 modio. All Rights Reserved.
+// Released under MIT.
+
 #pragma once
 
 #include "modio.h"
@@ -18,5 +21,5 @@ struct FModioAvatar
   FString Thumb100x100;
 };
 
-extern void initializeAvatar(FModioAvatar &Avatar, modio::Avatar modio_avatar);
-extern void initializeAvatarC(FModioAvatar &Avatar, ModioAvatar modio_avatar);
+extern void InitializeAvatar(FModioAvatar &Avatar, modio::Avatar modio_avatar);
+extern void InitializeAvatarC(FModioAvatar &Avatar, ModioAvatar modio_avatar);

@@ -1,3 +1,6 @@
+// Copyright 2019 modio. All Rights Reserved.
+// Released under MIT.
+
 #pragma once
 
 #include "modio.h"
@@ -35,5 +38,5 @@ struct FModioStats
   FString RatingsDisplayText;
 };
 
-extern void initializeStats(FModioStats &stats, modio::Stats modio_stats);
-extern void initializeStatsC(FModioStats &stats, ModioStats modio_stats);
+extern void InitializeStats(FModioStats &stats, modio::Stats modio_stats);
+extern void InitializeStatsC(FModioStats &stats, ModioStats modio_stats);

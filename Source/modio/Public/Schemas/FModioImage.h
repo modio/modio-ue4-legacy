@@ -1,3 +1,6 @@
+// Copyright 2019 modio. All Rights Reserved.
+// Released under MIT.
+
 #pragma once
 
 #include "modio.h"
@@ -16,5 +19,5 @@ struct FModioImage
   FString Thumb320x180;
 };
 
-extern void initializeImage(FModioImage &image, modio::Image modio_image);
-extern void initializeImageC(FModioImage &image, ModioImage modio_image);
+extern void InitializeImage(FModioImage &image, modio::Image modio_image);
+extern void InitializeImageC(FModioImage &image, ModioImage modio_image);

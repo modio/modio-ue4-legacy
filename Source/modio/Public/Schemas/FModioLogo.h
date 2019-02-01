@@ -1,3 +1,6 @@
+// Copyright 2019 modio. All Rights Reserved.
+// Released under MIT.
+
 #pragma once
 
 #include "modio.h"
@@ -20,5 +23,5 @@ struct FModioLogo
   FString Thumb1280x720;
 };
 
-extern void initializeLogo(FModioLogo &Logo, modio::Logo modio_logo);
-extern void initializeLogoC(FModioLogo &Logo, ModioLogo modio_logo);
+extern void InitializeLogo(FModioLogo &Logo, modio::Logo modio_logo);
+extern void InitializeLogoC(FModioLogo &Logo, ModioLogo modio_logo);
