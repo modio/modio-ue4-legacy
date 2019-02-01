@@ -3,9 +3,8 @@
 
 #pragma once
 
-#include "CoreMinimal.h"
 #include "Runtime/Engine/Classes/Components/ActorComponent.h"
-#include "ModioSchemas.h"
+#include "ModioUE4Plugin.h"
 
 #include "UModioComponent.generated.h"
 
@@ -157,7 +156,7 @@ private:
   void OnModUploadDelegate_Handler(int32 response_code);
   void OnGetAuthenticatedUserDelegate_Handler(int32 response_code, FString username);
   void OnGetAllModsDelegate_Handler(int32 response_code, TArray<FModioMod> mods);
-  void OnGetUserSubscriptionsDelegate_Handler(int32 response_code, TArray<FModioMod> mods);
   void OnAddModDelegate_Handler(int32 response_code, FModioMod mod);
   void OnEditModDelegate_Handler(int32 response_code, FModioMod mod);
+  void OnGetUserSubscriptionsDelegate_Handler(int32 response_code, TArray<FModioMod> mods);
 };

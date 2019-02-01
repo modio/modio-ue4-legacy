@@ -2,7 +2,6 @@
 // Released under MIT.
 
 #include "UModioComponent.h"
-#include "Engine/Engine.h"
 
 UModioComponent::FModioPlugin_OnEmailRequestDelegate UModioComponent::OnEmailRequestDelegate;
 UModioComponent::FModioPlugin_OnEmailExchangeDelegate UModioComponent::OnEmailExchangeDelegate;
@@ -91,14 +90,6 @@ void UModioComponent::OnGetAllModsDelegate_Handler(int32 response_code, TArray<F
 	}, TStatId(), NULL, ENamedThreads::GameThread);
 }
 
-void UModioComponent::OnGetUserSubscriptionsDelegate_Handler(int32 response_code, TArray<FModioMod> mods)
-{
-	FFunctionGraphTask::CreateAndDispatchWhenReady([=]()
-	{
-		OnGetUserSubscriptionsDynamicDelegate.Broadcast(response_code, mods);
-	}, TStatId(), NULL, ENamedThreads::GameThread);
-}
-
 void UModioComponent::OnAddModDelegate_Handler(int32 response_code, FModioMod mod)
 {
 	FFunctionGraphTask::CreateAndDispatchWhenReady([=]()
@@ -112,5 +103,13 @@ void UModioComponent::OnEditModDelegate_Handler(int32 response_code, FModioMod m
 	FFunctionGraphTask::CreateAndDispatchWhenReady([=]()
 	{
 		OnEditModDynamicDelegate.Broadcast(response_code, mod);
+	}, TStatId(), NULL, ENamedThreads::GameThread);
+}
+
+void UModioComponent::OnGetUserSubscriptionsDelegate_Handler(int32 response_code, TArray<FModioMod> mods)
+{
+	FFunctionGraphTask::CreateAndDispatchWhenReady([=]()
+	{
+		OnGetUserSubscriptionsDynamicDelegate.Broadcast(response_code, mods);
 	}, TStatId(), NULL, ENamedThreads::GameThread);
 }

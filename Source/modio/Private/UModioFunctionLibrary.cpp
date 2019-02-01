@@ -99,7 +99,7 @@ void UModioFunctionLibrary::ModioInstallDownloadedMods()
   modio_instance->installDownloadedMods();
 }
 
-void UModioFunctionLibrary::ModioGetAllMods(TEnumAsByte<ModioFilterEnum::Type> filter_type, int32 limit, int32 offset)
+void UModioFunctionLibrary::ModioGetAllMods(TEnumAsByte<EModioFilterType> filter_type, int32 limit, int32 offset)
 {
   modio::FilterCreator filter_creator;
   filter_creator.setLimit((u32)limit);

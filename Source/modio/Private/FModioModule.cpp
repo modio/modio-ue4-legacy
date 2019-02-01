@@ -2,9 +2,6 @@
 // Released under MIT.
 
 #include "FModioModule.h"
-#include "Core.h"
-#include "ModuleManager.h"
-#include "Runtime/Projects/Public/Interfaces/IPluginManager.h"
 
 #define LOCTEXT_NAMESPACE "FModioModule"
 

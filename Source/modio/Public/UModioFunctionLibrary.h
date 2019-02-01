@@ -46,7 +46,7 @@ class MODIO_API UModioFunctionLibrary : public UBlueprintFunctionLibrary
   // Browsing
 
   UFUNCTION(BlueprintCallable, Category = "mod.io")
-  static void ModioGetAllMods(TEnumAsByte<ModioFilterEnum::Type> filter_type, int32 limit, int32 offset);
+  static void ModioGetAllMods(TEnumAsByte<EModioFilterType> filter_type, int32 limit, int32 offset);
 
   // Mod creation and uploads
 
