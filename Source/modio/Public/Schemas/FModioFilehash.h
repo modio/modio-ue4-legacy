@@ -15,5 +15,5 @@ struct FModioFilehash
   FString Md5;
 };
 
-extern void InitializeFilehash(FModioFilehash &filehash, modio::Filehash modio_filehash);
-extern void InitializeFileHashC(FModioFilehash &filehash, ModioFilehash modio_filehash);
+extern void InitializeFilehash(FModioFilehash &filehash, const modio::Filehash &modio_filehash);
+extern void InitializeFileHashC(FModioFilehash &filehash, const ModioFilehash &modio_filehash);

@@ -21,5 +21,5 @@ struct FModioAvatar
   FString Thumb100x100;
 };
 
-extern void InitializeAvatar(FModioAvatar &Avatar, modio::Avatar modio_avatar);
-extern void InitializeAvatarC(FModioAvatar &Avatar, ModioAvatar modio_avatar);
+extern void InitializeAvatar(FModioAvatar &Avatar, const modio::Avatar &modio_avatar);
+extern void InitializeAvatarC(FModioAvatar &Avatar, const ModioAvatar &modio_avatar);

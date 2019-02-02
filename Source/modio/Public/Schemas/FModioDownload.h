@@ -17,5 +17,5 @@ struct FModioDownload
   FString BinaryUrl;
 };
 
-extern void InitializeDownload(FModioDownload &download, modio::Download modio_download);
-extern void InitializeDownloadC(FModioDownload &download, ModioDownload modio_download);
+extern void InitializeDownload(FModioDownload &download, const modio::Download &modio_download);
+extern void InitializeDownloadC(FModioDownload &download, const ModioDownload &modio_download);

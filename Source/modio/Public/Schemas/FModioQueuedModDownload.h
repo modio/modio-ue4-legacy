@@ -24,4 +24,4 @@ struct FModioQueuedModDownload
   FModioMod mod;
 };
 
-extern void InitializeQueuedModDownloadC(FModioQueuedModDownload &queued_mod_download, ModioQueuedModDownload modio_queued_mod_download);
+extern void InitializeQueuedModDownloadC(FModioQueuedModDownload &queued_mod_download, const ModioQueuedModDownload &modio_queued_mod_download);

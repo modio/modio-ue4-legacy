@@ -3,7 +3,7 @@
 
 #include "FModioModfile.h"
 
-void InitializeModfile(FModioModfile &Modfile, modio::Modfile modio_modfile)
+void InitializeModfile(FModioModfile &Modfile, const modio::Modfile &modio_modfile)
 {
   Modfile.Id = modio_modfile.id;
   Modfile.ModId = modio_modfile.mod_id;
@@ -21,7 +21,7 @@ void InitializeModfile(FModioModfile &Modfile, modio::Modfile modio_modfile)
   InitializeDownload(Modfile.Download, modio_modfile.download);
 }
 
-void InitializeModfileC(FModioModfile &Modfile, ModioModfile modio_modfile)
+void InitializeModfileC(FModioModfile &Modfile, const ModioModfile &modio_modfile)
 {
   Modfile.Id = modio_modfile.id;
   Modfile.ModId = modio_modfile.mod_id;

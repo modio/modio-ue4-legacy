@@ -66,5 +66,5 @@ struct FModioMod
   TArray<FModioMetadataKVP> MetadataKVP;
 };
 
-extern void InitializeMod(FModioMod &mod, modio::Mod modio_mod);
-extern void InitializeModC(FModioMod &mod, ModioMod modio_mod);
+extern void InitializeMod(FModioMod &mod, const modio::Mod &modio_mod);
+extern void InitializeModC(FModioMod &mod, const ModioMod &modio_mod);

@@ -3,7 +3,7 @@
 
 #include "FModioMod.h"
 
-void InitializeMod(FModioMod &mod, modio::Mod modio_mod)
+void InitializeMod(FModioMod &mod, const modio::Mod &modio_mod)
 {
   mod.Id = modio_mod.id;
   mod.GameId = modio_mod.game_id;
@@ -42,7 +42,7 @@ void InitializeMod(FModioMod &mod, modio::Mod modio_mod)
   }
 }
 
-void InitializeModC(FModioMod &mod, ModioMod modio_mod)
+void InitializeModC(FModioMod &mod, const ModioMod &modio_mod)
 {
   mod.Id = modio_mod.id;
   mod.GameId = modio_mod.game_id;

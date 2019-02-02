@@ -18,4 +18,4 @@ struct FModioInstalledMod
   FModioMod mod;
 };
 
-extern void InitializeInstalledModC(FModioInstalledMod &installed_mod, ModioInstalledMod modio_installed_mod);
+extern void InitializeInstalledModC(FModioInstalledMod &installed_mod, const ModioInstalledMod &modio_installed_mod);

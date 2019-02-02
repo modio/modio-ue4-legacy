@@ -17,5 +17,5 @@ struct FModioMetadataKVP
   FString Metavalue;
 };
 
-extern void InitializeKVP(FModioMetadataKVP &metadata_kvp, modio::MetadataKVP modio_metadata_kvp);
-extern void InitializeKVPC(FModioMetadataKVP &metadata_kvp, ModioMetadataKVP modio_metadata_kvp);
+extern void InitializeKVP(FModioMetadataKVP &metadata_kvp, const modio::MetadataKVP &modio_metadata_kvp);
+extern void InitializeKVPC(FModioMetadataKVP &metadata_kvp, const ModioMetadataKVP &modio_metadata_kvp);

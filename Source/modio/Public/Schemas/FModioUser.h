@@ -30,5 +30,5 @@ struct FModioUser
   FModioAvatar Avatar;
 };
 
-extern void InitializeUser(FModioUser &User, modio::User modio_user);
-extern void InitializeUserC(FModioUser &User, ModioUser modio_user);
+extern void InitializeUser(FModioUser &User, const modio::User &modio_user);
+extern void InitializeUserC(FModioUser &User, const ModioUser &modio_user);

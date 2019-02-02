@@ -3,7 +3,7 @@
 
 #include "FModioStats.h"
 
-void InitializeStats(FModioStats &Stats, modio::Stats modio_stats)
+void InitializeStats(FModioStats &Stats, const modio::Stats &modio_stats)
 {
   Stats.ModId = modio_stats.mod_id;
   Stats.PopularityRankPosition = modio_stats.popularity_rank_position;
@@ -19,7 +19,7 @@ void InitializeStats(FModioStats &Stats, modio::Stats modio_stats)
   Stats.RatingsDisplayText = UTF8_TO_TCHAR(modio_stats.ratings_display_text.c_str());
 }
 
-void InitializeStatsC(FModioStats &Stats, ModioStats modio_stats)
+void InitializeStatsC(FModioStats &Stats, const ModioStats &modio_stats)
 {
   Stats.ModId = modio_stats.mod_id;
   Stats.PopularityRankPosition = modio_stats.popularity_rank_position;

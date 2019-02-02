@@ -38,5 +38,5 @@ struct FModioStats
   FString RatingsDisplayText;
 };
 
-extern void InitializeStats(FModioStats &stats, modio::Stats modio_stats);
-extern void InitializeStatsC(FModioStats &stats, ModioStats modio_stats);
+extern void InitializeStats(FModioStats &stats, const modio::Stats &modio_stats);
+extern void InitializeStatsC(FModioStats &stats, const ModioStats &modio_stats);

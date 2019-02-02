@@ -3,7 +3,7 @@
 
 #include "FModioUser.h"
 
-void InitializeUser(FModioUser &User, modio::User modio_user)
+void InitializeUser(FModioUser &User, const modio::User &modio_user)
 {
   User.Id = modio_user.id;
   User.DateOnline = modio_user.date_online;
@@ -15,7 +15,7 @@ void InitializeUser(FModioUser &User, modio::User modio_user)
   InitializeAvatar(User.Avatar, modio_user.avatar);
 }
 
-void InitializeUserC(FModioUser &User, ModioUser modio_user)
+void InitializeUserC(FModioUser &User, const ModioUser &modio_user)
 {
   User.Id = modio_user.id;
   User.DateOnline = modio_user.date_online;

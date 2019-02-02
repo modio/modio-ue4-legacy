@@ -20,5 +20,5 @@ struct FModioMedia
   TArray<FModioImage> Images;
 };
 
-extern void InitializeMedia(FModioMedia &media, modio::Media modio_media);
-extern void InitializeMediaC(FModioMedia &media, ModioMedia modio_media);
+extern void InitializeMedia(FModioMedia &media, const modio::Media &modio_media);
+extern void InitializeMediaC(FModioMedia &media, const ModioMedia &modio_media);

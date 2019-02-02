@@ -44,5 +44,5 @@ struct FModioModfile
   FModioDownload Download;
 };
 
-extern void InitializeModfile(FModioModfile &modfile, modio::Modfile modio_modfile);
-extern void InitializeModfileC(FModioModfile &modfile, ModioModfile modio_modfile);
+extern void InitializeModfile(FModioModfile &modfile, const modio::Modfile &modio_modfile);
+extern void InitializeModfileC(FModioModfile &modfile, const ModioModfile &modio_modfile);
