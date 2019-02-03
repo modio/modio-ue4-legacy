@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "modio.h"
+#include "ModioHWrapper.h"
 #include "FModioQUeuedModfileUpload.generated.h"
 
 USTRUCT(BlueprintType)

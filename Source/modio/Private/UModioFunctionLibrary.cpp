@@ -3,7 +3,7 @@
 
 #include "UModioFunctionLibrary.h"
 #include "UModioComponent.h"
-#include "modio.h"
+#include "ModioHWrapper.h"
 
 extern modio::Instance *modio_instance;
 

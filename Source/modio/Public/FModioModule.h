@@ -4,7 +4,7 @@
 #pragma once
 
 #include "Modules/ModuleManager.h"
-#include "modio.h"
+#include "ModioHWrapper.h"
 #include "ModioUE4Utility.h"
 #include "UModioComponent.h"
 #include "UModioSettings.h"
