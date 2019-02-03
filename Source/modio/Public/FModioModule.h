@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "Runtime/Core/Public/Modules/ModuleManager.h"
+#include "Modules/ModuleManager.h"
 #include "modio.h"
 #include "ModioUE4Utility.h"
 #include "UModioComponent.h"
