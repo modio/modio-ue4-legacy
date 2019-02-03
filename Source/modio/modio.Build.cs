@@ -32,14 +32,14 @@ public class modio : ModuleRules
 
 		LoadModio(Target);
 
-		this.bEnableExceptions = true;
+		bEnableExceptions = true;
 		// Made sure to disable unity builds, as exclusion of some files causes the project to explode
 		// this was we atleast get deterministic builds even if they are slower
 		MinSourceFilesForUnityBuildOverride = 256;
 		
 		PublicIncludePaths.AddRange(
 			new string[] {
-				"modio/Public"
+				//"modio/Public"
 				/*,
 				"Runtime/Core/Public/Modules/",
 				"Editor/UnrealEd/Classes/Factories",
@@ -53,7 +53,7 @@ public class modio : ModuleRules
 		
 		PrivateIncludePaths.AddRange(
 			new string[] {
-				"modio/Private",
+				//"modio/Private",
 				// ... add other private include paths required here ...
 			}
 			);
