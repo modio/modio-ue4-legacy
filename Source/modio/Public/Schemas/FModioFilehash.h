@@ -16,4 +16,4 @@ struct FModioFilehash
 };
 
 extern void InitializeFilehash(FModioFilehash &filehash, const modio::Filehash &modio_filehash);
-extern void InitializeFileHashC(FModioFilehash &filehash, const ModioFilehash &modio_filehash);
+extern void InitializeFilehashC(FModioFilehash &filehash, const ModioFilehash &modio_filehash);

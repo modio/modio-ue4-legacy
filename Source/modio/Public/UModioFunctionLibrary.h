@@ -3,6 +3,14 @@
 
 #pragma once
 
+#include "Kismet/BlueprintFunctionLibrary.h"
+#include "Enums/EModioFilterType.h"
+#include "Customizables/FModioModfileCreator.h"
+#include "Customizables/FModioModEditor.h"
+#include "Customizables/FModioModCreator.h"
+#include "Schemas/FModioQueuedModfileUpload.h"
+#include "Schemas/FModioQueuedModDownload.h"
+#include "Schemas/FModioInstalledMod.h"
 #include "UModioFunctionLibrary.generated.h"
 
 UCLASS()

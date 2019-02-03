@@ -33,6 +33,9 @@ public class modio : ModuleRules
 		LoadModio(Target);
 
 		this.bEnableExceptions = true;
+		// Made sure to disable unity builds, as exclusion of some files causes the project to explode
+		// this was we atleast get deterministic builds even if they are slower
+		MinSourceFilesForUnityBuildOverride = 256;
 		
 		PublicIncludePaths.AddRange(
 			new string[] {

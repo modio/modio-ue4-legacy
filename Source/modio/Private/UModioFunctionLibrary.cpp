@@ -2,6 +2,10 @@
 // Released under MIT.
 
 #include "UModioFunctionLibrary.h"
+#include "UModioComponent.h"
+#include "modio.h"
+
+extern modio::Instance *modio_instance;
 
 UModioFunctionLibrary::UModioFunctionLibrary(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)
