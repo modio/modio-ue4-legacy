@@ -3,9 +3,6 @@
 
 #pragma once
 
-#include "Developer/Settings/Public/ISettingsModule.h"
-#include "Developer/Settings/Public/ISettingsSection.h"
-#include "Developer/Settings/Public/ISettingsContainer.h"
 #include "UModioSettings.generated.h"
 
 UCLASS(config = Game, defaultconfig)

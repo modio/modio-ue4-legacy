@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "modio.h"
+#include "ModioHWrapper.h"
 #include "FModioMetadataKVP.generated.h"
 
 USTRUCT(BlueprintType)
@@ -17,5 +17,5 @@ struct FModioMetadataKVP
   FString Metavalue;
 };
 
-extern void InitializeKVP(FModioMetadataKVP &metadata_kvp, const modio::MetadataKVP &modio_metadata_kvp);
-extern void InitializeKVPC(FModioMetadataKVP &metadata_kvp, const ModioMetadataKVP &modio_metadata_kvp);
+extern void InitializeMetadataKVP( FModioMetadataKVP &MetadataKVP, const modio::MetadataKVP &modio_metadata_kvp );
+extern void InitializeMetadataKVPC( FModioMetadataKVP &MetadataKVP, const ModioMetadataKVP &modio_metadata_kvp );

@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "modio.h"
+#include "ModioHWrapper.h"
 #include "FModioImage.generated.h"
 
 USTRUCT(BlueprintType)

@@ -2,6 +2,11 @@
 // Released under MIT.
 
 #include "FModioModule.h"
+#if WITH_EDITOR
+#include "ISettingsModule.h"
+#include "ISettingsContainer.h"
+#include "ISettingsSection.h"
+#endif
 
 #define LOCTEXT_NAMESPACE "FModioModule"
 
@@ -10,9 +15,9 @@ std::string current_user_username;
 
 void FModioModule::StartupModule()
 {
-  UModioSettings *Settings = GetMutableDefault<UModioSettings>();
+  const UModioSettings *Settings = GetDefault<UModioSettings>();
 
-  FString game_directory = FPaths::ConvertRelativePathToFull(FPaths::GameDir());
+  FString game_directory = FPaths::ConvertRelativePathToFull(FPaths::ProjectDir());
   std::string game_directory_str = std::string(TCHAR_TO_UTF8(*game_directory));
 
   u32 environment;
@@ -43,12 +48,17 @@ void FModioModule::StartupModule()
     current_user_username = user.username;
   });
 
-  RegisterSettings();
+  // Need GIsEdtor check as this might run when running the game but not with the editor
+  if( GIsEditor )
+  {
+    RegisterSettings();
+  }
 }
 
 void FModioModule::ShutdownModule()
 {
-  if (UObjectInitialized())
+  // Need GIsEdtor check as this might run when running the game but not with the editor	
+  if ( UObjectInitialized() && GIsEditor )
   {
     UnregisterSettings();
   }
@@ -73,8 +83,10 @@ bool FModioModule::HandleSettingsSaved()
   return true;
 }
 
+// @todo: Move Register/Unregister Settings to editor module as they use editor only ISettingsModule
 void FModioModule::RegisterSettings()
 {
+  #if WITH_EDITOR
   if (ISettingsModule *SettingsModule = FModuleManager::GetModulePtr<ISettingsModule>("Settings"))
   {
     ISettingsContainerPtr SettingsContainer = SettingsModule->GetContainer("Project");
@@ -93,14 +105,17 @@ void FModioModule::RegisterSettings()
       SettingsSection->OnModified().BindRaw(this, &FModioModule::HandleSettingsSaved);
     }
   }
+  #endif
 }
 
 void FModioModule::UnregisterSettings()
 {
+  #if WITH_EDITOR
   if (ISettingsModule *SettingsModule = FModuleManager::GetModulePtr<ISettingsModule>("Settings"))
   {
     SettingsModule->UnregisterSettings("Project", "mod.io Settings", "General");
   }
+  #endif
 }
 
 #undef LOCTEXT_NAMESPACE

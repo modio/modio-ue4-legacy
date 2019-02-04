@@ -2,6 +2,7 @@
 // Released under MIT.
 
 #include "FModioMod.h"
+#include "FModioMetadataKVP.h"
 
 void InitializeMod(FModioMod &mod, const modio::Mod &modio_mod)
 {
