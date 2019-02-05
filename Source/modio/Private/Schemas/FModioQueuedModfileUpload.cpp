@@ -3,7 +3,7 @@
 
 #include "FModioQueuedModfileUpload.h"
 
-void InitializeQueuedModfileUploadC(FModioQueuedModfileUpload &queued_modfile_upload, const ModioQueuedModfileUpload &modio_queued_modfile_upload)
+void InitializeQueuedModfileUpload(FModioQueuedModfileUpload &queued_modfile_upload, const ModioQueuedModfileUpload &modio_queued_modfile_upload)
 {
   queued_modfile_upload.State = modio_queued_modfile_upload.state;
   queued_modfile_upload.ModId = modio_queued_modfile_upload.mod_id;

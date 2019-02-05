@@ -4,6 +4,7 @@
 #pragma once
 
 #include "Kismet/BlueprintFunctionLibrary.h"
+#include "ModioCallbacks.h"
 #include "Enums/EModioFilterType.h"
 #include "Customizables/FModioModfileCreator.h"
 #include "Customizables/FModioModEditor.h"
@@ -37,8 +38,8 @@ class MODIO_API UModioFunctionLibrary : public UBlueprintFunctionLibrary
   UFUNCTION(BlueprintPure, Category = "mod.io")
   static void ModioIsLoggedIn(bool &is_logged_in);
 
-  UFUNCTION(BlueprintCallable, Category = "mod.io")
-  static void ModioGetAuthenticatedUser(FString &username);
+  UFUNCTION(BlueprintPure, Category = "mod.io")
+  static void ModioCurrentUser(FString &username);
 
   // Downloads and installs
 
@@ -74,4 +75,7 @@ class MODIO_API UModioFunctionLibrary : public UBlueprintFunctionLibrary
 
   UFUNCTION(BlueprintCallable, Category = "mod.io")
   static void ModioGetUserSubscriptions();
+
+  UFUNCTION(BlueprintCallable, Category = "mod.io")
+  static void ModioGetAuthenticatedUser();
 };

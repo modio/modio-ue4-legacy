@@ -23,4 +23,4 @@ struct FModioQueuedModfileUpload
   FString Path;
 };
 
-extern void InitializeQueuedModfileUploadC(FModioQueuedModfileUpload &queued_modfile_upload, const ModioQueuedModfileUpload &modio_queued_modfile_upload);
+extern void InitializeQueuedModfileUpload(FModioQueuedModfileUpload &queued_modfile_upload, const ModioQueuedModfileUpload &modio_queued_modfile_upload);

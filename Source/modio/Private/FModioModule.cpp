@@ -10,15 +10,11 @@
 
 #define LOCTEXT_NAMESPACE "FModioModule"
 
-modio::Instance *modio_instance;
-std::string current_user_username;
-
 void FModioModule::StartupModule()
 {
   const UModioSettings *Settings = GetDefault<UModioSettings>();
 
   FString game_directory = FPaths::ConvertRelativePathToFull(FPaths::ProjectDir());
-  std::string game_directory_str = std::string(TCHAR_TO_UTF8(*game_directory));
 
   u32 environment;
   if (Settings->IsLiveEnvironment)
@@ -27,13 +23,14 @@ void FModioModule::StartupModule()
     environment = MODIO_ENVIRONMENT_TEST;
   
   if (Settings->RootDirectory != "")
-    game_directory_str += std::string(TCHAR_TO_UTF8(*Settings->RootDirectory));
+    game_directory += Settings->RootDirectory;
 
   u32 game_id = Settings->GameId;
-  std::string api_key = std::string(TCHAR_TO_UTF8(*(Settings->ApiKey)));
+  FString api_key = Settings->ApiKey;
 
-  modio_instance = new modio::Instance(environment, game_id, api_key, game_directory_str);
+  modioInit(environment, game_id, TCHAR_TO_UTF8(*api_key), TCHAR_TO_UTF8(*game_directory));
 
+/*
   modio_instance->setDownloadListener([&](u32 response_code, u32 mod_id) {
     UModioComponent::OnModDownloadDelegate.Broadcast((int32)response_code);
   });
@@ -47,7 +44,7 @@ void FModioModule::StartupModule()
   modio_instance->getAuthenticatedUser([&](const modio::Response &response, const modio::User &user) {
     current_user_username = user.username;
   });
-
+*/
   // Need GIsEdtor check as this might run when running the game but not with the editor
   if( GIsEditor )
   {
@@ -62,7 +59,6 @@ void FModioModule::ShutdownModule()
   {
     UnregisterSettings();
   }
-  delete modio_instance;
 }
 
 bool FModioModule::SupportsDynamicReloading()

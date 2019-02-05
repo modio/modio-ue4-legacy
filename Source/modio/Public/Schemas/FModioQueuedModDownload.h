@@ -14,14 +14,14 @@ struct FModioQueuedModDownload
 
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
   FString Path;
-  // TODO: change to int64 unsupported by ue4
+  // @todo: change to int64 unsupported by ue4
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
   int32 CurrentProgress;
-  // TODO: change to int64 unsupported by ue4
+  // @todo: change to int64 unsupported by ue4
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
   int32 TotalSize;
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
   FModioMod mod;
 };
 
-extern void InitializeQueuedModDownloadC(FModioQueuedModDownload &queued_mod_download, const ModioQueuedModDownload &modio_queued_mod_download);
+extern void InitializeQueuedModDownload(FModioQueuedModDownload &queued_mod_download, const ModioQueuedModDownload &modio_queued_mod_download);

@@ -3,10 +3,12 @@
 
 #include "ModioUE4Utility.h"
 
-TArray<FModioMod> toTArrayMods(const std::vector<modio::Mod> &modio_mods)
+FString current_user_username;
+
+TArray<FModioMod> toTArrayMods(ModioMod* modio_mods, u32 mods_size)
 {
   TArray<FModioMod> mods;
-  for (u32 i = 0; i < modio_mods.size(); i++)
+  for (u32 i = 0; i < mods_size; i++)
   {
     FModioMod mod;
     InitializeMod(mod, modio_mods[i]);

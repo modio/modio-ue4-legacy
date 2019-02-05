@@ -9,9 +9,6 @@
 #include "UModioComponent.h"
 #include "UModioSettings.h"
 
-extern modio::Instance *modio_instance;
-extern std::string current_user_username;
-
 class FModioModule : public IModuleInterface
 {
 public:

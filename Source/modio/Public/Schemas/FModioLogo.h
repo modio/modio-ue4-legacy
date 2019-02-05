@@ -23,5 +23,4 @@ struct FModioLogo
   FString Thumb1280x720;
 };
 
-extern void InitializeLogo(FModioLogo &Logo, const modio::Logo &modio_logo);
-extern void InitializeLogoC(FModioLogo &Logo, const ModioLogo &modio_logo);
+extern void InitializeLogo(FModioLogo &Logo, const ModioLogo &modio_logo);

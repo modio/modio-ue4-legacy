@@ -19,5 +19,4 @@ struct FModioImage
   FString Thumb320x180;
 };
 
-extern void InitializeImage(FModioImage &image, const modio::Image &modio_image);
-extern void InitializeImageC(FModioImage &image, const ModioImage &modio_image);
+extern void InitializeImage(FModioImage &image, const ModioImage &modio_image);

@@ -17,5 +17,4 @@ struct FModioTag
   FString Name;
 };
 
-extern void InitializeTag(FModioTag &tag, const modio::Tag &modio_tag);
-extern void InitializeTagC(FModioTag &tag, const ModioTag &modio_tag);
+extern void InitializeTag(FModioTag &tag, const ModioTag &modio_tag);
