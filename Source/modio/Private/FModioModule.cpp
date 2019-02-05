@@ -30,21 +30,11 @@ void FModioModule::StartupModule()
 
   modioInit(environment, game_id, TCHAR_TO_UTF8(*api_key), TCHAR_TO_UTF8(*game_directory));
 
-/*
-  modio_instance->setDownloadListener([&](u32 response_code, u32 mod_id) {
-    UModioComponent::OnModDownloadDelegate.Broadcast((int32)response_code);
-  });
-
-  modio_instance->setUploadListener([&](u32 response_code, u32 mod_id) {
-    UModioComponent::OnModUploadDelegate.Broadcast((int32)response_code);
-  });
+  modioSetDownloadListener(&onModInstalled);
+  modioSetUploadListener(&onAddModfile);
 
   current_user_username = "";
 
-  modio_instance->getAuthenticatedUser([&](const modio::Response &response, const modio::User &user) {
-    current_user_username = user.username;
-  });
-*/
   // Need GIsEdtor check as this might run when running the game but not with the editor
   if( GIsEditor )
   {

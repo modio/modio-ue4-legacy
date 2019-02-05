@@ -18,22 +18,11 @@ void UModioFunctionLibrary::ModioProcess()
 void UModioFunctionLibrary::ModioEmailRequest(FString email)
 {
   modioEmailRequest(NULL, TCHAR_TO_UTF8(*email), &onEmailRequest);
-  UModioComponent::OnEmailRequestDelegate.Broadcast(69);
 }
 
 void UModioFunctionLibrary::ModioEmailExchange(FString security_code)
 {
   modioEmailExchange(NULL, TCHAR_TO_UTF8(*security_code), &onEmailExchange);
-
-  /*
-  modio_instance->emailExchange(std::string(TCHAR_TO_UTF8(*security_code)), [&](const modio::Response &response) {
-    modio_instance->getAuthenticatedUser([&](const modio::Response &response, const modio::User &user) {
-      current_user_username = user.username;
-    });
-
-    UModioComponent::OnEmailExchangeDelegate.Broadcast((int32)response.code);
-  });
-  */
 }
 
 void UModioFunctionLibrary::ModioLogout()

@@ -44,3 +44,13 @@ void onGetAuthenticatedUser(void* object, ModioResponse response, ModioUser modi
   InitializeUser(user, modio_user);
   UModioComponent::OnGetAuthenticatedUserDelegate.Broadcast((int32)response.code, user);
 }
+
+void onModInstalled(u32 response_code, u32 mod_id)
+{
+  UModioComponent::OnModDownloadDelegate.Broadcast((int32)response_code);
+}
+
+void onAddModfile(u32 response_code, u32 mod_id)
+{
+  UModioComponent::OnModUploadDelegate.Broadcast((int32)response_code);
+}
