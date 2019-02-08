@@ -3,14 +3,9 @@
 
 #pragma once
 
+#include "ModioUE4Plugin.h"
+#include "ModioCallbacks.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
-#include "Enums/EModioFilterType.h"
-#include "Customizables/FModioModfileCreator.h"
-#include "Customizables/FModioModEditor.h"
-#include "Customizables/FModioModCreator.h"
-#include "Schemas/FModioQueuedModfileUpload.h"
-#include "Schemas/FModioQueuedModDownload.h"
-#include "Schemas/FModioInstalledMod.h"
 #include "UModioFunctionLibrary.generated.h"
 
 UCLASS()
@@ -37,8 +32,8 @@ class MODIO_API UModioFunctionLibrary : public UBlueprintFunctionLibrary
   UFUNCTION(BlueprintPure, Category = "mod.io")
   static void ModioIsLoggedIn(bool &is_logged_in);
 
-  UFUNCTION(BlueprintCallable, Category = "mod.io")
-  static void ModioGetAuthenticatedUser(FString &username);
+  UFUNCTION(BlueprintPure, Category = "mod.io")
+  static void ModioCurrentUser(FModioUser &user);
 
   // Downloads and installs
 
@@ -74,4 +69,7 @@ class MODIO_API UModioFunctionLibrary : public UBlueprintFunctionLibrary
 
   UFUNCTION(BlueprintCallable, Category = "mod.io")
   static void ModioGetUserSubscriptions();
+
+  UFUNCTION(BlueprintCallable, Category = "mod.io")
+  static void ModioGetAuthenticatedUser();
 };

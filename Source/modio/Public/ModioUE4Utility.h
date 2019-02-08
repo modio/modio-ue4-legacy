@@ -3,7 +3,6 @@
 
 #pragma once
 
-#include "ModioHWrapper.h"
 #include "ModioUE4Plugin.h"
 
-extern TArray<FModioMod> toTArrayMods(const std::vector<modio::Mod> &modio_mods);
+extern TArray<FModioMod> toTArrayMods(ModioMod* modio_mods, u32 mods_size);

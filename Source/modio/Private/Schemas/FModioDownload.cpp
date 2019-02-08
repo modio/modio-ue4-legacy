@@ -3,13 +3,7 @@
 
 #include "FModioDownload.h"
 
-void InitializeDownload(FModioDownload &Download, const modio::Download &modio_download)
-{
-  Download.DateExpires = modio_download.date_expires;
-  Download.BinaryUrl = UTF8_TO_TCHAR(modio_download.binary_url.c_str());
-}
-
-void InitializeDownloadC(FModioDownload &Download, const ModioDownload &modio_download)
+void InitializeDownload(FModioDownload &Download, const ModioDownload &modio_download)
 {
   Download.DateExpires = modio_download.date_expires;
   Download.BinaryUrl = UTF8_TO_TCHAR(modio_download.binary_url);

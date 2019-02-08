@@ -3,14 +3,9 @@
 
 #pragma once
 
-#include "Modules/ModuleManager.h"
-#include "ModioHWrapper.h"
-#include "ModioUE4Utility.h"
-#include "UModioComponent.h"
 #include "UModioSettings.h"
-
-extern modio::Instance *modio_instance;
-extern std::string current_user_username;
+#include "ModioCallbacks.h"
+#include "Modules/ModuleManager.h"
 
 class FModioModule : public IModuleInterface
 {

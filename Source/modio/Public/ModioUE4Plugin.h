@@ -3,6 +3,8 @@
 
 #pragma once
 
+#include "ModioHWrapper.h"
+
 #include "Customizables/FModioModCreator.h"
 #include "Customizables/FModioModEditor.h"
 #include "Customizables/FModioModfileCreator.h"
@@ -25,4 +27,4 @@
 #include "Schemas/FModioTag.h"
 #include "Schemas/FModioUser.h"
 
-#include "FModioModule.h"
+#include "UModioFunctionLibrary.h"

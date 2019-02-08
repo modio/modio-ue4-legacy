@@ -3,9 +3,8 @@
 
 #pragma once
 
-#include "Components/ActorComponent.h"
 #include "ModioUE4Plugin.h"
-
+#include "Components/ActorComponent.h"
 #include "UModioComponent.generated.h"
 
 UCLASS(meta = (BlueprintSpawnableComponent), DisplayName = "ModioPlugin")
@@ -68,22 +67,6 @@ public:
       response_code);
   UPROPERTY(BlueprintAssignable, meta = (DisplayName = "mod.io OnModUpload"))
   FModioPlugin_OnModUploadDynamicDelegate OnModUploadDynamicDelegate;
-
-  /* onGetAuthenticatedUser */
-  DECLARE_MULTICAST_DELEGATE_TwoParams(
-      FModioPlugin_OnGetAuthenticatedUserDelegate,
-      int32,
-      FString);
-  static FModioPlugin_OnGetAuthenticatedUserDelegate OnGetAuthenticatedUserDelegate;
-
-  DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(
-      FModioPlugin_OnGetAuthenticatedUserDynamicDelegate,
-      int32,
-      response_code,
-      FString,
-      username);
-  UPROPERTY(BlueprintAssignable, meta = (DisplayName = "mod.io OnGetAuthenticatedUser"))
-  FModioPlugin_OnGetAuthenticatedUserDynamicDelegate OnGetAuthenticatedUserDynamicDelegate;
 
   /* onGetAllMods */
   DECLARE_MULTICAST_DELEGATE_TwoParams(
@@ -149,6 +132,22 @@ public:
   UPROPERTY(BlueprintAssignable, meta = (DisplayName = "mod.io OnGetUserSubscriptions"))
   FModioPlugin_OnGetUserSubscriptionsDynamicDelegate OnGetUserSubscriptionsDynamicDelegate;
 
+  /* onGetAuthenticatedUser */
+  DECLARE_MULTICAST_DELEGATE_TwoParams(
+      FModioPlugin_OnGetAuthenticatedUserDelegate,
+      int32,
+      FModioUser);
+  static FModioPlugin_OnGetAuthenticatedUserDelegate OnGetAuthenticatedUserDelegate;
+
+  DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(
+      FModioPlugin_OnGetAuthenticatedUserDynamicDelegate,
+      int32,
+      response_code,
+      FModioUser,
+      user);
+  UPROPERTY(BlueprintAssignable, meta = (DisplayName = "mod.io OnGetAuthenticatedUser"))
+  FModioPlugin_OnGetAuthenticatedUserDynamicDelegate OnGetAuthenticatedUserDynamicDelegate;
+
 private:
   void OnEmailRequestDelegate_Handler(int32 response_code);
   void OnEmailExchangeDelegate_Handler(int32 response_code);
@@ -159,4 +158,5 @@ private:
   void OnAddModDelegate_Handler(int32 response_code, FModioMod mod);
   void OnEditModDelegate_Handler(int32 response_code, FModioMod mod);
   void OnGetUserSubscriptionsDelegate_Handler(int32 response_code, TArray<FModioMod> mods);
+  void OnGetAuthenticatedUserDelegate_Handler(int32 response_code, FModioUser user);
 };

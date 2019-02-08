@@ -25,7 +25,7 @@ struct FModioModfile
   int32 DateAdded;
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
   int32 DateScanned;
-  // TODO use int 64 instead of 32
+  // @todo: use int 64 instead of 32
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
   int32 Filesize;
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
@@ -44,5 +44,4 @@ struct FModioModfile
   FModioDownload Download;
 };
 
-extern void InitializeModfile(FModioModfile &modfile, const modio::Modfile &modio_modfile);
-extern void InitializeModfileC(FModioModfile &modfile, const ModioModfile &modio_modfile);
+extern void InitializeModfile(FModioModfile &modfile, const ModioModfile &modio_modfile);
