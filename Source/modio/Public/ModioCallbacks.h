@@ -3,7 +3,9 @@
 
 #pragma once
 
+#include "ModioUE4Plugin.h"
 #include "ModioUE4Utility.h"
+#include "UModioComponent.h"
 
 extern void onEmailRequest(void* object, ModioResponse response);
 extern void onEmailExchange(void* object, ModioResponse response);

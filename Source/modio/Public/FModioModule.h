@@ -3,11 +3,9 @@
 
 #pragma once
 
-#include "Modules/ModuleManager.h"
-#include "ModioHWrapper.h"
-#include "ModioUE4Utility.h"
-#include "UModioComponent.h"
 #include "UModioSettings.h"
+#include "ModioCallbacks.h"
+#include "Modules/ModuleManager.h"
 
 class FModioModule : public IModuleInterface
 {

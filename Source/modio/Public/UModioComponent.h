@@ -3,9 +3,8 @@
 
 #pragma once
 
-#include "Components/ActorComponent.h"
 #include "ModioUE4Plugin.h"
-
+#include "Components/ActorComponent.h"
 #include "UModioComponent.generated.h"
 
 UCLASS(meta = (BlueprintSpawnableComponent), DisplayName = "ModioPlugin")
