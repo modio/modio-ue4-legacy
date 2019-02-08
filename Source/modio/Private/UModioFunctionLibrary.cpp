@@ -35,9 +35,9 @@ void UModioFunctionLibrary::ModioIsLoggedIn(bool &is_logged_in)
   is_logged_in = modioIsLoggedIn();
 }
 
-void UModioFunctionLibrary::ModioCurrentUser(FString &username)
+void UModioFunctionLibrary::ModioCurrentUser(FModioUser &user)
 {
-  username = current_user_username;
+  InitializeUser(user, modioGetCurrentUser());
 }
 
 void UModioFunctionLibrary::ModioGetAllInstalledMod(TArray<FModioInstalledMod> &installed_mods)

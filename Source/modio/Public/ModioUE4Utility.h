@@ -5,6 +5,6 @@
 
 #include "ModioHWrapper.h"
 #include "ModioUE4Plugin.h"
+#include "ModioCallbacks.h"
 
-extern FString current_user_username;
 extern TArray<FModioMod> toTArrayMods(ModioMod* modio_mods, u32 mods_size);

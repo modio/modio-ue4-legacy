@@ -19,8 +19,10 @@ struct GenericCall
   const std::function<void(const modio::Response &)> callback;
 };
 
+
 namespace modio
 {
+  void onUpdateCurrentUser(void *object, ModioResponse response, ModioUser user);
   void addModsToDownloadQueue(std::vector<u32> mod_ids);
   void pollEvents();
 }

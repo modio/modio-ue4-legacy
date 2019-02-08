@@ -40,7 +40,6 @@ void onGetUserSubscriptions(void* object, ModioResponse response, ModioMod* mods
 void onGetAuthenticatedUser(void* object, ModioResponse response, ModioUser modio_user)
 {
   FModioUser user;
-  current_user_username = user.Username;
   InitializeUser(user, modio_user);
   UModioComponent::OnGetAuthenticatedUserDelegate.Broadcast((int32)response.code, user);
 }

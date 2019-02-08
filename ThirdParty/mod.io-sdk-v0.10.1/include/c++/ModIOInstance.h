@@ -70,6 +70,7 @@ public:
   void logout() const;
   void emailRequest(const std::string &email, const std::function<void(const modio::Response &)> &callback);
   void emailExchange(const std::string &security_code, const std::function<void(const modio::Response &)> &callback);
+  modio::User getCurrentUser();
 
   //Media Methods
   void downloadImage(const std::string &image_url, const std::string &path, const std::function<void(const modio::Response &)> &callback);

@@ -499,6 +499,7 @@ extern "C"
   void MODIO_DLL modioEmailExchange(void* object, char* security_code, void (*callback)(void* object, ModioResponse response));
   bool MODIO_DLL modioIsLoggedIn();
   void MODIO_DLL modioLogout();
+  const struct ModioUser MODIO_DLL modioGetCurrentUser();
 
   //Image Methods
   void MODIO_DLL modioDownloadImage(void* object, char* image_url, char* path, void (*callback)(void* object, ModioResponse response));

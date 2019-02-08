@@ -33,8 +33,6 @@ void FModioModule::StartupModule()
   modioSetDownloadListener(&onModInstalled);
   modioSetUploadListener(&onAddModfile);
 
-  current_user_username = "";
-
   // Need GIsEdtor check as this might run when running the game but not with the editor
   if( GIsEditor )
   {

@@ -3,7 +3,7 @@
 
 #include "ModioUE4Utility.h"
 
-FString current_user_username;
+FModioUser user;
 
 TArray<FModioMod> toTArrayMods(ModioMod* modio_mods, u32 mods_size)
 {
