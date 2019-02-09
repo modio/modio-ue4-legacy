@@ -31,12 +31,11 @@ struct FModioStats
   int32 RatingsPercentagePositive;
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
   int32 DateExpires;
-  // TODO: should this be switched to double?
+  // @todo: should this be switched to double?
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
   float RatingsWeightedAggregate;
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
   FString RatingsDisplayText;
 };
 
-extern void InitializeStats(FModioStats &stats, const modio::Stats &modio_stats);
-extern void InitializeStatsC(FModioStats &stats, const ModioStats &modio_stats);
+extern void InitializeStats(FModioStats &stats, const ModioStats &modio_stats);
