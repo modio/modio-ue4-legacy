@@ -14,8 +14,21 @@ struct FInt64
 	/** Display a int64 as a string */
 	FORCEINLINE FString ToString() const { return FString::Printf( TEXT( "%lld" ), Value ); }
 
+	FORCEINLINE operator int64() const{ return Value; }
+
+	FORCEINLINE FInt64& operator=( int64 Other )
+	{ 
+		Value = Other; 
+		return *this;
+	}
+
 	FInt64() :
 		Value( 0 )
+	{
+	}
+
+	FInt64( float FromFloat ) :
+		Value( FromFloat )
 	{
 	}
 
