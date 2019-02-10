@@ -69,7 +69,7 @@ INT64_MATH_FORCEINLINE FInt64 UInt64MathLibrary::Abs_Int( const FInt64& A )
 
 INT64_MATH_FORCEINLINE FInt64 UInt64MathLibrary::Percent_Int64Int64( const FInt64& A, const FInt64& B )
 {
-	return A & B;
+	return A % B;
 }
 
 INT64_MATH_FORCEINLINE bool UInt64MathLibrary::Less_Int64Int64( const FInt64& A, const FInt64& B )
