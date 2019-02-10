@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include "Int64/Classes/Int64.h"
 #include "ModioHWrapper.h"
 #include "FModioMod.h"
 #include "FModioQueuedModDownload.generated.h"
@@ -14,12 +15,10 @@ struct FModioQueuedModDownload
 
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
   FString Path;
-  // @todo: change to int64 unsupported by ue4
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
-  int32 CurrentProgress;
-  // @todo: change to int64 unsupported by ue4
+  FInt64 CurrentProgress;
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
-  int32 TotalSize;
+  FInt64 TotalSize;
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
   FModioMod mod;
 };
