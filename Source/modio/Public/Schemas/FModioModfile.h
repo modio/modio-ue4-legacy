@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "Int64/Classes/Int64.h"
+#include "Int64.h"
 #include "ModioHWrapper.h"
 #include "FModioFilehash.h"
 #include "FModioDownload.h"

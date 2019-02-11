@@ -28,3 +28,4 @@
 #include "Schemas/FModioUser.h"
 
 #include "UModioFunctionLibrary.h"
+#include "BlueprintCallbackProxies/UEmailRequestCallbackProxy.h"
