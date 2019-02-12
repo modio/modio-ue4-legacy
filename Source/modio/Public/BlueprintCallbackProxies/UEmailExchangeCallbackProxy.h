@@ -6,30 +6,30 @@
 #include "ModioUE4Plugin.h"
 #include "Schemas/FModioResponse.h"
 #include "Net/OnlineBlueprintCallProxyBase.h"
-#include "UEmailRequestCallbackProxy.generated.h"
+#include "UEmailExchangeCallbackProxy.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(
-    FEmailRequestCheckResult,
+    FEmailExchangeCheckResult,
     FModioResponse,
     response);
 
 UCLASS()
-class MODIO_API UEmailRequestCallbackProxy : public UOnlineBlueprintCallProxyBase
+class MODIO_API UEmailExchangeCallbackProxy : public UOnlineBlueprintCallProxyBase
 {
   GENERATED_UCLASS_BODY()
 
-  FString Email;
+  FString SecurityCode;
 
   UPROPERTY(BlueprintAssignable)
-  FEmailRequestCheckResult OnSuccess;
+  FEmailExchangeCheckResult OnSuccess;
 
   UPROPERTY(BlueprintAssignable)
-  FEmailRequestCheckResult OnFailure;
+  FEmailExchangeCheckResult OnFailure;
 
   UFUNCTION(BlueprintCallable, Category = "mod.io")
-  static UEmailRequestCallbackProxy *EmailRequest(FString Email);
+  static UEmailExchangeCallbackProxy *EmailExchange(FString SecurityCode);
 
   virtual void Activate() override;
 
-  void OnEmailRequestDelegate(FModioResponse Response);
+  void OnEmailExchangeDelegate(FModioResponse Response);
 };

@@ -13,6 +13,7 @@
 
 #include "Schemas/FModioAvatar.h"
 #include "Schemas/FModioDownload.h"
+#include "Schemas/FModioError.h"
 #include "Schemas/FModioFilehash.h"
 #include "Schemas/FModioImage.h"
 #include "Schemas/FModioInstalledMod.h"
@@ -23,9 +24,11 @@
 #include "Schemas/FModioModfile.h"
 #include "Schemas/FModioQueuedModDownload.h"
 #include "Schemas/FModioQueuedModfileUpload.h"
+#include "Schemas/FModioResponse.h"
 #include "Schemas/FModioStats.h"
 #include "Schemas/FModioTag.h"
 #include "Schemas/FModioUser.h"
 
 #include "UModioFunctionLibrary.h"
 #include "BlueprintCallbackProxies/UEmailRequestCallbackProxy.h"
+#include "BlueprintCallbackProxies/UEmailExchangeCallbackProxy.h"
