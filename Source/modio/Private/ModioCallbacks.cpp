@@ -3,26 +3,11 @@
 
 #include "ModioCallbacks.h"
 
-void onEmailRequest(void *object, ModioResponse response)
-{
-  UModioComponent::OnEmailRequestDelegate.Broadcast((int32)response.code);
-}
-
-void onEmailExchange(void *object, ModioResponse response)
-{
-  UModioComponent::OnEmailExchangeDelegate.Broadcast((int32)response.code);
-}
-
 void onModAdded(void *object, ModioResponse response, ModioMod modio_mod)
 {
   FModioMod mod;
   InitializeMod(mod, modio_mod);
   UModioComponent::OnAddModDelegate.Broadcast((int32)response.code, mod);
-}
-
-void onGetAllMods(void* object, ModioResponse response, ModioMod* mods, u32 mods_size)
-{
-  UModioComponent::OnGetAllModsDelegate.Broadcast((int32)response.code, toTArrayMods(mods, mods_size));
 }
 
 void onModEdited(void* object, ModioResponse response, ModioMod modio_mod)

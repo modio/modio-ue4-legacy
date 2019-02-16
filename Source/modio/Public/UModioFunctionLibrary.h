@@ -21,12 +21,6 @@ class MODIO_API UModioFunctionLibrary : public UBlueprintFunctionLibrary
   // Authentication
 
   UFUNCTION(BlueprintCallable, Category = "mod.io")
-  static void ModioEmailRequest(FString email);
-
-  UFUNCTION(BlueprintCallable, Category = "mod.io")
-  static void ModioEmailExchange(FString security_code);
-
-  UFUNCTION(BlueprintCallable, Category = "mod.io")
   static void ModioLogout();
 
   UFUNCTION(BlueprintPure, Category = "mod.io")
@@ -45,12 +39,7 @@ class MODIO_API UModioFunctionLibrary : public UBlueprintFunctionLibrary
 
   UFUNCTION(BlueprintCallable, Category = "mod.io")
   static void ModioInstallDownloadedMods();
-
-  // Browsing
-
-  UFUNCTION(BlueprintCallable, Category = "mod.io")
-  static void ModioGetAllMods(TEnumAsByte<EModioFilterType> filter_type, int32 limit, int32 offset);
-
+  
   // Mod creation and uploads
 
   UFUNCTION(BlueprintCallable, Category = "mod.io")

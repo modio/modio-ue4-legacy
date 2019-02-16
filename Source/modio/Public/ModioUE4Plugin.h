@@ -32,3 +32,4 @@
 #include "UModioFunctionLibrary.h"
 #include "BlueprintCallbackProxies/UEmailRequestCallbackProxy.h"
 #include "BlueprintCallbackProxies/UEmailExchangeCallbackProxy.h"
+#include "BlueprintCallbackProxies/UGetAllModsCallbackProxy.h"

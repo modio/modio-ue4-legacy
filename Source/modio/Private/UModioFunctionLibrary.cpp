@@ -15,16 +15,6 @@ void UModioFunctionLibrary::ModioProcess()
   modioProcess();
 }
 
-void UModioFunctionLibrary::ModioEmailRequest(FString email)
-{
-  modioEmailRequest(NULL, TCHAR_TO_UTF8(*email), &onEmailRequest);
-}
-
-void UModioFunctionLibrary::ModioEmailExchange(FString security_code)
-{
-  modioEmailExchange(NULL, TCHAR_TO_UTF8(*security_code), &onEmailExchange);
-}
-
 void UModioFunctionLibrary::ModioLogout()
 {
   modioLogout();
@@ -75,17 +65,6 @@ void UModioFunctionLibrary::ModioGetModDownloadQueue(TArray<FModioQueuedModDownl
 void UModioFunctionLibrary::ModioInstallDownloadedMods()
 {
   modioInstallDownloadedMods();
-}
-
-void UModioFunctionLibrary::ModioGetAllMods(TEnumAsByte<EModioFilterType> filter_type, int32 limit, int32 offset)
-{
-  // @todo: apply the filter type
-  ModioFilterCreator modio_filter_creator;
-  modioInitFilter(&modio_filter_creator);
-  modioSetFilterLimit(&modio_filter_creator, (u32)limit);
-  modioSetFilterOffset(&modio_filter_creator, (u32)offset);
-
-  modioGetAllMods(NULL, modio_filter_creator, &onGetAllMods);
 }
 
 void UModioFunctionLibrary::ModioAddMod(FModioModCreator mod_creator)

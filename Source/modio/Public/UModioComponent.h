@@ -16,32 +16,6 @@ public:
   void OnRegister() override;
   void OnUnregister() override;
 
-  /* onEmailRequest */
-  DECLARE_MULTICAST_DELEGATE_OneParam(
-      FModioPlugin_OnEmailRequestDelegate,
-      int32);
-  static FModioPlugin_OnEmailRequestDelegate OnEmailRequestDelegate;
-
-  DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(
-      FModioPlugin_OnEmailRequestDynamicDelegate,
-      int32,
-      response_code);
-  UPROPERTY(BlueprintAssignable, meta = (DisplayName = "mod.io OnEmailRequest"))
-  FModioPlugin_OnEmailRequestDynamicDelegate OnEmailRequestDynamicDelegate;
-
-  /* onEmailExchange */
-  DECLARE_MULTICAST_DELEGATE_OneParam(
-      FModioPlugin_OnEmailExchangeDelegate,
-      int32);
-  static FModioPlugin_OnEmailExchangeDelegate OnEmailExchangeDelegate;
-
-  DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(
-      FModioPlugin_OnEmailExchangeDynamicDelegate,
-      int32,
-      response_code);
-  UPROPERTY(BlueprintAssignable, meta = (DisplayName = "mod.io OnEmailExchange"))
-  FModioPlugin_OnEmailExchangeDynamicDelegate OnEmailExchangeDynamicDelegate;
-
   /* onModDownload */
   DECLARE_MULTICAST_DELEGATE_OneParam(
       FModioPlugin_OnModDownloadDelegate,
@@ -67,22 +41,6 @@ public:
       response_code);
   UPROPERTY(BlueprintAssignable, meta = (DisplayName = "mod.io OnModUpload"))
   FModioPlugin_OnModUploadDynamicDelegate OnModUploadDynamicDelegate;
-
-  /* onGetAllMods */
-  DECLARE_MULTICAST_DELEGATE_TwoParams(
-      FModioPlugin_OnGetAllModsDelegate,
-      int32,
-      TArray<FModioMod>);
-  static FModioPlugin_OnGetAllModsDelegate OnGetAllModsDelegate;
-
-  DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(
-      FModioPlugin_OnGetAllModsDynamicDelegate,
-      int32,
-      response_code,
-      TArray<FModioMod>,
-      mods);
-  UPROPERTY(BlueprintAssignable, meta = (DisplayName = "mod.io OnGetAllMods"))
-  FModioPlugin_OnGetAllModsDynamicDelegate OnGetAllModsDynamicDelegate;
 
   /* onAddMod */
   DECLARE_MULTICAST_DELEGATE_TwoParams(
@@ -149,12 +107,9 @@ public:
   FModioPlugin_OnGetAuthenticatedUserDynamicDelegate OnGetAuthenticatedUserDynamicDelegate;
 
 private:
-  void OnEmailRequestDelegate_Handler(int32 response_code);
-  void OnEmailExchangeDelegate_Handler(int32 response_code);
   void OnModDownloadDelegate_Handler(int32 response_code);
   void OnModUploadDelegate_Handler(int32 response_code);
   void OnGetAuthenticatedUserDelegate_Handler(int32 response_code, FString username);
-  void OnGetAllModsDelegate_Handler(int32 response_code, TArray<FModioMod> mods);
   void OnAddModDelegate_Handler(int32 response_code, FModioMod mod);
   void OnEditModDelegate_Handler(int32 response_code, FModioMod mod);
   void OnGetUserSubscriptionsDelegate_Handler(int32 response_code, TArray<FModioMod> mods);
