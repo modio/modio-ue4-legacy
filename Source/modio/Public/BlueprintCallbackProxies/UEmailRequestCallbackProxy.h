@@ -26,7 +26,7 @@ class MODIO_API UEmailRequestCallbackProxy : public UOnlineBlueprintCallProxyBas
   UPROPERTY(BlueprintAssignable)
   FEmailRequestCheckResult OnFailure;
 
-  UFUNCTION(BlueprintCallable, Category = "mod.io")
+  UFUNCTION(BlueprintCallable, Category = "mod.io", meta = (BlueprintInternalUseOnly = "true"))
   static UEmailRequestCallbackProxy *EmailRequest(FString Email);
 
   virtual void Activate() override;

@@ -32,7 +32,7 @@ class MODIO_API UGetAllModsCallbackProxy : public UOnlineBlueprintCallProxyBase
   UPROPERTY(BlueprintAssignable)
   FGetAllModsCallbackCheckResult OnFailure;
 
-  UFUNCTION(BlueprintCallable, Category = "mod.io")
+  UFUNCTION(BlueprintCallable, Category = "mod.io", meta = (BlueprintInternalUseOnly = "true"))
   static UGetAllModsCallbackProxy *GetAllMods(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset);
 
   virtual void Activate() override;
