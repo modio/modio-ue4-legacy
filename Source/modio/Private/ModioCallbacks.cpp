@@ -3,11 +3,6 @@
 
 #include "ModioCallbacks.h"
 
-void onGetUserSubscriptions(void* object, ModioResponse response, ModioMod* mods, u32 mods_size)
-{
-  UModioComponent::OnGetUserSubscriptionsDelegate.Broadcast((int32)response.code, toTArrayMods(mods, mods_size));
-}
-
 void onGetAuthenticatedUser(void* object, ModioResponse response, ModioUser modio_user)
 {
   FModioUser user;

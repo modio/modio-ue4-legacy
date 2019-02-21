@@ -1,24 +1,24 @@
 // Copyright 2019 modio. All Rights Reserved.
 // Released under MIT.
 
-#include "UGetAllModsCallbackProxy.h"
+#include "UGetUserSubscriptionsCallbackProxy.h"
 
-void onGetAllMods(void *object, ModioResponse modio_response, ModioMod *modio_mods, u32 modio_mods_size)
+void onGetUserSubscriptions(void *object, ModioResponse modio_response, ModioMod *modio_mods, u32 modio_mods_size)
 {
-  UGetAllModsCallbackProxy *get_all_mods_request_proxy = (UGetAllModsCallbackProxy *)object;
+  UGetUserSubscriptionsCallbackProxy *get_user_subscriptions_request_proxy = (UGetUserSubscriptionsCallbackProxy *)object;
   FModioResponse response;
   InitializeResponse(response, modio_response);
-  get_all_mods_request_proxy->OnGetAllModsDelegate(response, toTArrayMods(modio_mods, modio_mods_size));
+  get_user_subscriptions_request_proxy->OnGetUserSubscriptionsDelegate(response, toTArrayMods(modio_mods, modio_mods_size));
 }
 
-UGetAllModsCallbackProxy::UGetAllModsCallbackProxy(const FObjectInitializer &ObjectInitializer)
+UGetUserSubscriptionsCallbackProxy::UGetUserSubscriptionsCallbackProxy(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)
 {
 }
 
-UGetAllModsCallbackProxy *UGetAllModsCallbackProxy::GetAllMods(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset)
+UGetUserSubscriptionsCallbackProxy *UGetUserSubscriptionsCallbackProxy::GetUserSubscriptions(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset)
 {
-  UGetAllModsCallbackProxy *Proxy = NewObject<UGetAllModsCallbackProxy>();
+  UGetUserSubscriptionsCallbackProxy *Proxy = NewObject<UGetUserSubscriptionsCallbackProxy>();
   Proxy->SetFlags(RF_StrongRefOnFrame);
   Proxy->FilterType = FilterType;
   Proxy->Limit = Limit;
@@ -26,7 +26,7 @@ UGetAllModsCallbackProxy *UGetAllModsCallbackProxy::GetAllMods(TEnumAsByte<EModi
   return Proxy;
 }
 
-void UGetAllModsCallbackProxy::Activate()
+void UGetUserSubscriptionsCallbackProxy::Activate()
 {
   ModioFilterCreator modio_filter_creator;
   modioInitFilter(&modio_filter_creator);
@@ -51,11 +51,12 @@ void UGetAllModsCallbackProxy::Activate()
     break;
   }
 
-  modioGetAllMods(this, modio_filter_creator, &onGetAllMods);
+  modioGetUserSubscriptions(this, modio_filter_creator, &onGetUserSubscriptions);
 }
 
-void UGetAllModsCallbackProxy::OnGetAllModsDelegate(FModioResponse Response, TArray<FModioMod> Mods)
+void UGetUserSubscriptionsCallbackProxy::OnGetUserSubscriptionsDelegate(FModioResponse Response, TArray<FModioMod> Mods)
 {
+  FString oa;
   if (Response.Code >= 200 && Response.Code < 300)
   {
     OnSuccess.Broadcast(Response, Mods);

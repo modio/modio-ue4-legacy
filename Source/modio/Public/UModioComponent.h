@@ -42,54 +42,6 @@ public:
   UPROPERTY(BlueprintAssignable, meta = (DisplayName = "mod.io OnModUpload"))
   FModioPlugin_OnModUploadDynamicDelegate OnModUploadDynamicDelegate;
 
-  /* onAddMod */
-  DECLARE_MULTICAST_DELEGATE_TwoParams(
-      FModioPlugin_OnAddModDelegate,
-      int32,
-      FModioMod);
-  static FModioPlugin_OnAddModDelegate OnAddModDelegate;
-
-  DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(
-      FModioPlugin_OnAddModDynamicDelegate,
-      int32,
-      response_code,
-      FModioMod,
-      mod);
-  UPROPERTY(BlueprintAssignable, meta = (DisplayName = "mod.io OnAddMod"))
-  FModioPlugin_OnAddModDynamicDelegate OnAddModDynamicDelegate;
-
-  /* onEditMod */
-  DECLARE_MULTICAST_DELEGATE_TwoParams(
-      FModioPlugin_OnEditModDelegate,
-      int32,
-      FModioMod);
-  static FModioPlugin_OnEditModDelegate OnEditModDelegate;
-
-  DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(
-      FModioPlugin_OnEditModDynamicDelegate,
-      int32,
-      response_code,
-      FModioMod,
-      mod);
-  UPROPERTY(BlueprintAssignable, meta = (DisplayName = "mod.io OnEditMod"))
-  FModioPlugin_OnEditModDynamicDelegate OnEditModDynamicDelegate;
-
-  /* onGetUserSubscriptions */
-  DECLARE_MULTICAST_DELEGATE_TwoParams(
-      FModioPlugin_OnGetUserSubscriptionsDelegate,
-      int32,
-      TArray<FModioMod>);
-  static FModioPlugin_OnGetUserSubscriptionsDelegate OnGetUserSubscriptionsDelegate;
-
-  DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(
-      FModioPlugin_OnGetUserSubscriptionsDynamicDelegate,
-      int32,
-      response_code,
-      TArray<FModioMod>,
-      mods);
-  UPROPERTY(BlueprintAssignable, meta = (DisplayName = "mod.io OnGetUserSubscriptions"))
-  FModioPlugin_OnGetUserSubscriptionsDynamicDelegate OnGetUserSubscriptionsDynamicDelegate;
-
   /* onGetAuthenticatedUser */
   DECLARE_MULTICAST_DELEGATE_TwoParams(
       FModioPlugin_OnGetAuthenticatedUserDelegate,

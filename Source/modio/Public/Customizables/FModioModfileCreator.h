@@ -11,5 +11,13 @@ struct FModioModfileCreator
   GENERATED_BODY()
 
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
-  FString Path;
+  FString Path = "";
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  FString Version = "";
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  FString Changelog = "";
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  bool Active = false;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  FString Filehash = "";
 };

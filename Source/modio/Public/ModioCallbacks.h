@@ -7,7 +7,6 @@
 #include "ModioUE4Utility.h"
 #include "UModioComponent.h"
 
-extern void onGetUserSubscriptions(void* object, ModioResponse response, ModioMod* mods, u32 mods_size);
 extern void onGetAuthenticatedUser(void* object, ModioResponse response, ModioUser modio_user);
 extern void onModInstalled(u32 response_code, u32 mod_id);
 extern void onAddModfile(u32 response_code, u32 mod_id);

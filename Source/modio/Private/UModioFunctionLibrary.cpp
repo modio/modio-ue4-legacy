@@ -91,13 +91,6 @@ void UModioFunctionLibrary::ModioGetModfileUploadQueue(TArray<FModioQueuedModfil
   free(modio_queued_mods);
 }
 
-void UModioFunctionLibrary::ModioGetUserSubscriptions()
-{
-  ModioFilterCreator modio_filter_creator;
-  modioInitFilter(&modio_filter_creator);
-  modioGetUserSubscriptions(NULL, modio_filter_creator, &onGetUserSubscriptions);
-}
-
 void UModioFunctionLibrary::ModioGetAuthenticatedUser()
 {
   modioGetAuthenticatedUser(NULL, &onGetAuthenticatedUser);
