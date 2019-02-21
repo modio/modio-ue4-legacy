@@ -43,9 +43,6 @@ class MODIO_API UModioFunctionLibrary : public UBlueprintFunctionLibrary
   // Mod creation and uploads
 
   UFUNCTION(BlueprintCallable, Category = "mod.io")
-  static void ModioAddMod(FModioModCreator mod_creator);
-
-  UFUNCTION(BlueprintCallable, Category = "mod.io")
   static void ModioEditMod(int32 mod_id, FModioModEditor mod_editor);
 
   UFUNCTION(BlueprintCallable, Category = "mod.io")

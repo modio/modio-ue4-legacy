@@ -67,17 +67,6 @@ void UModioFunctionLibrary::ModioInstallDownloadedMods()
   modioInstallDownloadedMods();
 }
 
-void UModioFunctionLibrary::ModioAddMod(FModioModCreator mod_creator)
-{
-  ModioModCreator modio_mod_creator;
-  modioInitModCreator(&modio_mod_creator);
-  modioSetModCreatorLogoPath(&modio_mod_creator, TCHAR_TO_UTF8(*mod_creator.LogoPath));
-  modioSetModCreatorName(&modio_mod_creator, TCHAR_TO_UTF8(*mod_creator.Name));
-  modioSetModCreatorSummary(&modio_mod_creator, TCHAR_TO_UTF8(*mod_creator.Summary));
-
-  modioAddMod(NULL, modio_mod_creator, &onModAdded);
-}
-
 void UModioFunctionLibrary::ModioEditMod(int32 mod_id, FModioModEditor mod_editor)
 {
   ModioModEditor modio_mod_editor;
