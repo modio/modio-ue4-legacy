@@ -7,8 +7,6 @@ UModioComponent::FModioPlugin_OnModDownloadDelegate UModioComponent::OnModDownlo
 UModioComponent::FModioPlugin_OnModUploadDelegate UModioComponent::OnModUploadDelegate;
 UModioComponent::FModioPlugin_OnGetUserSubscriptionsDelegate UModioComponent::OnGetUserSubscriptionsDelegate;
 UModioComponent::FModioPlugin_OnGetAuthenticatedUserDelegate UModioComponent::OnGetAuthenticatedUserDelegate;
-UModioComponent::FModioPlugin_OnAddModDelegate UModioComponent::OnAddModDelegate;
-UModioComponent::FModioPlugin_OnEditModDelegate UModioComponent::OnEditModDelegate;
 
 void UModioComponent::OnRegister()
 {
@@ -17,8 +15,6 @@ void UModioComponent::OnRegister()
   OnModUploadDelegate.AddUObject(this, &UModioComponent::OnModUploadDelegate_Handler);
   OnGetUserSubscriptionsDelegate.AddUObject(this, &UModioComponent::OnGetUserSubscriptionsDelegate_Handler);
   OnGetAuthenticatedUserDelegate.AddUObject(this, &UModioComponent::OnGetAuthenticatedUserDelegate_Handler);
-  OnAddModDelegate.AddUObject(this, &UModioComponent::OnAddModDelegate_Handler);
-  OnEditModDelegate.AddUObject(this, &UModioComponent::OnEditModDelegate_Handler);
 }
 
 void UModioComponent::OnUnregister()
@@ -27,8 +23,6 @@ void UModioComponent::OnUnregister()
 	OnModUploadDelegate.RemoveAll(this);
 	OnGetUserSubscriptionsDelegate.RemoveAll(this);
 	OnGetAuthenticatedUserDelegate.RemoveAll(this);
-	OnAddModDelegate.RemoveAll(this);
-	OnEditModDelegate.RemoveAll(this);
 	Super::OnUnregister();
 }
 
@@ -45,22 +39,6 @@ void UModioComponent::OnModUploadDelegate_Handler(int32 response_code)
 	FFunctionGraphTask::CreateAndDispatchWhenReady([=]()
 	{
 		OnModUploadDynamicDelegate.Broadcast(response_code);
-	}, TStatId(), NULL, ENamedThreads::GameThread);
-}
-
-void UModioComponent::OnAddModDelegate_Handler(int32 response_code, FModioMod mod)
-{
-	FFunctionGraphTask::CreateAndDispatchWhenReady([=]()
-	{
-		OnAddModDynamicDelegate.Broadcast(response_code, mod);
-	}, TStatId(), NULL, ENamedThreads::GameThread);
-}
-
-void UModioComponent::OnEditModDelegate_Handler(int32 response_code, FModioMod mod)
-{
-	FFunctionGraphTask::CreateAndDispatchWhenReady([=]()
-	{
-		OnEditModDynamicDelegate.Broadcast(response_code, mod);
 	}, TStatId(), NULL, ENamedThreads::GameThread);
 }
 

@@ -3,13 +3,6 @@
 
 #include "ModioCallbacks.h"
 
-void onModEdited(void* object, ModioResponse response, ModioMod modio_mod)
-{
-  FModioMod mod;
-  InitializeMod(mod, modio_mod);
-  UModioComponent::OnEditModDelegate.Broadcast((int32)response.code, mod);
-}
-
 void onGetUserSubscriptions(void* object, ModioResponse response, ModioMod* mods, u32 mods_size)
 {
   UModioComponent::OnGetUserSubscriptionsDelegate.Broadcast((int32)response.code, toTArrayMods(mods, mods_size));

@@ -67,15 +67,6 @@ void UModioFunctionLibrary::ModioInstallDownloadedMods()
   modioInstallDownloadedMods();
 }
 
-void UModioFunctionLibrary::ModioEditMod(int32 mod_id, FModioModEditor mod_editor)
-{
-  ModioModEditor modio_mod_editor;
-  modioInitModEditor(&modio_mod_editor);
-  modioSetModEditorName(&modio_mod_editor, TCHAR_TO_UTF8(*mod_editor.Name));
-
-  modioEditMod(NULL, mod_id, modio_mod_editor, &onModEdited);
-}
-
 void UModioFunctionLibrary::ModioAddModfile(int32 mod_id, FModioModfileCreator modfile_creator)
 {
   ModioModfileCreator modio_modfile_creator;

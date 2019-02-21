@@ -110,8 +110,6 @@ private:
   void OnModDownloadDelegate_Handler(int32 response_code);
   void OnModUploadDelegate_Handler(int32 response_code);
   void OnGetAuthenticatedUserDelegate_Handler(int32 response_code, FString username);
-  void OnAddModDelegate_Handler(int32 response_code, FModioMod mod);
-  void OnEditModDelegate_Handler(int32 response_code, FModioMod mod);
   void OnGetUserSubscriptionsDelegate_Handler(int32 response_code, TArray<FModioMod> mods);
   void OnGetAuthenticatedUserDelegate_Handler(int32 response_code, FModioUser user);
 };
