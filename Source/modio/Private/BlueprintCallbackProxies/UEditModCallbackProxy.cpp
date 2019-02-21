@@ -47,6 +47,8 @@ void UEditModCallbackProxy::Activate()
     modioSetModEditorHomepageURL(&mod_editor, TCHAR_TO_UTF8(*this->ModEditor.HomepageUrl));
 
   modioEditMod(this, (u32)this->ModId, mod_editor, &onModEdited);
+
+  modioFreeModEditor(&mod_editor);
 }
 
 void UEditModCallbackProxy::OnEditModDelegate(FModioResponse Response, FModioMod Mod)

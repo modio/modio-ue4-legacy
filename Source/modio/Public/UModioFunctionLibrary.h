@@ -45,9 +45,4 @@ class MODIO_API UModioFunctionLibrary : public UBlueprintFunctionLibrary
 
   UFUNCTION(BlueprintPure, Category = "mod.io")
   static void ModioGetModfileUploadQueue(TArray<FModioQueuedModfileUpload> &upload_queue);
-
-  // @todo migrate to callback proxies
-  
-  UFUNCTION(BlueprintCallable, Category = "mod.io")
-  static void ModioGetAuthenticatedUser();
 };

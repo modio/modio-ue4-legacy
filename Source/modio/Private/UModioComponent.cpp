@@ -5,21 +5,18 @@
 
 UModioComponent::FModioPlugin_OnModDownloadDelegate UModioComponent::OnModDownloadDelegate;
 UModioComponent::FModioPlugin_OnModUploadDelegate UModioComponent::OnModUploadDelegate;
-UModioComponent::FModioPlugin_OnGetAuthenticatedUserDelegate UModioComponent::OnGetAuthenticatedUserDelegate;
 
 void UModioComponent::OnRegister()
 {
   Super::OnRegister();
   OnModDownloadDelegate.AddUObject(this, &UModioComponent::OnModDownloadDelegate_Handler);
   OnModUploadDelegate.AddUObject(this, &UModioComponent::OnModUploadDelegate_Handler);
-  OnGetAuthenticatedUserDelegate.AddUObject(this, &UModioComponent::OnGetAuthenticatedUserDelegate_Handler);
 }
 
 void UModioComponent::OnUnregister()
 {
 	OnModDownloadDelegate.RemoveAll(this);
 	OnModUploadDelegate.RemoveAll(this);
-	OnGetAuthenticatedUserDelegate.RemoveAll(this);
 	Super::OnUnregister();
 }
 
@@ -36,13 +33,5 @@ void UModioComponent::OnModUploadDelegate_Handler(int32 response_code)
 	FFunctionGraphTask::CreateAndDispatchWhenReady([=]()
 	{
 		OnModUploadDynamicDelegate.Broadcast(response_code);
-	}, TStatId(), NULL, ENamedThreads::GameThread);
-}
-
-void UModioComponent::OnGetAuthenticatedUserDelegate_Handler(int32 response_code, FModioUser user)
-{
-	FFunctionGraphTask::CreateAndDispatchWhenReady([=]()
-	{
-		OnGetAuthenticatedUserDynamicDelegate.Broadcast(response_code, user);
 	}, TStatId(), NULL, ENamedThreads::GameThread);
 }

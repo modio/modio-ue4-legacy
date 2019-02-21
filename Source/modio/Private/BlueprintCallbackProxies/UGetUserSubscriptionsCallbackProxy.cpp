@@ -52,11 +52,12 @@ void UGetUserSubscriptionsCallbackProxy::Activate()
   }
 
   modioGetUserSubscriptions(this, modio_filter_creator, &onGetUserSubscriptions);
+
+  modioFreeFilter(&modio_filter_creator);
 }
 
 void UGetUserSubscriptionsCallbackProxy::OnGetUserSubscriptionsDelegate(FModioResponse Response, TArray<FModioMod> Mods)
 {
-  FString oa;
   if (Response.Code >= 200 && Response.Code < 300)
   {
     OnSuccess.Broadcast(Response, Mods);

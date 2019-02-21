@@ -90,8 +90,3 @@ void UModioFunctionLibrary::ModioGetModfileUploadQueue(TArray<FModioQueuedModfil
 
   free(modio_queued_mods);
 }
-
-void UModioFunctionLibrary::ModioGetAuthenticatedUser()
-{
-  modioGetAuthenticatedUser(NULL, &onGetAuthenticatedUser);
-}

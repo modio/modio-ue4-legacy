@@ -52,6 +52,8 @@ void UGetAllModsCallbackProxy::Activate()
   }
 
   modioGetAllMods(this, modio_filter_creator, &onGetAllMods);
+
+  modioFreeFilter(&modio_filter_creator);
 }
 
 void UGetAllModsCallbackProxy::OnGetAllModsDelegate(FModioResponse Response, TArray<FModioMod> Mods)

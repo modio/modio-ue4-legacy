@@ -47,6 +47,8 @@ void UAddModCallbackProxy::Activate()
     modioSetModCreatorHomepageURL(&mod_creator, TCHAR_TO_UTF8(*this->ModCreator.HomepageUrl));
 
   modioAddMod(this, mod_creator, &onModAdded);
+
+  modioFreeModCreator(&mod_creator);
 }
 
 void UAddModCallbackProxy::OnAddModDelegate(FModioResponse Response, FModioMod Mod)
