@@ -30,24 +30,8 @@ void UAddModCallbackProxy::Activate()
 {
   ModioModCreator mod_creator;
   modioInitModCreator(&mod_creator);
-
-  modioSetModCreatorMaturityOption(&mod_creator, (u32)this->ModCreator.MaturityOption);
-  modioSetModCreatorVisible(&mod_creator, this->ModCreator.Visible);
-  if (this->ModCreator.LogoPath != "")
-    modioSetModCreatorLogoPath(&mod_creator, TCHAR_TO_UTF8(*this->ModCreator.LogoPath));
-  if (this->ModCreator.Name != "")
-    modioSetModCreatorName(&mod_creator, TCHAR_TO_UTF8(*this->ModCreator.Name));
-  if (this->ModCreator.NameId != "")
-    modioSetModCreatorNameid(&mod_creator, TCHAR_TO_UTF8(*this->ModCreator.NameId));
-  if (this->ModCreator.Summary != "")
-    modioSetModCreatorSummary(&mod_creator, TCHAR_TO_UTF8(*this->ModCreator.Summary));
-  if (this->ModCreator.Description != "")
-    modioSetModCreatorDescription(&mod_creator, TCHAR_TO_UTF8(*this->ModCreator.Description));
-  if (this->ModCreator.HomepageUrl != "")
-    modioSetModCreatorHomepageURL(&mod_creator, TCHAR_TO_UTF8(*this->ModCreator.HomepageUrl));
-
+  setupModioModCreator(this->ModCreator, mod_creator);
   modioAddMod(this, mod_creator, &onModAdded);
-
   modioFreeModCreator(&mod_creator);
 }
 

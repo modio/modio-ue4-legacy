@@ -12,7 +12,7 @@
 #include "UEditModCallbackProxy.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(
-    FEditModCheckResult,
+    FEditModResult,
     FModioResponse,
     Response,
     FModioMod,
@@ -27,10 +27,10 @@ class MODIO_API UEditModCallbackProxy : public UOnlineBlueprintCallProxyBase
   int32 ModId;
 
   UPROPERTY(BlueprintAssignable)
-  FEditModCheckResult OnSuccess;
+  FEditModResult OnSuccess;
 
   UPROPERTY(BlueprintAssignable)
-  FEditModCheckResult OnFailure;
+  FEditModResult OnFailure;
 
   UFUNCTION(BlueprintCallable, Category = "mod.io", meta = (BlueprintInternalUseOnly = "true"))
   static UEditModCallbackProxy *EditMod(int32 ModId, FModioModEditor ModEditor);

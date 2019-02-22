@@ -32,20 +32,6 @@ void UEditModCallbackProxy::Activate()
   ModioModEditor mod_editor;
   modioInitModEditor(&mod_editor);
 
-  // @todo handle maturity option and visibility edition
-  //modioSetModEditorMaturityOption(&mod_editor, (u32)this->ModCreator.MaturityOption);
-  //modioSetModCreatorVisible(&mod_creator, this->ModCreator.Visible);
-  if (this->ModEditor.Name != "")
-    modioSetModEditorName(&mod_editor, TCHAR_TO_UTF8(*this->ModEditor.Name));
-  if (this->ModEditor.NameId != "")
-    modioSetModEditorNameid(&mod_editor, TCHAR_TO_UTF8(*this->ModEditor.NameId));
-  if (this->ModEditor.Summary != "")
-    modioSetModEditorSummary(&mod_editor, TCHAR_TO_UTF8(*this->ModEditor.Summary));
-  if (this->ModEditor.Description != "")
-    modioSetModEditorDescription(&mod_editor, TCHAR_TO_UTF8(*this->ModEditor.Description));
-  if (this->ModEditor.HomepageUrl != "")
-    modioSetModEditorHomepageURL(&mod_editor, TCHAR_TO_UTF8(*this->ModEditor.HomepageUrl));
-
   modioEditMod(this, (u32)this->ModId, mod_editor, &onModEdited);
 
   modioFreeModEditor(&mod_editor);

@@ -9,7 +9,7 @@
 #include "UEmailRequestCallbackProxy.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(
-    FEmailRequestCheckResult,
+    FEmailRequestResult,
     FModioResponse,
     response);
 
@@ -21,10 +21,10 @@ class MODIO_API UEmailRequestCallbackProxy : public UOnlineBlueprintCallProxyBas
   FString Email;
 
   UPROPERTY(BlueprintAssignable)
-  FEmailRequestCheckResult OnSuccess;
+  FEmailRequestResult OnSuccess;
 
   UPROPERTY(BlueprintAssignable)
-  FEmailRequestCheckResult OnFailure;
+  FEmailRequestResult OnFailure;
 
   UFUNCTION(BlueprintCallable, Category = "mod.io", meta = (BlueprintInternalUseOnly = "true"))
   static UEmailRequestCallbackProxy *EmailRequest(FString Email);

@@ -10,9 +10,9 @@
 #include "UGetUserSubscriptionsCallbackProxy.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(
-    FGetUserSubscriptionsCheckResult,
+    FGetUserSubscriptionsResult,
     FModioResponse,
-    response,
+    Response,
     const TArray<FModioMod> &,
     Mods);
 
@@ -26,10 +26,10 @@ class MODIO_API UGetUserSubscriptionsCallbackProxy : public UOnlineBlueprintCall
   int32 Offset;
 
   UPROPERTY(BlueprintAssignable)
-  FGetUserSubscriptionsCheckResult OnSuccess;
+  FGetUserSubscriptionsResult OnSuccess;
 
   UPROPERTY(BlueprintAssignable)
-  FGetUserSubscriptionsCheckResult OnFailure;
+  FGetUserSubscriptionsResult OnFailure;
 
   UFUNCTION(BlueprintCallable, Category = "mod.io", meta = (BlueprintInternalUseOnly = "true"))
   static UGetUserSubscriptionsCallbackProxy *GetUserSubscriptions(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset);

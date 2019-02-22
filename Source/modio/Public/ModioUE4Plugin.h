@@ -29,7 +29,13 @@
 #include "Schemas/FModioTag.h"
 #include "Schemas/FModioUser.h"
 
+#include "ModioUE4Utility.h"
+
 #include "UModioFunctionLibrary.h"
-#include "BlueprintCallbackProxies/UEmailRequestCallbackProxy.h"
+#include "BlueprintCallbackProxies/UAddModCallbackProxy.h"
+#include "BlueprintCallbackProxies/UEditModCallbackProxy.h"
 #include "BlueprintCallbackProxies/UEmailExchangeCallbackProxy.h"
+#include "BlueprintCallbackProxies/UEmailRequestCallbackProxy.h"
 #include "BlueprintCallbackProxies/UGetAllModsCallbackProxy.h"
+#include "BlueprintCallbackProxies/UGetAuthenticatedUserCallbackProxy.h"
+#include "BlueprintCallbackProxies/UGetUserSubscriptionsCallbackProxy.h"

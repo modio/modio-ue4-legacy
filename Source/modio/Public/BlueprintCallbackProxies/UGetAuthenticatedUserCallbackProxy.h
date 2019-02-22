@@ -10,7 +10,7 @@
 #include "UGetAuthenticatedUserCallbackProxy.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(
-    FGetAuthenticatedUserCheckResult,
+    FGetAuthenticatedUserResult,
     FModioResponse,
     response,
     FModioUser,
@@ -22,10 +22,10 @@ class MODIO_API UGetAuthenticatedUserCallbackProxy : public UOnlineBlueprintCall
   GENERATED_UCLASS_BODY()
 
   UPROPERTY(BlueprintAssignable)
-  FGetAuthenticatedUserCheckResult OnSuccess;
+  FGetAuthenticatedUserResult OnSuccess;
 
   UPROPERTY(BlueprintAssignable)
-  FGetAuthenticatedUserCheckResult OnFailure;
+  FGetAuthenticatedUserResult OnFailure;
 
   UFUNCTION(BlueprintCallable, Category = "mod.io", meta = (BlueprintInternalUseOnly = "true"))
   static UGetAuthenticatedUserCallbackProxy *GetAuthenticatedUser();

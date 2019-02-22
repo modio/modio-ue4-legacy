@@ -30,29 +30,8 @@ void UGetAllModsCallbackProxy::Activate()
 {
   ModioFilterCreator modio_filter_creator;
   modioInitFilter(&modio_filter_creator);
-  modioSetFilterLimit(&modio_filter_creator, (u32)this->Limit);
-  modioSetFilterOffset(&modio_filter_creator, (u32)this->Offset);
-
-  switch (this->FilterType)
-  {
-  case EModioFilterType::SORT_BY_ID:
-    break;
-  case EModioFilterType::SORT_BY_RATING:
-    modioSetFilterSort(&modio_filter_creator, (char *)"rating", false);
-    break;
-  case EModioFilterType::SORT_BY_DATE_LIVE:
-    modioSetFilterSort(&modio_filter_creator, (char *)"date_live", false);
-    break;
-  case EModioFilterType::SORT_BY_DATE_UPDATED:
-    modioSetFilterSort(&modio_filter_creator, (char *)"date_updated", false);
-    break;
-  default:
-    // @todo: handle error
-    break;
-  }
-
+  setupModioFilterCreator(this->FilterType, this->Limit, this->Offset, modio_filter_creator);
   modioGetAllMods(this, modio_filter_creator, &onGetAllMods);
-
   modioFreeFilter(&modio_filter_creator);
 }
 

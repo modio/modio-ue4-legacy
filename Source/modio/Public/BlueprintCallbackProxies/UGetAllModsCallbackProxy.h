@@ -11,7 +11,7 @@
 #include "UGetAllModsCallbackProxy.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(
-    FGetAllModsCallbackCheckResult,
+    FGetAllModsResult,
     FModioResponse,
     Response,
     const TArray<FModioMod> &,
@@ -27,10 +27,10 @@ class MODIO_API UGetAllModsCallbackProxy : public UOnlineBlueprintCallProxyBase
   int32 Offset;
 
   UPROPERTY(BlueprintAssignable)
-  FGetAllModsCallbackCheckResult OnSuccess;
+  FGetAllModsResult OnSuccess;
 
   UPROPERTY(BlueprintAssignable)
-  FGetAllModsCallbackCheckResult OnFailure;
+  FGetAllModsResult OnFailure;
 
   UFUNCTION(BlueprintCallable, Category = "mod.io", meta = (BlueprintInternalUseOnly = "true"))
   static UGetAllModsCallbackProxy *GetAllMods(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset);

@@ -4,7 +4,6 @@
 #pragma once
 
 #include "ModioUE4Plugin.h"
-#include "ModioUE4Utility.h"
 #include "UModioComponent.h"
 
 extern void onModInstalled(u32 response_code, u32 mod_id);
