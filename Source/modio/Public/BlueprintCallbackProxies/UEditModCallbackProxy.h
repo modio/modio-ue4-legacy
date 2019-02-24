@@ -37,5 +37,5 @@ class MODIO_API UEditModCallbackProxy : public UOnlineBlueprintCallProxyBase
 
   virtual void Activate() override;
 
-  void OnEditModDelegate(FModioResponse Response, FModioMod Mod);
+  virtual void OnEditModDelegate(FModioResponse Response, FModioMod Mod);
 };

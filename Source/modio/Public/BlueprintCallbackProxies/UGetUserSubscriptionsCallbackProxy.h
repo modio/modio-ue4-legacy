@@ -36,5 +36,5 @@ class MODIO_API UGetUserSubscriptionsCallbackProxy : public UOnlineBlueprintCall
 
   virtual void Activate() override;
 
-  void OnGetUserSubscriptionsDelegate(FModioResponse Response, TArray<FModioMod>);
+  virtual void OnGetUserSubscriptionsDelegate(FModioResponse Response, TArray<FModioMod>);
 };

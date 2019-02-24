@@ -32,5 +32,5 @@ class MODIO_API UGetAuthenticatedUserCallbackProxy : public UOnlineBlueprintCall
 
   virtual void Activate() override;
 
-  void OnGetAuthenticatedUserDelegate(FModioResponse Response, FModioUser User);
+  virtual void OnGetAuthenticatedUserDelegate(FModioResponse Response, FModioUser User);
 };

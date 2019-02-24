@@ -37,5 +37,5 @@ class MODIO_API UGetAllModsCallbackProxy : public UOnlineBlueprintCallProxyBase
 
   virtual void Activate() override;
 
-  void OnGetAllModsDelegate(FModioResponse Response, TArray<FModioMod> Mods);
+  virtual void OnGetAllModsDelegate(FModioResponse Response, TArray<FModioMod> Mods);
 };

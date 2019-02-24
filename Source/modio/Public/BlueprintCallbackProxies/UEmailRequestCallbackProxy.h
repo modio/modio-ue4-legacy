@@ -31,5 +31,5 @@ class MODIO_API UEmailRequestCallbackProxy : public UOnlineBlueprintCallProxyBas
 
   virtual void Activate() override;
 
-  void OnEmailRequestDelegate(FModioResponse Response);
+  virtual void OnEmailRequestDelegate(FModioResponse Response);
 };
