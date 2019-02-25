@@ -24,25 +24,25 @@ class MODIO_API UModioFunctionLibrary : public UBlueprintFunctionLibrary
   static void ModioLogout();
 
   UFUNCTION(BlueprintPure, Category = "mod.io")
-  static void ModioIsLoggedIn(bool &is_logged_in);
+  static void ModioIsLoggedIn(bool &IsLoggedIn);
 
   UFUNCTION(BlueprintPure, Category = "mod.io")
-  static void ModioCurrentUser(FModioUser &user);
+  static void ModioCurrentUser(FModioUser &User);
 
   // Downloads and installs
 
   UFUNCTION(BlueprintPure, Category = "mod.io")
-  static void ModioGetAllInstalledMod(TArray<FModioInstalledMod> &installed_mods);
+  static void ModioGetAllInstalledMod(TArray<FModioInstalledMod> &InstalledMods);
 
   UFUNCTION(BlueprintPure, Category = "mod.io")
-  static void ModioGetModDownloadQueue(TArray<FModioQueuedModDownload> &queued_mods);
+  static void ModioGetModDownloadQueue(TArray<FModioQueuedModDownload> &QueuedMods);
 
   UFUNCTION(BlueprintCallable, Category = "mod.io")
   static void ModioInstallDownloadedMods();
   
   UFUNCTION(BlueprintCallable, Category = "mod.io")
-  static void ModioAddModfile(int32 mod_id, FModioModfileCreator modfile_creator);
+  static void ModioAddModfile(int32 ModId, FModioModfileCreator ModfileCreator);
 
   UFUNCTION(BlueprintPure, Category = "mod.io")
-  static void ModioGetModfileUploadQueue(TArray<FModioQueuedModfileUpload> &upload_queue);
+  static void ModioGetModfileUploadQueue(TArray<FModioQueuedModfileUpload> &UploadQueue);
 };

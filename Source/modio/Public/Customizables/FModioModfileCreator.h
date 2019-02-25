@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include "Enums/EModioBooleanCustomizableType.h"
 #include "FModioModfileCreator.generated.h"
 
 USTRUCT(BlueprintType)
@@ -17,7 +18,7 @@ struct FModioModfileCreator
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
   FString Changelog = "";
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
-  bool Active = false;
+  TEnumAsByte<EModioBooleanCustomizableType> Active;
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
   FString Filehash = "";
 };

@@ -31,9 +31,8 @@ void UEditModCallbackProxy::Activate()
 {
   ModioModEditor mod_editor;
   modioInitModEditor(&mod_editor);
-
+  setupModioModEditor(this->ModEditor, mod_editor);
   modioEditMod(this, (u32)this->ModId, mod_editor, &onModEdited);
-
   modioFreeModEditor(&mod_editor);
 }
 

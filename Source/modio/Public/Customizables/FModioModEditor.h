@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include "Enums/EModioBooleanCustomizableType.h"
 #include "FModioModEditor.generated.h"
 
 USTRUCT(BlueprintType)
@@ -25,7 +26,7 @@ struct FModioModEditor
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
   FString CreatorTag = "";
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
-  bool Visible = false;
+  TEnumAsByte<EModioBooleanCustomizableType> Visible;
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io", Meta = (Bitmask, BitmaskEnum = "EModioMaturityOption"))
   int32 MaturityOption = 0;
 };

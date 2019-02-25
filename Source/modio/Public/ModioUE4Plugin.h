@@ -5,11 +5,13 @@
 
 #include "ModioHWrapper.h"
 
+#include "Enums/EModioBooleanCustomizableType.h"
+#include "Enums/EModioFilterType.h"
+#include "Enums/EModioMaturityOption.h"
+
 #include "Customizables/FModioModCreator.h"
 #include "Customizables/FModioModEditor.h"
 #include "Customizables/FModioModfileCreator.h"
-
-#include "Enums/EModioFilterType.h"
 
 #include "Schemas/FModioAvatar.h"
 #include "Schemas/FModioDownload.h"
