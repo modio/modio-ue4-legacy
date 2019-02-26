@@ -3,30 +3,29 @@
 
 #pragma once
 
-#include "Enums/EModioBooleanCustomizableType.h"
-#include "FModioModEditor.generated.h"
+#include "ModioHWrapper.h"
+#include "FModioError.h"
+#include "FModioResponse.generated.h"
 
 USTRUCT(BlueprintType)
-struct FModioModEditor
+struct FModioResponse
 {
   GENERATED_BODY()
-  
+
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
-  FString Name = "";
+  int32 Code;
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
-  FString Summary = "";
+  int32 ResultCount;
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
-  FString NameId = "";
+  int32 ResultLimit;
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
-  FString Description = "";
+  int32 ResultOffset;
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
-  FString HomepageUrl = "";
+  int32 ResultTotal;
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
-  FString MetadataBlob = "";
+  bool ResultCached;
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
-  FString CreatorTag = "";
-  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
-  TEnumAsByte<EModioBooleanCustomizableType> Visible;
-  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io", Meta = (Bitmask, BitmaskEnum = "EModioMaturityOption"))
-  int32 MaturityOption = 0;
+  FModioError Error;
 };
+
+extern void InitializeResponse(FModioResponse &response, const ModioResponse &modio_response);

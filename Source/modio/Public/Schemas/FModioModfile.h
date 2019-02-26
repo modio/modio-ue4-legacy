@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include "Int64.h"
 #include "ModioHWrapper.h"
 #include "FModioFilehash.h"
 #include "FModioDownload.h"
@@ -25,9 +26,8 @@ struct FModioModfile
   int32 DateAdded;
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
   int32 DateScanned;
-  // @todo: use int 64 instead of 32
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
-  int32 Filesize;
+  FInt64 Filesize;
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
   FString Filename;
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
