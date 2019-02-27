@@ -10,5 +10,5 @@ void onModInstalled(u32 response_code, u32 mod_id)
 
 void onAddModfile(u32 response_code, u32 mod_id)
 {
-  UModioComponent::OnModUploadDelegate.Broadcast((int32)response_code, (int32)mod_id);
+  UModioComponent::OnModfileUploadDelegate.Broadcast((int32)response_code, (int32)mod_id);
 }

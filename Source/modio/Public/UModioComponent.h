@@ -32,23 +32,23 @@ public:
   UPROPERTY(BlueprintAssignable, meta = (DisplayName = "mod.io OnModDownload"))
   FModioPlugin_OnModDownloadDynamicDelegate OnModDownloadDynamicDelegate;
 
-  /* onModUpload */
+  /* onModfileUpload */
   DECLARE_MULTICAST_DELEGATE_TwoParams(
-      FModioPlugin_OnModUploadDelegate,
+      FModioPlugin_OnModfileUploadDelegate,
       int32,
       int32);
-  static FModioPlugin_OnModUploadDelegate OnModUploadDelegate;
+  static FModioPlugin_OnModfileUploadDelegate OnModfileUploadDelegate;
 
   DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(
-      FModioPlugin_OnModUploadDynamicDelegate,
+      FModioPlugin_OnModfileUploadDynamicDelegate,
       int32,
       response_code,
       int32,
       mod_id);
-  UPROPERTY(BlueprintAssignable, meta = (DisplayName = "mod.io OnModUpload"))
-  FModioPlugin_OnModUploadDynamicDelegate OnModUploadDynamicDelegate;
+  UPROPERTY(BlueprintAssignable, meta = (DisplayName = "mod.io OnModfileUpload"))
+  FModioPlugin_OnModfileUploadDynamicDelegate OnModfileUploadDynamicDelegate;
 
 private:
   void OnModDownloadDelegate_Handler(int32 response_code, int32 mod_id);
-  void OnModUploadDelegate_Handler(int32 response_code, int32 mod_id);
+  void OnModfileUploadDelegate_Handler(int32 response_code, int32 mod_id);
 };
