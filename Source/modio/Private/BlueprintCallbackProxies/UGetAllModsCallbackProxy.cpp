@@ -8,7 +8,7 @@ void onGetAllMods(void *object, ModioResponse modio_response, ModioMod *modio_mo
   UGetAllModsCallbackProxy *get_all_mods_request_proxy = (UGetAllModsCallbackProxy *)object;
   FModioResponse response;
   InitializeResponse(response, modio_response);
-  get_all_mods_request_proxy->OnGetAllModsDelegate(response, toTArrayMods(modio_mods, modio_mods_size));
+  get_all_mods_request_proxy->OnGetAllModsDelegate(response, ConvertToTArrayMods(modio_mods, modio_mods_size));
 }
 
 UGetAllModsCallbackProxy::UGetAllModsCallbackProxy(const FObjectInitializer &ObjectInitializer)
@@ -30,7 +30,7 @@ void UGetAllModsCallbackProxy::Activate()
 {
   ModioFilterCreator modio_filter_creator;
   modioInitFilter(&modio_filter_creator);
-  setupModioFilterCreator(this->FilterType, this->Limit, this->Offset, modio_filter_creator);
+  SetupModioFilterCreator(this->FilterType, this->Limit, this->Offset, modio_filter_creator);
   modioGetAllMods(this, modio_filter_creator, &onGetAllMods);
   modioFreeFilter(&modio_filter_creator);
 }

@@ -4,6 +4,7 @@
 #pragma once
 
 #include "Enums/EModioBooleanCustomizableType.h"
+#include "Enums/EModioMaturityOption.h"
 #include "FModioModfileCreator.generated.h"
 
 USTRUCT(BlueprintType)

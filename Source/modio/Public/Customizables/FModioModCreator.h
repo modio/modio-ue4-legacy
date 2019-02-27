@@ -4,6 +4,7 @@
 #pragma once
 
 #include "Enums/EModioBooleanCustomizableType.h"
+#include "Enums/EModioMaturityOption.h"
 #include "FModioModCreator.generated.h"
 
 USTRUCT(BlueprintType)
@@ -29,6 +30,7 @@ struct FModioModCreator
   FString CreatorTag = "";
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
   TEnumAsByte<EModioBooleanCustomizableType> Visible;
+  // @todo Find a workaround to ue4 bitmask and enums issues
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io", Meta = (Bitmask, BitmaskEnum = "EModioMaturityOption"))
-  int32 MaturityOption = 0;
+  int32 MaturityOption = UNDEFINED_MATURITY_OPTION;
 };

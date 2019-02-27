@@ -8,7 +8,7 @@ void onGetUserSubscriptions(void *object, ModioResponse modio_response, ModioMod
   UGetUserSubscriptionsCallbackProxy *get_user_subscriptions_request_proxy = (UGetUserSubscriptionsCallbackProxy *)object;
   FModioResponse response;
   InitializeResponse(response, modio_response);
-  get_user_subscriptions_request_proxy->OnGetUserSubscriptionsDelegate(response, toTArrayMods(modio_mods, modio_mods_size));
+  get_user_subscriptions_request_proxy->OnGetUserSubscriptionsDelegate(response, ConvertToTArrayMods(modio_mods, modio_mods_size));
 }
 
 UGetUserSubscriptionsCallbackProxy::UGetUserSubscriptionsCallbackProxy(const FObjectInitializer &ObjectInitializer)
@@ -30,7 +30,7 @@ void UGetUserSubscriptionsCallbackProxy::Activate()
 {
   ModioFilterCreator modio_filter_creator;
   modioInitFilter(&modio_filter_creator);
-  setupModioFilterCreator(this->FilterType, this->Limit, this->Offset, modio_filter_creator);
+  SetupModioFilterCreator(this->FilterType, this->Limit, this->Offset, modio_filter_creator);
   modioGetUserSubscriptions(this, modio_filter_creator, &onGetUserSubscriptions);
   modioFreeFilter(&modio_filter_creator);
 }

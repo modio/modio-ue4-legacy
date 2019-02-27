@@ -3,9 +3,7 @@
 
 #include "ModioUE4Utility.h"
 
-FModioUser user;
-
-TArray<FModioMod> toTArrayMods(ModioMod* modio_mods, u32 mods_size)
+TArray<FModioMod> ConvertToTArrayMods(ModioMod* modio_mods, u32 mods_size)
 {
   TArray<FModioMod> mods;
   for (u32 i = 0; i < mods_size; i++)
@@ -17,7 +15,7 @@ TArray<FModioMod> toTArrayMods(ModioMod* modio_mods, u32 mods_size)
   return mods;
 }
 
-void setupModioFilterCreator(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, ModioFilterCreator& modio_filter_creator)
+void SetupModioFilterCreator(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, ModioFilterCreator& modio_filter_creator)
 {
   modioSetFilterLimit(&modio_filter_creator, (u32)Limit);
   modioSetFilterOffset(&modio_filter_creator, (u32)Offset);
@@ -41,7 +39,7 @@ void setupModioFilterCreator(TEnumAsByte<EModioFilterType> FilterType, int32 Lim
   }
 }
 
-void setupModioModCreator(FModioModCreator ModCreator, ModioModCreator& modio_mod_creator)
+void SetupModioModCreator(FModioModCreator ModCreator, ModioModCreator& modio_mod_creator)
 {
   modioSetModCreatorMaturityOption(&modio_mod_creator, (u32)ModCreator.MaturityOption);
 
@@ -69,10 +67,9 @@ void setupModioModCreator(FModioModCreator ModCreator, ModioModCreator& modio_mo
     modioSetModCreatorHomepageURL(&modio_mod_creator, TCHAR_TO_UTF8(*ModCreator.HomepageUrl));
 }
 
-void setupModioModEditor(FModioModEditor ModEditor, ModioModEditor& modio_mod_editor)
+void SetupModioModEditor(FModioModEditor ModEditor, ModioModEditor& modio_mod_editor)
 {
-  // @todo handle maturity option
-  //modioSetModEditorMaturityOption(&modio_mod_editor, (u32)ModCreator.MaturityOption);
+  modioSetModEditorMaturityOption(&modio_mod_editor, (u32)ModEditor.MaturityOption);
   switch (ModEditor.Visible)
   {
   case EModioBooleanCustomizableType::SET_TO_TRUE:
@@ -95,7 +92,7 @@ void setupModioModEditor(FModioModEditor ModEditor, ModioModEditor& modio_mod_ed
     modioSetModEditorHomepageURL(&modio_mod_editor, TCHAR_TO_UTF8(*ModEditor.HomepageUrl));
 }
 
-void setupModioModfileCreator(FModioModfileCreator ModfileCreator, ModioModfileCreator& modio_modfile_creator)
+void SetupModioModfileCreator(FModioModfileCreator ModfileCreator, ModioModfileCreator& modio_modfile_creator)
 {
   switch (ModfileCreator.Active)
   {
