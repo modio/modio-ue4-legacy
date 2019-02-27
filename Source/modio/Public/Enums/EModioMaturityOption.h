@@ -8,8 +8,9 @@
 UENUM(Meta = (Bitflags))
 enum class EModioMaturityOption
 {
-  ALCOHOL  UMETA(DisplayName = "Alcohol"),
-  DRUGS    UMETA(DisplayName = "Drugs"),
-  VIOLENCE UMETA(DisplayName = "Violence"),
-  EXPLICIT UMETA(DisplayName = "Explicit")
+  ALCOHOL   UMETA(DisplayName = "Alcohol"),
+  DRUGS     UMETA(DisplayName = "Drugs"),
+  VIOLENCE  UMETA(DisplayName = "Violence"),
+  EXPLICIT  UMETA(DisplayName = "Explicit"),
+  UNDEFINED UMETA(DisplayName = "Undefined (default)")
 };

@@ -30,7 +30,7 @@ void UAddModCallbackProxy::Activate()
 {
   ModioModCreator mod_creator;
   modioInitModCreator(&mod_creator);
-  setupModioModCreator(this->ModCreator, mod_creator);
+  SetupModioModCreator(this->ModCreator, mod_creator);
   modioAddMod(this, mod_creator, &onModAdded);
   modioFreeModCreator(&mod_creator);
 }
