@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include "ModioUE4Utility.h"
 #include "ModioUE4Plugin.h"
 #include "Enums/EModioFilterType.h"
 #include "Schemas/FModioResponse.h"

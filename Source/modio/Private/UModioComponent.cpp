@@ -20,18 +20,18 @@ void UModioComponent::OnUnregister()
 	Super::OnUnregister();
 }
 
-void UModioComponent::OnModDownloadDelegate_Handler(int32 response_code)
+void UModioComponent::OnModDownloadDelegate_Handler(int32 response_code, int32 mod_id)
 {
 	FFunctionGraphTask::CreateAndDispatchWhenReady([=]()
 	{
-		OnModDownloadDynamicDelegate.Broadcast(response_code);
+		OnModDownloadDynamicDelegate.Broadcast(response_code, mod_id);
 	}, TStatId(), NULL, ENamedThreads::GameThread);
 }
 
-void UModioComponent::OnModUploadDelegate_Handler(int32 response_code)
+void UModioComponent::OnModUploadDelegate_Handler(int32 response_code, int32 mod_id)
 {
 	FFunctionGraphTask::CreateAndDispatchWhenReady([=]()
 	{
-		OnModUploadDynamicDelegate.Broadcast(response_code);
+		OnModUploadDynamicDelegate.Broadcast(response_code, mod_id);
 	}, TStatId(), NULL, ENamedThreads::GameThread);
 }
