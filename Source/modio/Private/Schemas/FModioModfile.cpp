@@ -2,7 +2,6 @@
 // Released under MIT.
 
 #include "FModioModfile.h"
-#include "Schemas/FModioFilehash.h"
 
 void InitializeModfile(FModioModfile &Modfile, const ModioModfile &modio_modfile)
 {

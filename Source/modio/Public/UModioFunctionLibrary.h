@@ -21,55 +21,28 @@ class MODIO_API UModioFunctionLibrary : public UBlueprintFunctionLibrary
   // Authentication
 
   UFUNCTION(BlueprintCallable, Category = "mod.io")
-  static void ModioEmailRequest(FString email);
-
-  UFUNCTION(BlueprintCallable, Category = "mod.io")
-  static void ModioEmailExchange(FString security_code);
-
-  UFUNCTION(BlueprintCallable, Category = "mod.io")
   static void ModioLogout();
 
   UFUNCTION(BlueprintPure, Category = "mod.io")
-  static void ModioIsLoggedIn(bool &is_logged_in);
+  static void ModioIsLoggedIn(bool &IsLoggedIn);
 
   UFUNCTION(BlueprintPure, Category = "mod.io")
-  static void ModioCurrentUser(FModioUser &user);
+  static void ModioCurrentUser(FModioUser &User);
 
   // Downloads and installs
 
   UFUNCTION(BlueprintPure, Category = "mod.io")
-  static void ModioGetAllInstalledMod(TArray<FModioInstalledMod> &installed_mods);
+  static void ModioGetAllInstalledMod(TArray<FModioInstalledMod> &InstalledMods);
 
   UFUNCTION(BlueprintPure, Category = "mod.io")
-  static void ModioGetModDownloadQueue(TArray<FModioQueuedModDownload> &queued_mods);
+  static void ModioGetModDownloadQueue(TArray<FModioQueuedModDownload> &QueuedMods);
 
   UFUNCTION(BlueprintCallable, Category = "mod.io")
   static void ModioInstallDownloadedMods();
-
-  // Browsing
-
+  
   UFUNCTION(BlueprintCallable, Category = "mod.io")
-  static void ModioGetAllMods(TEnumAsByte<EModioFilterType> filter_type, int32 limit, int32 offset);
-
-  // Mod creation and uploads
-
-  UFUNCTION(BlueprintCallable, Category = "mod.io")
-  static void ModioAddMod(FModioModCreator mod_creator);
-
-  UFUNCTION(BlueprintCallable, Category = "mod.io")
-  static void ModioEditMod(int32 mod_id, FModioModEditor mod_editor);
-
-  UFUNCTION(BlueprintCallable, Category = "mod.io")
-  static void ModioAddModfile(int32 mod_id, FModioModfileCreator modfile_creator);
+  static void ModioAddModfile(int32 ModId, FModioModfileCreator ModfileCreator);
 
   UFUNCTION(BlueprintPure, Category = "mod.io")
-  static void ModioGetModfileUploadQueue(TArray<FModioQueuedModfileUpload> &upload_queue);
-
-  // Me
-
-  UFUNCTION(BlueprintCallable, Category = "mod.io")
-  static void ModioGetUserSubscriptions();
-
-  UFUNCTION(BlueprintCallable, Category = "mod.io")
-  static void ModioGetAuthenticatedUser();
+  static void ModioGetModfileUploadQueue(TArray<FModioQueuedModfileUpload> &UploadQueue);
 };

@@ -65,7 +65,8 @@ public class modio : ModuleRules
 				"CoreUObject",
 				"Engine",
 				"InputCore",
-				"Projects"
+				"Projects",
+				"Int64"
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);
