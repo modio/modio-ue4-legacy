@@ -3,8 +3,7 @@
 
 #pragma once
 
-#include "ModioUE4Plugin.h"
-#include "UModioComponent.h"
+#include "ModioHWrapper.h"
 
 extern void onModInstalled(u32 response_code, u32 mod_id);
 extern void onAddModfile(u32 response_code, u32 mod_id);

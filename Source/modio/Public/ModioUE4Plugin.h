@@ -31,7 +31,7 @@
 #include "Customizables/FModioModEditor.h"
 #include "Customizables/FModioModfileCreator.h"
 
-#include "UModioFunctionLibrary.h"
+#include "ModioFunctionLibrary.h"
 #include "BlueprintCallbackProxies/UAddModCallbackProxy.h"
 #include "BlueprintCallbackProxies/UEditModCallbackProxy.h"
 #include "BlueprintCallbackProxies/UEmailExchangeCallbackProxy.h"

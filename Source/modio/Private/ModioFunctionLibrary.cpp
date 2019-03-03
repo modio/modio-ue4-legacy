@@ -1,8 +1,8 @@
 // Copyright 2019 modio. All Rights Reserved.
 // Released under MIT.
 
-#include "UModioFunctionLibrary.h"
-#include "UModioComponent.h"
+#include "ModioFunctionLibrary.h"
+#include "ModioComponent.h"
 #include "ModioHWrapper.h"
 
 UModioFunctionLibrary::UModioFunctionLibrary(const FObjectInitializer &ObjectInitializer)
