@@ -12,102 +12,137 @@
 // Declare module name on one place so we don't have to retype it if we rename the module
 #define MODULE_NAME modio
 #define STRINGIFY(s) #s
-static FName ModuleName( STRINGIFY(MODULE_NAME) );
+static FName ModuleName(STRINGIFY(MODULE_NAME));
 #undef STRYINGIFY
 
-IMPLEMENT_MODULE( FModioModule, MODULE_NAME )
+IMPLEMENT_MODULE(FModioModule, MODULE_NAME)
 
-DEFINE_LOG_CATEGORY( LogModio );
+DEFINE_LOG_CATEGORY(LogModio);
 
 #define LOCTEXT_NAMESPACE "FModioModule"
 
-FModioSubsystemPtr IModioModule::Get(UWorld* world)
+FModioSubsystemPtr IModioModule::Get(UWorld *world)
 {
-  FModioModule* module = FModuleManager::GetModulePtr<FModioModule>( ModuleName );
-  if( module )
+  FModioModule* module = FModuleManager::GetModulePtr<FModioModule>(ModuleName);
+  if (module)
   {
     module->GetModioImp(world);
   }
   return nullptr;  
 }
 
-FModioSubsystemPtr FModioModule::GetModioImp( UWorld* world )
+static enum class EInstanceType : uint8
+{
+  Server,
+  Client
+};
+
+/** Helper function to find the first instance of the instance type */
+static bool IsLowestInstanceOf(UWorld *World, EInstanceType InstanceType)
+{
+  check(World);
+    
+  int LowestPIEInstance = INT_MAX;
+  const TIndirectArray<FWorldContext>& AllWorldContexts = GEngine->GetWorldContexts();
+  for (const FWorldContext& ContextItr : AllWorldContexts)
+  {
+    if (ContextItr.World()->GetNetMode() == NM_Client && InstanceType != EInstanceType::Client)
+    {
+      continue;
+    }
+    else if (ContextItr.World()->GetNetMode() != NM_Client && InstanceType != EInstanceType::Server)
+    {
+      continue;
+    }
+    LowestPIEInstance = FMath::Min(LowestPIEInstance, ContextItr.PIEInstance);
+  }
+
+  FWorldContext *WorldContext = GEngine->GetWorldContextFromWorld(World);
+  if (WorldContext)
+  {
+    return WorldContext->PIEInstance == LowestPIEInstance;
+  }
+  return nullptr;
+}
+
+FModioSubsystemPtr FModioModule::GetModioImp(UWorld *World) const
 {
   // Must pass in a valid word to get the interface, we don't default to GWorld
   // as some functions might actually pass in a null world by accident
-  if( !IsValid( world ) )
+  if (!IsValid(World))
   {
     return nullptr;
   }
 
+#if !UE_BUILD_SHIPPING
+  // In dev, we might run several instances of the game at the same time. Lets just limit it to
+  // one instance, so both instances don't clobber each others downloads etc
+  if (!GIsFirstInstance)
+  {
+    return nullptr;
+  }
+#endif
+
   const UModioSettings *Settings = GetDefault<UModioSettings>();
 
-  bool bIsDedicatedServerWorld = IsValid( world->GetGameInstance() ) ? world->GetGameInstance()->IsDedicatedServerInstance() : false;
-  if( bIsDedicatedServerWorld && !Settings->bRunOnDedicatedServer )
+  bool bIsDedicatedServerWorld = IsValid(World->GetGameInstance()) ? World->GetGameInstance()->IsDedicatedServerInstance() : false;
+  if (bIsDedicatedServerWorld && !Settings->bRunOnDedicatedServer)
   {
     return nullptr;
   }
 
 // In final game, we don't need to care about editor, so we can strip out all these checks
 #if WITH_EDITOR
-  // @todo: Check if GIsEditor is set when running standalone game
-  if( GIsEditor )
+  if (GIsEditor)
   {
     // Always return the implementation in editor, as then the developer is creating editor tools
-    if( world->WorldType == EWorldType::Editor || world->WorldType == EWorldType::EditorPreview )
+    if (World->WorldType == EWorldType::Editor || World->WorldType == EWorldType::EditorPreview)
     {
       return ModioImp;
     }
 
     // If dedicated server world, make sure we should run on it
-    if( bIsDedicatedServerWorld )
+    if (bIsDedicatedServerWorld)
     {
-      if( Settings->RunInEditor == ERunInEditorOn::DedicatedServer )
+      if (Settings->RunInEditor == ERunInEditorOn::DedicatedServer)
       {
         return ModioImp;
       }
       return nullptr;
     }
     
-    if( world->IsGameWorld() )
+    if (World->IsGameWorld())
     {
       // We don't want clients in PIE to have the world
-      if( world->IsClient() )
+      if (Settings->RunInEditor == ERunInEditorOn::FirstServer && IsLowestInstanceOf(World, EInstanceType::Server))
       {
-        #error Loop through these to find lowest world context
-        // GEngine->GetWorldContexts 
-        GEngine->GetWorldContextFromWorld( OwningWorld ))
-        // 
-        if( Settings->RunInEditor::FirstClient )
-        {
-          // @todo: I would like to loop through all worlds and find what their ID is, so we can take the lowest
-          if( GPlayInEditorID == 1 )
-          {
-          }
-        }
-        return nullptr;
+        return ModioImp;
       }
-      return ModioImp;
+      else if (Settings->RunInEditor == ERunInEditorOn::FirstClient && IsLowestInstanceOf(World, EInstanceType::Client))
+      {
+        return ModioImp;
+      } 
     }
   }
 #endif
 
   // Else, if it's another game world that's not PIE, always return the implementation
-  if( world->IsGameWorld() )
+  if (World->IsGameWorld())
   {
     return ModioImp;    
   }
 
+  // I don't actually know if there should be any more cases
   return nullptr;
 }
 
 void FModioModule::StartupModule()
 {
-  ModioImp = MakeShared<FModioSubsystem, ESPMode::ThreadSafe>();
-  ModioImp->Init();
+  const UModioSettings *Settings = GetDefault<UModioSettings>();
+  ModioImp = FModioSubsystem::Create(Settings->RootDirectory, Settings->GameId, Settings->ApiKey, Settings->bIsLiveEnvironment);
 
   // Need GIsEdtor check as this might run when running the game but not with the editor
-  if( GIsEditor )
+  if (GIsEditor)
   {
     RegisterSettings();
   }
@@ -116,13 +151,16 @@ void FModioModule::StartupModule()
 void FModioModule::ShutdownModule()
 {
   // Need GIsEdtor check as this might run when running the game but not with the editor	
-  if ( UObjectInitialized() && GIsEditor )
+  if (UObjectInitialized() && GIsEditor)
   {
     UnregisterSettings();
   }
 
-  ModioImp->Shutdown();
-  ModioImp.Reset();
+  if (ModioImp)
+  {
+    ModioImp->Shutdown();
+    ModioImp = nullptr;
+  }
 }
 
 bool FModioModule::SupportsDynamicReloading()
@@ -132,13 +170,23 @@ bool FModioModule::SupportsDynamicReloading()
 
 bool FModioModule::HandleSettingsSaved()
 {
-  UModioSettings *Settings = GetMutableDefault<UModioSettings>();
-  bool ResaveSettings = false;
+  if( FModioSubsystemPtr Modio = GetModioImp(GWorld) )
+  {
+    Modio->Shutdown();
+    Modio = nullptr;
+  }
 
-  if (ResaveSettings)
+  UModioSettings *Settings = GetMutableDefault<UModioSettings>();
+
+  // @todo: See if any setting is invalid, if so, set it to a valid setting and resave
+  bool bResaveSettings = false;
+
+  if (bResaveSettings)
   {
     Settings->SaveConfig();
   }
+
+  ModioImp = FModioSubsystem::Create(Settings->RootDirectory, Settings->GameId, Settings->ApiKey, Settings->bIsLiveEnvironment);
 
   return true;
 }

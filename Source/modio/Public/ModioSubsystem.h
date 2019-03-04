@@ -1,6 +1,9 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "ModioPackage.h"
+
+typedef TSharedPtr<struct FModioSubsystem, ESPMode::ThreadSafe> FModioSubsystemPtr;
 
 /**
  * Interface for the modio c++ UE4 API. Please note that this class shouldn't
@@ -11,18 +14,23 @@
 struct MODIO_API FModioSubsystem : 
   public TSharedFromThis<FModioSubsystem, ESPMode::ThreadSafe>
 {
+public:
+  virtual ~FModioSubsystem();
+protected:
+  friend class FModioModule;
+  static FModioSubsystemPtr Create( const FString& RootDirectory, uint32 GameId, const FString& ApiKey, bool bIsLiveEnvironment );
+PACKAGE_SCOPE:
+  /** Should only be create from our create function */
   FModioSubsystem();
 
-  virtual ~FModioSubsystem();
-
   /** Can be called multiple times during a session, as long as it's properly paired with it's shutdown */
-  void Init();
+  void Init( const FString& RootDirectory, uint32 GameId, const FString& ApiKey, bool bIsLiveEnvironent );
 
   /** Properly shutdowns modio */
   void Shutdown();
 private:
   /** Are we initialized */
-  uint8 Initialized:1;
+  uint8 bInitialized:1;
 };
 
 typedef TSharedPtr<FModioSubsystem, ESPMode::ThreadSafe> FModioSubsystemPtr;

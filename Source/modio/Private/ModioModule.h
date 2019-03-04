@@ -12,7 +12,7 @@ public:
   virtual void ShutdownModule() override;
   virtual bool SupportsDynamicReloading() override;
 
-  FModioSubsystemPtr GetModioImp( UWorld* world ) const;
+  FModioSubsystemPtr GetModioImp(UWorld *World) const;
 
 private:
   bool HandleSettingsSaved();

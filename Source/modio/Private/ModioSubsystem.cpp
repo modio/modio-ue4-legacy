@@ -4,66 +4,65 @@
 #include "ModioModule.h"
 
 FModioSubsystem::FModioSubsystem() :
-  Initialized( false )
+  bInitialized(false)
 {
 }
 
 FModioSubsystem::~FModioSubsystem()
 {
-  check(!Initialized);
+  check(!bInitialized);
 }
 
-void FModioSubsystem::Init()
+FModioSubsystemPtr FModioSubsystem::Create( const FString& RootDirectory, uint32 GameId, const FString& ApiKey, bool bIsLiveEnvironent )
 {
-  check(!Initialized);
-
-  const UModioSettings *Settings = GetDefault<UModioSettings>();
-
-  FString game_directory = FPaths::ConvertRelativePathToFull( FPaths::ProjectDir() );
-
-  if( !Settings->RootDirectory.Len() )
+  if( !RootDirectory.Len() )
   {
     UE_LOG( LogModio, Warning, TEXT( "No root directory defined for Modio, modio not initialized" ) );
-    return;
+    return nullptr;
   }
 
-  if( Settings->GameId == 0 )
+  if( GameId == 0 )
   {
     UE_LOG( LogModio, Warning, TEXT( "No GameId defined for Modio, modio not initialized" ) );
-    return;
+    return nullptr;
   }
 
-  if( !Settings->ApiKey.Len() )
+  if( !ApiKey.Len() )
   {
     UE_LOG( LogModio, Warning, TEXT( "No ApiKey defined for Modio, modio not initialized" ) );
-    return;
+    return nullptr;
   }
 
-  u32 environment;
-  if( Settings->IsLiveEnvironment )
-    environment = MODIO_ENVIRONMENT_LIVE;
-  else
-    environment = MODIO_ENVIRONMENT_TEST;
+  FString GameDirectory = FPaths::ConvertRelativePathToFull( FPaths::ProjectDir() );
+  GameDirectory += RootDirectory;
 
-  game_directory += Settings->RootDirectory;
+  FModioSubsystemPtr Modio = MakeShared<FModioSubsystem, ESPMode::ThreadSafe>();
+  Modio->Init( GameDirectory, GameId, ApiKey, bIsLiveEnvironent );
 
-  u32 game_id = Settings->GameId;
+  return Modio;
+}
 
-  modioInit( environment, game_id, TCHAR_TO_UTF8( *Settings->ApiKey ), TCHAR_TO_UTF8( *game_directory ) );
+void FModioSubsystem::Init( const FString& RootDirectory, uint32 GameId, const FString& ApiKey, bool bIsLiveEnvironment )
+{
+  check(!bInitialized);
 
-  modioSetDownloadListener( &onModInstalled );
-  modioSetUploadListener( &onAddModfile );
+  u32 Environment = bIsLiveEnvironment ? MODIO_ENVIRONMENT_LIVE : MODIO_ENVIRONMENT_TEST;
+  
+  modioInit( Environment, (u32)GameId, TCHAR_TO_UTF8(*ApiKey), TCHAR_TO_UTF8(*RootDirectory) );
 
-  Initialized = true;
+  modioSetDownloadListener(&onModInstalled);
+  modioSetUploadListener(&onAddModfile);
+
+  bInitialized = true;
 }
 
 void FModioSubsystem::Shutdown()
 {
-  check( Initialized );
+  check(bInitialized);
 
   // I would assume that nullptr is valid to stop the callbacks comming in
   modioSetDownloadListener(nullptr);
   modioSetUploadListener(nullptr);
 
-  Initialized = false;
+  bInitialized = false;
 }
