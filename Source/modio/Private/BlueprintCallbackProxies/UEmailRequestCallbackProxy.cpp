@@ -3,17 +3,10 @@
 
 #include "UEmailRequestCallbackProxy.h"
 
-void onModioEmailRequest(void *object, ModioResponse modio_response)
-{
-  UEmailRequestCallbackProxy *email_request_proxy = (UEmailRequestCallbackProxy *)object;
-  FModioResponse response;
-  InitializeResponse(response, modio_response);
-  email_request_proxy->OnEmailRequestDelegate(response);
-}
-
 UEmailRequestCallbackProxy::UEmailRequestCallbackProxy(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)
 {
+  EmailRequestDelegate.BindUObject( this, &UEmailRequestCallbackProxy::OnEmailRequestDelegate);
 }
 
 UEmailRequestCallbackProxy *UEmailRequestCallbackProxy::EmailRequest(FString Email)
@@ -26,7 +19,7 @@ UEmailRequestCallbackProxy *UEmailRequestCallbackProxy::EmailRequest(FString Ema
 
 void UEmailRequestCallbackProxy::Activate()
 {
-  modioEmailRequest(this, TCHAR_TO_UTF8(*this->Email), &onModioEmailRequest);
+  UModioFunctionLibrary::EmailRequest(TCHAR_TO_UTF8(*this->Email), EmailRequestDelegate);
 }
 
 void UEmailRequestCallbackProxy::OnEmailRequestDelegate(FModioResponse Response)
