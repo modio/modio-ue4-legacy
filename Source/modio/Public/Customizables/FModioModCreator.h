@@ -32,5 +32,5 @@ struct FModioModCreator
   TEnumAsByte<EModioBooleanCustomizableType> Visible;
   // @todo Find a workaround to ue4 bitmask and enums issues
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io", Meta = (Bitmask, BitmaskEnum = "EModioMaturityOption"))
-  int32 MaturityOption = UNDEFINED_MATURITY_OPTION;
+  int32 MaturityOption = 16;
 };

@@ -3,10 +3,11 @@
 
 #pragma once
 
-#include "ModioUE4Plugin.h"
-
-// @todo Find a workaround to no treat the bitmasked unidefined option as a numeric constant
-extern UNDEFINED_MATURITY_OPTION = 16;
+#include "Schemas/FModioMod.h"
+#include "Enums/EModioFilterType.h"
+#include "Customizables/FModioModCreator.h"
+#include "Customizables/FModioModEditor.h"
+#include "Customizables/FModioModfileCreator.h"
 
 extern TArray<FModioMod> ConvertToTArrayMods(ModioMod* modio_mods, u32 mods_size);
 extern void SetupModioFilterCreator(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, ModioFilterCreator& modio_filter_creator);

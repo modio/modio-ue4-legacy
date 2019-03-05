@@ -9,10 +9,6 @@
 #include "Enums/EModioFilterType.h"
 #include "Enums/EModioMaturityOption.h"
 
-#include "Customizables/FModioModCreator.h"
-#include "Customizables/FModioModEditor.h"
-#include "Customizables/FModioModfileCreator.h"
-
 #include "Schemas/FModioAvatar.h"
 #include "Schemas/FModioDownload.h"
 #include "Schemas/FModioError.h"
@@ -31,7 +27,9 @@
 #include "Schemas/FModioTag.h"
 #include "Schemas/FModioUser.h"
 
-#include "ModioUE4Utility.h"
+#include "Customizables/FModioModCreator.h"
+#include "Customizables/FModioModEditor.h"
+#include "Customizables/FModioModfileCreator.h"
 
 #include "UModioFunctionLibrary.h"
 #include "BlueprintCallbackProxies/UAddModCallbackProxy.h"
