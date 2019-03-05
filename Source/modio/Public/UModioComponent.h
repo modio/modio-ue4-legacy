@@ -17,32 +17,38 @@ public:
   void OnUnregister() override;
 
   /* onModDownload */
-  DECLARE_MULTICAST_DELEGATE_OneParam(
+  DECLARE_MULTICAST_DELEGATE_TwoParams(
       FModioPlugin_OnModDownloadDelegate,
+      int32,
       int32);
   static FModioPlugin_OnModDownloadDelegate OnModDownloadDelegate;
 
-  DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(
+  DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(
       FModioPlugin_OnModDownloadDynamicDelegate,
       int32,
-      response_code);
+      response_code,
+      int32,
+      mod_id);
   UPROPERTY(BlueprintAssignable, meta = (DisplayName = "mod.io OnModDownload"))
   FModioPlugin_OnModDownloadDynamicDelegate OnModDownloadDynamicDelegate;
 
-  /* onModUpload */
-  DECLARE_MULTICAST_DELEGATE_OneParam(
-      FModioPlugin_OnModUploadDelegate,
-      int32);
-  static FModioPlugin_OnModUploadDelegate OnModUploadDelegate;
-
-  DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(
-      FModioPlugin_OnModUploadDynamicDelegate,
+  /* onModfileUpload */
+  DECLARE_MULTICAST_DELEGATE_TwoParams(
+      FModioPlugin_OnModfileUploadDelegate,
       int32,
-      response_code);
-  UPROPERTY(BlueprintAssignable, meta = (DisplayName = "mod.io OnModUpload"))
-  FModioPlugin_OnModUploadDynamicDelegate OnModUploadDynamicDelegate;
+      int32);
+  static FModioPlugin_OnModfileUploadDelegate OnModfileUploadDelegate;
+
+  DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(
+      FModioPlugin_OnModfileUploadDynamicDelegate,
+      int32,
+      response_code,
+      int32,
+      mod_id);
+  UPROPERTY(BlueprintAssignable, meta = (DisplayName = "mod.io OnModfileUpload"))
+  FModioPlugin_OnModfileUploadDynamicDelegate OnModfileUploadDynamicDelegate;
 
 private:
-  void OnModDownloadDelegate_Handler(int32 response_code);
-  void OnModUploadDelegate_Handler(int32 response_code);
+  void OnModDownloadDelegate_Handler(int32 response_code, int32 mod_id);
+  void OnModfileUploadDelegate_Handler(int32 response_code, int32 mod_id);
 };

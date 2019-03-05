@@ -3,10 +3,14 @@
 
 #pragma once
 
-#include "ModioUE4Plugin.h"
+#include "Schemas/FModioMod.h"
+#include "Enums/EModioFilterType.h"
+#include "Customizables/FModioModCreator.h"
+#include "Customizables/FModioModEditor.h"
+#include "Customizables/FModioModfileCreator.h"
 
-extern TArray<FModioMod> toTArrayMods(ModioMod* modio_mods, u32 mods_size);
-extern void setupModioFilterCreator(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, ModioFilterCreator& modio_filter_creator);
-extern void setupModioModCreator(FModioModCreator ModCreator, ModioModCreator& modio_mod_creator);
-extern void setupModioModEditor(FModioModEditor ModEditor, ModioModEditor& modio_mod_editor);
-extern void setupModioModfileCreator(FModioModfileCreator ModfileCreator, ModioModfileCreator& modio_modfile_creator);
+extern TArray<FModioMod> ConvertToTArrayMods(ModioMod* modio_mods, u32 mods_size);
+extern void SetupModioFilterCreator(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, ModioFilterCreator& modio_filter_creator);
+extern void SetupModioModCreator(FModioModCreator ModCreator, ModioModCreator& modio_mod_creator);
+extern void SetupModioModEditor(FModioModEditor ModEditor, ModioModEditor& modio_mod_editor);
+extern void SetupModioModfileCreator(FModioModfileCreator ModfileCreator, ModioModfileCreator& modio_modfile_creator);

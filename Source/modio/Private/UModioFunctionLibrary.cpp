@@ -71,7 +71,7 @@ void UModioFunctionLibrary::ModioAddModfile(int32 ModId, FModioModfileCreator Mo
 {
   ModioModfileCreator modio_modfile_creator;
   modioInitModfileCreator(&modio_modfile_creator);
-  setupModioModfileCreator(ModfileCreator, modio_modfile_creator);
+  SetupModioModfileCreator(ModfileCreator, modio_modfile_creator);
   modioAddModfile((u32)ModId, modio_modfile_creator);
   modioFreeModfileCreator(&modio_modfile_creator);
 }
