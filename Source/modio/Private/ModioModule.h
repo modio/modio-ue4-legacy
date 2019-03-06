@@ -1,11 +1,9 @@
 #pragma once
 
-#include "IModioModule.h"
 #include "ModioSubsystem.h"
-#include "ModioSettings.h"
-#include "ModioCallbacks.h"
+#include "Modules/ModuleInterface.h"
 
-class FModioModule : public IModioModule
+class FModioModule : public IModuleInterface
 {
 public:
   virtual void StartupModule() override;

@@ -3,6 +3,8 @@
 
 #include "ModioModule.h"
 #include "ModioSubsystem.h"
+#include "ModioPublic.h"
+#include "ModioSettings.h"
 #if WITH_EDITOR
 #include "ISettingsModule.h"
 #include "ISettingsContainer.h"
@@ -21,14 +23,14 @@ DEFINE_LOG_CATEGORY(LogModio);
 
 #define LOCTEXT_NAMESPACE "FModioModule"
 
-FModioSubsystemPtr IModioModule::Get(UWorld *world)
+FModioSubsystemPtr FModioSubsystem::Get( UWorld *world )
 {
-  FModioModule* module = FModuleManager::GetModulePtr<FModioModule>(ModuleName);
-  if (module)
+  FModioModule* module = FModuleManager::GetModulePtr<FModioModule>( ModuleName );
+  if( module )
   {
-    module->GetModioImp(world);
+    module->GetModioImp( world );
   }
-  return nullptr;  
+  return nullptr;
 }
 
 static enum class EInstanceType : uint8

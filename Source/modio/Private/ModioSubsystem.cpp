@@ -1,7 +1,34 @@
 #include "ModioSubsystem.h"
 #include "ModioHWrapper.h"
+#include "ModioPublic.h"
 #include "ModioSettings.h"
 #include "ModioModule.h"
+#include "AsyncRequest/ModioAsyncRequest.h"
+#include "FModioResponse.h"
+#include "ModioCallbacks.h"
+
+class FModioAsyncRequest_EmailExchange : public FModioAsyncRequest
+{
+public:
+  FModioAsyncRequest_EmailExchange( FModioSubsystem *Modio, FEmailExchangeDelegate Delegate ) :
+    FModioAsyncRequest( Modio ),
+    ResponseDelegate( Delegate )
+  {
+  }
+  static void Response( void *Object, ModioResponse ModioResponse )
+  {
+    FModioResponse Response;
+    InitializeResponse( Response, ModioResponse );
+
+    FModioAsyncRequest_EmailExchange* ThisPointer = (FModioAsyncRequest_EmailExchange*)Object;
+    ThisPointer->ResponseDelegate.ExecuteIfBound( Response );
+
+    ThisPointer->Done();
+  }
+
+private:
+  FEmailExchangeDelegate ResponseDelegate;
+};
 
 FModioSubsystem::FModioSubsystem() :
   bInitialized(false)
@@ -42,6 +69,13 @@ FModioSubsystemPtr FModioSubsystem::Create( const FString& RootDirectory, uint32
   return Modio;
 }
 
+void FModioSubsystem::EmailExchange( const FString &SecurityCode, FEmailExchangeDelegate ExchangeDelegate )
+{
+  FModioAsyncRequest_EmailExchange *Request = new FModioAsyncRequest_EmailExchange( this, ExchangeDelegate );
+  modioEmailRequest( Request, TCHAR_TO_UTF8(*SecurityCode), FModioAsyncRequest_EmailExchange::Response );
+  QueueAsyncTask( Request );
+}
+
 void FModioSubsystem::Init( const FString& RootDirectory, uint32 GameId, const FString& ApiKey, bool bIsLiveEnvironment )
 {
   check(!bInitialized);
@@ -56,6 +90,23 @@ void FModioSubsystem::Init( const FString& RootDirectory, uint32 GameId, const F
   bInitialized = true;
 }
 
+void FModioSubsystem::QueueAsyncTask( struct FModioAsyncRequest* Request )
+{
+  checkf(Request, TEXT("Trying to queue up a invalid async request"));
+  TSharedPtr<FModioAsyncRequest> SharedRequest = MakeShareable(Request);
+  checkf(!AsyncRequests.Contains(SharedRequest), TEXT("Trying queue a async request twice"));
+
+  AsyncRequests.Add(SharedRequest);
+}
+
+void FModioSubsystem::AsyncRequestDone( struct FModioAsyncRequest *Request )
+{
+  checkf(Request, TEXT("Passing in a bad request to AsyncRequestDone"));
+  checkf(AsyncRequests.Contains(Request->AsShared()), TEXT("Async Request marking itself as done multiple times"));
+
+  AsyncRequests.RemoveSwap(Request->AsShared());
+}
+
 void FModioSubsystem::Shutdown()
 {
   check(bInitialized);
@@ -65,4 +116,9 @@ void FModioSubsystem::Shutdown()
   modioSetUploadListener(nullptr);
 
   bInitialized = false;
+}
+
+
+namespace ModioCallback
+{
 }

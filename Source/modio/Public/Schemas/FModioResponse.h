@@ -28,4 +28,4 @@ struct FModioResponse
   FModioError Error;
 };
 
-extern void InitializeResponse(FModioResponse &response, const ModioResponse &modio_response);
+extern void InitializeResponse( FModioResponse &Out_Response, const ModioResponse &ModioResponse);

@@ -3,13 +3,13 @@
 
 #include "FModioResponse.h"
 
-void InitializeResponse(FModioResponse &Response, const ModioResponse &modio_response)
+void InitializeResponse( FModioResponse &Out_Response, const ModioResponse &ModioResponse )
 {
-  Response.Code = modio_response.code;
-  Response.ResultCount = modio_response.result_count;
-  Response.ResultLimit = modio_response.result_limit;
-  Response.ResultOffset = modio_response.result_offset;
-  Response.ResultTotal = modio_response.result_total;
-  Response.ResultCached = modio_response.result_cached;
-  InitializeError(Response.Error, modio_response.error);
+  Out_Response.Code = ModioResponse.code;
+  Out_Response.ResultCount = ModioResponse.result_count;
+  Out_Response.ResultLimit = ModioResponse.result_limit;
+  Out_Response.ResultOffset = ModioResponse.result_offset;
+  Out_Response.ResultTotal = ModioResponse.result_total;
+  Out_Response.ResultCached = ModioResponse.result_cached;
+  InitializeError( Out_Response.Error, ModioResponse.error );
 }

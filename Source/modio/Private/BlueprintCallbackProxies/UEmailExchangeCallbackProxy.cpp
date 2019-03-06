@@ -2,31 +2,35 @@
 // Released under MIT.
 
 #include "UEmailExchangeCallbackProxy.h"
-
-void onModioEmailExchange(void *object, ModioResponse modio_response)
-{
-  UEmailExchangeCallbackProxy *email_exchange_proxy = (UEmailExchangeCallbackProxy *)object;
-  FModioResponse response;
-  InitializeResponse(response, modio_response);
-  email_exchange_proxy->OnEmailExchangeDelegate(response);
-}
+#include "ModioSubsystem.h"
 
 UEmailExchangeCallbackProxy::UEmailExchangeCallbackProxy(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)
 {
 }
 
-UEmailExchangeCallbackProxy *UEmailExchangeCallbackProxy::EmailExchange(FString SecurityCode)
+UEmailExchangeCallbackProxy *UEmailExchangeCallbackProxy::EmailExchange( UObject *WorldContextObject, const FString& SecurityCode )
 {
   UEmailExchangeCallbackProxy *Proxy = NewObject<UEmailExchangeCallbackProxy>();
   Proxy->SetFlags(RF_StrongRefOnFrame);
   Proxy->SecurityCode = SecurityCode;
+  Proxy->WorldContextObject = WorldContextObject;
   return Proxy;
 }
 
 void UEmailExchangeCallbackProxy::Activate()
 {
-  modioEmailExchange(this, TCHAR_TO_UTF8(*this->SecurityCode), &onModioEmailExchange);
+  UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
+  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
+  {
+    Modio->EmailExchange( SecurityCode, FEmailExchangeDelegate::CreateUObject( this, &UEmailExchangeCallbackProxy::OnEmailExchangeDelegate ) );
+  }
+  else
+  {
+    // @todonow: Make something more pretty than this
+    FModioResponse Response;
+    OnFailure.Broadcast( Response );
+  }
 }
 
 void UEmailExchangeCallbackProxy::OnEmailExchangeDelegate(FModioResponse Response)
