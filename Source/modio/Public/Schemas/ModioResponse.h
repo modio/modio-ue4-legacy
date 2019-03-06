@@ -5,7 +5,7 @@
 
 #include "ModioHWrapper.h"
 #include "FModioError.h"
-#include "FModioResponse.generated.h"
+#include "ModioResponse.generated.h"
 
 USTRUCT(BlueprintType)
 struct FModioResponse

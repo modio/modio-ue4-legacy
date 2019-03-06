@@ -4,7 +4,7 @@
 #include "ModioSettings.h"
 #include "ModioModule.h"
 #include "AsyncRequest/ModioAsyncRequest.h"
-#include "FModioResponse.h"
+#include "Schemas/ModioResponse.h"
 #include "ModioCallbacks.h"
 
 class FModioAsyncRequest_EmailExchange : public FModioAsyncRequest
@@ -63,7 +63,7 @@ FModioSubsystemPtr FModioSubsystem::Create( const FString& RootDirectory, uint32
   FString GameDirectory = FPaths::ConvertRelativePathToFull( FPaths::ProjectDir() );
   GameDirectory += RootDirectory;
 
-  FModioSubsystemPtr Modio = MakeShared<FModioSubsystem, ESPMode::ThreadSafe>();
+  FModioSubsystemPtr Modio = MakeShared<FModioSubsystem, ESPMode::Fast>();
   Modio->Init( GameDirectory, GameId, ApiKey, bIsLiveEnvironent );
 
   return Modio;

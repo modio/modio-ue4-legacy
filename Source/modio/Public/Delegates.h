@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "Schemas/FModioResponse.h"
+#include "Schemas/ModioResponse.h"
 #include "Delegates.generated.h"
 
 DECLARE_DELEGATE_OneParam(

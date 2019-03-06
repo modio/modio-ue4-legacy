@@ -1,7 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "FModioResponse.h"
+#include "ModioResponse.h"
 #include "ModioPackage.h"
 
 /**
@@ -10,7 +10,7 @@
 */
 DECLARE_DELEGATE_OneParam( FEmailExchangeDelegate, FModioResponse );
 
-typedef TSharedPtr<struct FModioSubsystem, ESPMode::ThreadSafe> FModioSubsystemPtr;
+typedef TSharedPtr<struct FModioSubsystem, ESPMode::Fast> FModioSubsystemPtr;
 
 /**
  * Interface for the modio c++ UE4 API. Please note that this class shouldn't
@@ -19,7 +19,7 @@ typedef TSharedPtr<struct FModioSubsystem, ESPMode::ThreadSafe> FModioSubsystemP
  * hold references to Object/Actors. And keep other pointers with Shared/Unique ptrs
  */
 struct MODIO_API FModioSubsystem : 
-  public TSharedFromThis<FModioSubsystem, ESPMode::ThreadSafe>
+  public TSharedFromThis<FModioSubsystem, ESPMode::Fast>
 {
 public:
   static FModioSubsystemPtr Get( UWorld *World );
@@ -53,5 +53,3 @@ private:
   /** Are we initialized */
   uint8 bInitialized:1;
 };
-
-typedef TSharedPtr<FModioSubsystem, ESPMode::ThreadSafe> FModioSubsystemPtr;

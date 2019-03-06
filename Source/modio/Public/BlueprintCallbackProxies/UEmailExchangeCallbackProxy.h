@@ -4,7 +4,7 @@
 #pragma once
 
 #include "ModioSubsystem.h"
-#include "Schemas/FModioResponse.h"
+#include "Schemas/ModioResponse.h"
 #include "Net/OnlineBlueprintCallProxyBase.h"
 #include "UEmailExchangeCallbackProxy.generated.h"
 
