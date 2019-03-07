@@ -1,8 +1,8 @@
 // Copyright 2019 modio. All Rights Reserved.
 // Released under MIT.
 
-#include "UModioFunctionLibrary.h"
-#include "UModioComponent.h"
+#include "ModioFunctionLibrary.h"
+#include "ModioComponent.h"
 #include "ModioHWrapper.h"
 
 UModioFunctionLibrary::UModioFunctionLibrary(const FObjectInitializer &ObjectInitializer)
@@ -90,4 +90,11 @@ void UModioFunctionLibrary::ModioGetModfileUploadQueue(TArray<FModioQueuedModfil
   }
 
   free(modio_queued_mods);
+}
+
+void UModioFunctionLibrary::EmailRequest(FString Email, FEmailRequestDelegate Delegate)
+{
+  EmailRequestStruct *email_request_struct = new EmailRequestStruct;
+  email_request_struct->Delegate = Delegate;
+  modioEmailRequest(email_request_struct, TCHAR_TO_UTF8(*Email), &onEmailExchange);
 }

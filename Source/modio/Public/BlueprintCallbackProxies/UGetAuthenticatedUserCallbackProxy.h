@@ -4,7 +4,7 @@
 #pragma once
 
 #include "ModioUE4Plugin.h"
-#include "Schemas/FModioResponse.h"
+#include "Schemas/ModioResponse.h"
 #include "Schemas/FModioUser.h"
 #include "Net/OnlineBlueprintCallProxyBase.h"
 #include "UGetAuthenticatedUserCallbackProxy.generated.h"

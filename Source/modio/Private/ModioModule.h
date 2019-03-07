@@ -1,11 +1,7 @@
-// Copyright 2019 modio. All Rights Reserved.
-// Released under MIT.
-
 #pragma once
 
-#include "UModioSettings.h"
-#include "ModioCallbacks.h"
-#include "Modules/ModuleManager.h"
+#include "ModioSubsystem.h"
+#include "Modules/ModuleInterface.h"
 
 class FModioModule : public IModuleInterface
 {
@@ -14,8 +10,12 @@ public:
   virtual void ShutdownModule() override;
   virtual bool SupportsDynamicReloading() override;
 
+  FModioSubsystemPtr GetModioImp(UWorld *World) const;
+
 private:
   bool HandleSettingsSaved();
   void RegisterSettings();
   void UnregisterSettings();
+
+  FModioSubsystemPtr ModioImp;
 };

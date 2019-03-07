@@ -5,7 +5,7 @@
 
 #include "ModioUE4Plugin.h"
 #include "Components/ActorComponent.h"
-#include "UModioComponent.generated.h"
+#include "ModioComponent.generated.h"
 
 UCLASS(meta = (BlueprintSpawnableComponent), DisplayName = "ModioPlugin")
 class MODIO_API UModioComponent : public UActorComponent

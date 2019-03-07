@@ -1,7 +1,7 @@
 // Copyright 2019 modio. All Rights Reserved.
 // Released under MIT.
 
-#include "UModioComponent.h"
+#include "ModioComponent.h"
 
 UModioComponent::FModioPlugin_OnModDownloadDelegate UModioComponent::OnModDownloadDelegate;
 UModioComponent::FModioPlugin_OnModfileUploadDelegate UModioComponent::OnModfileUploadDelegate;

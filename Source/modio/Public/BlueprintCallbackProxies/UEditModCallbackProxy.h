@@ -6,7 +6,7 @@
 #include "Customizables/FModioModEditor.h"
 #include "ModioUE4Plugin.h"
 #include "Enums/EModioMaturityOption.h"
-#include "Schemas/FModioResponse.h"
+#include "Schemas/ModioResponse.h"
 #include "Schemas/FModioMod.h"
 #include "Net/OnlineBlueprintCallProxyBase.h"
 #include "UEditModCallbackProxy.generated.h"

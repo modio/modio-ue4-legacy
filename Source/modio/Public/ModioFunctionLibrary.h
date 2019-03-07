@@ -3,10 +3,14 @@
 
 #pragma once
 
-#include "ModioUE4Plugin.h"
+#include "FModioInstalledMod.h"
+#include "FModioQueuedModDownload.h"
+#include "FModioModfileCreator.h"
+#include "FModioQueuedModfileUpload.h"
 #include "ModioCallbacks.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
-#include "UModioFunctionLibrary.generated.h"
+#include "Delegates.h"
+#include "ModioFunctionLibrary.generated.h"
 
 UCLASS()
 class MODIO_API UModioFunctionLibrary : public UBlueprintFunctionLibrary
@@ -45,4 +49,6 @@ class MODIO_API UModioFunctionLibrary : public UBlueprintFunctionLibrary
 
   UFUNCTION(BlueprintPure, Category = "mod.io")
   static void ModioGetModfileUploadQueue(TArray<FModioQueuedModfileUpload> &UploadQueue);
+
+  static void EmailRequest(FString Email, FEmailRequestDelegate Delegate);
 };

@@ -22,7 +22,7 @@
 #include "Schemas/FModioModfile.h"
 #include "Schemas/FModioQueuedModDownload.h"
 #include "Schemas/FModioQueuedModfileUpload.h"
-#include "Schemas/FModioResponse.h"
+#include "Schemas/ModioResponse.h"
 #include "Schemas/FModioStats.h"
 #include "Schemas/FModioTag.h"
 #include "Schemas/FModioUser.h"
@@ -31,7 +31,7 @@
 #include "Customizables/FModioModEditor.h"
 #include "Customizables/FModioModfileCreator.h"
 
-#include "UModioFunctionLibrary.h"
+#include "ModioFunctionLibrary.h"
 #include "BlueprintCallbackProxies/UAddModCallbackProxy.h"
 #include "BlueprintCallbackProxies/UEditModCallbackProxy.h"
 #include "BlueprintCallbackProxies/UEmailExchangeCallbackProxy.h"

@@ -3,9 +3,10 @@
 
 #pragma once
 
-#include "ModioUE4Plugin.h"
-#include "Schemas/FModioResponse.h"
 #include "Net/OnlineBlueprintCallProxyBase.h"
+#include "ModioUE4Plugin.h"
+#include "Schemas/ModioResponse.h"
+#include "Delegates.h"
 #include "UEmailRequestCallbackProxy.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(
@@ -25,6 +26,8 @@ class MODIO_API UEmailRequestCallbackProxy : public UOnlineBlueprintCallProxyBas
 
   UPROPERTY(BlueprintAssignable)
   FEmailRequestResult OnFailure;
+
+  FEmailRequestDelegate EmailRequestDelegate;
 
   UFUNCTION(BlueprintCallable, Category = "mod.io", meta = (BlueprintInternalUseOnly = "true"))
   static UEmailRequestCallbackProxy *EmailRequest(FString Email);

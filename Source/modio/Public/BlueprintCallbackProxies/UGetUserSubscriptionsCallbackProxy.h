@@ -5,7 +5,7 @@
 
 #include "ModioUE4Utility.h"
 #include "ModioUE4Plugin.h"
-#include "Schemas/FModioResponse.h"
+#include "Schemas/ModioResponse.h"
 #include "Schemas/FModioMod.h"
 #include "Net/OnlineBlueprintCallProxyBase.h"
 #include "UGetUserSubscriptionsCallbackProxy.generated.h"
