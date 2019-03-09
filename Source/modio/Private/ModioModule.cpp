@@ -12,7 +12,7 @@
 #endif
 
 // Declare module name on one place so we don't have to retype it if we rename the module
-#define MODULE_NAME modio
+#define MODULE_NAME Modio
 #define STRINGIFY(s) #s
 static FName ModuleName(STRINGIFY(MODULE_NAME));
 #undef STRYINGIFY
@@ -28,7 +28,7 @@ FModioSubsystemPtr FModioSubsystem::Get( UWorld *world )
   FModioModule* module = FModuleManager::GetModulePtr<FModioModule>( ModuleName );
   if( module )
   {
-    module->GetModioImp( world );
+    return module->GetModioImp( world );
   }
   return nullptr;
 }
