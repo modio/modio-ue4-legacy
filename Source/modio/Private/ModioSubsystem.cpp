@@ -3,6 +3,7 @@
 #include "ModioPublic.h"
 #include "ModioSettings.h"
 #include "ModioModule.h"
+#include "ModioUE4Utility.h"
 #include "AsyncRequest/ModioAsyncRequest_EmailRequest.h"
 #include "AsyncRequest/ModioAsyncRequest_EmailExchange.h"
 #include "Schemas/ModioResponse.h"
@@ -58,6 +59,17 @@ void FModioSubsystem::EmailExchange( const FString &SecurityCode, FEmailExchange
 {
   FModioAsyncRequest_EmailExchange *Request = new FModioAsyncRequest_EmailExchange( this, ExchangeDelegate );
   modioEmailRequest( Request, TCHAR_TO_UTF8(*SecurityCode), FModioAsyncRequest_EmailExchange::Response );
+  QueueAsyncTask( Request );
+}
+
+void FModioSubsystem::AddMod(const FModioModCreator& ModCreator, FAddModDelegate AddModDelegate)
+{
+  FModioAsyncRequest_AddMod *Request = new FModioAsyncRequest_AddMod( this, AddModDelegate );  
+  ModioModCreator mod_creator;
+  modioInitModCreator(&mod_creator);
+  SetupModioModCreator(ModCreator, mod_creator);
+  modioAddMod(Request, mod_creator, FModioAsyncRequest_AddMod::Response);
+  modioFreeModCreator(&mod_creator);  
   QueueAsyncTask( Request );
 }
 
