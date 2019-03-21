@@ -2,24 +2,35 @@
 // Released under MIT.
 
 #include "UEmailRequestCallbackProxy.h"
+#include "ModioSubsystem.h"
 
 UEmailRequestCallbackProxy::UEmailRequestCallbackProxy(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)
 {
-  EmailRequestDelegate.BindUObject( this, &UEmailRequestCallbackProxy::OnEmailRequestDelegate);
 }
 
-UEmailRequestCallbackProxy *UEmailRequestCallbackProxy::EmailRequest(FString Email)
+UEmailRequestCallbackProxy *UEmailRequestCallbackProxy::EmailRequest( UObject *WorldContextObject, const FString& Email )
 {
   UEmailRequestCallbackProxy *Proxy = NewObject<UEmailRequestCallbackProxy>();
   Proxy->SetFlags(RF_StrongRefOnFrame);
   Proxy->Email = Email;
+  Proxy->WorldContextObject = WorldContextObject;
   return Proxy;
 }
 
 void UEmailRequestCallbackProxy::Activate()
 {
-  UModioFunctionLibrary::EmailRequest(TCHAR_TO_UTF8(*this->Email), EmailRequestDelegate);
+  UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
+  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
+  {
+    Modio->EmailRequest( Email, FEmailRequestDelegate::CreateUObject( this, &UEmailRequestCallbackProxy::OnEmailRequestDelegate ) );
+  }
+  else
+  {
+    // @todonow: Make something more pretty than this
+    FModioResponse Response;
+    OnFailure.Broadcast( Response );
+  }
 }
 
 void UEmailRequestCallbackProxy::OnEmailRequestDelegate(FModioResponse Response)

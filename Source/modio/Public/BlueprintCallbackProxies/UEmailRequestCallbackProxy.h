@@ -3,10 +3,9 @@
 
 #pragma once
 
-#include "Net/OnlineBlueprintCallProxyBase.h"
-#include "ModioUE4Plugin.h"
+#include "ModioSubsystem.h"
 #include "Schemas/ModioResponse.h"
-#include "Delegates.h"
+#include "Net/OnlineBlueprintCallProxyBase.h"
 #include "UEmailRequestCallbackProxy.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(
@@ -21,16 +20,17 @@ class MODIO_API UEmailRequestCallbackProxy : public UOnlineBlueprintCallProxyBas
 
   FString Email;
 
+  // The world context object in which this call is taking place
+  UObject* WorldContextObject;
+
   UPROPERTY(BlueprintAssignable)
   FEmailRequestResult OnSuccess;
 
   UPROPERTY(BlueprintAssignable)
   FEmailRequestResult OnFailure;
 
-  FEmailRequestDelegate EmailRequestDelegate;
-
-  UFUNCTION(BlueprintCallable, Category = "mod.io", meta = (BlueprintInternalUseOnly = "true"))
-  static UEmailRequestCallbackProxy *EmailRequest(FString Email);
+  UFUNCTION(BlueprintCallable, Category = "mod.io", meta = (BlueprintInternalUseOnly = "true", DefaultToSelf="WorldContext"))
+  static UEmailRequestCallbackProxy *EmailRequest(UObject *WorldContextObject, const FString& Email);
 
   virtual void Activate() override;
 

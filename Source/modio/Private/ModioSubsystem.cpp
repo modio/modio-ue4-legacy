@@ -3,32 +3,10 @@
 #include "ModioPublic.h"
 #include "ModioSettings.h"
 #include "ModioModule.h"
-#include "AsyncRequest/ModioAsyncRequest.h"
+#include "AsyncRequest/ModioAsyncRequest_EmailRequest.h"
+#include "AsyncRequest/ModioAsyncRequest_EmailExchange.h"
 #include "Schemas/ModioResponse.h"
 #include "ModioCallbacks.h"
-
-class FModioAsyncRequest_EmailExchange : public FModioAsyncRequest
-{
-public:
-  FModioAsyncRequest_EmailExchange( FModioSubsystem *Modio, FEmailExchangeDelegate Delegate ) :
-    FModioAsyncRequest( Modio ),
-    ResponseDelegate( Delegate )
-  {
-  }
-  static void Response( void *Object, ModioResponse ModioResponse )
-  {
-    FModioResponse Response;
-    InitializeResponse( Response, ModioResponse );
-
-    FModioAsyncRequest_EmailExchange* ThisPointer = (FModioAsyncRequest_EmailExchange*)Object;
-    ThisPointer->ResponseDelegate.ExecuteIfBound( Response );
-
-    ThisPointer->Done();
-  }
-
-private:
-  FEmailExchangeDelegate ResponseDelegate;
-};
 
 FModioSubsystem::FModioSubsystem() :
   bInitialized(false)
@@ -67,6 +45,13 @@ FModioSubsystemPtr FModioSubsystem::Create( const FString& RootDirectory, uint32
   Modio->Init( GameDirectory, GameId, ApiKey, bIsLiveEnvironent );
 
   return Modio;
+}
+
+void FModioSubsystem::EmailRequest( const FString &Email, FEmailRequestDelegate ExchangeDelegate )
+{
+  FModioAsyncRequest_EmailRequest *Request = new FModioAsyncRequest_EmailRequest( this, ExchangeDelegate );
+  modioEmailRequest( Request, TCHAR_TO_UTF8(*Email), FModioAsyncRequest_EmailRequest::Response );
+  QueueAsyncTask( Request );
 }
 
 void FModioSubsystem::EmailExchange( const FString &SecurityCode, FEmailExchangeDelegate ExchangeDelegate )

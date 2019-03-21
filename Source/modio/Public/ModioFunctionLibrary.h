@@ -49,6 +49,4 @@ class MODIO_API UModioFunctionLibrary : public UBlueprintFunctionLibrary
 
   UFUNCTION(BlueprintPure, Category = "mod.io")
   static void ModioGetModfileUploadQueue(TArray<FModioQueuedModfileUpload> &UploadQueue);
-
-  static void EmailRequest(FString Email, FEmailRequestDelegate Delegate);
 };

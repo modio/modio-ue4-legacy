@@ -3,12 +3,9 @@
 #include "CoreMinimal.h"
 #include "ModioResponse.h"
 #include "ModioPackage.h"
-
-/**
-* Callback for when a email exchange has been done
-* @param ModioResponse - Response from Modio backend
-*/
-DECLARE_DELEGATE_OneParam( FEmailExchangeDelegate, FModioResponse );
+#include "ModioPackage.h"
+#include "AsyncRequest/ModioAsyncRequest_EmailExchange.h"
+#include "AsyncRequest/ModioAsyncRequest_EmailRequest.h"
 
 typedef TSharedPtr<struct FModioSubsystem, ESPMode::Fast> FModioSubsystemPtr;
 
@@ -25,6 +22,9 @@ public:
   static FModioSubsystemPtr Get( UWorld *World );
 
   virtual ~FModioSubsystem();
+
+  /** Request an email from to the mod.io backend */
+  void EmailRequest( const FString &Email, FEmailRequestDelegate ExchangeDelegate );
 
   /** Send your Security code to the backend */
   void EmailExchange( const FString &SecurityCode, FEmailExchangeDelegate ExchangeDelegate );
