@@ -4,28 +4,23 @@
 #pragma once
 
 #include "ModioHWrapper.h"
-#include "ModioError.h"
-#include "ModioResponse.generated.h"
+#include "ModioLogo.generated.h"
 
 USTRUCT(BlueprintType)
-struct FModioResponse
+struct FModioLogo
 {
   GENERATED_BODY()
 
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
-  int32 Code;
+  FString Filename;
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
-  int32 ResultCount;
+  FString Original;
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
-  int32 ResultLimit;
+  FString Thumb320x180;
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
-  int32 ResultOffset;
+  FString Thumb640x360;
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
-  int32 ResultTotal;
-  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
-  bool ResultCached;
-  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
-  FModioError Error;
+  FString Thumb1280x720;
 };
 
-extern void InitializeResponse( FModioResponse &Out_Response, const ModioResponse &ModioResponse);
+extern void InitializeLogo(FModioLogo &Logo, const ModioLogo &modio_logo);

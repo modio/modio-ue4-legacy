@@ -4,28 +4,30 @@
 #pragma once
 
 #include "ModioHWrapper.h"
-#include "ModioError.h"
-#include "ModioResponse.generated.h"
+#include "ModioAvatar.h"
+#include "ModioUser.generated.h"
 
 USTRUCT(BlueprintType)
-struct FModioResponse
+struct FModioUser
 {
   GENERATED_BODY()
 
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
-  int32 Code;
+  int32 Id;
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
-  int32 ResultCount;
+  int32 DateOnline;
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
-  int32 ResultLimit;
+  FString Username;
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
-  int32 ResultOffset;
+  FString NameId;
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
-  int32 ResultTotal;
+  FString Timezone;
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
-  bool ResultCached;
+  FString Language;
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
-  FModioError Error;
+  FString ProfileUrl;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
+  FModioAvatar Avatar;
 };
 
-extern void InitializeResponse( FModioResponse &Out_Response, const ModioResponse &ModioResponse);
+extern void InitializeUser(FModioUser &User, const ModioUser &modio_user);

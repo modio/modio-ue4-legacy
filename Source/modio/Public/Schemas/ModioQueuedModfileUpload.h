@@ -4,28 +4,23 @@
 #pragma once
 
 #include "ModioHWrapper.h"
-#include "ModioError.h"
-#include "ModioResponse.generated.h"
+#include "ModioQUeuedModfileUpload.generated.h"
 
 USTRUCT(BlueprintType)
-struct FModioResponse
+struct FModioQueuedModfileUpload
 {
   GENERATED_BODY()
 
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
-  int32 Code;
+  int32 State;
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
-  int32 ResultCount;
+  int32 ModId;
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
-  int32 ResultLimit;
+  int32 CurrentProgress;
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
-  int32 ResultOffset;
+  int32 TotalSize;
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
-  int32 ResultTotal;
-  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
-  bool ResultCached;
-  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
-  FModioError Error;
+  FString Path;
 };
 
-extern void InitializeResponse( FModioResponse &Out_Response, const ModioResponse &ModioResponse);
+extern void InitializeQueuedModfileUpload(FModioQueuedModfileUpload &queued_modfile_upload, const ModioQueuedModfileUpload &modio_queued_modfile_upload);

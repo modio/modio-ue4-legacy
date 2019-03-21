@@ -3,10 +3,10 @@
 
 #pragma once
 
-#include "FModioInstalledMod.h"
-#include "FModioQueuedModDownload.h"
-#include "FModioModfileCreator.h"
-#include "FModioQueuedModfileUpload.h"
+#include "ModioInstalledMod.h"
+#include "ModioQueuedModDownload.h"
+#include "ModioModfileCreator.h"
+#include "ModioQueuedModfileUpload.h"
 #include "ModioCallbacks.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "Delegates.h"
