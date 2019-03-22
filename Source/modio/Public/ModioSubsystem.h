@@ -4,12 +4,16 @@
 #include "ModioResponse.h"
 #include "Customizables/ModioModCreator.h"
 #include "Customizables/ModioModEditor.h"
+#include "Enums/ModioFilterType.h"
 #include "ModioPackage.h"
 #include "ModioPackage.h"
-#include "AsyncRequest/ModioAsyncRequest_EmailExchange.h"
-#include "AsyncRequest/ModioAsyncRequest_EmailRequest.h"
 #include "AsyncRequest/ModioAsyncRequest_AddMod.h"
 #include "AsyncRequest/ModioAsyncRequest_EditMod.h"
+#include "AsyncRequest/ModioAsyncRequest_EmailExchange.h"
+#include "AsyncRequest/ModioAsyncRequest_EmailRequest.h"
+#include "AsyncRequest/ModioAsyncRequest_GetAllMods.h"
+#include "AsyncRequest/ModioAsyncRequest_GetAuthenticatedUser.h"
+#include "AsyncRequest/ModioAsyncRequest_GetUserSubscriptions.h"
 
 typedef TSharedPtr<struct FModioSubsystem, ESPMode::Fast> FModioSubsystemPtr;
 
@@ -37,6 +41,15 @@ public:
 
   /** Edits an already existing mod profile on mod.io */
   void EditMod(const FModioModEditor &ModEditor, uint32 ModId, FEditModDelegate EditModDelegate);
+
+  /** Request mod information */
+  void GetAllMods(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, FGetAllModsDelegate GetAllModsDelegate);
+
+  /** Request the currently logged in user information */
+  void GetAuthenticatedUser(FGetAuthenticatedUserDelegate GetAuthenticatedUserDelegate);
+
+  /** Returns the mods the logged in user has subscribed */
+  void GetUserSubscriptions(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, FGetAllModsDelegate GetAllModsDelegate);
 
 protected:
   friend class FModioModule;
