@@ -11,7 +11,7 @@
 UENUM()
 enum class ERunInEditorOn : uint8
 {
-  FirstServer          UMETA( DisplayName = "Server", ToolTip="Server only (and Editor)"),
+  FirstServer     UMETA( DisplayName = "Server", ToolTip="Server only (and Editor)"),
   FirstClient     UMETA( DisplayName = "First Client", ToolTip="First Client Only (and Editor)" ),
   DedicatedServer UMETA( DisplayName = "Dedicated Server", ToolTip="On dedicated server (and Editor), same as EditorOnly if bRunOnDedicatedServer is off" ),
   EditorOnly      UMETA( DisplayName = "Editor Only", ToolTip="Only in editor context for tools" ),

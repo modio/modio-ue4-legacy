@@ -64,12 +64,23 @@ void FModioSubsystem::EmailExchange( const FString &SecurityCode, FEmailExchange
 
 void FModioSubsystem::AddMod(const FModioModCreator& ModCreator, FAddModDelegate AddModDelegate)
 {
-  FModioAsyncRequest_AddMod *Request = new FModioAsyncRequest_AddMod( this, AddModDelegate );  
+  FModioAsyncRequest_AddMod *Request = new FModioAsyncRequest_AddMod( this, AddModDelegate );
   ModioModCreator mod_creator;
   modioInitModCreator(&mod_creator);
   SetupModioModCreator(ModCreator, mod_creator);
   modioAddMod(Request, mod_creator, FModioAsyncRequest_AddMod::Response);
-  modioFreeModCreator(&mod_creator);  
+  modioFreeModCreator(&mod_creator);
+  QueueAsyncTask( Request );
+}
+
+void FModioSubsystem::EditMod(const FModioModEditor &ModEditor, uint32 ModId, FEditModDelegate EditModDelegate)
+{
+  FModioAsyncRequest_EditMod *Request = new FModioAsyncRequest_EditMod( this, EditModDelegate );
+  ModioModEditor mod_editor;
+  modioInitModEditor(&mod_editor);
+  SetupModioModEditor(ModEditor, mod_editor);
+  modioEditMod(Request , (u32)ModId, mod_editor, FModioAsyncRequest_EditMod::Response);
+  modioFreeModEditor(&mod_editor);
   QueueAsyncTask( Request );
 }
 

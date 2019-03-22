@@ -3,11 +3,13 @@
 #include "CoreMinimal.h"
 #include "ModioResponse.h"
 #include "Customizables/ModioModCreator.h"
+#include "Customizables/ModioModEditor.h"
 #include "ModioPackage.h"
 #include "ModioPackage.h"
 #include "AsyncRequest/ModioAsyncRequest_EmailExchange.h"
 #include "AsyncRequest/ModioAsyncRequest_EmailRequest.h"
 #include "AsyncRequest/ModioAsyncRequest_AddMod.h"
+#include "AsyncRequest/ModioAsyncRequest_EditMod.h"
 
 typedef TSharedPtr<struct FModioSubsystem, ESPMode::Fast> FModioSubsystemPtr;
 
@@ -32,6 +34,9 @@ public:
 
   /** Creates a new mod profile on mod.io */
   void AddMod(const FModioModCreator &ModCreator, FAddModDelegate AddModDelegate);
+
+  /** Edits an already existing mod profile on mod.io */
+  void EditMod(const FModioModEditor &ModEditor, uint32 ModId, FEditModDelegate EditModDelegate);
 
 protected:
   friend class FModioModule;
