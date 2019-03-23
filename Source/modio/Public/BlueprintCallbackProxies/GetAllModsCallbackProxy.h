@@ -26,16 +26,19 @@ class MODIO_API UGetAllModsCallbackProxy : public UOnlineBlueprintCallProxyBase
   int32 Limit;
   int32 Offset;
 
+  // The world context object in which this call is taking place
+  UObject* WorldContextObject;
+  
   UPROPERTY(BlueprintAssignable)
   FGetAllModsResult OnSuccess;
 
   UPROPERTY(BlueprintAssignable)
   FGetAllModsResult OnFailure;
 
-  UFUNCTION(BlueprintCallable, Category = "mod.io", meta = (BlueprintInternalUseOnly = "true"))
-  static UGetAllModsCallbackProxy *GetAllMods(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset);
+  UFUNCTION(BlueprintCallable, Category = "mod.io", meta = (BlueprintInternalUseOnly = "true", DefaultToSelf="WorldContext"))
+  static UGetAllModsCallbackProxy *GetAllMods(UObject *WorldContextObject, TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset);
 
   virtual void Activate() override;
 
-  virtual void OnGetAllModsDelegate(FModioResponse Response, TArray<FModioMod> Mods);
+  virtual void OnGetAllModsDelegate(FModioResponse Response, const TArray<FModioMod> &Mods);
 };

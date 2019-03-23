@@ -3,38 +3,37 @@
 
 #include "EditModCallbackProxy.h"
 #include "ModioUE4Utility.h"
-
-void onModEdited(void *object, ModioResponse modio_response, ModioMod modio_mod)
-{
-  UEditModCallbackProxy *edit_mod_proxy = (UEditModCallbackProxy *)object;
-  FModioResponse response;
-  InitializeResponse(response, modio_response);
-  FModioMod mod;
-  InitializeMod(mod, modio_mod);
-  edit_mod_proxy->OnEditModDelegate(response, mod);
-}
+#include "ModioSubsystem.h"
 
 UEditModCallbackProxy::UEditModCallbackProxy(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)
 {
 }
 
-UEditModCallbackProxy *UEditModCallbackProxy::EditMod(int32 ModId, FModioModEditor ModEditor)
+UEditModCallbackProxy *UEditModCallbackProxy::EditMod(UObject *WorldContextObject, int32 ModId, FModioModEditor ModEditor)
 {
   UEditModCallbackProxy *Proxy = NewObject<UEditModCallbackProxy>();
   Proxy->SetFlags(RF_StrongRefOnFrame);
   Proxy->ModId = ModId;
   Proxy->ModEditor = ModEditor;
+  Proxy->WorldContextObject = WorldContextObject;
   return Proxy;
 }
 
 void UEditModCallbackProxy::Activate()
 {
-  ModioModEditor mod_editor;
-  modioInitModEditor(&mod_editor);
-  SetupModioModEditor(this->ModEditor, mod_editor);
-  modioEditMod(this, (u32)this->ModId, mod_editor, &onModEdited);
-  modioFreeModEditor(&mod_editor);
+  UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
+  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
+  {
+    Modio->EditMod( this->ModId, this->ModEditor, FEditModDelegate::CreateUObject( this, &UEditModCallbackProxy::OnEditModDelegate ) );
+  }
+  else
+  {
+    // @todonow: Make something more pretty than this
+    FModioResponse Response;
+    FModioMod Mod;
+    OnFailure.Broadcast( Response, Mod );
+  }
 }
 
 void UEditModCallbackProxy::OnEditModDelegate(FModioResponse Response, FModioMod Mod)

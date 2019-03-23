@@ -2,32 +2,35 @@
 // Released under MIT.
 
 #include "GetAuthenticatedUserCallbackProxy.h"
-
-void onModioGetAuthenticatedUser(void *object, ModioResponse modio_response, ModioUser modio_user)
-{
-  UGetAuthenticatedUserCallbackProxy *get_authenticated_user_proxy = (UGetAuthenticatedUserCallbackProxy *)object;
-  FModioResponse response;
-  InitializeResponse(response, modio_response);
-  FModioUser user;
-  InitializeUser(user, modio_user);
-  get_authenticated_user_proxy->OnGetAuthenticatedUserDelegate(response, user);
-}
+#include "ModioSubsystem.h"
 
 UGetAuthenticatedUserCallbackProxy::UGetAuthenticatedUserCallbackProxy(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)
 {
 }
 
-UGetAuthenticatedUserCallbackProxy *UGetAuthenticatedUserCallbackProxy::GetAuthenticatedUser()
+UGetAuthenticatedUserCallbackProxy *UGetAuthenticatedUserCallbackProxy::GetAuthenticatedUser( UObject *WorldContextObject )
 {
   UGetAuthenticatedUserCallbackProxy *Proxy = NewObject<UGetAuthenticatedUserCallbackProxy>();
   Proxy->SetFlags(RF_StrongRefOnFrame);
+  Proxy->WorldContextObject = WorldContextObject;
   return Proxy;
 }
 
 void UGetAuthenticatedUserCallbackProxy::Activate()
 {
-  modioGetAuthenticatedUser(this, &onModioGetAuthenticatedUser);
+  UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
+  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
+  {
+    Modio->GetAuthenticatedUser( FGetAuthenticatedUserDelegate::CreateUObject( this, &UGetAuthenticatedUserCallbackProxy::OnGetAuthenticatedUserDelegate ) );
+  }
+  else
+  {
+    // @todonow: Make something more pretty than this
+    FModioResponse Response;
+    FModioUser User;
+    OnFailure.Broadcast( Response, User );
+  }
 }
 
 void UGetAuthenticatedUserCallbackProxy::OnGetAuthenticatedUserDelegate(FModioResponse Response, FModioUser User)

@@ -3,40 +3,41 @@
 
 #include "GetUserSubscriptionsCallbackProxy.h"
 #include "ModioUE4Utility.h"
-
-void onGetUserSubscriptions(void *object, ModioResponse modio_response, ModioMod *modio_mods, u32 modio_mods_size)
-{
-  UGetUserSubscriptionsCallbackProxy *get_user_subscriptions_request_proxy = (UGetUserSubscriptionsCallbackProxy *)object;
-  FModioResponse response;
-  InitializeResponse(response, modio_response);
-  get_user_subscriptions_request_proxy->OnGetUserSubscriptionsDelegate(response, ConvertToTArrayMods(modio_mods, modio_mods_size));
-}
+#include "ModioSubsystem.h"
 
 UGetUserSubscriptionsCallbackProxy::UGetUserSubscriptionsCallbackProxy(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)
 {
 }
 
-UGetUserSubscriptionsCallbackProxy *UGetUserSubscriptionsCallbackProxy::GetUserSubscriptions(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset)
+UGetUserSubscriptionsCallbackProxy *UGetUserSubscriptionsCallbackProxy::GetUserSubscriptions(UObject *WorldContextObject, TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset)
 {
   UGetUserSubscriptionsCallbackProxy *Proxy = NewObject<UGetUserSubscriptionsCallbackProxy>();
   Proxy->SetFlags(RF_StrongRefOnFrame);
   Proxy->FilterType = FilterType;
   Proxy->Limit = Limit;
   Proxy->Offset = Offset;
+  Proxy->WorldContextObject = WorldContextObject;
   return Proxy;
 }
 
 void UGetUserSubscriptionsCallbackProxy::Activate()
 {
-  ModioFilterCreator modio_filter_creator;
-  modioInitFilter(&modio_filter_creator);
-  SetupModioFilterCreator(this->FilterType, this->Limit, this->Offset, modio_filter_creator);
-  modioGetUserSubscriptions(this, modio_filter_creator, &onGetUserSubscriptions);
-  modioFreeFilter(&modio_filter_creator);
+  UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
+  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
+  {
+    Modio->GetUserSubscriptions( this->FilterType, this->Limit, this->Offset, FGetUserSubscriptionsDelegate::CreateUObject( this, &UGetUserSubscriptionsCallbackProxy::OnGetUserSubscriptionsDelegate ) );
+  }
+  else
+  {
+    // @todonow: Make something more pretty than this
+    FModioResponse Response;
+    TArray<FModioMod> Mods;
+    OnFailure.Broadcast( Response, Mods );
+  }
 }
 
-void UGetUserSubscriptionsCallbackProxy::OnGetUserSubscriptionsDelegate(FModioResponse Response, TArray<FModioMod> Mods)
+void UGetUserSubscriptionsCallbackProxy::OnGetUserSubscriptionsDelegate(FModioResponse Response, const TArray<FModioMod> &Mods)
 {
   if (Response.Code >= 200 && Response.Code < 300)
   {

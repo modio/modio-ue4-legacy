@@ -24,14 +24,17 @@ class MODIO_API UAddModCallbackProxy : public UOnlineBlueprintCallProxyBase
 
   FModioModCreator ModCreator;
 
+  // The world context object in which this call is taking place
+  UObject* WorldContextObject;
+
   UPROPERTY(BlueprintAssignable)
   FAddModResult OnSuccess;
 
   UPROPERTY(BlueprintAssignable)
   FAddModResult OnFailure;
 
-  UFUNCTION(BlueprintCallable, Category = "mod.io", meta = (BlueprintInternalUseOnly = "true"))
-  static UAddModCallbackProxy *AddMod(FModioModCreator ModCreator);
+  UFUNCTION(BlueprintCallable, Category = "mod.io", meta = (BlueprintInternalUseOnly = "true", DefaultToSelf="WorldContext"))
+  static UAddModCallbackProxy *AddMod(UObject *WorldContextObject, FModioModCreator ModCreator);
 
   virtual void Activate() override;
 

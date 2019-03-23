@@ -40,7 +40,7 @@ public:
   void AddMod(const FModioModCreator &ModCreator, FAddModDelegate AddModDelegate);
 
   /** Edits an already existing mod profile on mod.io */
-  void EditMod(const FModioModEditor &ModEditor, uint32 ModId, FEditModDelegate EditModDelegate);
+  void EditMod(uint32 ModId, const FModioModEditor &ModEditor, FEditModDelegate EditModDelegate);
 
   /** Request mod information */
   void GetAllMods(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, FGetAllModsDelegate GetAllModsDelegate);
@@ -49,7 +49,7 @@ public:
   void GetAuthenticatedUser(FGetAuthenticatedUserDelegate GetAuthenticatedUserDelegate);
 
   /** Returns the mods the logged in user has subscribed */
-  void GetUserSubscriptions(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, FGetAllModsDelegate GetAllModsDelegate);
+  void GetUserSubscriptions(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, FGetUserSubscriptionsDelegate GetUserSubscriptionsDelegate);
 
 protected:
   friend class FModioModule;

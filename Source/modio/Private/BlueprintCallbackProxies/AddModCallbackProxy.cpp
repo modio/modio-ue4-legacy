@@ -3,37 +3,36 @@
 
 #include "AddModCallbackProxy.h"
 #include "ModioUE4Utility.h"
-
-void onModAdded(void *object, ModioResponse modio_response, ModioMod modio_mod)
-{
-  UAddModCallbackProxy *add_mod_proxy = (UAddModCallbackProxy *)object;
-  FModioResponse response;
-  InitializeResponse(response, modio_response);
-  FModioMod mod;
-  InitializeMod(mod, modio_mod);
-  add_mod_proxy->OnAddModDelegate(response, mod);
-}
+#include "ModioSubsystem.h"
 
 UAddModCallbackProxy::UAddModCallbackProxy(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)
 {
 }
 
-UAddModCallbackProxy *UAddModCallbackProxy::AddMod(FModioModCreator ModCreator)
+UAddModCallbackProxy *UAddModCallbackProxy::AddMod(UObject *WorldContextObject, FModioModCreator ModCreator)
 {
   UAddModCallbackProxy *Proxy = NewObject<UAddModCallbackProxy>();
   Proxy->SetFlags(RF_StrongRefOnFrame);
   Proxy->ModCreator = ModCreator;
+  Proxy->WorldContextObject = WorldContextObject;
   return Proxy;
 }
 
 void UAddModCallbackProxy::Activate()
 {
-  ModioModCreator mod_creator;
-  modioInitModCreator(&mod_creator);
-  SetupModioModCreator(this->ModCreator, mod_creator);
-  modioAddMod(this, mod_creator, &onModAdded);
-  modioFreeModCreator(&mod_creator);
+  UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
+  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
+  {
+    Modio->AddMod( this->ModCreator, FAddModDelegate::CreateUObject( this, &UAddModCallbackProxy::OnAddModDelegate ) );
+  }
+  else
+  {
+    // @todonow: Make something more pretty than this
+    FModioResponse Response;
+    FModioMod Mod;
+    OnFailure.Broadcast( Response, Mod );
+  }
 }
 
 void UAddModCallbackProxy::OnAddModDelegate(FModioResponse Response, FModioMod Mod)

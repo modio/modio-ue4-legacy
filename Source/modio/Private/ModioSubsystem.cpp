@@ -59,7 +59,7 @@ void FModioSubsystem::AddMod(const FModioModCreator& ModCreator, FAddModDelegate
   QueueAsyncTask( Request );
 }
 
-void FModioSubsystem::EditMod(const FModioModEditor &ModEditor, uint32 ModId, FEditModDelegate EditModDelegate)
+void FModioSubsystem::EditMod(uint32 ModId, const FModioModEditor &ModEditor, FEditModDelegate EditModDelegate)
 {
   FModioAsyncRequest_EditMod *Request = new FModioAsyncRequest_EditMod( this, EditModDelegate );
   ModioModEditor mod_editor;
