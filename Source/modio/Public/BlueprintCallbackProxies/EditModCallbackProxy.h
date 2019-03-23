@@ -4,7 +4,6 @@
 #pragma once
 
 #include "Customizables/ModioModEditor.h"
-#include "ModioUE4Plugin.h"
 #include "Enums/ModioMaturityOption.h"
 #include "Schemas/ModioResponse.h"
 #include "Schemas/ModioMod.h"

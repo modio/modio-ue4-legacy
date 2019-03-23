@@ -4,6 +4,7 @@
 #include "ModioFunctionLibrary.h"
 #include "ModioComponent.h"
 #include "ModioHWrapper.h"
+#include "ModioUE4Utility.h"
 
 UModioFunctionLibrary::UModioFunctionLibrary(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)

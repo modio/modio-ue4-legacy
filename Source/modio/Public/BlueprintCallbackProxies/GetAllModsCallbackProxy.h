@@ -4,7 +4,6 @@
 #pragma once
 
 #include "ModioUE4Utility.h"
-#include "ModioUE4Plugin.h"
 #include "Enums/ModioFilterType.h"
 #include "Schemas/ModioResponse.h"
 #include "Schemas/ModioMod.h"

@@ -3,7 +3,6 @@
 
 #pragma once
 
-#include "ModioUE4Plugin.h"
 #include "Components/ActorComponent.h"
 #include "ModioComponent.generated.h"
 

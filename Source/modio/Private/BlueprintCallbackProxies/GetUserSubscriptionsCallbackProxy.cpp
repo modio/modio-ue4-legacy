@@ -2,6 +2,7 @@
 // Released under MIT.
 
 #include "GetUserSubscriptionsCallbackProxy.h"
+#include "ModioUE4Utility.h"
 
 void onGetUserSubscriptions(void *object, ModioResponse modio_response, ModioMod *modio_mods, u32 modio_mods_size)
 {

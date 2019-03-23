@@ -3,7 +3,6 @@
 
 #pragma once
 
-#include "ModioUE4Plugin.h"
 #include "Schemas/ModioResponse.h"
 #include "Schemas/ModioUser.h"
 #include "Net/OnlineBlueprintCallProxyBase.h"

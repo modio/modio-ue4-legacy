@@ -2,6 +2,7 @@
 // Released under MIT.
 
 #include "EditModCallbackProxy.h"
+#include "ModioUE4Utility.h"
 
 void onModEdited(void *object, ModioResponse modio_response, ModioMod modio_mod)
 {
