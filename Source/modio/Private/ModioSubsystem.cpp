@@ -113,6 +113,99 @@ void FModioSubsystem::GetUserSubscriptions(TEnumAsByte<EModioFilterType> FilterT
   QueueAsyncTask( Request );
 }
 
+void FModioSubsystem::Process()
+{
+  modioProcess();
+}
+
+void FModioSubsystem::Logout()
+{
+  modioLogout();
+}
+bool FModioSubsystem::IsLoggedIn()
+{
+  return modioIsLoggedIn();
+}
+FModioUser FModioSubsystem::CurrentUser()
+{
+  FModioUser User;
+  InitializeUser(User, modioGetCurrentUser());
+  return User;
+}
+
+TArray<FModioInstalledMod> FModioSubsystem::GetAllInstalledMods()
+{
+  TArray<FModioInstalledMod> InstalledMods;
+
+  u32 installed_mods_count = modioGetAllInstalledModsCount();
+  ModioInstalledMod *modio_installed_mods = (ModioInstalledMod *)malloc(installed_mods_count * sizeof(*modio_installed_mods));
+  modioGetAllInstalledMods(modio_installed_mods);
+
+  for (u32 i = 0; i < installed_mods_count; i++)
+  {
+    FModioInstalledMod installed_mod;
+    InitializeInstalledMod(installed_mod, modio_installed_mods[i]);
+    //modioFreeInstalledMod(&modio_installed_mods[i]);
+    InstalledMods.Add(installed_mod);
+  }
+
+  free(modio_installed_mods);
+
+  return InstalledMods;
+}
+
+TArray<FModioQueuedModDownload> FModioSubsystem::GetModDownloadQueue()
+{
+  TArray<FModioQueuedModDownload> QueuedMods;
+
+  u32 download_queue_count = modioGetModDownloadQueueCount();
+  ModioQueuedModDownload *modio_queued_mods = (ModioQueuedModDownload *)malloc(download_queue_count * sizeof(*modio_queued_mods));
+  modioGetModDownloadQueue(modio_queued_mods);
+
+  for (u32 i = 0; i < download_queue_count; i++)
+  {
+    FModioQueuedModDownload queued_mod;
+    InitializeQueuedModDownload(queued_mod, modio_queued_mods[i]);
+    //modioFreeQueuedModDownload(&modio_queued_mods[i]);
+    QueuedMods.Add(queued_mod);
+  }
+
+  free(modio_queued_mods);
+
+  return QueuedMods;
+}
+void FModioSubsystem::InstallDownloadedMods()
+{
+  modioInstallDownloadedMods();
+}
+void FModioSubsystem::AddModfile(int32 ModId, FModioModfileCreator ModfileCreator)
+{
+  ModioModfileCreator modio_modfile_creator;
+  modioInitModfileCreator(&modio_modfile_creator);
+  SetupModioModfileCreator(ModfileCreator, modio_modfile_creator);
+  modioAddModfile((u32)ModId, modio_modfile_creator);
+  modioFreeModfileCreator(&modio_modfile_creator);
+}
+TArray<FModioQueuedModfileUpload> FModioSubsystem::GetModfileUploadQueue()
+{
+  TArray<FModioQueuedModfileUpload> UploadQueue;
+
+  u32 upload_queue_count = modioGetModfileUploadQueueCount();
+  ModioQueuedModfileUpload *modio_queued_mods = (ModioQueuedModfileUpload *)malloc(upload_queue_count * sizeof(*modio_queued_mods));
+  modioGetModfileUploadQueue(modio_queued_mods);
+
+  for (u32 i = 0; i < upload_queue_count; i++)
+  {
+    FModioQueuedModfileUpload queued_mod;
+    InitializeQueuedModfileUpload(queued_mod, modio_queued_mods[i]);
+    UploadQueue.Add(queued_mod);
+  }
+
+  free(modio_queued_mods);
+
+  return UploadQueue;
+}
+
 void FModioSubsystem::Init( const FString& RootDirectory, uint32 GameId, const FString& ApiKey, bool bIsLiveEnvironment )
 {
   check(!bInitialized);

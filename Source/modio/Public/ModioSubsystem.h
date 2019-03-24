@@ -4,6 +4,10 @@
 #include "ModioResponse.h"
 #include "Customizables/ModioModCreator.h"
 #include "Customizables/ModioModEditor.h"
+#include "Customizables/ModioModfileCreator.h"
+#include "Schemas/ModioInstalledMod.h"
+#include "Schemas/ModioQueuedModDownload.h"
+#include "Schemas/ModioQueuedModfileUpload.h"
 #include "Enums/ModioFilterType.h"
 #include "ModioPackage.h"
 #include "ModioPackage.h"
@@ -50,6 +54,31 @@ public:
 
   /** Returns the mods the logged in user has subscribed */
   void GetUserSubscriptions(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, FGetUserSubscriptionsDelegate GetUserSubscriptionsDelegate);
+
+  /** Process callbacks in an asyncronous way */
+  void Process();
+
+  // Authentication
+
+  /** Logs out the current user from mod.io */  
+  void Logout();
+  /** Returns true if there is a user currently logged in */  
+  bool IsLoggedIn();
+  /** Returns the currently logged in user */  
+  FModioUser CurrentUser();
+
+  // Downloads and installs
+
+  /** Returns an array containing the installed mods information */
+  TArray<FModioInstalledMod> GetAllInstalledMods();
+  /** Returns an array containing the download queue information */
+  TArray<FModioQueuedModDownload> GetModDownloadQueue();
+  /** Installs the downloaded mods, this is called automatically on startup but can be triggered at any time */
+  void InstallDownloadedMods();
+  /** Adds a new modfile to the upload queue */
+  void AddModfile(int32 ModId, FModioModfileCreator ModfileCreator);
+  /** Returns an array containing the upload queue infromation */
+  TArray<FModioQueuedModfileUpload> GetModfileUploadQueue();
 
 protected:
   friend class FModioModule;

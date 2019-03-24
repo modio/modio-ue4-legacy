@@ -11,84 +11,83 @@ UModioFunctionLibrary::UModioFunctionLibrary(const FObjectInitializer &ObjectIni
 {
 }
 
-void UModioFunctionLibrary::ModioProcess()
+void UModioFunctionLibrary::ModioProcess(UObject *WorldContextObject)
 {
-  modioProcess();
-}
-
-void UModioFunctionLibrary::ModioLogout()
-{
-  modioLogout();
-}
-
-void UModioFunctionLibrary::ModioIsLoggedIn(bool &IsLoggedIn)
-{
-  IsLoggedIn = modioIsLoggedIn();
-}
-
-void UModioFunctionLibrary::ModioCurrentUser(FModioUser &User)
-{
-  InitializeUser(User, modioGetCurrentUser());
-}
-
-void UModioFunctionLibrary::ModioGetAllInstalledMod(TArray<FModioInstalledMod> &InstalledMods)
-{
-  u32 installed_mods_count = modioGetAllInstalledModsCount();
-  ModioInstalledMod *modio_installed_mods = (ModioInstalledMod *)malloc(installed_mods_count * sizeof(*modio_installed_mods));
-  modioGetAllInstalledMods(modio_installed_mods);
-
-  for (u32 i = 0; i < installed_mods_count; i++)
+  UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
+  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
   {
-    FModioInstalledMod installed_mod;
-    InitializeInstalledMod(installed_mod, modio_installed_mods[i]);
-    InstalledMods.Add(installed_mod);
+    Modio->Process();
   }
-
-  free(modio_installed_mods);
 }
 
-void UModioFunctionLibrary::ModioGetModDownloadQueue(TArray<FModioQueuedModDownload> &QueuedMods)
+void UModioFunctionLibrary::ModioLogout(UObject *WorldContextObject)
 {
-  u32 download_queue_count = modioGetModDownloadQueueCount();
-  ModioQueuedModDownload *modio_queued_mods = (ModioQueuedModDownload *)malloc(download_queue_count * sizeof(*modio_queued_mods));
-  modioGetModDownloadQueue(modio_queued_mods);
-
-  for (u32 i = 0; i < download_queue_count; i++)
+  UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
+  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
   {
-    FModioQueuedModDownload queued_mod;
-    InitializeQueuedModDownload(queued_mod, modio_queued_mods[i]);
-    QueuedMods.Add(queued_mod);
+    Modio->Logout();
   }
-
-  free(modio_queued_mods);
 }
 
-void UModioFunctionLibrary::ModioInstallDownloadedMods()
+void UModioFunctionLibrary::ModioIsLoggedIn(UObject *WorldContextObject, bool &IsLoggedIn)
 {
-  modioInstallDownloadedMods();
-}
-
-void UModioFunctionLibrary::ModioAddModfile(int32 ModId, FModioModfileCreator ModfileCreator)
-{
-  ModioModfileCreator modio_modfile_creator;
-  modioInitModfileCreator(&modio_modfile_creator);
-  SetupModioModfileCreator(ModfileCreator, modio_modfile_creator);
-  modioAddModfile((u32)ModId, modio_modfile_creator);
-  modioFreeModfileCreator(&modio_modfile_creator);
-}
-
-void UModioFunctionLibrary::ModioGetModfileUploadQueue(TArray<FModioQueuedModfileUpload> &UploadQueue)
-{
-  u32 upload_queue_count = modioGetModfileUploadQueueCount();
-  ModioQueuedModfileUpload *modio_queued_mods = (ModioQueuedModfileUpload *)malloc(upload_queue_count * sizeof(*modio_queued_mods));
-  modioGetModfileUploadQueue(modio_queued_mods);
-
-  for (u32 i = 0; i < upload_queue_count; i++)
+  UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
+  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
   {
-    FModioQueuedModfileUpload queued_mod;
-    InitializeQueuedModfileUpload(queued_mod, modio_queued_mods[i]);
-    UploadQueue.Add(queued_mod);
+    IsLoggedIn = Modio->IsLoggedIn();
   }
+}
 
-  free(modio_queued_mods);
+void UModioFunctionLibrary::ModioCurrentUser(UObject *WorldContextObject, FModioUser &User)
+{
+  UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
+  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
+  {
+    User = Modio->CurrentUser();
+  }
+}
+
+void UModioFunctionLibrary::ModioGetAllInstalledMods(UObject *WorldContextObject, TArray<FModioInstalledMod> &InstalledMods)
+{
+  UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
+  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
+  {
+    InstalledMods = Modio->GetAllInstalledMods();
+  }
+}
+
+void UModioFunctionLibrary::ModioGetModDownloadQueue(UObject *WorldContextObject, TArray<FModioQueuedModDownload> &QueuedMods)
+{
+  UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
+  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
+  {
+    QueuedMods = Modio->GetModDownloadQueue();
+  }
+}
+
+void UModioFunctionLibrary::ModioInstallDownloadedMods(UObject *WorldContextObject)
+{
+  UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
+  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
+  {
+    Modio->InstallDownloadedMods();
+  }
+}
+
+void UModioFunctionLibrary::ModioAddModfile(UObject *WorldContextObject, int32 ModId, FModioModfileCreator ModfileCreator)
+{
+  UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
+  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
+  {
+    Modio->AddModfile(ModId, ModfileCreator);
+  }
+}
+
+void UModioFunctionLibrary::ModioGetModfileUploadQueue(UObject *WorldContextObject, TArray<FModioQueuedModfileUpload> &UploadQueue)
+{
+  UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
+  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
+  {
+    UploadQueue = Modio->GetModfileUploadQueue();
+  }
 }
