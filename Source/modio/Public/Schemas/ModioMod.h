@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include "ModioResponse.h"
 #include "ModioHWrapper.h"
 #include "ModioLogo.h"
 #include "ModioUser.h"
@@ -67,3 +68,6 @@ struct FModioMod
 };
 
 extern void InitializeMod(FModioMod &mod, const ModioMod &modio_mod);
+
+DECLARE_DELEGATE_TwoParams( FModioModDelegate, FModioResponse, FModioMod );
+DECLARE_DELEGATE_TwoParams( FModioModArrayDelegate, FModioResponse, const TArray<FModioMod> & );

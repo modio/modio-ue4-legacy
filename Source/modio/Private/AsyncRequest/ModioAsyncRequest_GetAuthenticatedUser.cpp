@@ -1,7 +1,7 @@
 #include "AsyncRequest/ModioAsyncRequest_GetAuthenticatedUser.h"
 #include "ModioUE4Utility.h"
 
-FModioAsyncRequest_GetAuthenticatedUser::FModioAsyncRequest_GetAuthenticatedUser( FModioSubsystem *Modio, FGetAuthenticatedUserDelegate Delegate ) :
+FModioAsyncRequest_GetAuthenticatedUser::FModioAsyncRequest_GetAuthenticatedUser( FModioSubsystem *Modio, FModioUserDelegate Delegate ) :
   FModioAsyncRequest( Modio ),
   ResponseDelegate( Delegate )
 {

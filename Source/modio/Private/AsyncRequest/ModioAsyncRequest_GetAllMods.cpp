@@ -1,7 +1,7 @@
 #include "AsyncRequest/ModioAsyncRequest_GetAllMods.h"
 #include "ModioUE4Utility.h"
 
-FModioAsyncRequest_GetAllMods::FModioAsyncRequest_GetAllMods( FModioSubsystem *Modio, FGetAllModsDelegate Delegate ) :
+FModioAsyncRequest_GetAllMods::FModioAsyncRequest_GetAllMods( FModioSubsystem *Modio, FModioModArrayDelegate Delegate ) :
   FModioAsyncRequest( Modio ),
   ResponseDelegate( Delegate )
 {

@@ -24,7 +24,7 @@ void UAddModCallbackProxy::Activate()
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
   if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
   {
-    Modio->AddMod( this->ModCreator, FAddModDelegate::CreateUObject( this, &UAddModCallbackProxy::OnAddModDelegate ) );
+    Modio->AddMod( this->ModCreator, FModioModDelegate::CreateUObject( this, &UAddModCallbackProxy::OnAddModDelegate ) );
   }
   else
   {

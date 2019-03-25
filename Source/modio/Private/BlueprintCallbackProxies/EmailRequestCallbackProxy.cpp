@@ -23,7 +23,7 @@ void UEmailRequestCallbackProxy::Activate()
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
   if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
   {
-    Modio->EmailRequest( Email, FEmailRequestDelegate::CreateUObject( this, &UEmailRequestCallbackProxy::OnEmailRequestDelegate ) );
+    Modio->EmailRequest( Email, FModioGenericDelegate::CreateUObject( this, &UEmailRequestCallbackProxy::OnEmailRequestDelegate ) );
   }
   else
   {

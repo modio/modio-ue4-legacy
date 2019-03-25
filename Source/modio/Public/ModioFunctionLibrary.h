@@ -10,7 +10,6 @@
 #include "ModioQueuedModfileUpload.h"
 #include "ModioCallbacks.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
-#include "Delegates.h"
 #include "ModioFunctionLibrary.generated.h"
 
 UCLASS()

@@ -25,7 +25,7 @@ void UGetAllModsCallbackProxy::Activate()
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
   if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
   {
-    Modio->GetAllMods( this->FilterType, this->Limit, this->Offset, FGetAllModsDelegate::CreateUObject( this, &UGetAllModsCallbackProxy::OnGetAllModsDelegate ) );
+    Modio->GetAllMods( this->FilterType, this->Limit, this->Offset, FModioModArrayDelegate::CreateUObject( this, &UGetAllModsCallbackProxy::OnGetAllModsDelegate ) );
   }
   else
   {

@@ -22,7 +22,7 @@ void UGetAuthenticatedUserCallbackProxy::Activate()
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
   if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
   {
-    Modio->GetAuthenticatedUser( FGetAuthenticatedUserDelegate::CreateUObject( this, &UGetAuthenticatedUserCallbackProxy::OnGetAuthenticatedUserDelegate ) );
+    Modio->GetAuthenticatedUser( FModioUserDelegate::CreateUObject( this, &UGetAuthenticatedUserCallbackProxy::OnGetAuthenticatedUserDelegate ) );
   }
   else
   {

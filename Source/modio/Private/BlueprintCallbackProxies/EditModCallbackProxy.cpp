@@ -25,7 +25,7 @@ void UEditModCallbackProxy::Activate()
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
   if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
   {
-    Modio->EditMod( this->ModId, this->ModEditor, FEditModDelegate::CreateUObject( this, &UEditModCallbackProxy::OnEditModDelegate ) );
+    Modio->EditMod( this->ModId, this->ModEditor, FModioModDelegate::CreateUObject( this, &UEditModCallbackProxy::OnEditModDelegate ) );
   }
   else
   {

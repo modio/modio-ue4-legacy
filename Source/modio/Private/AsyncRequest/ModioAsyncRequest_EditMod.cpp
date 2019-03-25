@@ -1,6 +1,6 @@
 #include "AsyncRequest/ModioAsyncRequest_EditMod.h"
 
-FModioAsyncRequest_EditMod::FModioAsyncRequest_EditMod( FModioSubsystem *Modio, FEditModDelegate Delegate ) :
+FModioAsyncRequest_EditMod::FModioAsyncRequest_EditMod( FModioSubsystem *Modio, FModioModDelegate Delegate ) :
   FModioAsyncRequest( Modio ),
   ResponseDelegate( Delegate )
 {

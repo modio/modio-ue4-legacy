@@ -1,6 +1,6 @@
 #include "AsyncRequest/ModioAsyncRequest_EmailExchange.h"
 
-FModioAsyncRequest_EmailExchange::FModioAsyncRequest_EmailExchange( FModioSubsystem *Modio, FEmailExchangeDelegate Delegate ) :
+FModioAsyncRequest_EmailExchange::FModioAsyncRequest_EmailExchange( FModioSubsystem *Modio, FModioGenericDelegate Delegate ) :
   FModioAsyncRequest( Modio ),
   ResponseDelegate( Delegate )
 {

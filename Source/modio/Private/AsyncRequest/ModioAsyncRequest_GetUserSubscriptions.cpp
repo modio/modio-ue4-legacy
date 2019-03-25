@@ -1,7 +1,7 @@
 #include "AsyncRequest/ModioAsyncRequest_GetUserSubscriptions.h"
 #include "ModioUE4Utility.h"
 
-FModioAsyncRequest_GetUserSubscriptions::FModioAsyncRequest_GetUserSubscriptions( FModioSubsystem *Modio, FGetUserSubscriptionsDelegate Delegate ) :
+FModioAsyncRequest_GetUserSubscriptions::FModioAsyncRequest_GetUserSubscriptions( FModioSubsystem *Modio, FModioModArrayDelegate Delegate ) :
   FModioAsyncRequest( Modio ),
   ResponseDelegate( Delegate )
 {

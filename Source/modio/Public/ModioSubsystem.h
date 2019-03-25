@@ -35,25 +35,25 @@ public:
   virtual ~FModioSubsystem();
 
   /** Request an email from to the mod.io backend */
-  void EmailRequest(const FString &Email, FEmailRequestDelegate ExchangeDelegate);
+  void EmailRequest(const FString &Email, FModioGenericDelegate ExchangeDelegate);
 
   /** Send your Security code to the backend */
-  void EmailExchange(const FString &SecurityCode, FEmailExchangeDelegate ExchangeDelegate);
+  void EmailExchange(const FString &SecurityCode, FModioGenericDelegate ExchangeDelegate);
 
   /** Creates a new mod profile on mod.io */
-  void AddMod(const FModioModCreator &ModCreator, FAddModDelegate AddModDelegate);
+  void AddMod(const FModioModCreator &ModCreator, FModioModDelegate AddModDelegate);
 
   /** Edits an already existing mod profile on mod.io */
-  void EditMod(uint32 ModId, const FModioModEditor &ModEditor, FEditModDelegate EditModDelegate);
+  void EditMod(uint32 ModId, const FModioModEditor &ModEditor, FModioModDelegate EditModDelegate);
 
   /** Request mod information */
-  void GetAllMods(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, FGetAllModsDelegate GetAllModsDelegate);
+  void GetAllMods(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, FModioModArrayDelegate GetAllModsDelegate);
 
   /** Request the currently logged in user information */
-  void GetAuthenticatedUser(FGetAuthenticatedUserDelegate GetAuthenticatedUserDelegate);
+  void GetAuthenticatedUser(FModioUserDelegate GetAuthenticatedUserDelegate);
 
   /** Returns the mods the logged in user has subscribed */
-  void GetUserSubscriptions(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, FGetUserSubscriptionsDelegate GetUserSubscriptionsDelegate);
+  void GetUserSubscriptions(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, FModioModArrayDelegate GetUserSubscriptionsDelegate);
 
   /** Process callbacks in an asyncronous way */
   void Process();

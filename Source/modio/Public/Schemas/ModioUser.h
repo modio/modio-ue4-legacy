@@ -5,6 +5,7 @@
 
 #include "ModioHWrapper.h"
 #include "ModioAvatar.h"
+#include "ModioResponse.h"
 #include "ModioUser.generated.h"
 
 USTRUCT(BlueprintType)
@@ -31,3 +32,5 @@ struct FModioUser
 };
 
 extern void InitializeUser(FModioUser &User, const ModioUser &modio_user);
+
+DECLARE_DELEGATE_TwoParams( FModioUserDelegate, FModioResponse, FModioUser );

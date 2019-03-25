@@ -48,7 +48,7 @@ FModioSubsystemPtr FModioSubsystem::Create( const FString& RootDirectory, uint32
   return Modio;
 }
 
-void FModioSubsystem::AddMod(const FModioModCreator& ModCreator, FAddModDelegate AddModDelegate)
+void FModioSubsystem::AddMod(const FModioModCreator& ModCreator, FModioModDelegate AddModDelegate)
 {
   FModioAsyncRequest_AddMod *Request = new FModioAsyncRequest_AddMod( this, AddModDelegate );
   ModioModCreator mod_creator;
@@ -59,7 +59,7 @@ void FModioSubsystem::AddMod(const FModioModCreator& ModCreator, FAddModDelegate
   QueueAsyncTask( Request );
 }
 
-void FModioSubsystem::EditMod(uint32 ModId, const FModioModEditor &ModEditor, FEditModDelegate EditModDelegate)
+void FModioSubsystem::EditMod(uint32 ModId, const FModioModEditor &ModEditor, FModioModDelegate EditModDelegate)
 {
   FModioAsyncRequest_EditMod *Request = new FModioAsyncRequest_EditMod( this, EditModDelegate );
   ModioModEditor mod_editor;
@@ -70,21 +70,21 @@ void FModioSubsystem::EditMod(uint32 ModId, const FModioModEditor &ModEditor, FE
   QueueAsyncTask( Request );
 }
 
-void FModioSubsystem::EmailExchange( const FString &SecurityCode, FEmailExchangeDelegate ExchangeDelegate )
+void FModioSubsystem::EmailExchange( const FString &SecurityCode, FModioGenericDelegate ExchangeDelegate )
 {
   FModioAsyncRequest_EmailExchange *Request = new FModioAsyncRequest_EmailExchange( this, ExchangeDelegate );
   modioEmailRequest( Request, TCHAR_TO_UTF8(*SecurityCode), FModioAsyncRequest_EmailExchange::Response );
   QueueAsyncTask( Request );
 }
 
-void FModioSubsystem::EmailRequest( const FString &Email, FEmailRequestDelegate ExchangeDelegate )
+void FModioSubsystem::EmailRequest( const FString &Email, FModioGenericDelegate ExchangeDelegate )
 {
   FModioAsyncRequest_EmailRequest *Request = new FModioAsyncRequest_EmailRequest( this, ExchangeDelegate );
   modioEmailRequest( Request, TCHAR_TO_UTF8(*Email), FModioAsyncRequest_EmailRequest::Response );
   QueueAsyncTask( Request );
 }
 
-void FModioSubsystem::GetAllMods(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, FGetAllModsDelegate GetAllModsDelegate)
+void FModioSubsystem::GetAllMods(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, FModioModArrayDelegate GetAllModsDelegate)
 {
   FModioAsyncRequest_GetAllMods *Request = new FModioAsyncRequest_GetAllMods( this, GetAllModsDelegate );
   ModioFilterCreator modio_filter_creator;
@@ -95,14 +95,14 @@ void FModioSubsystem::GetAllMods(TEnumAsByte<EModioFilterType> FilterType, int32
   QueueAsyncTask( Request );
 }
 
-void FModioSubsystem::GetAuthenticatedUser(FGetAuthenticatedUserDelegate GetAuthenticatedUserDelegate)
+void FModioSubsystem::GetAuthenticatedUser(FModioUserDelegate GetAuthenticatedUserDelegate)
 {
   FModioAsyncRequest_GetAuthenticatedUser *Request = new FModioAsyncRequest_GetAuthenticatedUser( this, GetAuthenticatedUserDelegate );
   modioGetAuthenticatedUser(this, FModioAsyncRequest_GetAuthenticatedUser::Response);
   QueueAsyncTask( Request );
 }
 
-void FModioSubsystem::GetUserSubscriptions(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, FGetUserSubscriptionsDelegate GetUserSubscriptionsDelegate)
+void FModioSubsystem::GetUserSubscriptions(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, FModioModArrayDelegate GetUserSubscriptionsDelegate)
 {
   FModioAsyncRequest_GetUserSubscriptions *Request = new FModioAsyncRequest_GetUserSubscriptions( this, GetUserSubscriptionsDelegate );
   ModioFilterCreator modio_filter_creator;

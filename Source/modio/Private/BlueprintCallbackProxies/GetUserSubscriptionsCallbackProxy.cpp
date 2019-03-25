@@ -26,7 +26,7 @@ void UGetUserSubscriptionsCallbackProxy::Activate()
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
   if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
   {
-    Modio->GetUserSubscriptions( this->FilterType, this->Limit, this->Offset, FGetUserSubscriptionsDelegate::CreateUObject( this, &UGetUserSubscriptionsCallbackProxy::OnGetUserSubscriptionsDelegate ) );
+    Modio->GetUserSubscriptions( this->FilterType, this->Limit, this->Offset, FModioModArrayDelegate::CreateUObject( this, &UGetUserSubscriptionsCallbackProxy::OnGetUserSubscriptionsDelegate ) );
   }
   else
   {
