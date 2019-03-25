@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Metadata-KVP-(C-compatible).md - Grip</title>
+  <link rel="icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAEACABoBQAAFgAAACgAAAAQAAAAIAAAAAEACAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAKCgr/FRUX/xYWGP8YGBr/GRkb/xsbHP8dHR7/Hh4f/x4eIP8fHyD/ICAh/yMjJP8kJCX/JiYo/ygoKv8pKSr/LCwu/y0tLv80NDT/QUFC/0ZGR/9MTE7/UFBR/1JSUv9bW1v/XFxc/2BgYP9hYWP/aGhp/2xsbP9ycnL/d3d3/3l5e/98fHz/f3+A/2dn/P9z3a//cNX8/4CAgP+Xl5f/nZ2e/56en/+fn5//n5+h/6amp/+rq6v/rKys/7CvsP+zs7T/uLi5/7u7u/+8vLz/wMDA/8fHx//Kysr/zc3N/9HR0f/d3d3/3t7e/+Xl5f/q6ur/6+vr/+3t7f/z8/P/9fX1//b29v/39/f/+Pj4//n5+f/6+vr/+/v7//z8/P/9/f3//v7+//////8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/NCYmJiYmJiYmJiYmJiYmNCZKSkpKSkpKSkpKSkpKSiYmSkpKRisdRkMbMklKSkomJkpKSSEiNUhEEQwpSUpKJiZKSi8LHhhAPAwBDDZKSiYmSkoWACA7SEc6HAEaSkomJkpKBxI/SkpKSj4ICkpKJiZKSgUTR0pKSkpGDwZKSiYmSkoTED1KSkpKOQQVSkomJkpKKgowMy4sNycIMUpKJiZKSkEZDgkDAgsNH0VKSiYmSkpKQigUBgkXLUhKSkomJkpKSkpKSkpKSkpKSkpKJiYmJiYmJiYmJiYmJiYmJiYmIyUkNDQ0NDQ0NDQ0NDQmOCYmJiYmJiYmJiYmJiYmOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" />
+  <link rel="stylesheet" href="//octicons.github.com/components/octicons/octicons/octicons.css" />
+  <style>
+    /* Page tweaks */
+    .preview-page {
+      margin-top: 64px;
+    }
+    /* User-content tweaks */
+    .timeline-comment-wrapper > .timeline-comment:after,
+    .timeline-comment-wrapper > .timeline-comment:before {
+      content: none;
+    }
+    /* User-content overrides */
+    .discussion-timeline.wide {
+      width: 920px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div id="preview-page" class="preview-page" data-autorefresh-url="">
+
+    
+
+      <div role="main" class="main-content">
+        <div class="container new-discussion-timeline experiment-repo-nav">
+          <div class="repository-content">
+            <div id="readme" class="readme boxed-group clearfix announce instapaper_body md">
+              
+                <h3>
+                  <span class="octicon octicon-book"></span>
+                  Metadata-KVP-(C-compatible).md - Grip
+                </h3>
+              
+              <article class="markdown-body entry-content" itemprop="text" id="grip-content">
+                <h1>
+<a id="user-content-modiogetallmetadatakvp" class="anchor" href="#modiogetallmetadatakvp" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>modioGetAllMetadataKVP</h1>
+<div class="highlight highlight-source-c++"><pre><span class="pl-k">void</span> <span class="pl-en">modioGetAllMetadataKVP</span>(<span class="pl-k">void</span>* object, u32 mod_id, <span class="pl-k">void</span> (*callback)(<span class="pl-k">void</span>* object, ModioResponse response, ModioMetadataKVP* metadata_kvp_array, u32 metadata_kvp_array_size));</pre></div>
+<p>Wrapped by: [[Metadata-KVP#getallmetadatakvp]]</p>
+<p>API endpoint used: <a href="https://docs.mod.io/#get-all-mod-kvp-metadata" rel="nofollow">Get All Mod KVP Metadata</a></p>
+<p>Returns an array containing all corresponding mod's <a href='ModioMetadataKVP.html'>ModioMetadataKVP</a> objects.</p>
+<h2>
+<a id="user-content-function-parameters" class="anchor" href="#function-parameters" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Function parameters</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>object</td>
+<td><code>void*</code></td>
+<td>Context paramter.</td>
+</tr>
+<tr>
+<td>mod_id</td>
+<td><code>u32</code></td>
+<td>Mod's unique identifier.</td>
+</tr>
+<tr>
+<td>callback</td>
+<td><code>void (*callback)(void* object, ModioResponse response, ModioMetadataKVP* metadata_kvp_array, u32 metadata_kvp_array_size)</code></td>
+<td>Function called once the process finished.</td>
+</tr>
+</tbody>
+</table>
+<h2>
+<a id="user-content-callback-parameters" class="anchor" href="#callback-parameters" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Callback parameters</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>object</td>
+<td><code>void*</code></td>
+<td>Context paramter.</td>
+</tr>
+<tr>
+<td>response</td>
+<td><code>ModioResponse</code></td>
+<td><a href='ModioResponse.html'>ModioResponse</a> object that contains the mod.io response status.</td>
+</tr>
+<tr>
+<td>metadata_kvp_array</td>
+<td><code>ModioMetadataKVP*</code></td>
+<td>Array containing the <a href='ModioMetadataKVP.html'>ModioMetadataKVP</a> objects returned.</td>
+</tr>
+<tr>
+<td>metadata_kvp_array_size</td>
+<td><code>u32</code></td>
+<td>Tags array size.</td>
+</tr>
+</tbody>
+</table>
+<h2>
+<a id="user-content-example" class="anchor" href="#example" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h2>
+<div class="highlight highlight-source-c++"><pre><span class="pl-k">void</span> <span class="pl-en">onGetAllMetadataKVP</span>(<span class="pl-k">void</span> *object, ModioResponse response, ModioMetadataKVP *metadata_kvp_array, u32 metadata_kvp_array_size)
+{
+  <span class="pl-k">if</span>(response.<span class="pl-smi">code</span> == <span class="pl-c1">200</span>)
+  {
+    <span class="pl-c"><span class="pl-c">//</span>Metadata KVP retrieved successfully</span>
+  }
+}
+
+[...]
+
+<span class="pl-en">modioGetAllMetadataKVP</span>(<span class="pl-c1">NULL</span>, mod_id, &amp;onGetAllMetadataKVP);</pre></div>
+<h1>
+<a id="user-content-modioaddmetadatakvp" class="anchor" href="#modioaddmetadatakvp" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>modioAddMetadataKVP</h1>
+<div class="highlight highlight-source-c++"><pre><span class="pl-k">void</span> <span class="pl-en">modioAddMetadataKVP</span>(<span class="pl-k">void</span>* object, u32 mod_id, <span class="pl-k">char</span>** metadata_kvp_array, u32 metadata_kvp_array_size, <span class="pl-k">void</span> (*callback)(<span class="pl-k">void</span>* object, ModioResponse response));</pre></div>
+<p>Wrapped by: [[Metadata-KVP#addmetadatakvp]]</p>
+<p>API endpoint used: <a href="https://docs.mod.io/#add-mod-kvp-metadata" rel="nofollow">Add Mod KVP Metadata</a></p>
+<p>Adds the metadata key value pairs provided to the corresponding mod.</p>
+<h2>
+<a id="user-content-function-parameters-1" class="anchor" href="#function-parameters-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Function parameters</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>object</td>
+<td><code>void*</code></td>
+<td>Context paramter.</td>
+</tr>
+<tr>
+<td>mod_id</td>
+<td><code>u32</code></td>
+<td>Mod's unique identifier.</td>
+</tr>
+<tr>
+<td>metadata_kvp_array</td>
+<td><code>char**</code></td>
+<td>Array containing the metadata key value pairs to be added.</td>
+</tr>
+<tr>
+<td>metadata_kvp_array_size</td>
+<td><code>u32</code></td>
+<td>Metadata key value pairs array size.</td>
+</tr>
+<tr>
+<td>callback</td>
+<td><code>(*callback)(void* object, ModioResponse response)</code></td>
+<td>Function called once the process finished.</td>
+</tr>
+</tbody>
+</table>
+<h2>
+<a id="user-content-callback-parameters-1" class="anchor" href="#callback-parameters-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Callback parameters</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>object</td>
+<td><code>void*</code></td>
+<td>Context paramter.</td>
+</tr>
+<tr>
+<td>response</td>
+<td><code>ModioResponse</code></td>
+<td><a href='ModioResponse.html'>ModioResponse</a> object that contains the mod.io response status.</td>
+</tr>
+</tbody>
+</table>
+<h2>
+<a id="user-content-example-1" class="anchor" href="#example-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h2>
+<div class="highlight highlight-source-c++"><pre><span class="pl-k">void</span> <span class="pl-en">onAddMetadataKVP</span>(<span class="pl-k">void</span> *object, ModioResponse response)
+{
+  <span class="pl-k">if</span>(response.<span class="pl-smi">code</span> == <span class="pl-c1">201</span>)
+  {
+    <span class="pl-c"><span class="pl-c">//</span>Metadata KVP added successfully</span>
+  }
+}
+
+[...]
+
+<span class="pl-k">char</span> **metadata_kvp_array = (<span class="pl-k">char</span> **)malloc(<span class="pl-c1">1</span>);
+metadata_kvp_array[<span class="pl-c1">0</span>] = (<span class="pl-k">char</span> *)malloc(<span class="pl-c1">100</span>);
+<span class="pl-en">strcpy</span>(metadata_kvp_array[<span class="pl-c1">0</span>], <span class="pl-s"><span class="pl-pds">"</span>pistol-dmg:800<span class="pl-cce">\0</span><span class="pl-pds">"</span></span>);
+
+<span class="pl-en">modioAddMetadataKVP</span>(<span class="pl-c1">NULL</span>, mod_id, (<span class="pl-k">char</span> **)metadata_kvp_array, 1, &amp;onAddMetadataKVP);</pre></div>
+<h1>
+<a id="user-content-modiodeletemetadatakvp" class="anchor" href="#modiodeletemetadatakvp" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>modioDeleteMetadataKVP</h1>
+<div class="highlight highlight-source-c++"><pre><span class="pl-k">void</span> <span class="pl-en">modioDeleteMetadataKVP</span>(<span class="pl-k">void</span>* object, u32 mod_id, <span class="pl-k">char</span>** metadata_kvp_array, u32 metadata_kvp_array_size, <span class="pl-k">void</span> (*callback)(<span class="pl-k">void</span>* object, ModioResponse response));</pre></div>
+<p>Wrapped by: [[Metadata-KVP#deletemetadatakvp]]</p>
+<p>API endpoint used: <a href="https://docs.mod.io/#delete-mod-kvp-metadata" rel="nofollow">Delete Mod KVP Metadata</a></p>
+<p>Deletes the metadata key value pairs provided from the corresponding mod.</p>
+<h2>
+<a id="user-content-function-parameters-2" class="anchor" href="#function-parameters-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Function parameters</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>object</td>
+<td><code>void*</code></td>
+<td>Context paramter.</td>
+</tr>
+<tr>
+<td>mod_id</td>
+<td><code>u32</code></td>
+<td>Mod's unique identifier.</td>
+</tr>
+<tr>
+<td>metadata_kvp_array</td>
+<td><code>char**</code></td>
+<td>Array containing the metadata key value pairs to be deleted.</td>
+</tr>
+<tr>
+<td>metadata_kvp_array_size</td>
+<td><code>u32</code></td>
+<td>Metadata key value pairs array size.</td>
+</tr>
+<tr>
+<td>callback</td>
+<td><code>(*callback)(void* object, ModioResponse response)</code></td>
+<td>Function called once the process finished.</td>
+</tr>
+</tbody>
+</table>
+<h2>
+<a id="user-content-callback-parameters-2" class="anchor" href="#callback-parameters-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Callback parameters</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>object</td>
+<td><code>void*</code></td>
+<td>Context paramter.</td>
+</tr>
+<tr>
+<td>response</td>
+<td><code>ModioResponse</code></td>
+<td><a href='ModioResponse.html'>ModioResponse</a> object that contains the mod.io response status.</td>
+</tr>
+</tbody>
+</table>
+<h2>
+<a id="user-content-example-2" class="anchor" href="#example-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h2>
+<div class="highlight highlight-source-c++"><pre><span class="pl-k">void</span> <span class="pl-en">onDeleteMetadataKVP</span>(<span class="pl-k">void</span> *object, ModioResponse response)
+{
+  <span class="pl-k">if</span>(response.<span class="pl-smi">code</span> == <span class="pl-c1">204</span>)
+  {
+    <span class="pl-c"><span class="pl-c">//</span>Metadata KVP deleted successfully</span>
+  }
+}
+
+[...]
+
+<span class="pl-k">char</span> **metadata_kvp_array = (<span class="pl-k">char</span> **)malloc(<span class="pl-c1">1</span>);
+metadata_kvp_array[<span class="pl-c1">0</span>] = (<span class="pl-k">char</span> *)malloc(<span class="pl-c1">100</span>);
+<span class="pl-en">strcpy</span>(metadata_kvp_array[<span class="pl-c1">0</span>], <span class="pl-s"><span class="pl-pds">"</span>pistol-dmg:800<span class="pl-cce">\0</span><span class="pl-pds">"</span></span>);
+
+<span class="pl-en">modioDeleteMetadataKVP</span>(<span class="pl-c1">NULL</span>, mod_id, (<span class="pl-k">char</span> **)metadata_kvp_array, 1, &amp;onAddMetadataKVP);</pre></div>
+
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    
+
+  </div>
+  <div>&nbsp;</div>
+  </div><script>
+    function showCanonicalImages() {
+      var images = document.getElementsByTagName('img');
+      if (!images) {
+        return;
+      }
+      for (var index = 0; index < images.length; index++) {
+        var image = images[index];
+        if (image.getAttribute('data-canonical-src') && image.src !== image.getAttribute('data-canonical-src')) {
+          image.src = image.getAttribute('data-canonical-src');
+        }
+      }
+    }
+
+    function scrollToHash() {
+      if (location.hash && !document.querySelector(':target')) {
+        var element = document.getElementById('user-content-' + location.hash.slice(1));
+        if (element) {
+           element.scrollIntoView();
+        }
+      }
+    }
+
+    function autorefreshContent(eventSourceUrl) {
+      var initialTitle = document.title;
+      var contentElement = document.getElementById('grip-content');
+      var source = new EventSource(eventSourceUrl);
+      var isRendering = false;
+
+      source.onmessage = function(ev) {
+        var msg = JSON.parse(ev.data);
+        if (msg.updating) {
+          isRendering = true;
+          document.title = '(Rendering) ' + document.title;
+        } else {
+          isRendering = false;
+          document.title = initialTitle;
+          contentElement.innerHTML = msg.content;
+          showCanonicalImages();
+        }
+      }
+
+      source.onerror = function(e) {
+        if (e.readyState === EventSource.CLOSED && isRendering) {
+          isRendering = false;
+          document.title = initialTitle;
+        }
+      }
+    }
+
+    window.onhashchange = function() {
+      scrollToHash();
+    }
+
+    window.onload = function() {
+      scrollToHash();
+    }
+
+    showCanonicalImages();
+
+    var autorefreshUrl = document.getElementById('preview-page').getAttribute('data-autorefresh-url');
+    if (autorefreshUrl) {
+      autorefreshContent(autorefreshUrl);
+    }
+  </script>
+</body>
+</html>

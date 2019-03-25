@@ -145,7 +145,7 @@ TArray<FModioInstalledMod> FModioSubsystem::GetAllInstalledMods()
   {
     FModioInstalledMod installed_mod;
     InitializeInstalledMod(installed_mod, modio_installed_mods[i]);
-    //modioFreeInstalledMod(&modio_installed_mods[i]);
+    //modioFreeInstalledMod(modio_installed_mods[i]);
     InstalledMods.Add(installed_mod);
   }
 

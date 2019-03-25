@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>modio::FilterCreator.md - Grip</title>
+  <link rel="icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAEACABoBQAAFgAAACgAAAAQAAAAIAAAAAEACAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAKCgr/FRUX/xYWGP8YGBr/GRkb/xsbHP8dHR7/Hh4f/x4eIP8fHyD/ICAh/yMjJP8kJCX/JiYo/ygoKv8pKSr/LCwu/y0tLv80NDT/QUFC/0ZGR/9MTE7/UFBR/1JSUv9bW1v/XFxc/2BgYP9hYWP/aGhp/2xsbP9ycnL/d3d3/3l5e/98fHz/f3+A/2dn/P9z3a//cNX8/4CAgP+Xl5f/nZ2e/56en/+fn5//n5+h/6amp/+rq6v/rKys/7CvsP+zs7T/uLi5/7u7u/+8vLz/wMDA/8fHx//Kysr/zc3N/9HR0f/d3d3/3t7e/+Xl5f/q6ur/6+vr/+3t7f/z8/P/9fX1//b29v/39/f/+Pj4//n5+f/6+vr/+/v7//z8/P/9/f3//v7+//////8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/NCYmJiYmJiYmJiYmJiYmNCZKSkpKSkpKSkpKSkpKSiYmSkpKRisdRkMbMklKSkomJkpKSSEiNUhEEQwpSUpKJiZKSi8LHhhAPAwBDDZKSiYmSkoWACA7SEc6HAEaSkomJkpKBxI/SkpKSj4ICkpKJiZKSgUTR0pKSkpGDwZKSiYmSkoTED1KSkpKOQQVSkomJkpKKgowMy4sNycIMUpKJiZKSkEZDgkDAgsNH0VKSiYmSkpKQigUBgkXLUhKSkomJkpKSkpKSkpKSkpKSkpKJiYmJiYmJiYmJiYmJiYmJiYmIyUkNDQ0NDQ0NDQ0NDQmOCYmJiYmJiYmJiYmJiYmOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" />
+  <link rel="stylesheet" href="//octicons.github.com/components/octicons/octicons/octicons.css" />
+  <style>
+    /* Page tweaks */
+    .preview-page {
+      margin-top: 64px;
+    }
+    /* User-content tweaks */
+    .timeline-comment-wrapper > .timeline-comment:after,
+    .timeline-comment-wrapper > .timeline-comment:before {
+      content: none;
+    }
+    /* User-content overrides */
+    .discussion-timeline.wide {
+      width: 920px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div id="preview-page" class="preview-page" data-autorefresh-url="">
+
+    
+
+      <div role="main" class="main-content">
+        <div class="container new-discussion-timeline experiment-repo-nav">
+          <div class="repository-content">
+            <div id="readme" class="readme boxed-group clearfix announce instapaper_body md">
+              
+                <h3>
+                  <span class="octicon octicon-book"></span>
+                  modio::FilterCreator.md - Grip
+                </h3>
+              
+              <article class="markdown-body entry-content" itemprop="text" id="grip-content">
+                <p>The <a href='modio::FilterCreator.html'>modio::FilterCreator</a> is passed to <a href='Mods.html'>Mods</a> functions to filter the results.</p>
+<p>Filtering API documentation: <a href="https://docs.mod.io/#filtering" rel="nofollow">Filtering</a></p>
+<h1>
+<a id="user-content-setsort" class="anchor" href="#setsort" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>setSort</h1>
+<div class="highlight highlight-source-c++"><pre><span class="pl-k">void</span> <span class="pl-en">FilterCreator::setSort</span>(<span class="pl-k">const</span> std::string&amp; field, <span class="pl-k">bool</span> ascending);</pre></div>
+<p>API filtering parameter: <a href="https://docs.mod.io/#_sort-sort" rel="nofollow">_sort (Sort)</a></p>
+<p>Sort by a column, on ascending or descending order.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>field</td>
+<td><code>const std::string&amp;</code></td>
+<td>Column where the sorting is applied.</td>
+</tr>
+<tr>
+<td>ascending</td>
+<td><code>bool</code></td>
+<td>If set to true the result will be sorted on ascending order, otherwise on descending order.</td>
+</tr>
+</tbody>
+</table>
+<h1>
+<a id="user-content-setlimit" class="anchor" href="#setlimit" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>setLimit</h1>
+<div class="highlight highlight-source-c++"><pre><span class="pl-k">void</span> <span class="pl-en">FilterCreator::setLimit</span>(u32 limit)</pre></div>
+<p>API filtering parameter: <a href="https://docs.mod.io/#_limit-limit" rel="nofollow">_limit (Limit)</a></p>
+<p>Limit the number of results for a request.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>limit</td>
+<td><code>u32</code></td>
+<td>Number of results.</td>
+</tr>
+</tbody>
+</table>
+<h1>
+<a id="user-content-setoffset" class="anchor" href="#setoffset" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>setOffset</h1>
+<div class="highlight highlight-source-c++"><pre><span class="pl-k">void</span> <span class="pl-en">FilterCreator::setOffset</span>(`u32` offset)</pre></div>
+<p>API filtering parameter: <a href="https://docs.mod.io/#offset" rel="nofollow">_offset</a></p>
+<p>Excludes a given amount of registers ordered by id. Use this to paginate your results combined with <a href="#setlimit">setLimit</a>.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>offset</td>
+<td><code>u32</code></td>
+<td>Amount to registers to be excluded from the result ordered by id.</td>
+</tr>
+</tbody>
+</table>
+<h1>
+<a id="user-content-setfulltextsearch" class="anchor" href="#setfulltextsearch" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>setFullTextSearch</h1>
+<div class="highlight highlight-source-c++"><pre><span class="pl-k">void</span> <span class="pl-en">FilterCreator::setFullTextSearch</span>(`<span class="pl-k">const</span> std::string&amp;` text)</pre></div>
+<p>API filtering parameter: <a href="https://docs.mod.io/#_q-full-text-search" rel="nofollow">_q (Full text search)</a></p>
+<p>Full-text search is a lenient search filter that is only available if the object you are querying contains a name column.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>text</td>
+<td><code>const std::string&amp;</code></td>
+<td>Searched text.</td>
+</tr>
+</tbody>
+</table>
+<h1>
+<a id="user-content-setcachemaxageseconds" class="anchor" href="#setcachemaxageseconds" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>setCacheMaxAgeSeconds</h1>
+<div class="highlight highlight-source-c++"><pre><span class="pl-k">void</span> <span class="pl-en">FilterCreator::setCacheMaxAgeSeconds</span>(u32 max_age_seconds)</pre></div>
+<p>API filtering parameter: N/A</p>
+<p>Maximum time in seconds that a fetched response will be allowed to be reused from the local cache.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>max_age_seconds</td>
+<td><code>u32</code></td>
+<td>Maximum cache age allowed.</td>
+</tr>
+</tbody>
+</table>
+<h1>
+<a id="user-content-addfieldvalue" class="anchor" href="#addfieldvalue" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>addFieldValue</h1>
+<div class="highlight highlight-source-c++"><pre><span class="pl-k">void</span> <span class="pl-en">FilterCreator::addFieldValue</span>(<span class="pl-k">const</span> std::string&amp; field, <span class="pl-k">const</span> std::string&amp; value)</pre></div>
+<p>Filters to the exact field's value match.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>field</td>
+<td><code>const std::string&amp;</code></td>
+<td>Filtered column.</td>
+</tr>
+<tr>
+<td>value</td>
+<td><code>const std::string&amp;</code></td>
+<td>String filter value. Supports the * wildcard.</td>
+</tr>
+</tbody>
+</table>
+<h1>
+<a id="user-content-addlikefield" class="anchor" href="#addlikefield" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>addLikeField</h1>
+<div class="highlight highlight-source-c++"><pre><span class="pl-k">void</span> <span class="pl-en">FilterCreator::addLikeField</span>(<span class="pl-k">const</span> std::string&amp; field, <span class="pl-k">const</span> std::string&amp; value)</pre></div>
+<p>API filtering parameter: <a href="https://docs.mod.io/#lk-like" rel="nofollow">_lk (Like)</a></p>
+<p>Where the string supplied matches the preceding column value. This is the equivalent to SQL's LIKE. The * wildcard is supported e.g. <code>addLikeField(filter, "name", "The world of *")</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>field</td>
+<td><code>const std::string&amp;</code></td>
+<td>Filtered column.</td>
+</tr>
+<tr>
+<td>value</td>
+<td><code>const std::string&amp;</code></td>
+<td>String filter value. Supports the * wildcard.</td>
+</tr>
+</tbody>
+</table>
+<h1>
+<a id="user-content-addnotlikefield" class="anchor" href="#addnotlikefield" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>addNotLikeField</h1>
+<div class="highlight highlight-source-c++"><pre><span class="pl-k">void</span> <span class="pl-en">FilterCreator::addNotLikeField</span>(<span class="pl-k">const</span> std::string&amp; field, <span class="pl-k">const</span> std::string&amp; value)</pre></div>
+<p>API filtering parameter: <a href="https://docs.mod.io/#not-lk-not-like" rel="nofollow">-not-lk (Not like)</a></p>
+<p>Where the string supplied does not match the preceding column value. This is the equivalent to SQL's NOT LIKE. The * wildcard is supported e.g. <code>addNotLikeField(filter, "name", "The world of *")</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>field</td>
+<td><code>const std::string&amp;</code></td>
+<td>Filtered column.</td>
+</tr>
+<tr>
+<td>value</td>
+<td><code>const std::string&amp;</code></td>
+<td>String filter value. Supports the * wildcard.</td>
+</tr>
+</tbody>
+</table>
+<h1>
+<a id="user-content-addinfield" class="anchor" href="#addinfield" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>addInField</h1>
+<div class="highlight highlight-source-c++"><pre><span class="pl-k">void</span> <span class="pl-en">FilterCreator::addInField</span>(`<span class="pl-k">const</span> std::string&amp;` field, `<span class="pl-k">const</span> std::string&amp;` value)</pre></div>
+<p>API filtering parameter: <a href="https://docs.mod.io/#in-in" rel="nofollow">-in (In)</a></p>
+<p>Where the supplied list of values appears in the preceding column value. This is the equivalent to SQL's IN.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>field</td>
+<td><code>const std::string&amp;</code></td>
+<td>Filtered column.</td>
+</tr>
+<tr>
+<td>value</td>
+<td><code>const std::string&amp;</code></td>
+<td>Filter value.</td>
+</tr>
+</tbody>
+</table>
+<h1>
+<a id="user-content-addnotinfield" class="anchor" href="#addnotinfield" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>addNotInField</h1>
+<div class="highlight highlight-source-c++"><pre><span class="pl-k">void</span> <span class="pl-en">FilterCreator::addNotInField</span>(<span class="pl-k">const</span> std::string&amp; field, <span class="pl-k">const</span> std::string&amp; value)</pre></div>
+<p>API filtering parameter: <a href="https://docs.mod.io/#not-in-not-in" rel="nofollow">-not-in (Not In)</a></p>
+<p>Where the supplied list of values does not in the preceding column value. This is the equivalent to SQL's NOT IN</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>field</td>
+<td><code>const std::string&amp;</code></td>
+<td>Filtered column.</td>
+</tr>
+<tr>
+<td>value</td>
+<td><code>const std::string&amp;</code></td>
+<td>Filter value.</td>
+</tr>
+</tbody>
+</table>
+<h1>
+<a id="user-content-addminfield" class="anchor" href="#addminfield" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>addMinField</h1>
+<div class="highlight highlight-source-c++"><pre><span class="pl-k">void</span> <span class="pl-en">FilterCreator::addMinField</span>(<span class="pl-k">const</span> std::string&amp; field, <span class="pl-k">double</span> value)</pre></div>
+<p>API filtering parameter: <a href="https://docs.mod.io/#min-min" rel="nofollow">-min (Min)</a></p>
+<p>Where the preceding column value is greater than or equal to the value specified.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>field</td>
+<td><code>const std::string&amp;</code></td>
+<td>Filtered column.</td>
+</tr>
+<tr>
+<td>value</td>
+<td><code>double</code></td>
+<td>Filter value.</td>
+</tr>
+</tbody>
+</table>
+<h1>
+<a id="user-content-addmaxfield" class="anchor" href="#addmaxfield" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>addMaxField</h1>
+<div class="highlight highlight-source-c++"><pre><span class="pl-k">void</span> <span class="pl-en">FilterCreator::addMaxField</span>(<span class="pl-k">const</span> std::string&amp; field, <span class="pl-k">double</span> value)</pre></div>
+<p>API filtering parameter: <a href="https://docs.mod.io/#max-max" rel="nofollow">-max (Max)</a></p>
+<p>Where the preceding column value is smaller than or equal to the value specified.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>field</td>
+<td><code>const std::string&amp;</code></td>
+<td>Filtered column.</td>
+</tr>
+<tr>
+<td>value</td>
+<td><code>double</code></td>
+<td>Filter value.</td>
+</tr>
+</tbody>
+</table>
+<h1>
+<a id="user-content-addsmallerthanfield" class="anchor" href="#addsmallerthanfield" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>addSmallerThanField</h1>
+<div class="highlight highlight-source-c++"><pre><span class="pl-k">void</span> <span class="pl-en">FilterCreator::addSmallerThanField</span>(<span class="pl-k">const</span> std::string&amp; field, <span class="pl-k">double</span> value)</pre></div>
+<p>API filtering parameter: <a href="https://docs.mod.io/#st-smaller-than" rel="nofollow">-st (Smaller Than)</a></p>
+<p>Where the preceding column value is smaller than the value specified.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>field</td>
+<td><code>const std::string&amp;</code></td>
+<td>Filtered column.</td>
+</tr>
+<tr>
+<td>value</td>
+<td><code>double</code></td>
+<td>Filter value.</td>
+</tr>
+</tbody>
+</table>
+<h1>
+<a id="user-content-addgreaterthanfield" class="anchor" href="#addgreaterthanfield" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>addGreaterThanField</h1>
+<div class="highlight highlight-source-c++"><pre><span class="pl-k">void</span> <span class="pl-en">FilterCreator::addGreaterThanField</span>(<span class="pl-k">const</span> std::string&amp; field, <span class="pl-k">double</span> value)</pre></div>
+<p>API filtering parameter: <a href="https://docs.mod.io/#gt-greater-than" rel="nofollow">-gt (Greater Than)</a></p>
+<p>Where the preceding column value is greater than the value specified.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>field</td>
+<td><code>const std::string&amp;</code></td>
+<td>Filtered column.</td>
+</tr>
+<tr>
+<td>value</td>
+<td><code>double</code></td>
+<td>Filter value.</td>
+</tr>
+</tbody>
+</table>
+<h1>
+<a id="user-content-addnotequalfield" class="anchor" href="#addnotequalfield" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>addNotEqualField</h1>
+<div class="highlight highlight-source-c++"><pre><span class="pl-k">void</span> <span class="pl-en">FilterCreator::addNotEqualField</span>(<span class="pl-k">const</span> std::string&amp; field, <span class="pl-k">const</span> std::string&amp; value)</pre></div>
+<p>API filtering parameter: <a href="https://docs.mod.io/#not-not-equal-to" rel="nofollow">-not (Not Equal To)</a></p>
+<p>Where the preceding column value does not equal the value specified.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>field</td>
+<td><code>const std::string&amp;</code></td>
+<td>Filtered column.</td>
+</tr>
+<tr>
+<td>value</td>
+<td><code>const std::string&amp;</code></td>
+<td>Filter value.</td>
+</tr>
+</tbody>
+</table>
+
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    
+
+  </div>
+  <div>&nbsp;</div>
+  </div><script>
+    function showCanonicalImages() {
+      var images = document.getElementsByTagName('img');
+      if (!images) {
+        return;
+      }
+      for (var index = 0; index < images.length; index++) {
+        var image = images[index];
+        if (image.getAttribute('data-canonical-src') && image.src !== image.getAttribute('data-canonical-src')) {
+          image.src = image.getAttribute('data-canonical-src');
+        }
+      }
+    }
+
+    function scrollToHash() {
+      if (location.hash && !document.querySelector(':target')) {
+        var element = document.getElementById('user-content-' + location.hash.slice(1));
+        if (element) {
+           element.scrollIntoView();
+        }
+      }
+    }
+
+    function autorefreshContent(eventSourceUrl) {
+      var initialTitle = document.title;
+      var contentElement = document.getElementById('grip-content');
+      var source = new EventSource(eventSourceUrl);
+      var isRendering = false;
+
+      source.onmessage = function(ev) {
+        var msg = JSON.parse(ev.data);
+        if (msg.updating) {
+          isRendering = true;
+          document.title = '(Rendering) ' + document.title;
+        } else {
+          isRendering = false;
+          document.title = initialTitle;
+          contentElement.innerHTML = msg.content;
+          showCanonicalImages();
+        }
+      }
+
+      source.onerror = function(e) {
+        if (e.readyState === EventSource.CLOSED && isRendering) {
+          isRendering = false;
+          document.title = initialTitle;
+        }
+      }
+    }
+
+    window.onhashchange = function() {
+      scrollToHash();
+    }
+
+    window.onload = function() {
+      scrollToHash();
+    }
+
+    showCanonicalImages();
+
+    var autorefreshUrl = document.getElementById('preview-page').getAttribute('data-autorefresh-url');
+    if (autorefreshUrl) {
+      autorefreshContent(autorefreshUrl);
+    }
+  </script>
+</body>
+</html>

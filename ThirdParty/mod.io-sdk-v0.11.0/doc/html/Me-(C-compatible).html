@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Me-(C-compatible).md - Grip</title>
+  <link rel="icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAEACABoBQAAFgAAACgAAAAQAAAAIAAAAAEACAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAKCgr/FRUX/xYWGP8YGBr/GRkb/xsbHP8dHR7/Hh4f/x4eIP8fHyD/ICAh/yMjJP8kJCX/JiYo/ygoKv8pKSr/LCwu/y0tLv80NDT/QUFC/0ZGR/9MTE7/UFBR/1JSUv9bW1v/XFxc/2BgYP9hYWP/aGhp/2xsbP9ycnL/d3d3/3l5e/98fHz/f3+A/2dn/P9z3a//cNX8/4CAgP+Xl5f/nZ2e/56en/+fn5//n5+h/6amp/+rq6v/rKys/7CvsP+zs7T/uLi5/7u7u/+8vLz/wMDA/8fHx//Kysr/zc3N/9HR0f/d3d3/3t7e/+Xl5f/q6ur/6+vr/+3t7f/z8/P/9fX1//b29v/39/f/+Pj4//n5+f/6+vr/+/v7//z8/P/9/f3//v7+//////8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/NCYmJiYmJiYmJiYmJiYmNCZKSkpKSkpKSkpKSkpKSiYmSkpKRisdRkMbMklKSkomJkpKSSEiNUhEEQwpSUpKJiZKSi8LHhhAPAwBDDZKSiYmSkoWACA7SEc6HAEaSkomJkpKBxI/SkpKSj4ICkpKJiZKSgUTR0pKSkpGDwZKSiYmSkoTED1KSkpKOQQVSkomJkpKKgowMy4sNycIMUpKJiZKSkEZDgkDAgsNH0VKSiYmSkpKQigUBgkXLUhKSkomJkpKSkpKSkpKSkpKSkpKJiYmJiYmJiYmJiYmJiYmJiYmIyUkNDQ0NDQ0NDQ0NDQmOCYmJiYmJiYmJiYmJiYmOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" />
+  <link rel="stylesheet" href="//octicons.github.com/components/octicons/octicons/octicons.css" />
+  <style>
+    /* Page tweaks */
+    .preview-page {
+      margin-top: 64px;
+    }
+    /* User-content tweaks */
+    .timeline-comment-wrapper > .timeline-comment:after,
+    .timeline-comment-wrapper > .timeline-comment:before {
+      content: none;
+    }
+    /* User-content overrides */
+    .discussion-timeline.wide {
+      width: 920px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div id="preview-page" class="preview-page" data-autorefresh-url="">
+
+    
+
+      <div role="main" class="main-content">
+        <div class="container new-discussion-timeline experiment-repo-nav">
+          <div class="repository-content">
+            <div id="readme" class="readme boxed-group clearfix announce instapaper_body md">
+              
+                <h3>
+                  <span class="octicon octicon-book"></span>
+                  Me-(C-compatible).md - Grip
+                </h3>
+              
+              <article class="markdown-body entry-content" itemprop="text" id="grip-content">
+                <h1>
+<a id="user-content-modiogetauthenticateduser" class="anchor" href="#modiogetauthenticateduser" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>modioGetAuthenticatedUser</h1>
+<div class="highlight highlight-source-c++"><pre><span class="pl-k">void</span> <span class="pl-en">modioGetAuthenticatedUser</span>(<span class="pl-k">void</span>* object, <span class="pl-k">void</span> (*callback)(<span class="pl-k">void</span>* object, ModioResponse response, ModioUser user));</pre></div>
+<p>Wrapped by: [[Me#getauthenticateduser]]</p>
+<p>API endpoint used: <a href="https://docs.mod.io/#get-authenticated-user" rel="nofollow">Get Authenticated User</a></p>
+<p>Get the authenticated user details. Successful request will return a <a href='ModioUser.html'>ModioUser</a> Object.</p>
+<h2>
+<a id="user-content-function-parameters" class="anchor" href="#function-parameters" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Function parameters</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>object</td>
+<td><code>void*</code></td>
+<td>Context parameter.</td>
+</tr>
+<tr>
+<td>callback</td>
+<td><code>void (*callback)(void* object, ModioResponse response, ModioUser user)</code></td>
+<td>Function called once the process finished.</td>
+</tr>
+</tbody>
+</table>
+<h2>
+<a id="user-content-callback-parameters" class="anchor" href="#callback-parameters" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Callback parameters</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>object</td>
+<td><code>void*</code></td>
+<td>Context parameter.</td>
+</tr>
+<tr>
+<td>response</td>
+<td><code>ModioResponse</code></td>
+<td><a href='ModioResponse.html'>ModioResponse</a> object that contains the mod.io response status.</td>
+</tr>
+<tr>
+<td>user</td>
+<td><code>ModioUser</code></td>
+<td><a href='ModioUser.html'>ModioUser</a> object returned.</td>
+</tr>
+</tbody>
+</table>
+<h2>
+<a id="user-content-example" class="anchor" href="#example" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h2>
+<div class="highlight highlight-source-c++"><pre><span class="pl-k">void</span> <span class="pl-en">onGetAuthenticatedUser</span>(<span class="pl-k">void</span>* object, ModioResponse response, ModioUser user)
+{
+  <span class="pl-k">if</span>(response.<span class="pl-smi">code</span> == <span class="pl-c1">200</span>)
+  {
+    <span class="pl-c"><span class="pl-c">//</span>User retrieved successfully</span>
+  }
+}
+
+[...]
+
+<span class="pl-en">modioGetAuthenticatedUser</span>(<span class="pl-c1">NULL</span>, &amp;onGetAuthenticatedUser);</pre></div>
+<h1>
+<a id="user-content-modiogetusersubscriptions" class="anchor" href="#modiogetusersubscriptions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>modioGetUserSubscriptions</h1>
+<div class="highlight highlight-source-c++"><pre><span class="pl-k">void</span> <span class="pl-en">modioGetUserSubscriptions</span>(<span class="pl-k">void</span>* object, ModioFilterCreator filter, <span class="pl-k">void</span> (*callback)(<span class="pl-k">void</span>* object, ModioResponse response, ModioMod mods[], u32 mods_size));</pre></div>
+<p>Wrapped by: [[Me#getusersubscriptions]]</p>
+<p>API endpoint used: <a href="https://docs.mod.io/#get-all-mods" rel="nofollow">Get All Mods</a></p>
+<p>Browse mods on mod.io, can be filtered using the <a href='ModioFilterCreator.html'>ModioFilterCreator</a>.</p>
+<h2>
+<a id="user-content-function-parameters-1" class="anchor" href="#function-parameters-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Function parameters</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>object</td>
+<td><code>void*</code></td>
+<td>Context parameter.</td>
+</tr>
+<tr>
+<td>filter</td>
+<td><code>ModioFilterCreator*</code></td>
+<td><a href='ModioFilterCreator.html'>ModioFilterCreator</a> object to be customized.</td>
+</tr>
+<tr>
+<td>callback</td>
+<td><code>void (*callback)(void* object, ModioResponse response, ModioMod mods[], u32 mods_size)</code></td>
+<td>Function called once the process finished.</td>
+</tr>
+</tbody>
+</table>
+<h2>
+<a id="user-content-callback-parameters-1" class="anchor" href="#callback-parameters-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Callback parameters</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>object</td>
+<td><code>void*</code></td>
+<td>Context parameter.</td>
+</tr>
+<tr>
+<td>response</td>
+<td><code>ModioResponse</code></td>
+<td><a href='ModioResponse.html'>ModioResponse</a> object that contains the mod.io response status.</td>
+</tr>
+<tr>
+<td>mods</td>
+<td><code>ModioMod[]</code></td>
+<td><a href='ModioMod.html'>ModioMod</a> array containing the returned mods.</td>
+</tr>
+<tr>
+<td>mods_size</td>
+<td><code>u32</code></td>
+<td>Mod array size.</td>
+</tr>
+</tbody>
+</table>
+<h2>
+<a id="user-content-example-1" class="anchor" href="#example-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h2>
+<div class="highlight highlight-source-c++"><pre><span class="pl-k">void</span> <span class="pl-en">onGetUserSubscriptions</span>(<span class="pl-k">void</span>* object, ModioResponse response, ModioMod* mods, u32 mods_size)
+{
+  <span class="pl-k">if</span>(response.<span class="pl-smi">code</span> == <span class="pl-c1">200</span>)
+  {
+    <span class="pl-c"><span class="pl-c">//</span>User subscriptions retrieved successfully</span>
+  }
+}
+
+[...]
+
+ModioFilterCreator filter;
+<span class="pl-en">modioInitFilter</span>(&amp;filter);
+<span class="pl-en">modioSetFilterLimit</span>(&amp;filter,<span class="pl-c1">3</span>);
+
+<span class="pl-en">modioGetUserSubscriptions</span>(<span class="pl-c1">NULL</span>, filter, &amp;onGetUserSubscriptions);</pre></div>
+<h1>
+<a id="user-content-modiogetuserevents" class="anchor" href="#modiogetuserevents" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>modioGetUserEvents</h1>
+<div class="highlight highlight-source-c++"><pre><span class="pl-k">void</span> <span class="pl-en">modioGetUserEvents</span>(<span class="pl-k">void</span>* object, ModioFilterCreator filter, <span class="pl-k">void</span> (*callback)(<span class="pl-k">void</span>* object, ModioResponse response, ModioEvent* events_array, u32 events_array_size));</pre></div>
+<p>Wrapped by: [[Events#getuserevents]]</p>
+<p>API endpoint used: <a href="https://docs.mod.io/#get-user-events" rel="nofollow">Get User Events</a></p>
+<p>Get events that have been fired specific to the user. The result can be filtered using the <a href='ModioFilterCreator.html'>ModioFilterCreator</a>.</p>
+<h2>
+<a id="user-content-function-parameters-2" class="anchor" href="#function-parameters-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Function parameters</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>object</td>
+<td><code>void*</code></td>
+<td>Context paramter.</td>
+</tr>
+<tr>
+<td>filter</td>
+<td><code>ModioFilterCreator*</code></td>
+<td><a href='ModioFilterCreator.html'>ModioFilterCreator</a> object to be customized.</td>
+</tr>
+<tr>
+<td>callback</td>
+<td><code>void (*callback)(void* object, ModioResponse response, ModioEvent* mod_events_array, u32 mod_events_array_size)</code></td>
+<td>Function called once the process finished.</td>
+</tr>
+</tbody>
+</table>
+<h2>
+<a id="user-content-callback-parameters-2" class="anchor" href="#callback-parameters-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Callback parameters</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>object</td>
+<td><code>void*</code></td>
+<td>Context paramter.</td>
+</tr>
+<tr>
+<td>response</td>
+<td><code>ModioResponse</code></td>
+<td><a href='ModioResponse.html'>ModioResponse</a> object that contains the mod.io response status.</td>
+</tr>
+<tr>
+<td>mod_events_array</td>
+<td><code>ModioEvent*</code></td>
+<td>Array containing the <a href='ModioEvent.html'>ModioEvent</a> objects returned.</td>
+</tr>
+<tr>
+<td>mod_events_array_size</td>
+<td><code>u32</code></td>
+<td>Mod events array size.</td>
+</tr>
+</tbody>
+</table>
+<h2>
+<a id="user-content-example-2" class="anchor" href="#example-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h2>
+<div class="highlight highlight-source-c++"><pre><span class="pl-k">void</span> <span class="pl-en">onGetUserEvents</span>(<span class="pl-k">void</span>* object, ModioResponse response, ModioEvent* events_array, u32 events_array_size)
+{
+  <span class="pl-k">if</span>(response.<span class="pl-smi">code</span> == <span class="pl-c1">200</span>)
+  {
+    <span class="pl-c"><span class="pl-c">//</span>User events retrieved successfully</span>
+  }
+}
+
+[...]
+
+ModioFilterCreator filter_creator;
+<span class="pl-en">modioInitFilter</span>(&amp;filter_creator);
+<span class="pl-en">modioSetFilterLimit</span>(&amp;filter_creator,<span class="pl-c1">3</span>);
+
+<span class="pl-en">modioGetUserEvents</span>(<span class="pl-c1">NULL</span>, filter, &amp;onGetAllModEvents);</pre></div>
+<h1>
+<a id="user-content-modiogetusergames" class="anchor" href="#modiogetusergames" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>modioGetUserGames</h1>
+<div class="highlight highlight-source-c++"><pre><span class="pl-k">void</span> <span class="pl-en">modioGetUserGames</span>(<span class="pl-k">void</span>* object, ModioFilterCreator filter, <span class="pl-k">void</span> (*callback)(<span class="pl-k">void</span>* object, ModioResponse response, ModioGame games[], u32 games_size));</pre></div>
+<p>Wrapped by: [[Me#getusergames]]</p>
+<p>API endpoint used: <a href="https://docs.mod.io/#get-user-games" rel="nofollow">Get User Games</a></p>
+<p>Browse mods on mod.io, can be filtered using the <a href='ModioFilterCreator.html'>ModioFilterCreator</a>.</p>
+<h2>
+<a id="user-content-function-parameters-3" class="anchor" href="#function-parameters-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Function parameters</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>object</td>
+<td><code>void*</code></td>
+<td>Context parameter.</td>
+</tr>
+<tr>
+<td>filter</td>
+<td><code>ModioFilterCreator*</code></td>
+<td><a href='ModioFilterCreator.html'>ModioFilterCreator</a> object to be customized.</td>
+</tr>
+<tr>
+<td>callback</td>
+<td><code>void (*callback)(void* object, ModioResponse response, ModioGame games[], u32 games_size)</code></td>
+<td>Function called once the process finished.</td>
+</tr>
+</tbody>
+</table>
+<h2>
+<a id="user-content-callback-parameters-3" class="anchor" href="#callback-parameters-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Callback parameters</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>object</td>
+<td><code>void*</code></td>
+<td>Context parameter.</td>
+</tr>
+<tr>
+<td>response</td>
+<td><code>ModioResponse</code></td>
+<td><a href='ModioResponse.html'>ModioResponse</a> object that contains the mod.io response status.</td>
+</tr>
+<tr>
+<td>games</td>
+<td><code>ModioGame[]</code></td>
+<td><a href='ModioGame.html'>ModioGame</a> array.</td>
+</tr>
+<tr>
+<td>games_size</td>
+<td><code>u32</code></td>
+<td>Games array size.</td>
+</tr>
+</tbody>
+</table>
+<h2>
+<a id="user-content-example-3" class="anchor" href="#example-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h2>
+<div class="highlight highlight-source-c++"><pre><span class="pl-k">void</span> <span class="pl-en">onGetUserGames</span>(<span class="pl-k">void</span>* object, ModioResponse response, ModioGame* games, u32 games_size)
+{
+  <span class="pl-k">if</span>(response.<span class="pl-smi">code</span> == <span class="pl-c1">200</span>)
+  {
+    <span class="pl-c"><span class="pl-c">//</span>User games retrieved successfully</span>
+  }
+}
+
+[...]
+
+ModioFilterCreator filter;
+<span class="pl-en">modioInitFilter</span>(&amp;filter);
+<span class="pl-en">modioSetFilterLimit</span>(&amp;filter,<span class="pl-c1">3</span>);
+
+<span class="pl-en">modioGetUserGames</span>(<span class="pl-c1">NULL</span>, filter, &amp;onGetUserGames);</pre></div>
+<h1>
+<a id="user-content-modiogetusermods" class="anchor" href="#modiogetusermods" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>modioGetUserMods</h1>
+<div class="highlight highlight-source-c++"><pre><span class="pl-k">void</span> <span class="pl-en">modioGetUserMods</span>(<span class="pl-k">void</span>* object, ModioFilterCreator filter, <span class="pl-k">void</span> (*callback)(<span class="pl-k">void</span>* object, ModioResponse response, ModioMod mods[], u32 mods_size));</pre></div>
+<p>Wrapped by: [[Me#getusermods]]</p>
+<p>API endpoint used: <a href="https://docs.mod.io/#get-user-mods" rel="nofollow">Get User Mods</a></p>
+<p>Get all mods the authenticated user added or is a team member of. Successful request will return an array of <a href='ModioMod.html'>ModioMod</a> Objects.</p>
+<h2>
+<a id="user-content-function-parameters-4" class="anchor" href="#function-parameters-4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Function parameters</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>object</td>
+<td><code>void*</code></td>
+<td>Context parameter.</td>
+</tr>
+<tr>
+<td>filter</td>
+<td><code>ModioFilterCreator*</code></td>
+<td><a href='ModioFilterCreator.html'>ModioFilterCreator</a> object to be customized.</td>
+</tr>
+<tr>
+<td>callback</td>
+<td><code>void (*callback)(void* object, ModioResponse response, ModioMod mods[], u32 mods_size)</code></td>
+<td>Function called once the process finished.</td>
+</tr>
+</tbody>
+</table>
+<h2>
+<a id="user-content-callback-parameters-4" class="anchor" href="#callback-parameters-4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Callback parameters</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>object</td>
+<td><code>void*</code></td>
+<td>Context parameter.</td>
+</tr>
+<tr>
+<td>response</td>
+<td><code>ModioResponse</code></td>
+<td><a href='ModioResponse.html'>ModioResponse</a> object that contains the mod.io response status.</td>
+</tr>
+<tr>
+<td>mods</td>
+<td><code>ModioMod[]</code></td>
+<td><a href='ModioMod.html'>ModioMod</a> array.</td>
+</tr>
+<tr>
+<td>mods_size</td>
+<td><code>u32</code></td>
+<td>Mods array size.</td>
+</tr>
+</tbody>
+</table>
+<h2>
+<a id="user-content-example-4" class="anchor" href="#example-4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h2>
+<div class="highlight highlight-source-c++"><pre><span class="pl-k">void</span> <span class="pl-en">onGetUserMods</span>(<span class="pl-k">void</span>* object, ModioResponse response, ModioMod* mods, u32 mods_size)
+{
+  <span class="pl-k">if</span>(response.<span class="pl-smi">code</span> == <span class="pl-c1">200</span>)
+  {
+    <span class="pl-c"><span class="pl-c">//</span>User mods retrieved successfully</span>
+  }
+}
+
+[...]
+
+ModioFilterCreator filter;
+<span class="pl-en">modioInitFilter</span>(&amp;filter);
+<span class="pl-en">modioSetFilterLimit</span>(&amp;filter,<span class="pl-c1">3</span>);
+
+<span class="pl-en">modioGetUserMods</span>(<span class="pl-c1">NULL</span>, filter, &amp;onGetUserMods);</pre></div>
+<h1>
+<a id="user-content-modiogetusermodfiles" class="anchor" href="#modiogetusermodfiles" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>modioGetUserModfiles</h1>
+<div class="highlight highlight-source-c++"><pre><span class="pl-k">void</span> <span class="pl-en">modioGetUserModfiles</span>(<span class="pl-k">void</span>* object, ModioFilterCreator filter, <span class="pl-k">void</span> (*callback)(<span class="pl-k">void</span>* object, ModioResponse response, ModioModfile modfiles[], u32 modfiles_size));</pre></div>
+<p>Wrapped by: [[Me#getusermodfiles]]</p>
+<p>API endpoint used: <a href="https://docs.mod.io/#get-user-modfiles" rel="nofollow">Get User Modfiles</a></p>
+<p>Get all modfiles the authenticated user uploaded. Successful request will return an array of <a href='ModioModfile.html'>ModioModfile</a> Objects.</p>
+<h2>
+<a id="user-content-function-parameters-5" class="anchor" href="#function-parameters-5" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Function parameters</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>object</td>
+<td><code>void*</code></td>
+<td>Context parameter.</td>
+</tr>
+<tr>
+<td>filter</td>
+<td><code>ModioFilterCreator*</code></td>
+<td><a href='ModioFilterCreator.html'>ModioFilterCreator</a> object to be customized.</td>
+</tr>
+<tr>
+<td>callback</td>
+<td><code>void (*callback)(void* object, ModioResponse response, ModioModfile modfiles[], u32 modfiles_size)</code></td>
+<td>Function called once the process finished.</td>
+</tr>
+</tbody>
+</table>
+<h2>
+<a id="user-content-callback-parameters-5" class="anchor" href="#callback-parameters-5" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Callback parameters</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>object</td>
+<td><code>void*</code></td>
+<td>Context parameter.</td>
+</tr>
+<tr>
+<td>response</td>
+<td><code>ModioResponse</code></td>
+<td><a href='ModioResponse.html'>ModioResponse</a> object that contains the mod.io response status.</td>
+</tr>
+<tr>
+<td>modfiles</td>
+<td><code>ModioModfile[]</code></td>
+<td><a href='ModioModfile.html'>ModioModfile</a> array.</td>
+</tr>
+<tr>
+<td>modfiles_size</td>
+<td><code>u32</code></td>
+<td>Modfile array size.</td>
+</tr>
+</tbody>
+</table>
+<h2>
+<a id="user-content-example-5" class="anchor" href="#example-5" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h2>
+<div class="highlight highlight-source-c++"><pre><span class="pl-k">void</span> <span class="pl-en">onGetUserModfiles</span>(<span class="pl-k">void</span>* object, ModioResponse response, ModioModfile* modfiles, u32 modfiles_size)
+{
+  <span class="pl-k">if</span>(response.<span class="pl-smi">code</span> == <span class="pl-c1">200</span>)
+  {
+    <span class="pl-c"><span class="pl-c">//</span>User modfiles retrieved successfully</span>
+  }
+}
+
+[...]
+
+ModioFilterCreator filter;
+<span class="pl-en">modioInitFilter</span>(&amp;filter);
+<span class="pl-en">modioSetFilterLimit</span>(&amp;filter,<span class="pl-c1">3</span>);
+
+<span class="pl-en">modioGetUserModfiles</span>(<span class="pl-c1">NULL</span>, filter, &amp;onGetUserModfiles);</pre></div>
+<h1>
+<a id="user-content-modiogetuserratings" class="anchor" href="#modiogetuserratings" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>modioGetUserRatings</h1>
+<div class="highlight highlight-source-c++"><pre><span class="pl-k">void</span> <span class="pl-en">modioGetUserRatings</span>(<span class="pl-k">void</span>* object, ModioFilterCreator filter, <span class="pl-k">void</span> (*callback)(<span class="pl-k">void</span>* object, ModioResponse response, ModioRating ratings[], u32 ratings_size));</pre></div>
+<p>Wrapped by: [[Me#getuserratings]]</p>
+<p>API endpoint used: <a href="https://docs.mod.io/#get-user-ratings" rel="nofollow">Get User Ratings</a></p>
+<p>Get all mod rating's submitted by the authenticated user. Successful request will return an array of <a href='ModioRating.html'>ModioRating</a> Objects.</p>
+<h2>
+<a id="user-content-function-parameters-6" class="anchor" href="#function-parameters-6" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Function parameters</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>object</td>
+<td><code>void*</code></td>
+<td>Context parameter.</td>
+</tr>
+<tr>
+<td>filter</td>
+<td><code>ModioFilterCreator*</code></td>
+<td><a href='ModioFilterCreator.html'>ModioFilterCreator</a> object to be customized.</td>
+</tr>
+<tr>
+<td>callback</td>
+<td><code>void (*callback)(void* object, ModioResponse response, ModioRating ratings[], u32 ratings_size)</code></td>
+<td>Function called once the process finished.</td>
+</tr>
+</tbody>
+</table>
+<h2>
+<a id="user-content-callback-parameters-6" class="anchor" href="#callback-parameters-6" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Callback parameters</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>object</td>
+<td><code>void*</code></td>
+<td>Context parameter.</td>
+</tr>
+<tr>
+<td>response</td>
+<td><code>ModioResponse</code></td>
+<td><a href='ModioResponse.html'>ModioResponse</a> object that contains the mod.io response status.</td>
+</tr>
+<tr>
+<td>ratings</td>
+<td><code>ModioRating[]</code></td>
+<td><a href='ModioRating.html'>ModioRating</a> array.</td>
+</tr>
+<tr>
+<td>ratings_size</td>
+<td><code>u32</code></td>
+<td>Rating array size.</td>
+</tr>
+</tbody>
+</table>
+<h2>
+<a id="user-content-example-6" class="anchor" href="#example-6" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h2>
+<div class="highlight highlight-source-c++"><pre><span class="pl-k">void</span> <span class="pl-en">onGetUserRatings</span>(<span class="pl-k">void</span>* object, ModioResponse response, ModioRating* rating, u32 ratings_size)
+{
+  <span class="pl-k">if</span>(response.<span class="pl-smi">code</span> == <span class="pl-c1">200</span>)
+  {
+    <span class="pl-c"><span class="pl-c">//</span>User ratings retrieved successfully</span>
+  }
+}
+
+[...]
+
+ModioFilterCreator filter;
+<span class="pl-en">modioInitFilter</span>(&amp;filter);
+<span class="pl-en">modioSetFilterLimit</span>(&amp;filter,<span class="pl-c1">3</span>);
+
+<span class="pl-en">modioGetUserRatings</span>(<span class="pl-c1">NULL</span>, filter, &amp;onGetUserRatings);</pre></div>
+
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    
+
+  </div>
+  <div>&nbsp;</div>
+  </div><script>
+    function showCanonicalImages() {
+      var images = document.getElementsByTagName('img');
+      if (!images) {
+        return;
+      }
+      for (var index = 0; index < images.length; index++) {
+        var image = images[index];
+        if (image.getAttribute('data-canonical-src') && image.src !== image.getAttribute('data-canonical-src')) {
+          image.src = image.getAttribute('data-canonical-src');
+        }
+      }
+    }
+
+    function scrollToHash() {
+      if (location.hash && !document.querySelector(':target')) {
+        var element = document.getElementById('user-content-' + location.hash.slice(1));
+        if (element) {
+           element.scrollIntoView();
+        }
+      }
+    }
+
+    function autorefreshContent(eventSourceUrl) {
+      var initialTitle = document.title;
+      var contentElement = document.getElementById('grip-content');
+      var source = new EventSource(eventSourceUrl);
+      var isRendering = false;
+
+      source.onmessage = function(ev) {
+        var msg = JSON.parse(ev.data);
+        if (msg.updating) {
+          isRendering = true;
+          document.title = '(Rendering) ' + document.title;
+        } else {
+          isRendering = false;
+          document.title = initialTitle;
+          contentElement.innerHTML = msg.content;
+          showCanonicalImages();
+        }
+      }
+
+      source.onerror = function(e) {
+        if (e.readyState === EventSource.CLOSED && isRendering) {
+          isRendering = false;
+          document.title = initialTitle;
+        }
+      }
+    }
+
+    window.onhashchange = function() {
+      scrollToHash();
+    }
+
+    window.onload = function() {
+      scrollToHash();
+    }
+
+    showCanonicalImages();
+
+    var autorefreshUrl = document.getElementById('preview-page').getAttribute('data-autorefresh-url');
+    if (autorefreshUrl) {
+      autorefreshContent(autorefreshUrl);
+    }
+  </script>
+</body>
+</html>
