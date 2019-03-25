@@ -8,7 +8,6 @@
 extern "C"
 {
 	void modioInitInstalledMod(ModioInstalledMod* installed_mod, nlohmann::json image_json);
-	void modioFreeInstalledMod(ModioInstalledMod* installed_mod);
 }
 
 #endif

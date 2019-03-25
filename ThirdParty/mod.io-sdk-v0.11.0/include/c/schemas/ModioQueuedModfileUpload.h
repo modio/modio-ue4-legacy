@@ -8,7 +8,6 @@
 extern "C"
 {
   void modioInitQueuedModfileUpload(ModioQueuedModfileUpload* queued_modfile_upload, nlohmann::json queued_modfile_upload_json);
-  void modioFreeQueuedModfileUpload(ModioQueuedModfileUpload* queued_modfile_upload);
 }
 
 #endif

@@ -678,6 +678,11 @@ extern "C"
   //Stats Methods
   void MODIO_DLL modioGetModStats(void* object, u32 mod_id, void (*callback)(void* object, ModioResponse response, ModioStats mod));
   void MODIO_DLL modioGetAllModStats(void* object, ModioFilterCreator filter, void (*callback)(void* object, ModioResponse response, ModioStats mods_stats[], u32 mods_stats_size));
+
+  //Free Methods For Schemas Returned By Funtions
+  void MODIO_DLL modioFreeInstalledMod(ModioInstalledMod* installed_mod);
+  void MODIO_DLL modioFreeQueuedModDownload(ModioQueuedModDownload* queued_mod_download);
+  void MODIO_DLL modioFreeQueuedModfileUpload(ModioQueuedModfileUpload* queued_modfile_upload);
 }
 
 #endif

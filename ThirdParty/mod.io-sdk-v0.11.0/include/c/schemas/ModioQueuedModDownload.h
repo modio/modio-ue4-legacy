@@ -8,7 +8,6 @@
 extern "C"
 {
   void modioInitQueuedModDownload(ModioQueuedModDownload* queued_mod_download, nlohmann::json queued_mod_download_json);
-  void modioFreeQueuedModDownload(ModioQueuedModDownload* queued_mod_download);
 }
 
 #endif
