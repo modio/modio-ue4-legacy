@@ -6,6 +6,8 @@
 #include "ModioUE4Utility.h"
 #include "AsyncRequest/ModioAsyncRequest_EmailRequest.h"
 #include "AsyncRequest/ModioAsyncRequest_EmailExchange.h"
+#include "AsyncRequest/ModioAsyncRequest_SubscribeToMod.h"
+#include "AsyncRequest/ModioAsyncRequest_UnsubscribeFromMod.h"
 #include "Schemas/ModioResponse.h"
 #include "ModioCallbacks.h"
 
@@ -204,6 +206,20 @@ TArray<FModioQueuedModfileUpload> FModioSubsystem::GetModfileUploadQueue()
   free(modio_queued_mods);
 
   return UploadQueue;
+}
+
+void FModioSubsystem::SubscribeToMod(int32 ModId, FModioModDelegate SubscribeToModDelegate)
+{
+  FModioAsyncRequest_SubscribeToMod *Request = new FModioAsyncRequest_SubscribeToMod( this, SubscribeToModDelegate );
+  modioSubscribeToMod(Request, (u32)ModId, FModioAsyncRequest_SubscribeToMod::Response);
+  QueueAsyncTask( Request );
+}
+
+void FModioSubsystem::UnsubscribeFromMod(int32 ModId, FModioGenericDelegate UnsubscribeFromModDelegate)
+{
+  FModioAsyncRequest_UnsubscribeFromMod *Request = new FModioAsyncRequest_UnsubscribeFromMod( this, UnsubscribeFromModDelegate );
+  modioUnsubscribeFromMod(Request, (u32)ModId, FModioAsyncRequest_UnsubscribeFromMod::Response);
+  QueueAsyncTask( Request );
 }
 
 void FModioSubsystem::Init( const FString& RootDirectory, uint32 GameId, const FString& ApiKey, bool bIsLiveEnvironment )

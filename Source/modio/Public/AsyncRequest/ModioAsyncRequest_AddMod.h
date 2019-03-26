@@ -2,7 +2,6 @@
 #include "AsyncRequest/ModioAsyncRequest.h"
 #include "Schemas/ModioResponse.h"
 #include "Schemas/ModioMod.h"
-#include "Schemas/ModioMod.h"
 
 /**
 * Callback for when a new mod profile has been created

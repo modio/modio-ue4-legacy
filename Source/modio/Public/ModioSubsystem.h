@@ -80,6 +80,13 @@ public:
   /** Returns an array containing the upload queue infromation */
   TArray<FModioQueuedModfileUpload> GetModfileUploadQueue();
 
+  //Mod Subscription
+
+  /** Subscribes to the corresponding mod */
+  void SubscribeToMod(int32 ModId, FModioModDelegate SubscribeToModDelegate);
+  /** Unsubscribes from the corresponding mod */
+  void UnsubscribeFromMod(int32 ModId, FModioGenericDelegate UnsubscribeFromModDelegate);
+
 protected:
   friend class FModioModule;
   static FModioSubsystemPtr Create(const FString &RootDirectory, uint32 GameId, const FString &ApiKey, bool bIsLiveEnvironment);
