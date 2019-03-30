@@ -12,12 +12,17 @@
 #include "ModioPackage.h"
 #include "ModioPackage.h"
 #include "AsyncRequest/ModioAsyncRequest_AddMod.h"
+#include "AsyncRequest/ModioAsyncRequest_AddModDependencies.h"
+#include "AsyncRequest/ModioAsyncRequest_DeleteModDependencies.h"
 #include "AsyncRequest/ModioAsyncRequest_EditMod.h"
 #include "AsyncRequest/ModioAsyncRequest_EmailExchange.h"
 #include "AsyncRequest/ModioAsyncRequest_EmailRequest.h"
+#include "AsyncRequest/ModioAsyncRequest_GetAllModDependencies.h"
 #include "AsyncRequest/ModioAsyncRequest_GetAllMods.h"
 #include "AsyncRequest/ModioAsyncRequest_GetAuthenticatedUser.h"
 #include "AsyncRequest/ModioAsyncRequest_GetUserSubscriptions.h"
+#include "AsyncRequest/ModioAsyncRequest_SubscribeToMod.h"
+#include "AsyncRequest/ModioAsyncRequest_UnsubscribeFromMod.h"
 
 typedef TSharedPtr<struct FModioSubsystem, ESPMode::Fast> FModioSubsystemPtr;
 
@@ -86,6 +91,14 @@ public:
   void SubscribeToMod(int32 ModId, FModioModDelegate SubscribeToModDelegate);
   /** Unsubscribes from the corresponding mod */
   void UnsubscribeFromMod(int32 ModId, FModioGenericDelegate UnsubscribeFromModDelegate);
+
+  //Mod Dependencies
+  /** Request all the dependencies from a mod */
+  void GetAllModDependencies(int32 ModId, FModioModDependencyArrayDelegate GetAllModDependenciesDelegate);
+  /** Add the provided dependencies to a corresponding mod */
+  void AddModDependencies(int32 ModId, const TArray<int32> &Dependencies, FModioGenericDelegate AddModDependenciesDelegate);
+  /** Deletes all the provided dependencies from the corresponding mod */
+  void DeleteModDependencies(int32 ModId, const TArray<int32> &Dependencies, FModioGenericDelegate DeleteModDependenciesDelegate);
 
 protected:
   friend class FModioModule;

@@ -4,10 +4,6 @@
 #include "ModioSettings.h"
 #include "ModioModule.h"
 #include "ModioUE4Utility.h"
-#include "AsyncRequest/ModioAsyncRequest_EmailRequest.h"
-#include "AsyncRequest/ModioAsyncRequest_EmailExchange.h"
-#include "AsyncRequest/ModioAsyncRequest_SubscribeToMod.h"
-#include "AsyncRequest/ModioAsyncRequest_UnsubscribeFromMod.h"
 #include "Schemas/ModioResponse.h"
 #include "ModioCallbacks.h"
 
@@ -219,6 +215,41 @@ void FModioSubsystem::UnsubscribeFromMod(int32 ModId, FModioGenericDelegate Unsu
 {
   FModioAsyncRequest_UnsubscribeFromMod *Request = new FModioAsyncRequest_UnsubscribeFromMod( this, UnsubscribeFromModDelegate );
   modioUnsubscribeFromMod(Request, (u32)ModId, FModioAsyncRequest_UnsubscribeFromMod::Response);
+  QueueAsyncTask( Request );
+}
+
+void FModioSubsystem::GetAllModDependencies(int32 ModId, FModioModDependencyArrayDelegate GetAllModDependenciesDelegate)
+{
+  FModioAsyncRequest_GetAllModDependencies *Request = new FModioAsyncRequest_GetAllModDependencies( this, GetAllModDependenciesDelegate );
+  modioGetAllModDependencies(Request, (u32)ModId, FModioAsyncRequest_GetAllModDependencies::Response);
+  QueueAsyncTask( Request );
+}
+
+void FModioSubsystem::AddModDependencies(int32 ModId, const TArray<int32> &Dependencies, FModioGenericDelegate AddModDependenciesDelegate)
+{
+  FModioAsyncRequest_AddModDependencies *Request = new FModioAsyncRequest_AddModDependencies( this, AddModDependenciesDelegate );
+  u32 *ModIds = new u32[Dependencies.Num()];
+  for(int i = 0; i < Dependencies.Num(); i++)
+  {
+    ModIds[i] = Dependencies[i];
+  }
+  modioAddModDependencies(Request, (u32)ModId, ModIds, (u32)Dependencies.Num(), FModioAsyncRequest_AddModDependencies::Response);
+  delete[] ModIds;
+
+  QueueAsyncTask( Request );
+}
+
+void FModioSubsystem::DeleteModDependencies(int32 ModId, const TArray<int32> &Dependencies, FModioGenericDelegate DeleteModDependenciesDelegate)
+{
+  FModioAsyncRequest_DeleteModDependencies *Request = new FModioAsyncRequest_DeleteModDependencies( this, DeleteModDependenciesDelegate );
+  u32 *ModIds = new u32[Dependencies.Num()];
+  for(int i = 0; i < Dependencies.Num(); i++)
+  {
+    ModIds[i] = Dependencies[i];
+  }
+  modioDeleteModDependencies(Request, (u32)ModId, ModIds, (u32)Dependencies.Num(), FModioAsyncRequest_DeleteModDependencies::Response);
+  delete[] ModIds;
+  
   QueueAsyncTask( Request );
 }
 

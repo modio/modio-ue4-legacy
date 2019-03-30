@@ -1,0 +1,19 @@
+#include "AsyncRequest/ModioAsyncRequest_DeleteModDependencies.h"
+#include "ModioUE4Utility.h"
+
+FModioAsyncRequest_DeleteModDependencies::FModioAsyncRequest_DeleteModDependencies( FModioSubsystem *Modio, FModioGenericDelegate Delegate ) :
+  FModioAsyncRequest( Modio ),
+  ResponseDelegate( Delegate )
+{
+}
+
+void FModioAsyncRequest_DeleteModDependencies::Response(void *Object, ModioResponse ModioResponse)
+{
+  FModioResponse Response;
+  InitializeResponse( Response, ModioResponse );
+
+  FModioAsyncRequest_DeleteModDependencies* ThisPointer = (FModioAsyncRequest_DeleteModDependencies*)Object;
+  ThisPointer->ResponseDelegate.ExecuteIfBound( Response );
+  
+  ThisPointer->Done();
+}
