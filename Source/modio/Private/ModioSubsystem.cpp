@@ -21,8 +21,7 @@ FModioSubsystemPtr FModioSubsystem::Create( const FString& RootDirectory, uint32
 {
   if( !RootDirectory.Len() )
   {
-    UE_LOG( LogModio, Warning, TEXT( "No root directory defined for Modio, modio not initialized" ) );
-    return nullptr;
+    UE_LOG( LogModio, Warning, TEXT( "No root directory defined for Modio, modio will be initialized on the game directory" ) );
   }
 
   if( GameId == 0 )
