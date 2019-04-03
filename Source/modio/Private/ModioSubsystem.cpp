@@ -70,7 +70,7 @@ void FModioSubsystem::EditMod(uint32 ModId, const FModioModEditor &ModEditor, FM
 void FModioSubsystem::EmailExchange( const FString &SecurityCode, FModioGenericDelegate ExchangeDelegate )
 {
   FModioAsyncRequest_EmailExchange *Request = new FModioAsyncRequest_EmailExchange( this, ExchangeDelegate );
-  modioEmailRequest( Request, TCHAR_TO_UTF8(*SecurityCode), FModioAsyncRequest_EmailExchange::Response );
+  modioEmailExchange( Request, TCHAR_TO_UTF8(*SecurityCode), FModioAsyncRequest_EmailExchange::Response );
   QueueAsyncTask( Request );
 }
 

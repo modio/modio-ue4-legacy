@@ -14,7 +14,8 @@
 // Declare module name on one place so we don't have to retype it if we rename the module
 #define MODULE_NAME Modio
 #define STRINGIFY(s) #s
-static FName ModuleName(STRINGIFY(MODULE_NAME));
+// @todo: use MODULE_NAME constant instead of literal "Modio"
+static FName ModuleName("Modio");
 #undef STRYINGIFY
 
 IMPLEMENT_MODULE(FModioModule, MODULE_NAME)
