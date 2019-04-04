@@ -21,6 +21,7 @@ class MODIO_API UGetAuthenticatedUserCallbackProxy : public UOnlineBlueprintCall
   GENERATED_UCLASS_BODY()
 
   // The world context object in which this call is taking place
+  UPROPERTY()
   UObject* WorldContextObject;
 
   UPROPERTY(BlueprintAssignable)
@@ -30,7 +31,7 @@ class MODIO_API UGetAuthenticatedUserCallbackProxy : public UOnlineBlueprintCall
   FGetAuthenticatedUserResult OnFailure;
 
   UFUNCTION(BlueprintCallable, Category = "mod.io", meta = (BlueprintInternalUseOnly = "true", DefaultToSelf="WorldContext"))
-  static UGetAuthenticatedUserCallbackProxy *GetAuthenticatedUser(UObject *WorldContextObject);
+  static UGetAuthenticatedUserCallbackProxy *GetAuthenticatedUser(UObject *WorldContext);
 
   virtual void Activate() override;
 

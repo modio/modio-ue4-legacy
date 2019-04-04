@@ -9,14 +9,14 @@ UGetAllModsCallbackProxy::UGetAllModsCallbackProxy(const FObjectInitializer &Obj
 {
 }
 
-UGetAllModsCallbackProxy *UGetAllModsCallbackProxy::GetAllMods(UObject *WorldContextObject, TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset)
+UGetAllModsCallbackProxy *UGetAllModsCallbackProxy::GetAllMods(UObject *WorldContext, TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset)
 {
   UGetAllModsCallbackProxy *Proxy = NewObject<UGetAllModsCallbackProxy>();
   Proxy->SetFlags(RF_StrongRefOnFrame);
   Proxy->FilterType = FilterType;
   Proxy->Limit = Limit;
   Proxy->Offset = Offset;
-  Proxy->WorldContextObject = WorldContextObject;
+  Proxy->WorldContextObject = WorldContext;
   return Proxy;
 }
 

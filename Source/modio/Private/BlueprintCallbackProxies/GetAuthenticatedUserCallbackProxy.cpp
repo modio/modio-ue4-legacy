@@ -9,11 +9,11 @@ UGetAuthenticatedUserCallbackProxy::UGetAuthenticatedUserCallbackProxy(const FOb
 {
 }
 
-UGetAuthenticatedUserCallbackProxy *UGetAuthenticatedUserCallbackProxy::GetAuthenticatedUser( UObject *WorldContextObject )
+UGetAuthenticatedUserCallbackProxy *UGetAuthenticatedUserCallbackProxy::GetAuthenticatedUser( UObject *WorldContext )
 {
   UGetAuthenticatedUserCallbackProxy *Proxy = NewObject<UGetAuthenticatedUserCallbackProxy>();
   Proxy->SetFlags(RF_StrongRefOnFrame);
-  Proxy->WorldContextObject = WorldContextObject;
+  Proxy->WorldContextObject = WorldContext;
   return Proxy;
 }
 

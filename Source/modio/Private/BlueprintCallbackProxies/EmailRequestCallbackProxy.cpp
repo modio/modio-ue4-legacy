@@ -9,12 +9,12 @@ UEmailRequestCallbackProxy::UEmailRequestCallbackProxy(const FObjectInitializer 
 {
 }
 
-UEmailRequestCallbackProxy *UEmailRequestCallbackProxy::EmailRequest( UObject *WorldContextObject, const FString& Email )
+UEmailRequestCallbackProxy *UEmailRequestCallbackProxy::EmailRequest( UObject *WorldContext, const FString& Email )
 {
   UEmailRequestCallbackProxy *Proxy = NewObject<UEmailRequestCallbackProxy>();
   Proxy->SetFlags(RF_StrongRefOnFrame);
   Proxy->Email = Email;
-  Proxy->WorldContextObject = WorldContextObject;
+  Proxy->WorldContextObject = WorldContext;
   return Proxy;
 }
 

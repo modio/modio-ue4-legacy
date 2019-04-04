@@ -25,6 +25,7 @@ class MODIO_API UAddModCallbackProxy : public UOnlineBlueprintCallProxyBase
   FModioModCreator ModCreator;
 
   // The world context object in which this call is taking place
+  UPROPERTY()
   UObject* WorldContextObject;
 
   UPROPERTY(BlueprintAssignable)
@@ -34,7 +35,7 @@ class MODIO_API UAddModCallbackProxy : public UOnlineBlueprintCallProxyBase
   FAddModResult OnFailure;
 
   UFUNCTION(BlueprintCallable, Category = "mod.io", meta = (BlueprintInternalUseOnly = "true", DefaultToSelf="WorldContext"))
-  static UAddModCallbackProxy *AddMod(UObject *WorldContextObject, FModioModCreator ModCreator);
+  static UAddModCallbackProxy *AddMod(UObject *WorldContext, FModioModCreator ModCreator);
 
   virtual void Activate() override;
 

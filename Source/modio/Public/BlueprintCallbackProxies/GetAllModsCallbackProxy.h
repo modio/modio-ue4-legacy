@@ -27,6 +27,7 @@ class MODIO_API UGetAllModsCallbackProxy : public UOnlineBlueprintCallProxyBase
   int32 Offset;
 
   // The world context object in which this call is taking place
+  UPROPERTY()
   UObject* WorldContextObject;
   
   UPROPERTY(BlueprintAssignable)
@@ -36,7 +37,7 @@ class MODIO_API UGetAllModsCallbackProxy : public UOnlineBlueprintCallProxyBase
   FGetAllModsResult OnFailure;
 
   UFUNCTION(BlueprintCallable, Category = "mod.io", meta = (BlueprintInternalUseOnly = "true", DefaultToSelf="WorldContext"))
-  static UGetAllModsCallbackProxy *GetAllMods(UObject *WorldContextObject, TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset);
+  static UGetAllModsCallbackProxy *GetAllMods(UObject *WorldContext, TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset);
 
   virtual void Activate() override;
 

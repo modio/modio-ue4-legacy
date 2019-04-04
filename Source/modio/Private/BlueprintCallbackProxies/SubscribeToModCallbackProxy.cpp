@@ -10,12 +10,12 @@ USubscribeToModCallbackProxy::USubscribeToModCallbackProxy(const FObjectInitiali
 {
 }
 
-USubscribeToModCallbackProxy *USubscribeToModCallbackProxy::SubscribeToMod(UObject *WorldContextObject, int32 ModId)
+USubscribeToModCallbackProxy *USubscribeToModCallbackProxy::SubscribeToMod(UObject *WorldContext, int32 ModId)
 {
   USubscribeToModCallbackProxy *Proxy = NewObject<USubscribeToModCallbackProxy>();
   Proxy->SetFlags(RF_StrongRefOnFrame);
   Proxy->ModId = ModId;
-  Proxy->WorldContextObject = WorldContextObject;
+  Proxy->WorldContextObject = WorldContext;
   return Proxy;
 }
 

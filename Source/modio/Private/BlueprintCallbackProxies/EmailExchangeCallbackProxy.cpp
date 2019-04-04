@@ -9,12 +9,12 @@ UEmailExchangeCallbackProxy::UEmailExchangeCallbackProxy(const FObjectInitialize
 {
 }
 
-UEmailExchangeCallbackProxy *UEmailExchangeCallbackProxy::EmailExchange( UObject *WorldContextObject, const FString& SecurityCode )
+UEmailExchangeCallbackProxy *UEmailExchangeCallbackProxy::EmailExchange( UObject *WorldContext, const FString& SecurityCode )
 {
   UEmailExchangeCallbackProxy *Proxy = NewObject<UEmailExchangeCallbackProxy>();
   Proxy->SetFlags(RF_StrongRefOnFrame);
   Proxy->SecurityCode = SecurityCode;
-  Proxy->WorldContextObject = WorldContextObject;
+  Proxy->WorldContextObject = WorldContext;
   return Proxy;
 }
 

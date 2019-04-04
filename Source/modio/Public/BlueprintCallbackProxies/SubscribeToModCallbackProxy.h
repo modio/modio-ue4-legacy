@@ -23,6 +23,7 @@ class MODIO_API USubscribeToModCallbackProxy : public UOnlineBlueprintCallProxyB
   int32 ModId;
 
   // The world context object in which this call is taking place
+  UPROPERTY()
   UObject* WorldContextObject;
 
   UPROPERTY(BlueprintAssignable)
@@ -32,7 +33,7 @@ class MODIO_API USubscribeToModCallbackProxy : public UOnlineBlueprintCallProxyB
   FSubscribeToModResult OnFailure;
 
   UFUNCTION(BlueprintCallable, Category = "mod.io", meta = (BlueprintInternalUseOnly = "true", DefaultToSelf="WorldContext"))
-  static USubscribeToModCallbackProxy *SubscribeToMod(UObject *WorldContextObject, int32 ModId);
+  static USubscribeToModCallbackProxy *SubscribeToMod(UObject *WorldContext, int32 ModId);
 
   virtual void Activate() override;
 
