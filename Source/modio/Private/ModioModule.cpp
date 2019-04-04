@@ -13,9 +13,11 @@
 
 // Declare module name on one place so we don't have to retype it if we rename the module
 #define MODULE_NAME Modio
-#define STRINGIFY(s) #s
-static FName ModuleName(STRINGIFY(MODULE_NAME));
-#undef STRYINGIFY
+#define Q(x) #x
+#define QUOTE(x) Q(x)
+static FName ModuleName( QUOTE(MODULE_NAME) );
+#undef QUOTE
+#undef Q
 
 IMPLEMENT_MODULE(FModioModule, MODULE_NAME)
 
