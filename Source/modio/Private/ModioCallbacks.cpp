@@ -2,6 +2,7 @@
 // Released under MIT.
 
 #include "ModioCallbacks.h"
+#include "ModioComponent.h"
 
 void onModInstalled(u32 response_code, u32 mod_id)
 {

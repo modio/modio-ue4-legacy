@@ -6,7 +6,7 @@ using UnrealBuildTool;
 
 public class modio : ModuleRules
 {
-	private String modio_directory = "mod.io-sdk-v0.10.1";
+	private String modio_directory = "mod.io-sdk-v0.11.0";
 
 	private string ModulePath
 	{
@@ -27,6 +27,9 @@ public class modio : ModuleRules
 	{
 		PublicDefinitions.Add("JSON_NOEXCEPTION");
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
+
+		// For beeing able to declare something public inside of the module, but private to outsiders
+		PrivateDefinitions.Add( "MODIO_PACKAGE=1" );
 
 		PrivateDependencyModuleNames.AddRange(new string[] { });
 
