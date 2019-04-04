@@ -6,6 +6,8 @@
 #include "Misc/MessageDialog.h"
 #include "Framework/MultiBox/MultiBoxBuilder.h"
 #include "ModioToolbar.h"
+#include "ModioSubsystem.h"
+#include "Engine/World.h"
 
 #include "LevelEditor.h"
 
@@ -44,19 +46,37 @@ void FmodioEditorModule::ShutdownModule()
 	FmodioEditorCommands::Unregister();
 }
 
-static bool Disabled(){ return false; }
+bool FmodioEditorModule::Enabled_LoginButton()
+{
+  if( FModioSubsystemPtr modio = FModioSubsystem::Get( GWorld ) )
+  {
+    return !modio->IsLoggedIn();    
+  }
+  return false;
+}
+
+bool FmodioEditorModule::Enabled_LogoutButton()
+{
+  if( FModioSubsystemPtr modio = FModioSubsystem::Get( GWorld ) )
+  {
+    return modio->IsLoggedIn();
+  }
+  return false;
+}
+
+static bool Disabled() { return false; }
 
 void FmodioEditorModule::MapCommands()
 {
   PluginCommands->MapAction(
     FmodioEditorCommands::Get().Login,
     FExecuteAction::CreateRaw(this, &FmodioEditorModule::PluginButtonClicked),
-    FCanExecuteAction::CreateStatic( &Disabled ) );
+    FCanExecuteAction::CreateStatic( &FmodioEditorModule::Enabled_LoginButton ) );
 
   PluginCommands->MapAction(
     FmodioEditorCommands::Get().Logout,
     FExecuteAction::CreateRaw( this, &FmodioEditorModule::PluginButtonClicked ),
-    FCanExecuteAction::CreateStatic( &Disabled ) );
+    FCanExecuteAction::CreateStatic( &FmodioEditorModule::Enabled_LogoutButton ) );
 
   PluginCommands->MapAction(
     FmodioEditorCommands::Get().UploadMod,

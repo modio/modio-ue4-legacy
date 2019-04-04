@@ -42,6 +42,7 @@ public class modioEditor : ModuleRules
 				"Engine",
 				"Slate",
 				"SlateCore",
+				"modio"
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);

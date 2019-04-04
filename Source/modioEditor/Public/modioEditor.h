@@ -20,6 +20,12 @@ public:
 	void PluginButtonClicked();
 	
 private:
+  /** Returns true if the login button is enabled */
+  static bool Enabled_LoginButton();
+
+  /** Returns true if the login button is enabled */
+  static bool Enabled_LogoutButton();
+
   void MapCommands();
 	void AddToolbarExtension(FToolBarBuilder& Builder);
 private:
