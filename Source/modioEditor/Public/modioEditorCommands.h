@@ -20,6 +20,8 @@ public:
 
 public:
 	TSharedPtr< FUICommandInfo > Login;
+  TSharedPtr< FUICommandInfo > Logout;
   TSharedPtr< FUICommandInfo > UploadMod;
   TSharedPtr< FUICommandInfo > NewModWizard;
+  TSharedPtr< FUICommandInfo > Settings;
 };

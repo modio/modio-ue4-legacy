@@ -23,11 +23,7 @@ void FmodioEditorModule::StartupModule()
 	FmodioEditorCommands::Register();
 	
 	PluginCommands = MakeShareable(new FUICommandList);
-
-	/*PluginCommands->MapAction(
-		FmodioEditorCommands::Get().PluginAction,
-		FExecuteAction::CreateRaw(this, &FmodioEditorModule::PluginButtonClicked),
-		FCanExecuteAction());*/
+  MapCommands();
 		
 	FLevelEditorModule& LevelEditorModule = FModuleManager::LoadModuleChecked<FLevelEditorModule>("LevelEditor");
 		
@@ -46,6 +42,36 @@ void FmodioEditorModule::ShutdownModule()
 	FmodioEditorStyle::Shutdown();
 
 	FmodioEditorCommands::Unregister();
+}
+
+static bool Disabled(){ return false; }
+
+void FmodioEditorModule::MapCommands()
+{
+  PluginCommands->MapAction(
+    FmodioEditorCommands::Get().Login,
+    FExecuteAction::CreateRaw(this, &FmodioEditorModule::PluginButtonClicked),
+    FCanExecuteAction::CreateStatic( &Disabled ) );
+
+  PluginCommands->MapAction(
+    FmodioEditorCommands::Get().Logout,
+    FExecuteAction::CreateRaw( this, &FmodioEditorModule::PluginButtonClicked ),
+    FCanExecuteAction::CreateStatic( &Disabled ) );
+
+  PluginCommands->MapAction(
+    FmodioEditorCommands::Get().UploadMod,
+    FExecuteAction::CreateRaw( this, &FmodioEditorModule::PluginButtonClicked ),
+    FCanExecuteAction::CreateStatic( &Disabled ) );
+
+  PluginCommands->MapAction(
+    FmodioEditorCommands::Get().NewModWizard,
+    FExecuteAction::CreateRaw( this, &FmodioEditorModule::PluginButtonClicked ),
+    FCanExecuteAction::CreateStatic( &Disabled ) );
+
+  PluginCommands->MapAction(
+    FmodioEditorCommands::Get().Settings,
+    FExecuteAction::CreateRaw( this, &FmodioEditorModule::PluginButtonClicked ),
+    FCanExecuteAction::CreateStatic( &Disabled ) );
 }
 
 void FmodioEditorModule::PluginButtonClicked()

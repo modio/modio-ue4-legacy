@@ -10,5 +10,6 @@ TSharedRef< SWidget > FModioToolbar::GenerateModioDropdown( TSharedRef<FUIComman
   MenuBuilder.AddMenuEntry( FmodioEditorCommands::Get().Login );
   MenuBuilder.AddMenuEntry( FmodioEditorCommands::Get().NewModWizard );
   MenuBuilder.AddMenuEntry( FmodioEditorCommands::Get().UploadMod );
+  MenuBuilder.AddMenuEntry( FmodioEditorCommands::Get().Settings );
   return MenuBuilder.MakeWidget();
 }

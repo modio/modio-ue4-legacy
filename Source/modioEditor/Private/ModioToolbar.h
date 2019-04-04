@@ -1,5 +1,9 @@
 #pragma once
 
+#include "CoreMinimal.h"
+#include "Widgets/SWidget.h"
+#include "Framework/Commands/UICommandList.h"
+
 struct FModioToolbar
 {
   /**

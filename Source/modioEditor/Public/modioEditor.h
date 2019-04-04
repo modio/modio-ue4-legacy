@@ -20,6 +20,7 @@ public:
 	void PluginButtonClicked();
 	
 private:
+  void MapCommands();
 	void AddToolbarExtension(FToolBarBuilder& Builder);
 private:
 	TSharedPtr<class FUICommandList> PluginCommands;
