@@ -2,7 +2,7 @@
 
 # Unreal Engine 4 Plugin
 [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/modio/UE4Plugin/blob/master/LICENSE)
-[![Discord](https://img.shields.io/discord/389039439487434752.svg)](https://discord.mod.io)
+[![Discord](https://img.shields.io/discord/389039439487434752.svg?label=Discord&logo=discord&color=7289DA&labelColor=2C2F33)](https://discord.mod.io)
 [![Master docs](https://img.shields.io/badge/docs-master-green.svg)](https://github.com/modio/UE4Plugin/wiki)
 
 
