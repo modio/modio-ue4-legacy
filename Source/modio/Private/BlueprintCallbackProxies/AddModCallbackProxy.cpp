@@ -10,12 +10,12 @@ UAddModCallbackProxy::UAddModCallbackProxy(const FObjectInitializer &ObjectIniti
 {
 }
 
-UAddModCallbackProxy *UAddModCallbackProxy::AddMod(UObject *WorldContextObject, FModioModCreator ModCreator)
+UAddModCallbackProxy *UAddModCallbackProxy::AddMod(UObject *WorldContext, FModioModCreator ModCreator)
 {
   UAddModCallbackProxy *Proxy = NewObject<UAddModCallbackProxy>();
   Proxy->SetFlags(RF_StrongRefOnFrame);
   Proxy->ModCreator = ModCreator;
-  Proxy->WorldContextObject = WorldContextObject;
+  Proxy->WorldContextObject = WorldContext;
   return Proxy;
 }
 
