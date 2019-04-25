@@ -9,12 +9,12 @@ UUnsubscribeFromModCallbackProxy::UUnsubscribeFromModCallbackProxy(const FObject
 {
 }
 
-UUnsubscribeFromModCallbackProxy *UUnsubscribeFromModCallbackProxy::UnsubscribeFromMod( UObject *WorldContextObject, int32 ModId )
+UUnsubscribeFromModCallbackProxy *UUnsubscribeFromModCallbackProxy::UnsubscribeFromMod( UObject *WorldContext, int32 ModId )
 {
   UUnsubscribeFromModCallbackProxy *Proxy = NewObject<UUnsubscribeFromModCallbackProxy>();
   Proxy->SetFlags(RF_StrongRefOnFrame);
   Proxy->ModId = ModId;
-  Proxy->WorldContextObject = WorldContextObject;
+  Proxy->WorldContextObject = WorldContext;
   return Proxy;
 }
 

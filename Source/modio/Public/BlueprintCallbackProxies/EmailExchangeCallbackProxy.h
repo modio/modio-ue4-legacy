@@ -21,6 +21,7 @@ class MODIO_API UEmailExchangeCallbackProxy : public UOnlineBlueprintCallProxyBa
   FString SecurityCode;
 
   // The world context object in which this call is taking place
+  UPROPERTY()
   UObject* WorldContextObject;
 
   UPROPERTY(BlueprintAssignable)
@@ -30,7 +31,7 @@ class MODIO_API UEmailExchangeCallbackProxy : public UOnlineBlueprintCallProxyBa
   FEmailExchangeResult OnFailure;
 
   UFUNCTION(BlueprintCallable, Category = "mod.io", meta = (BlueprintInternalUseOnly = "true", DefaultToSelf="WorldContext"))
-  static UEmailExchangeCallbackProxy *EmailExchange( UObject *WorldContextObject, const FString &SecurityCode);
+  static UEmailExchangeCallbackProxy *EmailExchange( UObject *WorldContext, const FString &SecurityCode);
 
   virtual void Activate() override;
 

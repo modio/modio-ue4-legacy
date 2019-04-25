@@ -26,6 +26,7 @@ class MODIO_API UGetUserSubscriptionsCallbackProxy : public UOnlineBlueprintCall
   int32 Offset;
 
   // The world context object in which this call is taking place
+  UPROPERTY()
   UObject* WorldContextObject;
 
   UPROPERTY(BlueprintAssignable)
@@ -35,7 +36,7 @@ class MODIO_API UGetUserSubscriptionsCallbackProxy : public UOnlineBlueprintCall
   FGetUserSubscriptionsResult OnFailure;
 
   UFUNCTION(BlueprintCallable, Category = "mod.io", meta = (BlueprintInternalUseOnly = "true", DefaultToSelf="WorldContext"))
-  static UGetUserSubscriptionsCallbackProxy *GetUserSubscriptions(UObject *WorldContextObject, TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset);
+  static UGetUserSubscriptionsCallbackProxy *GetUserSubscriptions(UObject *WorldContext, TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset);
 
   virtual void Activate() override;
 

@@ -26,6 +26,7 @@ class MODIO_API UEditModCallbackProxy : public UOnlineBlueprintCallProxyBase
   int32 ModId;
 
   // The world context object in which this call is taking place
+  UPROPERTY()
   UObject* WorldContextObject;
 
   UPROPERTY(BlueprintAssignable)
@@ -35,7 +36,7 @@ class MODIO_API UEditModCallbackProxy : public UOnlineBlueprintCallProxyBase
   FEditModResult OnFailure;
 
   UFUNCTION(BlueprintCallable, Category = "mod.io", meta = (BlueprintInternalUseOnly = "true", DefaultToSelf="WorldContext"))
-  static UEditModCallbackProxy *EditMod(UObject *WorldContextObject, int32 ModId, FModioModEditor ModEditor);
+  static UEditModCallbackProxy *EditMod(UObject *WorldContext, int32 ModId, FModioModEditor ModEditor);
 
   virtual void Activate() override;
 

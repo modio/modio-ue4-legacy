@@ -10,13 +10,13 @@ UEditModCallbackProxy::UEditModCallbackProxy(const FObjectInitializer &ObjectIni
 {
 }
 
-UEditModCallbackProxy *UEditModCallbackProxy::EditMod(UObject *WorldContextObject, int32 ModId, FModioModEditor ModEditor)
+UEditModCallbackProxy *UEditModCallbackProxy::EditMod(UObject *WorldContext, int32 ModId, FModioModEditor ModEditor)
 {
   UEditModCallbackProxy *Proxy = NewObject<UEditModCallbackProxy>();
   Proxy->SetFlags(RF_StrongRefOnFrame);
   Proxy->ModId = ModId;
   Proxy->ModEditor = ModEditor;
-  Proxy->WorldContextObject = WorldContextObject;
+  Proxy->WorldContextObject = WorldContext;
   return Proxy;
 }
 

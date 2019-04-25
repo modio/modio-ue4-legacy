@@ -10,14 +10,14 @@ UGetUserSubscriptionsCallbackProxy::UGetUserSubscriptionsCallbackProxy(const FOb
 {
 }
 
-UGetUserSubscriptionsCallbackProxy *UGetUserSubscriptionsCallbackProxy::GetUserSubscriptions(UObject *WorldContextObject, TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset)
+UGetUserSubscriptionsCallbackProxy *UGetUserSubscriptionsCallbackProxy::GetUserSubscriptions(UObject *WorldContext, TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset)
 {
   UGetUserSubscriptionsCallbackProxy *Proxy = NewObject<UGetUserSubscriptionsCallbackProxy>();
   Proxy->SetFlags(RF_StrongRefOnFrame);
   Proxy->FilterType = FilterType;
   Proxy->Limit = Limit;
   Proxy->Offset = Offset;
-  Proxy->WorldContextObject = WorldContextObject;
+  Proxy->WorldContextObject = WorldContext;
   return Proxy;
 }
 
