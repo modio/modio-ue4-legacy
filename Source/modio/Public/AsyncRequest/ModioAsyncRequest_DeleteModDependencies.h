@@ -4,9 +4,8 @@
 #include "Schemas/ModioModDependency.h"
 
 /**
-* Callback returning all the mod profile information requested
+* Callback for when dependencies were removed from a mod
 * @param ModioResponse - Response from Modio backend
-* @param Mods - Mods information retreived from mod.io
 */
 
 class FModioAsyncRequest_DeleteModDependencies : public FModioAsyncRequest

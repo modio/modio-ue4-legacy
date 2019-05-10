@@ -27,6 +27,18 @@ TArray<FModioModDependency> ConvertToTArrayModDependencies(ModioDependency* Modi
   return ModDependencies;
 }
 
+TArray<FModioModTag> ConvertToTArrayModTags(ModioTag* ModioTags, u32 TagsSize)
+{
+  TArray<FModioModTag> ModTags;
+  for (u32 i = 0; i < TagsSize; i++)
+  {
+    FModioModTag ModTag;
+    InitializeModTag(ModTag, ModioTags[i]);
+    ModTags.Add(ModTag);
+  }
+  return ModTags;
+}
+
 void SetupModioFilterCreator(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, ModioFilterCreator& modio_filter_creator)
 {
   modioSetFilterLimit(&modio_filter_creator, (u32)Limit);

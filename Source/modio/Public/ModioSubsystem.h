@@ -23,6 +23,10 @@
 #include "AsyncRequest/ModioAsyncRequest_GetUserSubscriptions.h"
 #include "AsyncRequest/ModioAsyncRequest_SubscribeToMod.h"
 #include "AsyncRequest/ModioAsyncRequest_UnsubscribeFromMod.h"
+#include "AsyncRequest/ModioAsyncRequest_GalaxyAuth.h"
+#include "AsyncRequest/ModioAsyncRequest_AddModTags.h"
+#include "AsyncRequest/ModioAsyncRequest_DeleteModTags.h"
+#include "AsyncRequest/ModioAsyncRequest_GetAllModTags.h"
 
 typedef TSharedPtr<struct FModioSubsystem, ESPMode::Fast> FModioSubsystemPtr;
 
@@ -40,10 +44,10 @@ public:
   virtual ~FModioSubsystem();
 
   /** Request an email from to the mod.io backend */
-  void EmailRequest(const FString &Email, FModioGenericDelegate ExchangeDelegate);
+  void EmailRequest(const FString &Email, FModioGenericDelegate EmailRequestDelegate);
 
   /** Send your Security code to the backend */
-  void EmailExchange(const FString &SecurityCode, FModioGenericDelegate ExchangeDelegate);
+  void EmailExchange(const FString &SecurityCode, FModioGenericDelegate EmailExchangeDelegate);
 
   /** Creates a new mod profile on mod.io */
   void AddMod(const FModioModCreator &ModCreator, FModioModDelegate AddModDelegate);
@@ -59,6 +63,12 @@ public:
 
   /** Returns the mods the logged in user has subscribed */
   void GetUserSubscriptions(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, FModioModArrayDelegate GetUserSubscriptionsDelegate);
+
+  /** Log in to mod.io on behalf of a GOG Galaxy user */
+  void GalaxyAuth(const FString &Appdata, FModioGenericDelegate GalaxyAuthDelegate);
+
+  /** Log in to mod.io on behalf of a Steam user */
+  //void SteamAuth(const FString &Appdata, FModioGenericDelegate GalaxyAuthDelegate);
 
   /** Process callbacks in an asyncronous way */
   void Process();
@@ -99,6 +109,14 @@ public:
   void AddModDependencies(int32 ModId, const TArray<int32> &Dependencies, FModioGenericDelegate AddModDependenciesDelegate);
   /** Deletes all the provided dependencies from the corresponding mod */
   void DeleteModDependencies(int32 ModId, const TArray<int32> &Dependencies, FModioGenericDelegate DeleteModDependenciesDelegate);
+
+  //Mod Tags
+  /** Request all the tags from a mod */
+  void GetAllModTags(int32 ModId, FModioModTagsArrayDelegate GetAllModTagsDelegate);
+  /** Assign the provided tags to a corresponding mod */
+  void AddModTags(int32 ModId, const TArray<FString> &Tags, FModioGenericDelegate AddModTagsDelegate);
+  /** Deletes all the provided tags from the corresponding mod */
+  void DeleteModTags(int32 ModId, const TArray<FString> &Tags, FModioGenericDelegate DeleteModTagsDelegate);
 
 protected:
   friend class FModioModule;

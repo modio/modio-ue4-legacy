@@ -4,14 +4,14 @@
 #include "Schemas/ModioModDependency.h"
 
 /**
-* Callback for when new dependencies were added to a mod
+* Callback for when tags were removed from a mod
 * @param ModioResponse - Response from Modio backend
 */
 
-class FModioAsyncRequest_AddModDependencies : public FModioAsyncRequest
+class FModioAsyncRequest_DeleteModTags : public FModioAsyncRequest
 {
 public:
-  FModioAsyncRequest_AddModDependencies( FModioSubsystem *Modio, FModioGenericDelegate Delegate );
+  FModioAsyncRequest_DeleteModTags( FModioSubsystem *Modio, FModioGenericDelegate Delegate );
 
   static void Response(void *Object, ModioResponse ModioResponse );
 

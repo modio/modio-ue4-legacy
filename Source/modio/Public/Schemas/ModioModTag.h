@@ -3,11 +3,12 @@
 
 #pragma once
 
+#include "ModioResponse.h"
 #include "ModioHWrapper.h"
-#include "ModioTag.generated.h"
+#include "ModioModTag.generated.h"
 
 USTRUCT(BlueprintType)
-struct FModioTag
+struct FModioModTag
 {
   GENERATED_BODY()
 
@@ -17,4 +18,6 @@ struct FModioTag
   FString Name;
 };
 
-extern void InitializeTag(FModioTag &tag, const ModioTag &modio_tag);
+extern void InitializeModTag(FModioModTag &tag, const ModioTag &modio_tag);
+
+DECLARE_DELEGATE_TwoParams( FModioModTagsArrayDelegate, FModioResponse, const TArray<FModioModTag> & );

@@ -67,16 +67,16 @@ void FModioSubsystem::EditMod(uint32 ModId, const FModioModEditor &ModEditor, FM
   QueueAsyncTask( Request );
 }
 
-void FModioSubsystem::EmailExchange( const FString &SecurityCode, FModioGenericDelegate ExchangeDelegate )
+void FModioSubsystem::EmailExchange( const FString &SecurityCode, FModioGenericDelegate EmailExchangeDelegate )
 {
-  FModioAsyncRequest_EmailExchange *Request = new FModioAsyncRequest_EmailExchange( this, ExchangeDelegate );
+  FModioAsyncRequest_EmailExchange *Request = new FModioAsyncRequest_EmailExchange( this, EmailExchangeDelegate );
   modioEmailExchange( Request, TCHAR_TO_UTF8(*SecurityCode), FModioAsyncRequest_EmailExchange::Response );
   QueueAsyncTask( Request );
 }
 
-void FModioSubsystem::EmailRequest( const FString &Email, FModioGenericDelegate ExchangeDelegate )
+void FModioSubsystem::EmailRequest( const FString &Email, FModioGenericDelegate EmailRequestDelegate )
 {
-  FModioAsyncRequest_EmailRequest *Request = new FModioAsyncRequest_EmailRequest( this, ExchangeDelegate );
+  FModioAsyncRequest_EmailRequest *Request = new FModioAsyncRequest_EmailRequest( this, EmailRequestDelegate );
   modioEmailRequest( Request, TCHAR_TO_UTF8(*Email), FModioAsyncRequest_EmailRequest::Response );
   QueueAsyncTask( Request );
 }
@@ -107,6 +107,13 @@ void FModioSubsystem::GetUserSubscriptions(TEnumAsByte<EModioFilterType> FilterT
   SetupModioFilterCreator(FilterType, Limit, Offset, modio_filter_creator);
   modioGetUserSubscriptions(this, modio_filter_creator, FModioAsyncRequest_GetUserSubscriptions::Response);
   modioFreeFilter(&modio_filter_creator);
+  QueueAsyncTask( Request );
+}
+
+void FModioSubsystem::GalaxyAuth(const FString &Appdata, FModioGenericDelegate GalaxyAuthDelegate)
+{
+  FModioAsyncRequest_GalaxyAuth *Request = new FModioAsyncRequest_GalaxyAuth( this, GalaxyAuthDelegate );
+  modioGalaxyAuth( Request, TCHAR_TO_UTF8(*Appdata), FModioAsyncRequest_GalaxyAuth::Response );
   QueueAsyncTask( Request );
 }
 
@@ -248,6 +255,51 @@ void FModioSubsystem::DeleteModDependencies(int32 ModId, const TArray<int32> &De
   }
   modioDeleteModDependencies(Request, (u32)ModId, ModIds, (u32)Dependencies.Num(), FModioAsyncRequest_DeleteModDependencies::Response);
   delete[] ModIds;
+  
+  QueueAsyncTask( Request );
+}
+
+void FModioSubsystem::GetAllModTags(int32 ModId, FModioModTagsArrayDelegate GetAllModTagsDelegate)
+{
+  FModioAsyncRequest_GetAllModTags *Request = new FModioAsyncRequest_GetAllModTags( this, GetAllModTagsDelegate );
+  modioGetModTags(Request, (u32)ModId, FModioAsyncRequest_GetAllModTags::Response);
+  QueueAsyncTask( Request );
+}
+
+void FModioSubsystem::AddModTags(int32 ModId, const TArray<FString> &Tags, FModioGenericDelegate AddModTagsDelegate)
+{
+  FModioAsyncRequest_AddModTags *Request = new FModioAsyncRequest_AddModTags( this, AddModTagsDelegate );
+  char **ModTags = new char*[Tags.Num()];
+  for(int i = 0; i < Tags.Num(); i++)
+  {
+    ModTags[i] = new char[Tags[i].Len() + 1];
+    strcpy_s(ModTags[i], sizeof ModTags[i], TCHAR_TO_UTF8(*Tags[i]));
+  }
+  modioAddModTags(Request, (u32)ModId, ModTags, (u32)Tags.Num(), FModioAsyncRequest_AddModTags::Response);
+  for(int i = 0; i < Tags.Num(); i++)
+  {
+    delete[] ModTags[i];
+  }
+  delete[] ModTags;
+
+  QueueAsyncTask( Request );
+}
+
+void FModioSubsystem::DeleteModTags(int32 ModId, const TArray<FString> &Tags, FModioGenericDelegate DeleteModTagsDelegate)
+{
+  FModioAsyncRequest_DeleteModTags *Request = new FModioAsyncRequest_DeleteModTags( this, DeleteModTagsDelegate );
+  char **ModTags = new char*[Tags.Num()];
+  for(int i = 0; i < Tags.Num(); i++)
+  {
+    ModTags[i] = new char[Tags[i].Len() + 1];
+    strcpy_s(ModTags[i], sizeof ModTags[i], TCHAR_TO_UTF8(*Tags[i]));
+  }
+  modioDeleteModTags(Request, (u32)ModId, ModTags, (u32)Tags.Num(), FModioAsyncRequest_DeleteModTags::Response);
+  for(int i = 0; i < Tags.Num(); i++)
+  {
+    delete[] ModTags[i];
+  }
+  delete[] ModTags;
   
   QueueAsyncTask( Request );
 }
