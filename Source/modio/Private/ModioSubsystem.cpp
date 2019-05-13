@@ -401,6 +401,127 @@ void FModioSubsystem::DeleteMetadataKVPs(int32 ModId, const TMap<FString, FStrin
   QueueAsyncTask( Request );
 }
 
+void FModioSubsystem::AddModLogo(int32 ModId, const FString &LogoPath, FModioGenericDelegate AddModLogoDelegate)
+{
+  FModioAsyncRequest_AddModLogo *Request = new FModioAsyncRequest_AddModLogo( this, AddModLogoDelegate );
+  modioAddModLogo( Request, ModId, TCHAR_TO_UTF8(*LogoPath), FModioAsyncRequest_AddModLogo::Response );
+  QueueAsyncTask( Request );
+}
+
+void FModioSubsystem::AddModImages(int32 ModId, const TArray<FString> &ImagePaths, FModioGenericDelegate AddModImagesDelegate)
+{
+  FModioAsyncRequest_AddModImages *Request = new FModioAsyncRequest_AddModImages( this, AddModImagesDelegate );
+  char **CImagePaths = new char*[ImagePaths.Num()];
+  for(int i = 0; i < ImagePaths.Num(); i++)
+  {
+    CImagePaths[i] = new char[ImagePaths[i].Len() + 1];
+    strcpy_s(CImagePaths[i], sizeof CImagePaths[i], TCHAR_TO_UTF8(*ImagePaths[i]));
+  }
+  modioAddModImages(Request, (u32)ModId, CImagePaths, (u32)ImagePaths.Num(), FModioAsyncRequest_AddModImages::Response);
+  for(int i = 0; i < ImagePaths.Num(); i++)
+  {
+    delete[] CImagePaths[i];
+  }
+  delete[] CImagePaths;
+
+  QueueAsyncTask( Request );
+}
+
+void FModioSubsystem::AddModYoutubeLinks(int32 ModId, const TArray<FString> &YoutubeLinks, FModioGenericDelegate AddModYoutubeLinksDelegate)
+{
+  FModioAsyncRequest_AddModYoutubeLinks *Request = new FModioAsyncRequest_AddModYoutubeLinks( this, AddModYoutubeLinksDelegate );
+  char **CYoutubeLinks = new char*[YoutubeLinks.Num()];
+  for(int i = 0; i < YoutubeLinks.Num(); i++)
+  {
+    CYoutubeLinks[i] = new char[YoutubeLinks[i].Len() + 1];
+    strcpy_s(CYoutubeLinks[i], sizeof CYoutubeLinks[i], TCHAR_TO_UTF8(*YoutubeLinks[i]));
+  }
+  modioAddModYoutubeLinks(Request, (u32)ModId, CYoutubeLinks, (u32)YoutubeLinks.Num(), FModioAsyncRequest_AddModYoutubeLinks::Response);
+  for(int i = 0; i < YoutubeLinks.Num(); i++)
+  {
+    delete[] CYoutubeLinks[i];
+  }
+  delete[] CYoutubeLinks;
+
+  QueueAsyncTask( Request );
+}
+
+void FModioSubsystem::AddModSketchfabLinks(int32 ModId, const TArray<FString> &SketchfabLinks, FModioGenericDelegate AddModSketchfabLinksDelegate)
+{
+  FModioAsyncRequest_AddModSketchfabLinks *Request = new FModioAsyncRequest_AddModSketchfabLinks( this, AddModSketchfabLinksDelegate );
+  char **CSketchfabLinks = new char*[SketchfabLinks.Num()];
+  for(int i = 0; i < SketchfabLinks.Num(); i++)
+  {
+    CSketchfabLinks[i] = new char[SketchfabLinks[i].Len() + 1];
+    strcpy_s(CSketchfabLinks[i], sizeof CSketchfabLinks[i], TCHAR_TO_UTF8(*SketchfabLinks[i]));
+  }
+  modioAddModSketchfabLinks(Request, (u32)ModId, CSketchfabLinks, (u32)SketchfabLinks.Num(), FModioAsyncRequest_AddModSketchfabLinks::Response);
+  for(int i = 0; i < SketchfabLinks.Num(); i++)
+  {
+    delete[] CSketchfabLinks[i];
+  }
+  delete[] CSketchfabLinks;
+
+  QueueAsyncTask( Request );
+}
+
+void FModioSubsystem::DeleteModImages(int32 ModId, const TArray<FString> &ImagePaths, FModioGenericDelegate DeleteModImagesDelegate)
+{
+  FModioAsyncRequest_DeleteModImages *Request = new FModioAsyncRequest_DeleteModImages( this, DeleteModImagesDelegate );
+  char **CImagePaths = new char*[ImagePaths.Num()];
+  for(int i = 0; i < ImagePaths.Num(); i++)
+  {
+    CImagePaths[i] = new char[ImagePaths[i].Len() + 1];
+    strcpy_s(CImagePaths[i], sizeof CImagePaths[i], TCHAR_TO_UTF8(*ImagePaths[i]));
+  }
+  modioDeleteModImages(Request, (u32)ModId, CImagePaths, (u32)ImagePaths.Num(), FModioAsyncRequest_DeleteModImages::Response);
+  for(int i = 0; i < ImagePaths.Num(); i++)
+  {
+    delete[] CImagePaths[i];
+  }
+  delete[] CImagePaths;
+
+  QueueAsyncTask( Request );
+}
+
+void FModioSubsystem::DeleteModYoutubeLinks(int32 ModId, const TArray<FString> &YoutubeLinks, FModioGenericDelegate DeleteModYoutubeLinksDelegate)
+{
+  FModioAsyncRequest_DeleteModYoutubeLinks *Request = new FModioAsyncRequest_DeleteModYoutubeLinks( this, DeleteModYoutubeLinksDelegate );
+  char **CYoutubeLinks = new char*[YoutubeLinks.Num()];
+  for(int i = 0; i < YoutubeLinks.Num(); i++)
+  {
+    CYoutubeLinks[i] = new char[YoutubeLinks[i].Len() + 1];
+    strcpy_s(CYoutubeLinks[i], sizeof CYoutubeLinks[i], TCHAR_TO_UTF8(*YoutubeLinks[i]));
+  }
+  modioDeleteModYoutubeLinks(Request, (u32)ModId, CYoutubeLinks, (u32)YoutubeLinks.Num(), FModioAsyncRequest_DeleteModYoutubeLinks::Response);
+  for(int i = 0; i < YoutubeLinks.Num(); i++)
+  {
+    delete[] CYoutubeLinks[i];
+  }
+  delete[] CYoutubeLinks;
+
+  QueueAsyncTask( Request );
+}
+
+void FModioSubsystem::DeleteModSketchfabLinks(int32 ModId, const TArray<FString> &SketchfabLinks, FModioGenericDelegate DeleteModSketchfabLinksDelegate)
+{
+  FModioAsyncRequest_DeleteModSketchfabLinks *Request = new FModioAsyncRequest_DeleteModSketchfabLinks( this, DeleteModSketchfabLinksDelegate );
+  char **CSketchfabLinks = new char*[SketchfabLinks.Num()];
+  for(int i = 0; i < SketchfabLinks.Num(); i++)
+  {
+    CSketchfabLinks[i] = new char[SketchfabLinks[i].Len() + 1];
+    strcpy_s(CSketchfabLinks[i], sizeof CSketchfabLinks[i], TCHAR_TO_UTF8(*SketchfabLinks[i]));
+  }
+  modioDeleteModSketchfabLinks(Request, (u32)ModId, CSketchfabLinks, (u32)SketchfabLinks.Num(), FModioAsyncRequest_DeleteModSketchfabLinks::Response);
+  for(int i = 0; i < SketchfabLinks.Num(); i++)
+  {
+    delete[] CSketchfabLinks[i];
+  }
+  delete[] CSketchfabLinks;
+
+  QueueAsyncTask( Request );
+}
+
 void FModioSubsystem::Init( const FString& RootDirectory, uint32 GameId, const FString& ApiKey, bool bIsLiveEnvironment )
 {
   check(!bInitialized);

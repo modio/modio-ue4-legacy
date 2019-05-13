@@ -34,6 +34,13 @@
 #include "AsyncRequest/ModioAsyncRequest_AddMetadataKVPs.h"
 #include "AsyncRequest/ModioAsyncRequest_DeleteMetadataKVPs.h"
 #include "AsyncRequest/ModioAsyncRequest_GetAllMetadataKVPs.h"
+#include "AsyncRequest/ModioAsyncRequest_AddModLogo.h"
+#include "AsyncRequest/ModioAsyncRequest_AddModImages.h"
+#include "AsyncRequest/ModioAsyncRequest_AddModYoutubeLinks.h"
+#include "AsyncRequest/ModioAsyncRequest_AddModSketchfabLinks.h"
+#include "AsyncRequest/ModioAsyncRequest_DeleteModImages.h"
+#include "AsyncRequest/ModioAsyncRequest_DeleteModYoutubeLinks.h"
+#include "AsyncRequest/ModioAsyncRequest_DeleteModSketchfabLinks.h"
 
 typedef TSharedPtr<struct FModioSubsystem, ESPMode::Fast> FModioSubsystemPtr;
 
@@ -144,6 +151,22 @@ public:
   void AddMetadataKVPs(int32 ModId, const TMap<FString, FString> &MetadataKVPs, FModioGenericDelegate AddMetadataKVPsDelegate);
   /** Deletes all the provided metadata kvp from the corresponding mod */
   void DeleteMetadataKVPs(int32 ModId, const TMap<FString, FString> &MetadataKVPs, FModioGenericDelegate DeleteMetadataKVPsDelegate);
+
+  //Media Methods
+  /** Adds a new logo image to the corresponding mod */
+  void AddModLogo(int32 ModId, const FString &LogoPath, FModioGenericDelegate AddModLogoDelegate);
+  /** Add images to the corresponding mod */
+  void AddModImages(int32 ModId, const TArray<FString> &ImagePaths, FModioGenericDelegate AddModImagesDelegate);
+  /** Add youtube links to the corresponding mod */
+  void AddModYoutubeLinks(int32 ModId, const TArray<FString> &YoutubeLinks, FModioGenericDelegate AddModYoutubeLinksDelegate);
+  /** Add sketchfab to the corresponding mod */
+  void AddModSketchfabLinks(int32 ModId, const TArray<FString> &SketchfabLinks, FModioGenericDelegate AddModSketchfabLinksDelegate);
+  /** Delete images from the corresponding mod */
+  void DeleteModImages(int32 ModId, const TArray<FString> &ImagePaths, FModioGenericDelegate AddModImagesDelegate);
+  /** Delete youtube links from the corresponding mod */
+  void DeleteModYoutubeLinks(int32 ModId, const TArray<FString> &YoutubeLinks, FModioGenericDelegate AddModYoutubeLinksDelegate);
+  /** Delete sketchfab from the corresponding mod */
+  void DeleteModSketchfabLinks(int32 ModId, const TArray<FString> &SketchfabLinks, FModioGenericDelegate AddModSketchfabLinksDelegate);
 
 protected:
   friend class FModioModule;
