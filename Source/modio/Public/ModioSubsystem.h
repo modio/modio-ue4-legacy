@@ -20,7 +20,11 @@
 #include "AsyncRequest/ModioAsyncRequest_GetAllModDependencies.h"
 #include "AsyncRequest/ModioAsyncRequest_GetAllMods.h"
 #include "AsyncRequest/ModioAsyncRequest_GetAuthenticatedUser.h"
+#include "AsyncRequest/ModioAsyncRequest_GetUserEvents.h"
 #include "AsyncRequest/ModioAsyncRequest_GetUserSubscriptions.h"
+#include "AsyncRequest/ModioAsyncRequest_GetUserMods.h"
+#include "AsyncRequest/ModioAsyncRequest_GetUserModfiles.h"
+#include "AsyncRequest/ModioAsyncRequest_GetUserRatings.h"
 #include "AsyncRequest/ModioAsyncRequest_SubscribeToMod.h"
 #include "AsyncRequest/ModioAsyncRequest_UnsubscribeFromMod.h"
 #include "AsyncRequest/ModioAsyncRequest_GalaxyAuth.h"
@@ -58,11 +62,23 @@ public:
   /** Request mod information */
   void GetAllMods(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, FModioModArrayDelegate GetAllModsDelegate);
 
-  /** Request the currently logged in user information */
+  /** Request the authenticated user information */
   void GetAuthenticatedUser(FModioUserDelegate GetAuthenticatedUserDelegate);
 
   /** Returns the mods the logged in user has subscribed */
   void GetUserSubscriptions(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, FModioModArrayDelegate GetUserSubscriptionsDelegate);
+
+  /** Returns the mods the authenticated user owns */
+  void GetUserMods(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, FModioModArrayDelegate GetUserModsDelegate);
+
+  /** Returns the modfiles the authenticated user owns */
+  void GetUserModfiles(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, FModioModfileArrayDelegate GetUserModfilesDelegate);
+
+  /** Returns the events related to the authenticated user */
+  void GetUserEvents(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, FModioUserEventArrayDelegate GetUserEventsDelegate);
+
+  /** Returns the ratings submited by the authenticated user */
+  void GetUserRatings(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, FModioRatingArrayDelegate GetUserRatingsDelegate);
 
   /** Log in to mod.io on behalf of a GOG Galaxy user */
   void GalaxyAuth(const FString &Appdata, FModioGenericDelegate GalaxyAuthDelegate);
