@@ -348,6 +348,59 @@ void FModioSubsystem::DeleteModTags(int32 ModId, const TArray<FString> &Tags, FM
   QueueAsyncTask( Request );
 }
 
+void FModioSubsystem::GetAllMetadataKVPs(int32 ModId, FModioMetadataKVPArrayDelegate GetAllMetadataKVPsDelegate)
+{
+  FModioAsyncRequest_GetAllMetadataKVPs *Request = new FModioAsyncRequest_GetAllMetadataKVPs( this, GetAllMetadataKVPsDelegate );
+  modioGetAllMetadataKVP(Request, (u32)ModId, FModioAsyncRequest_GetAllMetadataKVPs::Response);
+  QueueAsyncTask( Request );
+}
+
+void FModioSubsystem::AddMetadataKVPs(int32 ModId, const TMap<FString, FString> &MetadataKVPs, FModioGenericDelegate AddMetadataKVPsDelegate)
+{
+  FModioAsyncRequest_AddMetadataKVPs *Request = new FModioAsyncRequest_AddMetadataKVPs( this, AddMetadataKVPsDelegate );
+  char **CMetadataKVPs = new char*[MetadataKVPs.Num()];
+
+  uint32 i = 0;
+  for (const TPair<FString, FString>& pair : MetadataKVPs)
+  {
+    FString StringfiedKVP = pair.Key + ":" + pair.Value;
+    CMetadataKVPs[i] = new char[StringfiedKVP.Len() + 1];
+    strcpy_s(CMetadataKVPs[i], sizeof StringfiedKVP, TCHAR_TO_UTF8(*StringfiedKVP));
+    i++;
+  }
+  modioAddMetadataKVP(Request, (u32)ModId, CMetadataKVPs, (u32)MetadataKVPs.Num(), FModioAsyncRequest_AddMetadataKVPs::Response);
+  for(int i = 0; i < MetadataKVPs.Num(); i++)
+  {
+    delete[] CMetadataKVPs[i];
+  }
+  delete[] CMetadataKVPs;
+
+  QueueAsyncTask( Request );
+}
+
+void FModioSubsystem::DeleteMetadataKVPs(int32 ModId, const TMap<FString, FString> &MetadataKVPs, FModioGenericDelegate DeleteMetadataKVPsDelegate)
+{
+  FModioAsyncRequest_DeleteMetadataKVPs *Request = new FModioAsyncRequest_DeleteMetadataKVPs( this, DeleteMetadataKVPsDelegate );
+  char **CMetadataKVPs = new char*[MetadataKVPs.Num()];
+  
+  uint32 i = 0;
+  for (const TPair<FString, FString>& pair : MetadataKVPs)
+  {
+    FString StringfiedKVP = pair.Key + ":" + pair.Value;
+    CMetadataKVPs[i] = new char[StringfiedKVP.Len() + 1];
+    strcpy_s(CMetadataKVPs[i], sizeof StringfiedKVP, TCHAR_TO_UTF8(*StringfiedKVP));
+    i++;
+  }
+  modioDeleteMetadataKVP(Request, (u32)ModId, CMetadataKVPs, (u32)MetadataKVPs.Num(), FModioAsyncRequest_DeleteModTags::Response);
+  for(int i = 0; i < MetadataKVPs.Num(); i++)
+  {
+    delete[] CMetadataKVPs[i];
+  }
+  delete[] CMetadataKVPs;
+
+  QueueAsyncTask( Request );
+}
+
 void FModioSubsystem::Init( const FString& RootDirectory, uint32 GameId, const FString& ApiKey, bool bIsLiveEnvironment )
 {
   check(!bInitialized);

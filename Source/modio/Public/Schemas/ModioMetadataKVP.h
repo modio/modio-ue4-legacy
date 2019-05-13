@@ -4,6 +4,7 @@
 #pragma once
 
 #include "ModioHWrapper.h"
+#include "ModioResponse.h"
 #include "ModioMetadataKVP.generated.h"
 
 USTRUCT(BlueprintType)
@@ -18,3 +19,6 @@ struct FModioMetadataKVP
 };
 
 extern void InitializeMetadataKVP( FModioMetadataKVP &MetadataKVP, const ModioMetadataKVP &modio_metadata_kvp );
+
+DECLARE_DELEGATE_TwoParams( FModioMetadataKVPDelegate, FModioResponse, FModioMetadataKVP );
+DECLARE_DELEGATE_TwoParams( FModioMetadataKVPArrayDelegate, FModioResponse, const TArray<FModioMetadataKVP> & );

@@ -19,6 +19,7 @@ extern TArray<FModioModfile> ConvertToTArrayModfiles(ModioModfile* ModioModfiles
 extern TArray<FModioRating> ConvertToTArrayRatings(ModioRating* ModioRatings, u32 RatingsSize);
 extern TArray<FModioModDependency> ConvertToTArrayModDependencies(ModioDependency* ModioDependencies, u32 ModDependenciesSize);
 extern TArray<FModioModTag> ConvertToTArrayModTags(ModioTag* ModioTags, u32 ModTagsSize);
+extern TArray<FModioMetadataKVP> ConvertToTArrayMetadataKVPs(ModioMetadataKVP* ModioMetadataKVPs, u32 ModioMetadatasSize);
 extern TArray<FModioUserEvent> ConvertToTArrayUserEvents(ModioUserEvent* ModioUserEvents, u32 UserEventsSize);
 extern TArray<FModioModEvent> ConvertToTArrayModEvents(ModioModEvent* ModioModEvents, u32 ModEventsSize);
 extern void SetupModioFilterCreator(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, ModioFilterCreator& modio_filter_creator);

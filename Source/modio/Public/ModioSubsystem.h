@@ -31,6 +31,9 @@
 #include "AsyncRequest/ModioAsyncRequest_AddModTags.h"
 #include "AsyncRequest/ModioAsyncRequest_DeleteModTags.h"
 #include "AsyncRequest/ModioAsyncRequest_GetAllModTags.h"
+#include "AsyncRequest/ModioAsyncRequest_AddMetadataKVPs.h"
+#include "AsyncRequest/ModioAsyncRequest_DeleteMetadataKVPs.h"
+#include "AsyncRequest/ModioAsyncRequest_GetAllMetadataKVPs.h"
 
 typedef TSharedPtr<struct FModioSubsystem, ESPMode::Fast> FModioSubsystemPtr;
 
@@ -133,6 +136,14 @@ public:
   void AddModTags(int32 ModId, const TArray<FString> &Tags, FModioGenericDelegate AddModTagsDelegate);
   /** Deletes all the provided tags from the corresponding mod */
   void DeleteModTags(int32 ModId, const TArray<FString> &Tags, FModioGenericDelegate DeleteModTagsDelegate);
+
+  //Mod MetadataKVP
+  /** Request all the metadata kvp from a mod */
+  void GetAllMetadataKVPs(int32 ModId, FModioMetadataKVPArrayDelegate GetAllMetadataKVPsDelegate);
+  /** Assign the provided metadata kvp to a corresponding mod */
+  void AddMetadataKVPs(int32 ModId, const TMap<FString, FString> &MetadataKVPs, FModioGenericDelegate AddMetadataKVPsDelegate);
+  /** Deletes all the provided metadata kvp from the corresponding mod */
+  void DeleteMetadataKVPs(int32 ModId, const TMap<FString, FString> &MetadataKVPs, FModioGenericDelegate DeleteMetadataKVPsDelegate);
 
 protected:
   friend class FModioModule;

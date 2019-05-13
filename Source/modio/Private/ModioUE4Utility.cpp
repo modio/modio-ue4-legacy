@@ -63,6 +63,18 @@ TArray<FModioModTag> ConvertToTArrayModTags(ModioTag* ModioTags, u32 TagsSize)
   return ModTags;
 }
 
+TArray<FModioMetadataKVP> ConvertToTArrayMetadataKVPs(ModioMetadataKVP* ModioMetadataKVPs, u32 MetadataKVPsSize)
+{
+  TArray<FModioMetadataKVP> MetadataKVPs;
+  for (u32 i = 0; i < MetadataKVPsSize; i++)
+  {
+    FModioMetadataKVP MetadataKVP;
+    InitializeMetadataKVP(MetadataKVP, ModioMetadataKVPs[i]);
+    MetadataKVPs.Add(MetadataKVP);
+  }
+  return MetadataKVPs;
+}
+
 TArray<FModioUserEvent> ConvertToTArrayUserEvents(ModioUserEvent* ModioUserEvents, u32 UserEventsSize)
 {
   TArray<FModioUserEvent> UserEvents;
