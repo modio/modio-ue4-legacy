@@ -20,9 +20,27 @@
 #include "AsyncRequest/ModioAsyncRequest_GetAllModDependencies.h"
 #include "AsyncRequest/ModioAsyncRequest_GetAllMods.h"
 #include "AsyncRequest/ModioAsyncRequest_GetAuthenticatedUser.h"
+#include "AsyncRequest/ModioAsyncRequest_GetUserEvents.h"
 #include "AsyncRequest/ModioAsyncRequest_GetUserSubscriptions.h"
+#include "AsyncRequest/ModioAsyncRequest_GetUserMods.h"
+#include "AsyncRequest/ModioAsyncRequest_GetUserModfiles.h"
+#include "AsyncRequest/ModioAsyncRequest_GetUserRatings.h"
 #include "AsyncRequest/ModioAsyncRequest_SubscribeToMod.h"
 #include "AsyncRequest/ModioAsyncRequest_UnsubscribeFromMod.h"
+#include "AsyncRequest/ModioAsyncRequest_GalaxyAuth.h"
+#include "AsyncRequest/ModioAsyncRequest_AddModTags.h"
+#include "AsyncRequest/ModioAsyncRequest_DeleteModTags.h"
+#include "AsyncRequest/ModioAsyncRequest_GetAllModTags.h"
+#include "AsyncRequest/ModioAsyncRequest_AddMetadataKVPs.h"
+#include "AsyncRequest/ModioAsyncRequest_DeleteMetadataKVPs.h"
+#include "AsyncRequest/ModioAsyncRequest_GetAllMetadataKVPs.h"
+#include "AsyncRequest/ModioAsyncRequest_AddModLogo.h"
+#include "AsyncRequest/ModioAsyncRequest_AddModImages.h"
+#include "AsyncRequest/ModioAsyncRequest_AddModYoutubeLinks.h"
+#include "AsyncRequest/ModioAsyncRequest_AddModSketchfabLinks.h"
+#include "AsyncRequest/ModioAsyncRequest_DeleteModImages.h"
+#include "AsyncRequest/ModioAsyncRequest_DeleteModYoutubeLinks.h"
+#include "AsyncRequest/ModioAsyncRequest_DeleteModSketchfabLinks.h"
 
 typedef TSharedPtr<struct FModioSubsystem, ESPMode::Fast> FModioSubsystemPtr;
 
@@ -40,10 +58,10 @@ public:
   virtual ~FModioSubsystem();
 
   /** Request an email from to the mod.io backend */
-  void EmailRequest(const FString &Email, FModioGenericDelegate ExchangeDelegate);
+  void EmailRequest(const FString &Email, FModioGenericDelegate EmailRequestDelegate);
 
   /** Send your Security code to the backend */
-  void EmailExchange(const FString &SecurityCode, FModioGenericDelegate ExchangeDelegate);
+  void EmailExchange(const FString &SecurityCode, FModioGenericDelegate EmailExchangeDelegate);
 
   /** Creates a new mod profile on mod.io */
   void AddMod(const FModioModCreator &ModCreator, FModioModDelegate AddModDelegate);
@@ -54,11 +72,29 @@ public:
   /** Request mod information */
   void GetAllMods(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, FModioModArrayDelegate GetAllModsDelegate);
 
-  /** Request the currently logged in user information */
+  /** Request the authenticated user information */
   void GetAuthenticatedUser(FModioUserDelegate GetAuthenticatedUserDelegate);
 
   /** Returns the mods the logged in user has subscribed */
   void GetUserSubscriptions(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, FModioModArrayDelegate GetUserSubscriptionsDelegate);
+
+  /** Returns the mods the authenticated user owns */
+  void GetUserMods(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, FModioModArrayDelegate GetUserModsDelegate);
+
+  /** Returns the modfiles the authenticated user owns */
+  void GetUserModfiles(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, FModioModfileArrayDelegate GetUserModfilesDelegate);
+
+  /** Returns the events related to the authenticated user */
+  void GetUserEvents(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, FModioUserEventArrayDelegate GetUserEventsDelegate);
+
+  /** Returns the ratings submited by the authenticated user */
+  void GetUserRatings(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, FModioRatingArrayDelegate GetUserRatingsDelegate);
+
+  /** Log in to mod.io on behalf of a GOG Galaxy user */
+  void GalaxyAuth(const FString &Appdata, FModioGenericDelegate GalaxyAuthDelegate);
+
+  /** Log in to mod.io on behalf of a Steam user */
+  //void SteamAuth(const FString &Appdata, FModioGenericDelegate GalaxyAuthDelegate);
 
   /** Process callbacks in an asyncronous way */
   void Process();
@@ -99,6 +135,38 @@ public:
   void AddModDependencies(int32 ModId, const TArray<int32> &Dependencies, FModioGenericDelegate AddModDependenciesDelegate);
   /** Deletes all the provided dependencies from the corresponding mod */
   void DeleteModDependencies(int32 ModId, const TArray<int32> &Dependencies, FModioGenericDelegate DeleteModDependenciesDelegate);
+
+  //Mod Tags
+  /** Request all the tags from a mod */
+  void GetAllModTags(int32 ModId, FModioModTagsArrayDelegate GetAllModTagsDelegate);
+  /** Assign the provided tags to a corresponding mod */
+  void AddModTags(int32 ModId, const TArray<FString> &Tags, FModioGenericDelegate AddModTagsDelegate);
+  /** Deletes all the provided tags from the corresponding mod */
+  void DeleteModTags(int32 ModId, const TArray<FString> &Tags, FModioGenericDelegate DeleteModTagsDelegate);
+
+  //Mod MetadataKVP
+  /** Request all the metadata kvp from a mod */
+  void GetAllMetadataKVPs(int32 ModId, FModioMetadataKVPArrayDelegate GetAllMetadataKVPsDelegate);
+  /** Assign the provided metadata kvp to a corresponding mod */
+  void AddMetadataKVPs(int32 ModId, const TMap<FString, FString> &MetadataKVPs, FModioGenericDelegate AddMetadataKVPsDelegate);
+  /** Deletes all the provided metadata kvp from the corresponding mod */
+  void DeleteMetadataKVPs(int32 ModId, const TMap<FString, FString> &MetadataKVPs, FModioGenericDelegate DeleteMetadataKVPsDelegate);
+
+  //Media Methods
+  /** Adds a new logo image to the corresponding mod */
+  void AddModLogo(int32 ModId, const FString &LogoPath, FModioGenericDelegate AddModLogoDelegate);
+  /** Add images to the corresponding mod */
+  void AddModImages(int32 ModId, const TArray<FString> &ImagePaths, FModioGenericDelegate AddModImagesDelegate);
+  /** Add youtube links to the corresponding mod */
+  void AddModYoutubeLinks(int32 ModId, const TArray<FString> &YoutubeLinks, FModioGenericDelegate AddModYoutubeLinksDelegate);
+  /** Add sketchfab to the corresponding mod */
+  void AddModSketchfabLinks(int32 ModId, const TArray<FString> &SketchfabLinks, FModioGenericDelegate AddModSketchfabLinksDelegate);
+  /** Delete images from the corresponding mod */
+  void DeleteModImages(int32 ModId, const TArray<FString> &ImagePaths, FModioGenericDelegate AddModImagesDelegate);
+  /** Delete youtube links from the corresponding mod */
+  void DeleteModYoutubeLinks(int32 ModId, const TArray<FString> &YoutubeLinks, FModioGenericDelegate AddModYoutubeLinksDelegate);
+  /** Delete sketchfab from the corresponding mod */
+  void DeleteModSketchfabLinks(int32 ModId, const TArray<FString> &SketchfabLinks, FModioGenericDelegate AddModSketchfabLinksDelegate);
 
 protected:
   friend class FModioModule;

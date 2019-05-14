@@ -29,8 +29,8 @@ void InitializeMod(FModioMod &mod, const ModioMod &modio_mod)
 
   for (u32 i = 0; i < modio_mod.tags_array_size; i++)
   {
-    FModioTag tag;
-    InitializeTag(tag, modio_mod.tags_array[i]);
+    FModioModTag tag;
+    InitializeModTag(tag, modio_mod.tags_array[i]);
     mod.Tags.Add(tag);
   }
 

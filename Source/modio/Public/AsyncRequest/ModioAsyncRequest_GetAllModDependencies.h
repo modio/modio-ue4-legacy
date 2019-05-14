@@ -4,9 +4,9 @@
 #include "Schemas/ModioModDependency.h"
 
 /**
-* Callback returning all the mod profile information requested
+* Callback returning all the dependencies corresponding to a mod
 * @param ModioResponse - Response from Modio backend
-* @param Mods - Mods information retreived from mod.io
+* @param Dependencies - Dependencies assigned to the corresponding mod
 */
 
 class FModioAsyncRequest_GetAllModDependencies : public FModioAsyncRequest

@@ -5,6 +5,7 @@
 
 #include "Int64.h"
 #include "ModioHWrapper.h"
+#include "ModioResponse.h"
 #include "ModioFilehash.h"
 #include "ModioDownload.h"
 #include "ModioModfile.generated.h"
@@ -45,3 +46,6 @@ struct FModioModfile
 };
 
 extern void InitializeModfile(FModioModfile &modfile, const ModioModfile &modio_modfile);
+
+DECLARE_DELEGATE_TwoParams( FModioModfileDelegate, FModioResponse, FModioModfile );
+DECLARE_DELEGATE_TwoParams( FModioModfileArrayDelegate, FModioResponse, const TArray<FModioModfile> & );

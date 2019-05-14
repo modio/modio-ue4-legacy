@@ -10,7 +10,7 @@
 #include "ModioModfile.h"
 #include "ModioMedia.h"
 #include "ModioStats.h"
-#include "ModioTag.h"
+#include "ModioModTag.h"
 #include "ModioMetadataKVP.h"
 #include "ModioMod.generated.h"
 
@@ -62,7 +62,7 @@ struct FModioMod
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
   FModioStats Stats;
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
-  TArray<FModioTag> Tags;
+  TArray<FModioModTag> Tags;
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
   TArray<FModioMetadataKVP> MetadataKVP;
 };

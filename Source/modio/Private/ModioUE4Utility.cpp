@@ -3,16 +3,40 @@
 
 #include "ModioUE4Utility.h"
 
-TArray<FModioMod> ConvertToTArrayMods(ModioMod* modio_mods, u32 mods_size)
+TArray<FModioMod> ConvertToTArrayMods(ModioMod* ModioMods, u32 ModsSize)
 {
-  TArray<FModioMod> mods;
-  for (u32 i = 0; i < mods_size; i++)
+  TArray<FModioMod> Mods;
+  for (u32 i = 0; i < ModsSize; i++)
   {
-    FModioMod mod;
-    InitializeMod(mod, modio_mods[i]);
-    mods.Add(mod);
+    FModioMod Mod;
+    InitializeMod(Mod, ModioMods[i]);
+    Mods.Add(Mod);
   }
-  return mods;
+  return Mods;
+}
+
+TArray<FModioModfile> ConvertToTArrayModfiles(ModioModfile* ModioModfiles, u32 ModfilesSize)
+{
+  TArray<FModioModfile> Modfiles;
+  for (u32 i = 0; i < ModfilesSize; i++)
+  {
+    FModioModfile Modfile;
+    InitializeModfile(Modfile, ModioModfiles[i]);
+    Modfiles.Add(Modfile);
+  }
+  return Modfiles;
+}
+
+TArray<FModioRating> ConvertToTArrayRatings(ModioRating* ModioRatings, u32 RatingsSize)
+{
+  TArray<FModioRating> Ratings;
+  for (u32 i = 0; i < RatingsSize; i++)
+  {
+    FModioRating Rating;
+    InitializeRating(Rating, ModioRatings[i]);
+    Ratings.Add(Rating);
+  }
+  return Ratings;
 }
 
 TArray<FModioModDependency> ConvertToTArrayModDependencies(ModioDependency* ModioDependencies, u32 DependenciesSize)
@@ -25,6 +49,54 @@ TArray<FModioModDependency> ConvertToTArrayModDependencies(ModioDependency* Modi
     ModDependencies.Add(ModDependency);
   }
   return ModDependencies;
+}
+
+TArray<FModioModTag> ConvertToTArrayModTags(ModioTag* ModioTags, u32 TagsSize)
+{
+  TArray<FModioModTag> ModTags;
+  for (u32 i = 0; i < TagsSize; i++)
+  {
+    FModioModTag ModTag;
+    InitializeModTag(ModTag, ModioTags[i]);
+    ModTags.Add(ModTag);
+  }
+  return ModTags;
+}
+
+TArray<FModioMetadataKVP> ConvertToTArrayMetadataKVPs(ModioMetadataKVP* ModioMetadataKVPs, u32 MetadataKVPsSize)
+{
+  TArray<FModioMetadataKVP> MetadataKVPs;
+  for (u32 i = 0; i < MetadataKVPsSize; i++)
+  {
+    FModioMetadataKVP MetadataKVP;
+    InitializeMetadataKVP(MetadataKVP, ModioMetadataKVPs[i]);
+    MetadataKVPs.Add(MetadataKVP);
+  }
+  return MetadataKVPs;
+}
+
+TArray<FModioUserEvent> ConvertToTArrayUserEvents(ModioUserEvent* ModioUserEvents, u32 UserEventsSize)
+{
+  TArray<FModioUserEvent> UserEvents;
+  for (u32 i = 0; i < UserEventsSize; i++)
+  {
+    FModioUserEvent UserEvent;
+    InitializeUserEvent(UserEvent, ModioUserEvents[i]);
+    UserEvents.Add(UserEvent);
+  }
+  return UserEvents;
+}
+
+TArray<FModioModEvent> ConvertToTArrayModEvents(ModioModEvent* ModioModEvents, u32 ModEventsSize)
+{
+  TArray<FModioModEvent> ModEvents;
+  for (u32 i = 0; i < ModEventsSize; i++)
+  {
+    FModioModEvent ModEvent;
+    InitializeModEvent(ModEvent, ModioModEvents[i]);
+    ModEvents.Add(ModEvent);
+  }
+  return ModEvents;
 }
 
 void SetupModioFilterCreator(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, ModioFilterCreator& modio_filter_creator)

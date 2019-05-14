@@ -67,16 +67,16 @@ void FModioSubsystem::EditMod(uint32 ModId, const FModioModEditor &ModEditor, FM
   QueueAsyncTask( Request );
 }
 
-void FModioSubsystem::EmailExchange( const FString &SecurityCode, FModioGenericDelegate ExchangeDelegate )
+void FModioSubsystem::EmailExchange( const FString &SecurityCode, FModioGenericDelegate EmailExchangeDelegate )
 {
-  FModioAsyncRequest_EmailExchange *Request = new FModioAsyncRequest_EmailExchange( this, ExchangeDelegate );
-  modioEmailRequest( Request, TCHAR_TO_UTF8(*SecurityCode), FModioAsyncRequest_EmailExchange::Response );
+  FModioAsyncRequest_EmailExchange *Request = new FModioAsyncRequest_EmailExchange( this, EmailExchangeDelegate );
+  modioEmailExchange( Request, TCHAR_TO_UTF8(*SecurityCode), FModioAsyncRequest_EmailExchange::Response );
   QueueAsyncTask( Request );
 }
 
-void FModioSubsystem::EmailRequest( const FString &Email, FModioGenericDelegate ExchangeDelegate )
+void FModioSubsystem::EmailRequest( const FString &Email, FModioGenericDelegate EmailRequestDelegate )
 {
-  FModioAsyncRequest_EmailRequest *Request = new FModioAsyncRequest_EmailRequest( this, ExchangeDelegate );
+  FModioAsyncRequest_EmailRequest *Request = new FModioAsyncRequest_EmailRequest( this, EmailRequestDelegate );
   modioEmailRequest( Request, TCHAR_TO_UTF8(*Email), FModioAsyncRequest_EmailRequest::Response );
   QueueAsyncTask( Request );
 }
@@ -99,6 +99,28 @@ void FModioSubsystem::GetAuthenticatedUser(FModioUserDelegate GetAuthenticatedUs
   QueueAsyncTask( Request );
 }
 
+void FModioSubsystem::GetUserEvents(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, FModioUserEventArrayDelegate GetUserEventsDelegate)
+{
+  FModioAsyncRequest_GetUserEvents *Request = new FModioAsyncRequest_GetUserEvents( this, GetUserEventsDelegate );
+  ModioFilterCreator modio_filter_creator;
+  modioInitFilter(&modio_filter_creator);
+  SetupModioFilterCreator(FilterType, Limit, Offset, modio_filter_creator);
+  modioGetUserEvents(this, modio_filter_creator, FModioAsyncRequest_GetUserEvents::Response);
+  modioFreeFilter(&modio_filter_creator);
+  QueueAsyncTask( Request );
+}
+
+void FModioSubsystem::GetUserRatings(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, FModioRatingArrayDelegate GetUserRatingsDelegate)
+{
+  FModioAsyncRequest_GetUserRatings *Request = new FModioAsyncRequest_GetUserRatings( this, GetUserRatingsDelegate );
+  ModioFilterCreator modio_filter_creator;
+  modioInitFilter(&modio_filter_creator);
+  SetupModioFilterCreator(FilterType, Limit, Offset, modio_filter_creator);
+  modioGetUserRatings(this, modio_filter_creator, FModioAsyncRequest_GetUserRatings::Response);
+  modioFreeFilter(&modio_filter_creator);
+  QueueAsyncTask( Request );
+}
+
 void FModioSubsystem::GetUserSubscriptions(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, FModioModArrayDelegate GetUserSubscriptionsDelegate)
 {
   FModioAsyncRequest_GetUserSubscriptions *Request = new FModioAsyncRequest_GetUserSubscriptions( this, GetUserSubscriptionsDelegate );
@@ -107,6 +129,35 @@ void FModioSubsystem::GetUserSubscriptions(TEnumAsByte<EModioFilterType> FilterT
   SetupModioFilterCreator(FilterType, Limit, Offset, modio_filter_creator);
   modioGetUserSubscriptions(this, modio_filter_creator, FModioAsyncRequest_GetUserSubscriptions::Response);
   modioFreeFilter(&modio_filter_creator);
+  QueueAsyncTask( Request );
+}
+
+void FModioSubsystem::GetUserMods(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, FModioModArrayDelegate GetUserModsDelegate)
+{
+  FModioAsyncRequest_GetUserMods *Request = new FModioAsyncRequest_GetUserMods( this, GetUserModsDelegate );
+  ModioFilterCreator modio_filter_creator;
+  modioInitFilter(&modio_filter_creator);
+  SetupModioFilterCreator(FilterType, Limit, Offset, modio_filter_creator);
+  modioGetUserMods(this, modio_filter_creator, FModioAsyncRequest_GetUserMods::Response);
+  modioFreeFilter(&modio_filter_creator);
+  QueueAsyncTask( Request );
+}
+
+void FModioSubsystem::GetUserModfiles(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, FModioModfileArrayDelegate GetUserModfilesDelegate)
+{
+  FModioAsyncRequest_GetUserModfiles *Request = new FModioAsyncRequest_GetUserModfiles( this, GetUserModfilesDelegate );
+  ModioFilterCreator modio_filter_creator;
+  modioInitFilter(&modio_filter_creator);
+  SetupModioFilterCreator(FilterType, Limit, Offset, modio_filter_creator);
+  modioGetUserModfiles(this, modio_filter_creator, FModioAsyncRequest_GetUserModfiles::Response);
+  modioFreeFilter(&modio_filter_creator);
+  QueueAsyncTask( Request );
+}
+
+void FModioSubsystem::GalaxyAuth(const FString &Appdata, FModioGenericDelegate GalaxyAuthDelegate)
+{
+  FModioAsyncRequest_GalaxyAuth *Request = new FModioAsyncRequest_GalaxyAuth( this, GalaxyAuthDelegate );
+  modioGalaxyAuth( Request, TCHAR_TO_UTF8(*Appdata), FModioAsyncRequest_GalaxyAuth::Response );
   QueueAsyncTask( Request );
 }
 
@@ -249,6 +300,225 @@ void FModioSubsystem::DeleteModDependencies(int32 ModId, const TArray<int32> &De
   modioDeleteModDependencies(Request, (u32)ModId, ModIds, (u32)Dependencies.Num(), FModioAsyncRequest_DeleteModDependencies::Response);
   delete[] ModIds;
   
+  QueueAsyncTask( Request );
+}
+
+void FModioSubsystem::GetAllModTags(int32 ModId, FModioModTagsArrayDelegate GetAllModTagsDelegate)
+{
+  FModioAsyncRequest_GetAllModTags *Request = new FModioAsyncRequest_GetAllModTags( this, GetAllModTagsDelegate );
+  modioGetModTags(Request, (u32)ModId, FModioAsyncRequest_GetAllModTags::Response);
+  QueueAsyncTask( Request );
+}
+
+void FModioSubsystem::AddModTags(int32 ModId, const TArray<FString> &Tags, FModioGenericDelegate AddModTagsDelegate)
+{
+  FModioAsyncRequest_AddModTags *Request = new FModioAsyncRequest_AddModTags( this, AddModTagsDelegate );
+  char **ModTags = new char*[Tags.Num()];
+  for(int i = 0; i < Tags.Num(); i++)
+  {
+    ModTags[i] = new char[Tags[i].Len() + 1];
+    strcpy_s(ModTags[i], sizeof ModTags[i], TCHAR_TO_UTF8(*Tags[i]));
+  }
+  modioAddModTags(Request, (u32)ModId, ModTags, (u32)Tags.Num(), FModioAsyncRequest_AddModTags::Response);
+  for(int i = 0; i < Tags.Num(); i++)
+  {
+    delete[] ModTags[i];
+  }
+  delete[] ModTags;
+
+  QueueAsyncTask( Request );
+}
+
+void FModioSubsystem::DeleteModTags(int32 ModId, const TArray<FString> &Tags, FModioGenericDelegate DeleteModTagsDelegate)
+{
+  FModioAsyncRequest_DeleteModTags *Request = new FModioAsyncRequest_DeleteModTags( this, DeleteModTagsDelegate );
+  char **ModTags = new char*[Tags.Num()];
+  for(int i = 0; i < Tags.Num(); i++)
+  {
+    ModTags[i] = new char[Tags[i].Len() + 1];
+    strcpy_s(ModTags[i], sizeof ModTags[i], TCHAR_TO_UTF8(*Tags[i]));
+  }
+  modioDeleteModTags(Request, (u32)ModId, ModTags, (u32)Tags.Num(), FModioAsyncRequest_DeleteModTags::Response);
+  for(int i = 0; i < Tags.Num(); i++)
+  {
+    delete[] ModTags[i];
+  }
+  delete[] ModTags;
+  
+  QueueAsyncTask( Request );
+}
+
+void FModioSubsystem::GetAllMetadataKVPs(int32 ModId, FModioMetadataKVPArrayDelegate GetAllMetadataKVPsDelegate)
+{
+  FModioAsyncRequest_GetAllMetadataKVPs *Request = new FModioAsyncRequest_GetAllMetadataKVPs( this, GetAllMetadataKVPsDelegate );
+  modioGetAllMetadataKVP(Request, (u32)ModId, FModioAsyncRequest_GetAllMetadataKVPs::Response);
+  QueueAsyncTask( Request );
+}
+
+void FModioSubsystem::AddMetadataKVPs(int32 ModId, const TMap<FString, FString> &MetadataKVPs, FModioGenericDelegate AddMetadataKVPsDelegate)
+{
+  FModioAsyncRequest_AddMetadataKVPs *Request = new FModioAsyncRequest_AddMetadataKVPs( this, AddMetadataKVPsDelegate );
+  char **CMetadataKVPs = new char*[MetadataKVPs.Num()];
+
+  uint32 i = 0;
+  for (const TPair<FString, FString>& pair : MetadataKVPs)
+  {
+    FString StringfiedKVP = pair.Key + ":" + pair.Value;
+    CMetadataKVPs[i] = new char[StringfiedKVP.Len() + 1];
+    strcpy_s(CMetadataKVPs[i], sizeof StringfiedKVP, TCHAR_TO_UTF8(*StringfiedKVP));
+    i++;
+  }
+  modioAddMetadataKVP(Request, (u32)ModId, CMetadataKVPs, (u32)MetadataKVPs.Num(), FModioAsyncRequest_AddMetadataKVPs::Response);
+  for(int i = 0; i < MetadataKVPs.Num(); i++)
+  {
+    delete[] CMetadataKVPs[i];
+  }
+  delete[] CMetadataKVPs;
+
+  QueueAsyncTask( Request );
+}
+
+void FModioSubsystem::DeleteMetadataKVPs(int32 ModId, const TMap<FString, FString> &MetadataKVPs, FModioGenericDelegate DeleteMetadataKVPsDelegate)
+{
+  FModioAsyncRequest_DeleteMetadataKVPs *Request = new FModioAsyncRequest_DeleteMetadataKVPs( this, DeleteMetadataKVPsDelegate );
+  char **CMetadataKVPs = new char*[MetadataKVPs.Num()];
+  
+  uint32 i = 0;
+  for (const TPair<FString, FString>& pair : MetadataKVPs)
+  {
+    FString StringfiedKVP = pair.Key + ":" + pair.Value;
+    CMetadataKVPs[i] = new char[StringfiedKVP.Len() + 1];
+    strcpy_s(CMetadataKVPs[i], sizeof StringfiedKVP, TCHAR_TO_UTF8(*StringfiedKVP));
+    i++;
+  }
+  modioDeleteMetadataKVP(Request, (u32)ModId, CMetadataKVPs, (u32)MetadataKVPs.Num(), FModioAsyncRequest_DeleteModTags::Response);
+  for(int i = 0; i < MetadataKVPs.Num(); i++)
+  {
+    delete[] CMetadataKVPs[i];
+  }
+  delete[] CMetadataKVPs;
+
+  QueueAsyncTask( Request );
+}
+
+void FModioSubsystem::AddModLogo(int32 ModId, const FString &LogoPath, FModioGenericDelegate AddModLogoDelegate)
+{
+  FModioAsyncRequest_AddModLogo *Request = new FModioAsyncRequest_AddModLogo( this, AddModLogoDelegate );
+  modioAddModLogo( Request, ModId, TCHAR_TO_UTF8(*LogoPath), FModioAsyncRequest_AddModLogo::Response );
+  QueueAsyncTask( Request );
+}
+
+void FModioSubsystem::AddModImages(int32 ModId, const TArray<FString> &ImagePaths, FModioGenericDelegate AddModImagesDelegate)
+{
+  FModioAsyncRequest_AddModImages *Request = new FModioAsyncRequest_AddModImages( this, AddModImagesDelegate );
+  char **CImagePaths = new char*[ImagePaths.Num()];
+  for(int i = 0; i < ImagePaths.Num(); i++)
+  {
+    CImagePaths[i] = new char[ImagePaths[i].Len() + 1];
+    strcpy_s(CImagePaths[i], sizeof CImagePaths[i], TCHAR_TO_UTF8(*ImagePaths[i]));
+  }
+  modioAddModImages(Request, (u32)ModId, CImagePaths, (u32)ImagePaths.Num(), FModioAsyncRequest_AddModImages::Response);
+  for(int i = 0; i < ImagePaths.Num(); i++)
+  {
+    delete[] CImagePaths[i];
+  }
+  delete[] CImagePaths;
+
+  QueueAsyncTask( Request );
+}
+
+void FModioSubsystem::AddModYoutubeLinks(int32 ModId, const TArray<FString> &YoutubeLinks, FModioGenericDelegate AddModYoutubeLinksDelegate)
+{
+  FModioAsyncRequest_AddModYoutubeLinks *Request = new FModioAsyncRequest_AddModYoutubeLinks( this, AddModYoutubeLinksDelegate );
+  char **CYoutubeLinks = new char*[YoutubeLinks.Num()];
+  for(int i = 0; i < YoutubeLinks.Num(); i++)
+  {
+    CYoutubeLinks[i] = new char[YoutubeLinks[i].Len() + 1];
+    strcpy_s(CYoutubeLinks[i], sizeof CYoutubeLinks[i], TCHAR_TO_UTF8(*YoutubeLinks[i]));
+  }
+  modioAddModYoutubeLinks(Request, (u32)ModId, CYoutubeLinks, (u32)YoutubeLinks.Num(), FModioAsyncRequest_AddModYoutubeLinks::Response);
+  for(int i = 0; i < YoutubeLinks.Num(); i++)
+  {
+    delete[] CYoutubeLinks[i];
+  }
+  delete[] CYoutubeLinks;
+
+  QueueAsyncTask( Request );
+}
+
+void FModioSubsystem::AddModSketchfabLinks(int32 ModId, const TArray<FString> &SketchfabLinks, FModioGenericDelegate AddModSketchfabLinksDelegate)
+{
+  FModioAsyncRequest_AddModSketchfabLinks *Request = new FModioAsyncRequest_AddModSketchfabLinks( this, AddModSketchfabLinksDelegate );
+  char **CSketchfabLinks = new char*[SketchfabLinks.Num()];
+  for(int i = 0; i < SketchfabLinks.Num(); i++)
+  {
+    CSketchfabLinks[i] = new char[SketchfabLinks[i].Len() + 1];
+    strcpy_s(CSketchfabLinks[i], sizeof CSketchfabLinks[i], TCHAR_TO_UTF8(*SketchfabLinks[i]));
+  }
+  modioAddModSketchfabLinks(Request, (u32)ModId, CSketchfabLinks, (u32)SketchfabLinks.Num(), FModioAsyncRequest_AddModSketchfabLinks::Response);
+  for(int i = 0; i < SketchfabLinks.Num(); i++)
+  {
+    delete[] CSketchfabLinks[i];
+  }
+  delete[] CSketchfabLinks;
+
+  QueueAsyncTask( Request );
+}
+
+void FModioSubsystem::DeleteModImages(int32 ModId, const TArray<FString> &ImagePaths, FModioGenericDelegate DeleteModImagesDelegate)
+{
+  FModioAsyncRequest_DeleteModImages *Request = new FModioAsyncRequest_DeleteModImages( this, DeleteModImagesDelegate );
+  char **CImagePaths = new char*[ImagePaths.Num()];
+  for(int i = 0; i < ImagePaths.Num(); i++)
+  {
+    CImagePaths[i] = new char[ImagePaths[i].Len() + 1];
+    strcpy_s(CImagePaths[i], sizeof CImagePaths[i], TCHAR_TO_UTF8(*ImagePaths[i]));
+  }
+  modioDeleteModImages(Request, (u32)ModId, CImagePaths, (u32)ImagePaths.Num(), FModioAsyncRequest_DeleteModImages::Response);
+  for(int i = 0; i < ImagePaths.Num(); i++)
+  {
+    delete[] CImagePaths[i];
+  }
+  delete[] CImagePaths;
+
+  QueueAsyncTask( Request );
+}
+
+void FModioSubsystem::DeleteModYoutubeLinks(int32 ModId, const TArray<FString> &YoutubeLinks, FModioGenericDelegate DeleteModYoutubeLinksDelegate)
+{
+  FModioAsyncRequest_DeleteModYoutubeLinks *Request = new FModioAsyncRequest_DeleteModYoutubeLinks( this, DeleteModYoutubeLinksDelegate );
+  char **CYoutubeLinks = new char*[YoutubeLinks.Num()];
+  for(int i = 0; i < YoutubeLinks.Num(); i++)
+  {
+    CYoutubeLinks[i] = new char[YoutubeLinks[i].Len() + 1];
+    strcpy_s(CYoutubeLinks[i], sizeof CYoutubeLinks[i], TCHAR_TO_UTF8(*YoutubeLinks[i]));
+  }
+  modioDeleteModYoutubeLinks(Request, (u32)ModId, CYoutubeLinks, (u32)YoutubeLinks.Num(), FModioAsyncRequest_DeleteModYoutubeLinks::Response);
+  for(int i = 0; i < YoutubeLinks.Num(); i++)
+  {
+    delete[] CYoutubeLinks[i];
+  }
+  delete[] CYoutubeLinks;
+
+  QueueAsyncTask( Request );
+}
+
+void FModioSubsystem::DeleteModSketchfabLinks(int32 ModId, const TArray<FString> &SketchfabLinks, FModioGenericDelegate DeleteModSketchfabLinksDelegate)
+{
+  FModioAsyncRequest_DeleteModSketchfabLinks *Request = new FModioAsyncRequest_DeleteModSketchfabLinks( this, DeleteModSketchfabLinksDelegate );
+  char **CSketchfabLinks = new char*[SketchfabLinks.Num()];
+  for(int i = 0; i < SketchfabLinks.Num(); i++)
+  {
+    CSketchfabLinks[i] = new char[SketchfabLinks[i].Len() + 1];
+    strcpy_s(CSketchfabLinks[i], sizeof CSketchfabLinks[i], TCHAR_TO_UTF8(*SketchfabLinks[i]));
+  }
+  modioDeleteModSketchfabLinks(Request, (u32)ModId, CSketchfabLinks, (u32)SketchfabLinks.Num(), FModioAsyncRequest_DeleteModSketchfabLinks::Response);
+  for(int i = 0; i < SketchfabLinks.Num(); i++)
+  {
+    delete[] CSketchfabLinks[i];
+  }
+  delete[] CSketchfabLinks;
+
   QueueAsyncTask( Request );
 }
 
