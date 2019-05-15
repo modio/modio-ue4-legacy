@@ -303,7 +303,7 @@ void FModioSubsystem::DeleteModDependencies(int32 ModId, const TArray<int32> &De
   QueueAsyncTask( Request );
 }
 
-void FModioSubsystem::GetAllModTags(int32 ModId, FModioModTagsArrayDelegate GetAllModTagsDelegate)
+void FModioSubsystem::GetAllModTags(int32 ModId, FModioModTagArrayDelegate GetAllModTagsDelegate)
 {
   FModioAsyncRequest_GetAllModTags *Request = new FModioAsyncRequest_GetAllModTags( this, GetAllModTagsDelegate );
   modioGetModTags(Request, (u32)ModId, FModioAsyncRequest_GetAllModTags::Response);

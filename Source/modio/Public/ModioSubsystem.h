@@ -138,7 +138,7 @@ public:
 
   //Mod Tags
   /** Request all the tags from a mod */
-  void GetAllModTags(int32 ModId, FModioModTagsArrayDelegate GetAllModTagsDelegate);
+  void GetAllModTags(int32 ModId, FModioModTagArrayDelegate GetAllModTagsDelegate);
   /** Assign the provided tags to a corresponding mod */
   void AddModTags(int32 ModId, const TArray<FString> &Tags, FModioGenericDelegate AddModTagsDelegate);
   /** Deletes all the provided tags from the corresponding mod */

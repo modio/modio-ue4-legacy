@@ -1,7 +1,7 @@
 #include "AsyncRequest/ModioAsyncRequest_GetAllModTags.h"
 #include "ModioUE4Utility.h"
 
-FModioAsyncRequest_GetAllModTags::FModioAsyncRequest_GetAllModTags( FModioSubsystem *Modio, FModioModTagsArrayDelegate Delegate ) :
+FModioAsyncRequest_GetAllModTags::FModioAsyncRequest_GetAllModTags( FModioSubsystem *Modio, FModioModTagArrayDelegate Delegate ) :
   FModioAsyncRequest( Modio ),
   ResponseDelegate( Delegate )
 {

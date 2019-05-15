@@ -12,9 +12,9 @@
 class FModioAsyncRequest_GetAllModTags : public FModioAsyncRequest
 {
 public:
-  FModioAsyncRequest_GetAllModTags( FModioSubsystem *Modio, FModioModTagsArrayDelegate Delegate );
+  FModioAsyncRequest_GetAllModTags( FModioSubsystem *Modio, FModioModTagArrayDelegate Delegate );
 
   static void Response(void *Object, ModioResponse ModioResponse, ModioTag *ModioTags, u32 ModioTagsSize);
 private:
-  FModioModTagsArrayDelegate ResponseDelegate;
+  FModioModTagArrayDelegate ResponseDelegate;
 };
