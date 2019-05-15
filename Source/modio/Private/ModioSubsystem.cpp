@@ -348,55 +348,55 @@ void FModioSubsystem::DeleteModTags(int32 ModId, const TArray<FString> &Tags, FM
   QueueAsyncTask( Request );
 }
 
-void FModioSubsystem::GetAllMetadataKVPs(int32 ModId, FModioMetadataKVPArrayDelegate GetAllMetadataKVPsDelegate)
+void FModioSubsystem::GetAllMetadataKVP(int32 ModId, FModioMetadataKVPArrayDelegate GetAllMetadataKVPDelegate)
 {
-  FModioAsyncRequest_GetAllMetadataKVPs *Request = new FModioAsyncRequest_GetAllMetadataKVPs( this, GetAllMetadataKVPsDelegate );
-  modioGetAllMetadataKVP(Request, (u32)ModId, FModioAsyncRequest_GetAllMetadataKVPs::Response);
+  FModioAsyncRequest_GetAllMetadataKVP *Request = new FModioAsyncRequest_GetAllMetadataKVP( this, GetAllMetadataKVPDelegate );
+  modioGetAllMetadataKVP(Request, (u32)ModId, FModioAsyncRequest_GetAllMetadataKVP::Response);
   QueueAsyncTask( Request );
 }
 
-void FModioSubsystem::AddMetadataKVPs(int32 ModId, const TMap<FString, FString> &MetadataKVPs, FModioGenericDelegate AddMetadataKVPsDelegate)
+void FModioSubsystem::AddMetadataKVP(int32 ModId, const TMap<FString, FString> &MetadataKVP, FModioGenericDelegate AddMetadataKVPDelegate)
 {
-  FModioAsyncRequest_AddMetadataKVPs *Request = new FModioAsyncRequest_AddMetadataKVPs( this, AddMetadataKVPsDelegate );
-  char **CMetadataKVPs = new char*[MetadataKVPs.Num()];
+  FModioAsyncRequest_AddMetadataKVP *Request = new FModioAsyncRequest_AddMetadataKVP( this, AddMetadataKVPDelegate );
+  char **CMetadataKVP = new char*[MetadataKVP.Num()];
 
   uint32 i = 0;
-  for (const TPair<FString, FString>& pair : MetadataKVPs)
+  for (const TPair<FString, FString>& pair : MetadataKVP)
   {
     FString StringfiedKVP = pair.Key + ":" + pair.Value;
-    CMetadataKVPs[i] = new char[StringfiedKVP.Len() + 1];
-    strcpy_s(CMetadataKVPs[i], sizeof StringfiedKVP, TCHAR_TO_UTF8(*StringfiedKVP));
+    CMetadataKVP[i] = new char[StringfiedKVP.Len() + 1];
+    strcpy_s(CMetadataKVP[i], sizeof StringfiedKVP, TCHAR_TO_UTF8(*StringfiedKVP));
     i++;
   }
-  modioAddMetadataKVP(Request, (u32)ModId, CMetadataKVPs, (u32)MetadataKVPs.Num(), FModioAsyncRequest_AddMetadataKVPs::Response);
-  for(int i = 0; i < MetadataKVPs.Num(); i++)
+  modioAddMetadataKVP(Request, (u32)ModId, CMetadataKVP, (u32)MetadataKVP.Num(), FModioAsyncRequest_AddMetadataKVP::Response);
+  for(int i = 0; i < MetadataKVP.Num(); i++)
   {
-    delete[] CMetadataKVPs[i];
+    delete[] CMetadataKVP[i];
   }
-  delete[] CMetadataKVPs;
+  delete[] CMetadataKVP;
 
   QueueAsyncTask( Request );
 }
 
-void FModioSubsystem::DeleteMetadataKVPs(int32 ModId, const TMap<FString, FString> &MetadataKVPs, FModioGenericDelegate DeleteMetadataKVPsDelegate)
+void FModioSubsystem::DeleteMetadataKVP(int32 ModId, const TMap<FString, FString> &MetadataKVP, FModioGenericDelegate DeleteMetadataKVPDelegate)
 {
-  FModioAsyncRequest_DeleteMetadataKVPs *Request = new FModioAsyncRequest_DeleteMetadataKVPs( this, DeleteMetadataKVPsDelegate );
-  char **CMetadataKVPs = new char*[MetadataKVPs.Num()];
+  FModioAsyncRequest_DeleteMetadataKVP *Request = new FModioAsyncRequest_DeleteMetadataKVP( this, DeleteMetadataKVPDelegate );
+  char **CMetadataKVP = new char*[MetadataKVP.Num()];
   
   uint32 i = 0;
-  for (const TPair<FString, FString>& pair : MetadataKVPs)
+  for (const TPair<FString, FString>& pair : MetadataKVP)
   {
     FString StringfiedKVP = pair.Key + ":" + pair.Value;
-    CMetadataKVPs[i] = new char[StringfiedKVP.Len() + 1];
-    strcpy_s(CMetadataKVPs[i], sizeof StringfiedKVP, TCHAR_TO_UTF8(*StringfiedKVP));
+    CMetadataKVP[i] = new char[StringfiedKVP.Len() + 1];
+    strcpy_s(CMetadataKVP[i], sizeof StringfiedKVP, TCHAR_TO_UTF8(*StringfiedKVP));
     i++;
   }
-  modioDeleteMetadataKVP(Request, (u32)ModId, CMetadataKVPs, (u32)MetadataKVPs.Num(), FModioAsyncRequest_DeleteModTags::Response);
-  for(int i = 0; i < MetadataKVPs.Num(); i++)
+  modioDeleteMetadataKVP(Request, (u32)ModId, CMetadataKVP, (u32)MetadataKVP.Num(), FModioAsyncRequest_DeleteModTags::Response);
+  for(int i = 0; i < MetadataKVP.Num(); i++)
   {
-    delete[] CMetadataKVPs[i];
+    delete[] CMetadataKVP[i];
   }
-  delete[] CMetadataKVPs;
+  delete[] CMetadataKVP;
 
   QueueAsyncTask( Request );
 }

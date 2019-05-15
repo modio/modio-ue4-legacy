@@ -8,10 +8,10 @@
 * @param ModioResponse - Response from Modio backend
 */
 
-class FModioAsyncRequest_DeleteMetadataKVPs : public FModioAsyncRequest
+class FModioAsyncRequest_DeleteMetadataKVP : public FModioAsyncRequest
 {
 public:
-  FModioAsyncRequest_DeleteMetadataKVPs( FModioSubsystem *Modio, FModioGenericDelegate Delegate );
+  FModioAsyncRequest_DeleteMetadataKVP( FModioSubsystem *Modio, FModioGenericDelegate Delegate );
 
   static void Response(void *Object, ModioResponse ModioResponse );
 

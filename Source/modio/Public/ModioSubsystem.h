@@ -31,9 +31,9 @@
 #include "AsyncRequest/ModioAsyncRequest_AddModTags.h"
 #include "AsyncRequest/ModioAsyncRequest_DeleteModTags.h"
 #include "AsyncRequest/ModioAsyncRequest_GetAllModTags.h"
-#include "AsyncRequest/ModioAsyncRequest_AddMetadataKVPs.h"
-#include "AsyncRequest/ModioAsyncRequest_DeleteMetadataKVPs.h"
-#include "AsyncRequest/ModioAsyncRequest_GetAllMetadataKVPs.h"
+#include "AsyncRequest/ModioAsyncRequest_AddMetadataKVP.h"
+#include "AsyncRequest/ModioAsyncRequest_DeleteMetadataKVP.h"
+#include "AsyncRequest/ModioAsyncRequest_GetAllMetadataKVP.h"
 #include "AsyncRequest/ModioAsyncRequest_AddModLogo.h"
 #include "AsyncRequest/ModioAsyncRequest_AddModImages.h"
 #include "AsyncRequest/ModioAsyncRequest_AddModYoutubeLinks.h"
@@ -146,11 +146,11 @@ public:
 
   //Mod MetadataKVP
   /** Request all the metadata kvp from a mod */
-  void GetAllMetadataKVPs(int32 ModId, FModioMetadataKVPArrayDelegate GetAllMetadataKVPsDelegate);
+  void GetAllMetadataKVP(int32 ModId, FModioMetadataKVPArrayDelegate GetAllMetadataKVPDelegate);
   /** Assign the provided metadata kvp to a corresponding mod */
-  void AddMetadataKVPs(int32 ModId, const TMap<FString, FString> &MetadataKVPs, FModioGenericDelegate AddMetadataKVPsDelegate);
+  void AddMetadataKVP(int32 ModId, const TMap<FString, FString> &MetadataKVP, FModioGenericDelegate AddMetadataKVPDelegate);
   /** Deletes all the provided metadata kvp from the corresponding mod */
-  void DeleteMetadataKVPs(int32 ModId, const TMap<FString, FString> &MetadataKVPs, FModioGenericDelegate DeleteMetadataKVPsDelegate);
+  void DeleteMetadataKVP(int32 ModId, const TMap<FString, FString> &MetadataKVP, FModioGenericDelegate DeleteMetadataKVPDelegate);
 
   //Media Methods
   /** Adds a new logo image to the corresponding mod */

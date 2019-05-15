@@ -1,18 +1,18 @@
-#include "AsyncRequest/ModioAsyncRequest_AddMetadataKVPs.h"
+#include "AsyncRequest/ModioAsyncRequest_AddMetadataKVP.h"
 #include "ModioUE4Utility.h"
 
-FModioAsyncRequest_AddMetadataKVPs::FModioAsyncRequest_AddMetadataKVPs( FModioSubsystem *Modio, FModioGenericDelegate Delegate ) :
+FModioAsyncRequest_AddMetadataKVP::FModioAsyncRequest_AddMetadataKVP( FModioSubsystem *Modio, FModioGenericDelegate Delegate ) :
   FModioAsyncRequest( Modio ),
   ResponseDelegate( Delegate )
 {
 }
 
-void FModioAsyncRequest_AddMetadataKVPs::Response(void *Object, ModioResponse ModioResponse)
+void FModioAsyncRequest_AddMetadataKVP::Response(void *Object, ModioResponse ModioResponse)
 {
   FModioResponse Response;
   InitializeResponse( Response, ModioResponse );
 
-  FModioAsyncRequest_AddMetadataKVPs* ThisPointer = (FModioAsyncRequest_AddMetadataKVPs*)Object;
+  FModioAsyncRequest_AddMetadataKVP* ThisPointer = (FModioAsyncRequest_AddMetadataKVP*)Object;
   ThisPointer->ResponseDelegate.ExecuteIfBound( Response );
   
   ThisPointer->Done();

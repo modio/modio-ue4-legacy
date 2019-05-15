@@ -8,10 +8,10 @@
 * @param ModioResponse - Response from Modio backend
 */
 
-class FModioAsyncRequest_AddMetadataKVPs : public FModioAsyncRequest
+class FModioAsyncRequest_AddMetadataKVP : public FModioAsyncRequest
 {
 public:
-  FModioAsyncRequest_AddMetadataKVPs( FModioSubsystem *Modio, FModioGenericDelegate Delegate );
+  FModioAsyncRequest_AddMetadataKVP( FModioSubsystem *Modio, FModioGenericDelegate Delegate );
 
   static void Response(void *Object, ModioResponse ModioResponse );
 
