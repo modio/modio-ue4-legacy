@@ -20,4 +20,4 @@ struct FModioModTag
 
 extern void InitializeModTag(FModioModTag &tag, const ModioTag &modio_tag);
 
-DECLARE_DELEGATE_TwoParams( FModioModTagsArrayDelegate, FModioResponse, const TArray<FModioModTag> & );
+DECLARE_DELEGATE_TwoParams( FModioModTagArrayDelegate, FModioResponse, const TArray<FModioModTag> & );
