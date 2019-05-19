@@ -2,7 +2,6 @@
 // Released under MIT.
 
 #include "ModioFunctionLibrary.h"
-#include "ModioComponent.h"
 #include "ModioHWrapper.h"
 #include "ModioUE4Utility.h"
 

@@ -1,0 +1,45 @@
+// Copyright 2019 modio. All Rights Reserved.
+// Released under MIT.
+
+#include "CallbackProxy_SetModDownloadListener.h"
+#include "ModioUE4Utility.h"
+#include "ModioSubsystem.h"
+
+UCallbackProxy_SetModDownloadListener::UCallbackProxy_SetModDownloadListener(const FObjectInitializer &ObjectInitializer)
+    : Super(ObjectInitializer)
+{
+}
+
+UCallbackProxy_SetModDownloadListener *UCallbackProxy_SetModDownloadListener::SetModDownloadListener(UObject *WorldContext)
+{
+  UCallbackProxy_SetModDownloadListener *Proxy = NewObject<UCallbackProxy_SetModDownloadListener>();
+  Proxy->SetFlags(RF_StrongRefOnFrame);
+  Proxy->WorldContextObject = WorldContext;
+  return Proxy;
+}
+
+void UCallbackProxy_SetModDownloadListener::Activate()
+{
+  UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
+  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
+  {
+    Modio->SetModDownloadListener( FModioOnModDownloadDelegate::CreateUObject( this, &UCallbackProxy_SetModDownloadListener::OnModDownloadDelegate ) );
+  }
+  else
+  {
+    // @todonow: Make something more pretty than this
+    OnFailure.Broadcast( 0, 0 );
+  }
+}
+
+void UCallbackProxy_SetModDownloadListener::OnModDownloadDelegate(int32 ResponseCode, int32 ModId)
+{
+  if (ResponseCode >= 200 && ResponseCode < 300)
+  {
+    OnSuccess.Broadcast(ResponseCode, ModId);
+  }
+  else
+  {
+    OnFailure.Broadcast(ResponseCode, ModId);
+  }
+}
