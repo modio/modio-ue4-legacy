@@ -120,9 +120,9 @@ public:
   void AddModfile(int32 ModId, FModioModfileCreator ModfileCreator);
   /** Returns an array containing the upload queue infromation */
   TArray<FModioQueuedModfileUpload> GetModfileUploadQueue();
-  /** Callback triggered every time a mod is downloaded */
+  /** Callback triggered every time a mod is downloaded locally from mod.io */
   void SetModDownloadListener(FModioOnModDownloadDelegate ModioOnModDownloadDelegate);
-  /** Callback triggered every time a mod is uploaded */
+  /** Callback triggered every time a local mod finished uploading to mod.io */
   void SetModUploadListener(FModioOnModUploadDelegate ModioOnModUploadDelegate);
 
   //Mod Subscription
@@ -175,7 +175,7 @@ public:
   /** Download and upload delegate listeners */
   static FModioOnModDownloadDelegate ModioOnModDownloadDelegate;
   static FModioOnModUploadDelegate ModioOnModUploadDelegate;
-  
+
 protected:
   friend class FModioModule;
   static FModioSubsystemPtr Create(const FString &RootDirectory, uint32 GameId, const FString &ApiKey, bool bIsLiveEnvironment);
