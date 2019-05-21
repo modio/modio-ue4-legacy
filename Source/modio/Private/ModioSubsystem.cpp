@@ -7,6 +7,9 @@
 #include "Schemas/ModioResponse.h"
 #include "ModioCallbacks.h"
 
+FModioOnModDownloadDelegate FModioSubsystem::ModioOnModDownloadDelegate;
+FModioOnModUploadDelegate FModioSubsystem::ModioOnModUploadDelegate;
+
 FModioSubsystem::FModioSubsystem() :
   bInitialized(false)
 {
@@ -522,6 +525,16 @@ void FModioSubsystem::DeleteModSketchfabLinks(int32 ModId, const TArray<FString>
   QueueAsyncTask( Request );
 }
 
+void FModioSubsystem::SetModDownloadListener(FModioOnModDownloadDelegate ModioOnModDownloadDelegate)
+{
+  FModioSubsystem::ModioOnModDownloadDelegate = ModioOnModDownloadDelegate;
+}
+
+void FModioSubsystem::SetModUploadListener(FModioOnModUploadDelegate ModioOnModUploadDelegate)
+{
+  FModioSubsystem::ModioOnModUploadDelegate = ModioOnModUploadDelegate;
+}
+
 void FModioSubsystem::Init( const FString& RootDirectory, uint32 GameId, const FString& ApiKey, bool bIsLiveEnvironment )
 {
   check(!bInitialized);
@@ -530,8 +543,8 @@ void FModioSubsystem::Init( const FString& RootDirectory, uint32 GameId, const F
   
   modioInit( Environment, (u32)GameId, TCHAR_TO_UTF8(*ApiKey), TCHAR_TO_UTF8(*RootDirectory) );
 
-  modioSetDownloadListener(&onModInstalled);
-  modioSetUploadListener(&onAddModfile);
+  modioSetDownloadListener(&onModDownload);
+  modioSetUploadListener(&onModUpload);
 
   bInitialized = true;
 }
