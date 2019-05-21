@@ -23,7 +23,8 @@ UCallbackProxy_EditMod *UCallbackProxy_EditMod::EditMod(UObject *WorldContext, i
 void UCallbackProxy_EditMod::Activate()
 {
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
-  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
+  FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
+  if( Modio.IsValid() )
   {
     Modio->EditMod( this->ModId, this->ModEditor, FModioModDelegate::CreateUObject( this, &UCallbackProxy_EditMod::OnEditModDelegate ) );
   }

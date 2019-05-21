@@ -24,7 +24,8 @@ UCallbackProxy_GetUserRatings *UCallbackProxy_GetUserRatings::GetUserRatings(UOb
 void UCallbackProxy_GetUserRatings::Activate()
 {
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
-  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
+  FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
+  if( Modio.IsValid() )
   {
     Modio->GetUserRatings( this->FilterType, this->Limit, this->Offset, FModioRatingArrayDelegate::CreateUObject( this, &UCallbackProxy_GetUserRatings::OnGetUserRatingsDelegate ) );
   }

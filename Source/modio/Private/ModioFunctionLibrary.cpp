@@ -13,7 +13,8 @@ UModioFunctionLibrary::UModioFunctionLibrary(const FObjectInitializer &ObjectIni
 void UModioFunctionLibrary::ModioProcess(UObject *WorldContextObject)
 {
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
-  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
+  FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
+  if( Modio.IsValid() )
   {
     Modio->Process();
   }
@@ -22,7 +23,8 @@ void UModioFunctionLibrary::ModioProcess(UObject *WorldContextObject)
 void UModioFunctionLibrary::ModioLogout(UObject *WorldContextObject)
 {
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
-  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
+  FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
+  if( Modio.IsValid() )
   {
     Modio->Logout();
   }
@@ -31,7 +33,8 @@ void UModioFunctionLibrary::ModioLogout(UObject *WorldContextObject)
 void UModioFunctionLibrary::ModioIsLoggedIn(UObject *WorldContextObject, bool &IsLoggedIn)
 {
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
-  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
+  FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
+  if( Modio.IsValid() )
   {
     IsLoggedIn = Modio->IsLoggedIn();
   }
@@ -40,7 +43,8 @@ void UModioFunctionLibrary::ModioIsLoggedIn(UObject *WorldContextObject, bool &I
 void UModioFunctionLibrary::ModioCurrentUser(UObject *WorldContextObject, FModioUser &User)
 {
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
-  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
+  FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
+  if( Modio.IsValid() )
   {
     User = Modio->CurrentUser();
   }
@@ -49,7 +53,8 @@ void UModioFunctionLibrary::ModioCurrentUser(UObject *WorldContextObject, FModio
 void UModioFunctionLibrary::ModioGetAllInstalledMods(UObject *WorldContextObject, TArray<FModioInstalledMod> &InstalledMods)
 {
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
-  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
+  FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
+  if( Modio.IsValid() )
   {
     InstalledMods = Modio->GetAllInstalledMods();
   }
@@ -58,7 +63,8 @@ void UModioFunctionLibrary::ModioGetAllInstalledMods(UObject *WorldContextObject
 void UModioFunctionLibrary::ModioGetModDownloadQueue(UObject *WorldContextObject, TArray<FModioQueuedModDownload> &QueuedMods)
 {
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
-  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
+  FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
+  if( Modio.IsValid() )
   {
     QueuedMods = Modio->GetModDownloadQueue();
   }
@@ -67,7 +73,8 @@ void UModioFunctionLibrary::ModioGetModDownloadQueue(UObject *WorldContextObject
 void UModioFunctionLibrary::ModioInstallDownloadedMods(UObject *WorldContextObject)
 {
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
-  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
+  FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
+  if( Modio.IsValid() )
   {
     Modio->InstallDownloadedMods();
   }
@@ -76,7 +83,8 @@ void UModioFunctionLibrary::ModioInstallDownloadedMods(UObject *WorldContextObje
 void UModioFunctionLibrary::ModioAddModfile(UObject *WorldContextObject, int32 ModId, FModioModfileCreator ModfileCreator)
 {
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
-  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
+  FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
+  if( Modio.IsValid() )
   {
     Modio->AddModfile(ModId, ModfileCreator);
   }
@@ -85,7 +93,8 @@ void UModioFunctionLibrary::ModioAddModfile(UObject *WorldContextObject, int32 M
 void UModioFunctionLibrary::ModioGetModfileUploadQueue(UObject *WorldContextObject, TArray<FModioQueuedModfileUpload> &UploadQueue)
 {
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
-  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
+  FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
+  if( Modio.IsValid() )
   {
     UploadQueue = Modio->GetModfileUploadQueue();
   }

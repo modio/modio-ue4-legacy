@@ -24,7 +24,8 @@ UCallbackProxy_GetUserSubscriptions *UCallbackProxy_GetUserSubscriptions::GetUse
 void UCallbackProxy_GetUserSubscriptions::Activate()
 {
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
-  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
+  FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
+  if( Modio.IsValid() )
   {
     Modio->GetUserSubscriptions( this->FilterType, this->Limit, this->Offset, FModioModArrayDelegate::CreateUObject( this, &UCallbackProxy_GetUserSubscriptions::OnGetUserSubscriptionsDelegate ) );
   }

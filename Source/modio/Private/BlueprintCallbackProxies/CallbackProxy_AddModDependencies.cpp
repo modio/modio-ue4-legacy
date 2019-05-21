@@ -22,7 +22,8 @@ UCallbackProxy_AddModDependencies *UCallbackProxy_AddModDependencies::AddModDepe
 void UCallbackProxy_AddModDependencies::Activate()
 {
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
-  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
+  FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
+  if( Modio.IsValid() )
   {
     Modio->AddModDependencies( ModId, Dependencies, FModioGenericDelegate::CreateUObject( this, &UCallbackProxy_AddModDependencies::OnAddModDependenciesDelegate ) );
   }

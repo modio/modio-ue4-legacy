@@ -22,7 +22,8 @@ UCallbackProxy_DeleteModTags *UCallbackProxy_DeleteModTags::DeleteModTags( UObje
 void UCallbackProxy_DeleteModTags::Activate()
 {
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
-  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
+  FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
+  if( Modio.IsValid() )
   {
     Modio->DeleteModTags( ModId, Tags, FModioGenericDelegate::CreateUObject( this, &UCallbackProxy_DeleteModTags::OnDeleteModTagsDelegate ) );
   }

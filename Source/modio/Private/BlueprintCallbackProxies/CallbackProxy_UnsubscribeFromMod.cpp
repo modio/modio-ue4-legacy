@@ -21,7 +21,8 @@ UCallbackProxy_UnsubscribeFromMod *UCallbackProxy_UnsubscribeFromMod::Unsubscrib
 void UCallbackProxy_UnsubscribeFromMod::Activate()
 {
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
-  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
+  FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
+  if( Modio.IsValid() )
   {
     Modio->UnsubscribeFromMod( this->ModId, FModioGenericDelegate::CreateUObject( this, &UCallbackProxy_UnsubscribeFromMod::OnUnsubscribeFromModDelegate ) );
   }

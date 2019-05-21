@@ -24,7 +24,8 @@ UCallbackProxy_GetUserEvents *UCallbackProxy_GetUserEvents::GetUserEvents(UObjec
 void UCallbackProxy_GetUserEvents::Activate()
 {
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
-  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
+  FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
+  if( Modio.IsValid() )
   {
     Modio->GetUserEvents( this->FilterType, this->Limit, this->Offset, FModioUserEventArrayDelegate::CreateUObject( this, &UCallbackProxy_GetUserEvents::OnGetUserEventsDelegate ) );
   }

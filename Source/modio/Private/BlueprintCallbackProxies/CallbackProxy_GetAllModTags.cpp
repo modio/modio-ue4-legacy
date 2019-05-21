@@ -21,7 +21,8 @@ UCallbackProxy_GetAllModTags *UCallbackProxy_GetAllModTags::GetAllModTags( UObje
 void UCallbackProxy_GetAllModTags::Activate()
 {
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
-  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
+  FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
+  if( Modio.IsValid() )
   {
     Modio->GetAllModTags( ModId, FModioModTagArrayDelegate::CreateUObject( this, &UCallbackProxy_GetAllModTags::OnGetAllModTagsDelegate ) );
   }

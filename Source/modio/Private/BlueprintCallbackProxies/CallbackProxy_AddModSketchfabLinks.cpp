@@ -22,7 +22,8 @@ UCallbackProxy_AddModSketchfabLinks *UCallbackProxy_AddModSketchfabLinks::AddMod
 void UCallbackProxy_AddModSketchfabLinks::Activate()
 {
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
-  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
+  FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
+  if( Modio.IsValid() )
   {
     Modio->AddModSketchfabLinks( this->ModId, this->SketchfabLinks, FModioGenericDelegate::CreateUObject( this, &UCallbackProxy_AddModSketchfabLinks::OnAddModSketchfabLinksDelegate ) );
   }

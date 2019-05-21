@@ -22,7 +22,8 @@ UCallbackProxy_AddModYoutubeLinks *UCallbackProxy_AddModYoutubeLinks::AddModYout
 void UCallbackProxy_AddModYoutubeLinks::Activate()
 {
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
-  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
+  FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
+  if( Modio.IsValid() )
   {
     Modio->AddModYoutubeLinks( this->ModId, this->YoutubeLinks, FModioGenericDelegate::CreateUObject( this, &UCallbackProxy_AddModYoutubeLinks::OnAddModYoutubeLinksDelegate ) );
   }

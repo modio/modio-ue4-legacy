@@ -21,7 +21,8 @@ UCallbackProxy_GalaxyAuth *UCallbackProxy_GalaxyAuth::GalaxyAuth( UObject *World
 void UCallbackProxy_GalaxyAuth::Activate()
 {
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
-  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
+  FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
+  if( Modio.IsValid() )
   {
     Modio->GalaxyAuth( Appdata, FModioGenericDelegate::CreateUObject( this, &UCallbackProxy_GalaxyAuth::OnGalaxyAuthDelegate ) );
   }

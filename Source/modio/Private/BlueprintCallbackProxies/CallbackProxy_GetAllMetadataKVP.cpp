@@ -21,7 +21,8 @@ UCallbackProxy_GetAllMetadataKVP *UCallbackProxy_GetAllMetadataKVP::GetAllMetada
 void UCallbackProxy_GetAllMetadataKVP::Activate()
 {
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
-  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
+  FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
+  if( Modio.IsValid() )
   {
     Modio->GetAllMetadataKVP( ModId, FModioMetadataKVPArrayDelegate::CreateUObject( this, &UCallbackProxy_GetAllMetadataKVP::OnGetAllMetadataKVPDelegate ) );
   }

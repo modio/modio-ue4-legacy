@@ -71,73 +71,7 @@ static bool IsLowestInstanceOf(UWorld *World, EInstanceType InstanceType)
 
 FModioSubsystemPtr FModioModule::GetModioImp(UWorld *World) const
 {
-  // Must pass in a valid word to get the interface, we don't default to GWorld
-  // as some functions might actually pass in a null world by accident
-  if (!IsValid(World))
-  {
-    return nullptr;
-  }
-
-#if !UE_BUILD_SHIPPING
-  // In dev, we might run several instances of the game at the same time. Lets just limit it to
-  // one instance, so both instances don't clobber each others downloads etc
-  if (!GIsFirstInstance)
-  {
-    return nullptr;
-  }
-#endif
-
-  const UModioSettings *Settings = GetDefault<UModioSettings>();
-
-  bool bIsDedicatedServerWorld = IsValid(World->GetGameInstance()) ? World->GetGameInstance()->IsDedicatedServerInstance() : false;
-  if (bIsDedicatedServerWorld && !Settings->bRunOnDedicatedServer)
-  {
-    return nullptr;
-  }
-
-// In final game, we don't need to care about editor, so we can strip out all these checks
-#if WITH_EDITOR
-  if (GIsEditor)
-  {
-    // Always return the implementation in editor, as then the developer is creating editor tools
-    if (World->WorldType == EWorldType::Editor || World->WorldType == EWorldType::EditorPreview)
-    {
-      return ModioImp;
-    }
-
-    // If dedicated server world, make sure we should run on it
-    if (bIsDedicatedServerWorld)
-    {
-      if (Settings->RunInEditor == ERunInEditorOn::DedicatedServer)
-      {
-        return ModioImp;
-      }
-      return nullptr;
-    }
-    
-    if (World->IsGameWorld())
-    {
-      // We don't want clients in PIE to have the world
-      if (Settings->RunInEditor == ERunInEditorOn::FirstServer && IsLowestInstanceOf(World, EInstanceType::Server))
-      {
-        return ModioImp;
-      }
-      else if (Settings->RunInEditor == ERunInEditorOn::FirstClient && IsLowestInstanceOf(World, EInstanceType::Client))
-      {
-        return ModioImp;
-      } 
-    }
-  }
-#endif
-
-  // Else, if it's another game world that's not PIE, always return the implementation
-  if (World->IsGameWorld())
-  {
-    return ModioImp;    
-  }
-
-  // I don't actually know if there should be any more cases
-  return nullptr;
+  return ModioImp;
 }
 
 void FModioModule::StartupModule()
@@ -160,7 +94,7 @@ void FModioModule::ShutdownModule()
     UnregisterSettings();
   }
 
-  if (ModioImp)
+  if (ModioImp.IsValid())
   {
     ModioImp->Shutdown();
     ModioImp = nullptr;
@@ -174,7 +108,8 @@ bool FModioModule::SupportsDynamicReloading()
 
 bool FModioModule::HandleSettingsSaved()
 {
-  if( FModioSubsystemPtr Modio = GetModioImp(GWorld) )
+  FModioSubsystemPtr Modio = GetModioImp(GWorld);
+  if( Modio.IsValid() )
   {
     Modio->Shutdown();
     Modio = nullptr;

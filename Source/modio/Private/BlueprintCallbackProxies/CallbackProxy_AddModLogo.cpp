@@ -22,7 +22,8 @@ UCallbackProxy_AddModLogo *UCallbackProxy_AddModLogo::AddModLogo( UObject *World
 void UCallbackProxy_AddModLogo::Activate()
 {
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
-  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
+  FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
+  if( Modio.IsValid() )
   {
     Modio->AddModLogo( ModId, LogoPath, FModioGenericDelegate::CreateUObject( this, &UCallbackProxy_AddModLogo::OnAddModLogoDelegate ) );
   }

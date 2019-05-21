@@ -22,7 +22,8 @@ UCallbackProxy_DeleteModDependencies *UCallbackProxy_DeleteModDependencies::Dele
 void UCallbackProxy_DeleteModDependencies::Activate()
 {
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
-  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
+  FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
+  if( Modio.IsValid() )
   {
     Modio->DeleteModDependencies( ModId, Dependencies, FModioGenericDelegate::CreateUObject( this, &UCallbackProxy_DeleteModDependencies::OnDeleteModDependenciesDelegate ) );
   }

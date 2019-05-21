@@ -21,7 +21,8 @@ UCallbackProxy_EmailExchange *UCallbackProxy_EmailExchange::EmailExchange( UObje
 void UCallbackProxy_EmailExchange::Activate()
 {
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
-  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
+  FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
+  if( Modio.IsValid() )
   {
     Modio->EmailExchange( SecurityCode, FModioGenericDelegate::CreateUObject( this, &UCallbackProxy_EmailExchange::OnEmailExchangeDelegate ) );
   }

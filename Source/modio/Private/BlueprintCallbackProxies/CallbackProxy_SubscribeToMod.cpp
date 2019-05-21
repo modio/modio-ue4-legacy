@@ -22,7 +22,8 @@ UCallbackProxy_SubscribeToMod *UCallbackProxy_SubscribeToMod::SubscribeToMod(UOb
 void UCallbackProxy_SubscribeToMod::Activate()
 {
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
-  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
+  FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
+  if( Modio.IsValid() )
   {
     Modio->SubscribeToMod( this->ModId, FModioModDelegate::CreateUObject( this, &UCallbackProxy_SubscribeToMod::OnSubscribeToModDelegate ) );
   }
