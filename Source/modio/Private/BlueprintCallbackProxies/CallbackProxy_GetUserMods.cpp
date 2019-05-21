@@ -24,7 +24,8 @@ UCallbackProxy_GetUserMods *UCallbackProxy_GetUserMods::GetUserMods(UObject *Wor
 void UCallbackProxy_GetUserMods::Activate()
 {
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
-  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
+  FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
+  if( Modio.IsValid() )
   {
     Modio->GetUserMods( this->FilterType, this->Limit, this->Offset, FModioModArrayDelegate::CreateUObject( this, &UCallbackProxy_GetUserMods::OnGetUserModsDelegate ) );
   }

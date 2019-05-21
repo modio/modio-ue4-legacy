@@ -23,7 +23,8 @@ UCallbackProxy_GetAllMods *UCallbackProxy_GetAllMods::GetAllMods(UObject *WorldC
 void UCallbackProxy_GetAllMods::Activate()
 {
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
-  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
+  FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
+  if( Modio.IsValid() )
   {
     Modio->GetAllMods( this->FilterType, this->Limit, this->Offset, FModioModArrayDelegate::CreateUObject( this, &UCallbackProxy_GetAllMods::OnGetAllModsDelegate ) );
   }

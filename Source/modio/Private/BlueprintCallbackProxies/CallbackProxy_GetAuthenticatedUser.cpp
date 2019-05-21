@@ -20,7 +20,8 @@ UCallbackProxy_GetAuthenticatedUser *UCallbackProxy_GetAuthenticatedUser::GetAut
 void UCallbackProxy_GetAuthenticatedUser::Activate()
 {
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
-  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
+  FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
+  if( Modio.IsValid() )
   {
     Modio->GetAuthenticatedUser( FModioUserDelegate::CreateUObject( this, &UCallbackProxy_GetAuthenticatedUser::OnGetAuthenticatedUserDelegate ) );
   }

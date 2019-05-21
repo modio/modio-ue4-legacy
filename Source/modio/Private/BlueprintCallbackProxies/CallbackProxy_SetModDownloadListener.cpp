@@ -21,7 +21,8 @@ UCallbackProxy_SetModDownloadListener *UCallbackProxy_SetModDownloadListener::Se
 void UCallbackProxy_SetModDownloadListener::Activate()
 {
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
-  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
+  FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
+  if( Modio.IsValid() )
   {
     Modio->SetModDownloadListener( FModioOnModDownloadDelegate::CreateUObject( this, &UCallbackProxy_SetModDownloadListener::OnModDownloadDelegate ) );
   }

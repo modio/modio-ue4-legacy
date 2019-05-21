@@ -22,7 +22,8 @@ UCallbackProxy_DeleteModYoutubeLinks *UCallbackProxy_DeleteModYoutubeLinks::Dele
 void UCallbackProxy_DeleteModYoutubeLinks::Activate()
 {
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
-  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
+  FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
+  if( Modio.IsValid() )
   {
     Modio->DeleteModYoutubeLinks( this->ModId, this->YoutubeLinks, FModioGenericDelegate::CreateUObject( this, &UCallbackProxy_DeleteModYoutubeLinks::OnDeleteModYoutubeLinksDelegate ) );
   }

@@ -22,7 +22,8 @@ UCallbackProxy_DeleteModSketchfabLinks *UCallbackProxy_DeleteModSketchfabLinks::
 void UCallbackProxy_DeleteModSketchfabLinks::Activate()
 {
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
-  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
+  FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
+  if( Modio.IsValid() )
   {
     Modio->DeleteModSketchfabLinks( this->ModId, this->SketchfabLinks, FModioGenericDelegate::CreateUObject( this, &UCallbackProxy_DeleteModSketchfabLinks::OnDeleteModSketchfabLinksDelegate ) );
   }

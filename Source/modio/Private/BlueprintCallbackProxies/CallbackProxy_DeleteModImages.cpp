@@ -22,7 +22,8 @@ UCallbackProxy_DeleteModImages *UCallbackProxy_DeleteModImages::DeleteModImages(
 void UCallbackProxy_DeleteModImages::Activate()
 {
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
-  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
+  FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
+  if( Modio.IsValid() )
   {
     Modio->DeleteModImages( this->ModId, this->ImagePaths, FModioGenericDelegate::CreateUObject( this, &UCallbackProxy_DeleteModImages::OnDeleteModImagesDelegate ) );
   }

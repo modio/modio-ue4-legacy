@@ -22,7 +22,8 @@ UCallbackProxy_DeleteMetadataKVP *UCallbackProxy_DeleteMetadataKVP::DeleteMetada
 void UCallbackProxy_DeleteMetadataKVP::Activate()
 {
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
-  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
+  FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
+  if( Modio.IsValid() )
   {
     Modio->DeleteMetadataKVP( ModId, MetadataKVP, FModioGenericDelegate::CreateUObject( this, &UCallbackProxy_DeleteMetadataKVP::OnDeleteMetadataKVPDelegate ) );
   }

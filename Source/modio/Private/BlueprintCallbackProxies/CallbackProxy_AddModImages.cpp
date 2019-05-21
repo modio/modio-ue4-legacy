@@ -22,7 +22,8 @@ UCallbackProxy_AddModImages *UCallbackProxy_AddModImages::AddModImages( UObject 
 void UCallbackProxy_AddModImages::Activate()
 {
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
-  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
+  FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
+  if( Modio.IsValid() )
   {
     Modio->AddModImages( this->ModId, this->ImagePaths, FModioGenericDelegate::CreateUObject( this, &UCallbackProxy_AddModImages::OnAddModImagesDelegate ) );
   }

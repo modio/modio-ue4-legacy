@@ -22,7 +22,8 @@ UCallbackProxy_AddMetadataKVP *UCallbackProxy_AddMetadataKVP::AddMetadataKVP( UO
 void UCallbackProxy_AddMetadataKVP::Activate()
 {
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
-  if( FModioSubsystemPtr Modio = FModioSubsystem::Get( World ) )
+  FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
+  if( Modio.IsValid() )
   {
     Modio->AddMetadataKVP( ModId, MetadataKVP, FModioGenericDelegate::CreateUObject( this, &UCallbackProxy_AddMetadataKVP::OnAddMetadataKVPDelegate ) );
   }
