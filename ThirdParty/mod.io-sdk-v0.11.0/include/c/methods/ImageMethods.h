@@ -8,5 +8,6 @@
 #include "../schemas/ModioResponse.h"
 #include "../ModioC.h"
 #include "callbacks/ImageCallbacks.h"
+#include "../../ModioUtility.h"
 
 #endif

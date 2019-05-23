@@ -157,6 +157,13 @@ void FModioSubsystem::GetUserModfiles(TEnumAsByte<EModioFilterType> FilterType, 
   QueueAsyncTask( Request );
 }
 
+void FModioSubsystem::SteamAuth(const FString &Base64Ticket, FModioGenericDelegate SteamAuthDelegate)
+{
+  FModioAsyncRequest_SteamAuth *Request = new FModioAsyncRequest_SteamAuth( this, SteamAuthDelegate );
+  modioSteamAuthEncoded( Request, TCHAR_TO_UTF8(*Base64Ticket), FModioAsyncRequest_SteamAuth::Response );
+  QueueAsyncTask( Request );
+}
+
 void FModioSubsystem::GalaxyAuth(const FString &Appdata, FModioGenericDelegate GalaxyAuthDelegate)
 {
   FModioAsyncRequest_GalaxyAuth *Request = new FModioAsyncRequest_GalaxyAuth( this, GalaxyAuthDelegate );

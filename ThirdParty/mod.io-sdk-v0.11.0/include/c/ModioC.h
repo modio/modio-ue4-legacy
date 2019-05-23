@@ -107,8 +107,10 @@ typedef int i32;
 #define MODIO_SERVICE_STEAM   0
 #define MODIO_SERVICE_GALAXY  1
 
+#ifdef __cplusplus
 extern "C"
 {
+#endif
   // Schemas
   typedef struct ModioAvatar ModioAvatar;
   typedef struct ModioComment ModioComment;
@@ -498,9 +500,9 @@ extern "C"
 
   //General Methods
   void MODIO_DLL modioInit(u32 environment, u32 game_id, char* api_key, char* root_path);
-  void MODIO_DLL modioShutdown();
+  void MODIO_DLL modioShutdown(void);
   void MODIO_DLL modioSetDebugLevel(u32 debug_level);
-  void MODIO_DLL modioProcess();
+  void MODIO_DLL modioProcess(void);
   void MODIO_DLL modioSleep(u32 milliseconds);
   void MODIO_DLL compressFiles(char* root_directory, char* filenames[], u32 filenames_size, char* zip_path);
 
@@ -512,13 +514,14 @@ extern "C"
   //Authentication Methods
   void MODIO_DLL modioEmailRequest(void* object, char* email, void (*callback)(void* object, ModioResponse response));
   void MODIO_DLL modioEmailExchange(void* object, char* security_code, void (*callback)(void* object, ModioResponse response));
-  bool MODIO_DLL modioIsLoggedIn();
-  void MODIO_DLL modioLogout();
-  const struct ModioUser MODIO_DLL modioGetCurrentUser();
+  bool MODIO_DLL modioIsLoggedIn(void);
+  void MODIO_DLL modioLogout(void);
+  struct ModioUser MODIO_DLL modioGetCurrentUser(void);
 
   //External Authentication Methods
   void MODIO_DLL modioGalaxyAuth(void* object, char* appdata, void (*callback)(void* object, ModioResponse response));
   void MODIO_DLL modioSteamAuth(void* object, unsigned char* rgubTicket, u32 cubTicket, void (*callback)(void* object, ModioResponse response));
+  void MODIO_DLL modioSteamAuthEncoded(void* object, char* base64_ticket, void (*callback)(void* object, ModioResponse response));
   void MODIO_DLL modioLinkExternalAccount(void* object, u32 service, char* service_id, char* email, void (*callback)(void* object, ModioResponse response));
 
   //Image Methods
@@ -639,26 +642,26 @@ extern "C"
   void MODIO_DLL modioGetUserRatings(void* object, ModioFilterCreator filter, void (*callback)(void* object, ModioResponse response, ModioRating ratings[], u32 ratings_size));
 
   //Settings Methods
-  void MODIO_DLL modioInitConfig();
-  u32 MODIO_DLL modioGetAutomaticUpdatesConfig();
-  u32 MODIO_DLL modioGetAllowBackgroundDownloadsConfig();
+  void MODIO_DLL modioInitConfig(void);
+  u32 MODIO_DLL modioGetAutomaticUpdatesConfig(void);
+  u32 MODIO_DLL modioGetAllowBackgroundDownloadsConfig(void);
   void MODIO_DLL modioSetAutomaticUpdatesConfig(u32 option);
   void MODIO_DLL modioSetAllowBackgroundDownloadsConfig(u32 option);
 
   //Downloads Methods
   void MODIO_DLL modioDownloadMod(u32 mod_id);
-  void MODIO_DLL modioInstallDownloadedMods();
+  void MODIO_DLL modioInstallDownloadedMods(void);
   bool MODIO_DLL modioUninstallMod(u32 mod_id);
-  void MODIO_DLL modioPauseDownloads();
-  void MODIO_DLL modioResumeDownloads();
+  void MODIO_DLL modioPauseDownloads(void);
+  void MODIO_DLL modioResumeDownloads(void);
   void MODIO_DLL modioPrioritizeModDownload(u32 mod_id);
   void MODIO_DLL modioSetDownloadListener(void (*callback)(u32 response_code, u32 mod_id));  
   void MODIO_DLL modioSetUploadListener(void (*callback)(u32 response_code, u32 mod_id));  
-  u32 MODIO_DLL modioGetModDownloadQueueCount();
+  u32 MODIO_DLL modioGetModDownloadQueueCount(void);
   void MODIO_DLL modioGetModDownloadQueue(ModioQueuedModDownload* download_queue);
-  u32 MODIO_DLL modioGetModfileUploadQueueCount();
+  u32 MODIO_DLL modioGetModfileUploadQueueCount(void);
   void MODIO_DLL modioGetModfileUploadQueue(ModioQueuedModfileUpload* upload_queue);
-  u32 MODIO_DLL modioGetAllInstalledModsCount();
+  u32 MODIO_DLL modioGetAllInstalledModsCount(void);
   void MODIO_DLL modioGetAllInstalledMods(ModioInstalledMod* installed_mods);
   u32 MODIO_DLL modioGetModState(u32 mod_id);
 
@@ -683,6 +686,8 @@ extern "C"
   void MODIO_DLL modioFreeInstalledMod(ModioInstalledMod* installed_mod);
   void MODIO_DLL modioFreeQueuedModDownload(ModioQueuedModDownload* queued_mod_download);
   void MODIO_DLL modioFreeQueuedModfileUpload(ModioQueuedModfileUpload* queued_modfile_upload);
+#ifdef __cplusplus
 }
+#endif
 
 #endif
