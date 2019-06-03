@@ -8,10 +8,6 @@
 
 Welcome to [mod.io](https://mod.io) Unreal Engine 4 Plugin. It allows game developers to easily control the browsing and installation of mod files in their games. It provides a C/blueprint interface built on the Unreal Engine to connect to the [mod.io API](https://docs.mod.io). We have a [test environment](https://test.mod.io) available which offers developers a private sandbox to try the Unreal Engine 4 Plugin out.
 
-## Getting started
-If you are a game developer, first step is to add mod support to your Unreal Engine 4 game. Once mod support is up and running, [create your games profile](https://mod.io/games/add) on mod.io, to get an API key and access to all [functionality mod.io offers](https://apps.mod.io/guides/getting-started).
-Next, download the latest [UE4 release](https://github.com/modio/UE4Plugin/releases) and unpack it into your project, then head over to the [GitHub Wiki](https://github.com/modio/UE4Plugin/wiki) and follow the guides to get it running within your game.
-
 ## Usage
 
 ### Browse mods
@@ -78,6 +74,28 @@ Modio->AddMod(ModCreator, FModioModDelegate::CreateUObject(ModioManager, &UModio
 void AModioManager::OnAddMod(FModioResponse Response, FModioMod Mod)
 {
   // Response.code should be 200 if the mod profile was created
+}
+```
+
+## Getting started
+If you are a game developer, first step is to add mod support to your Unreal Engine 4 game. Once mod support is up and running, [create your games profile](https://mod.io/games/add) on mod.io, to get an API key and access to all [functionality mod.io offers](https://apps.mod.io/guides/getting-started).
+Next, download the latest [UE4 release](https://github.com/modio/UE4Plugin/releases) and unpack it into your project, then head over to the [GitHub Wiki](https://github.com/modio/UE4Plugin/wiki) and follow the guides to get it running within your game.
+
+![Alt text](img/settings.png?raw=true "Title")
+
+```
+#include "ModioSubsystem.h"
+
+// ...
+
+FModioSubsystemPtr Modio;
+Modio = FModioSubsystem::Get(GetWorld());
+
+// ...
+
+void UModioManager::Tick(float DeltaTime)
+{
+  Modio->Process();
 }
 ```
 
