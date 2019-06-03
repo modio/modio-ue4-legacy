@@ -12,8 +12,56 @@ Welcome to [mod.io](https://mod.io) Unreal Engine 4 Plugin. It allows game devel
 If you are a game developer, first step is to add mod support to your Unreal Engine 4 game. Once mod support is up and running, [create your games profile](https://mod.io/games/add) on mod.io, to get an API key and access to all [functionality mod.io offers](https://apps.mod.io/guides/getting-started).
 Next, download the latest [UE4 release](https://github.com/modio/UE4Plugin/releases) and unpack it into your project, then head over to the [GitHub Wiki](https://github.com/modio/UE4Plugin/wiki) and follow the guides to get it running within your game.
 
-## Dependencies
-TODO
+## Usage
+
+### Browse mods
+
+```
+Modio->GetAllMods(EModioFilterType::SORT_BY_DATE_UPDATED,
+                   4 /* Limit the number of results for a request. */,
+                   0 /* Use the offset to skip over results and paginate through them */,
+                   FModioModArrayDelegate::CreateUObject(ModioManager, &UModioManager::OnGetAllMods));
+
+// ...
+
+void UModioManager::OnGetAllMods(FModioResponse Response, const TArray<FModioMod> &Mods)
+{
+	for (FModioMod Mod : Mods)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Name: %s"), *Mod.Name);
+		UE_LOG(LogTemp, Warning, TEXT("Description: %s"), *Mod.Description);
+		UE_LOG(LogTemp, Warning, TEXT("Date updated: %d"), Mod.DateUpdated);
+	}
+}
+```
+
+### Auth
+
+First request a security code to your email.
+
+```
+Modio->EmailRequest("john.doe@email.com", FModioGenericDelegate::CreateUObject(ModioManager, &UModioManager::OnEmailRequest));
+
+// ...
+
+void UModioManager::OnEmailRequest(FModioResponse Response)
+{
+  // Response.code should be 200 if an security code was sent to the provided email
+}
+```
+
+Then input the code to finish authentication.
+
+```
+Modio->EmailExchange("VBY5A", FModioGenericDelegate::CreateUObject(ModioManager, &UModioManager::OnEmailExchange));
+
+// ...
+
+void UModioManager::OnEmailExchange(FModioResponse Response)
+{
+  // Response.code should be 200 if an security code was sent to the provided email
+}
+```
 
 ## Contributions Welcome
 Our Unreal Engine 4 plugin is public and open source. Game developers are welcome to utilize it directly, to add support for mods in their games, or fork it for their games customized use. Want to make changes to our plugin? Submit a pull request with your recommended changes to be reviewed.
