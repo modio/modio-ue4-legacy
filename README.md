@@ -37,7 +37,7 @@ void UModioManager::OnGetAllMods(FModioResponse Response, const TArray<FModioMod
 
 ### Auth
 
-First request a security code to your email.
+First step is to request a security code to your email.
 
 ```
 Modio->EmailRequest("john.doe@email.com", FModioGenericDelegate::CreateUObject(ModioManager, &UModioManager::OnEmailRequest));
@@ -50,7 +50,7 @@ void UModioManager::OnEmailRequest(FModioResponse Response)
 }
 ```
 
-Then input the code to finish authentication.
+Finish authentication by submitting the 5-digit code.
 
 ```
 Modio->EmailExchange("VBY5A", FModioGenericDelegate::CreateUObject(ModioManager, &UModioManager::OnEmailExchange));
@@ -59,7 +59,25 @@ Modio->EmailExchange("VBY5A", FModioGenericDelegate::CreateUObject(ModioManager,
 
 void UModioManager::OnEmailExchange(FModioResponse Response)
 {
-  // Response.code should be 200 if an security code was sent to the provided email
+  // Response.code should be 200 if you are now authenticated
+}
+```
+
+### Create a mod profile
+
+```
+FModioModCreator ModCreator;
+ModCreator.Name = "My Mod";
+ModCreator.LogoPath = "ModExample/logo.png";
+ModCreator.HomepageUrl = "http://www.webpage.com";
+ModCreator.Summary = "Mod added via the SDK examples. Mod added via the SDK examples. Mod added via the SDK examples. Mod added via the SDK examples. Mod added via the SDK examples. Mod added via the SDK examples.";
+Modio->AddMod(ModCreator, FModioModDelegate::CreateUObject(ModioManager, &UModioManager::OnAddMod));
+
+// ...
+
+void AModioManager::OnAddMod(FModioResponse Response, FModioMod Mod)
+{
+  // Response.code should be 200 if the mod profile was created
 }
 ```
 
