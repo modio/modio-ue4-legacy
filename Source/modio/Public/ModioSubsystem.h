@@ -27,6 +27,7 @@
 #include "AsyncRequest/ModioAsyncRequest_GetUserRatings.h"
 #include "AsyncRequest/ModioAsyncRequest_SubscribeToMod.h"
 #include "AsyncRequest/ModioAsyncRequest_UnsubscribeFromMod.h"
+#include "AsyncRequest/ModioAsyncRequest_SteamAuth.h"
 #include "AsyncRequest/ModioAsyncRequest_GalaxyAuth.h"
 #include "AsyncRequest/ModioAsyncRequest_AddModTags.h"
 #include "AsyncRequest/ModioAsyncRequest_DeleteModTags.h"
@@ -90,6 +91,8 @@ public:
   /** Returns the ratings submited by the authenticated user */
   void GetUserRatings(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, FModioRatingArrayDelegate GetUserRatingsDelegate);
 
+  /** Log in to mod.io on behalf of a Steam Galaxy user */
+  void SteamAuth(const FString &Base64Ticket, FModioGenericDelegate SteamAuthDelegate);
   /** Log in to mod.io on behalf of a GOG Galaxy user */
   void GalaxyAuth(const FString &Appdata, FModioGenericDelegate GalaxyAuthDelegate);
 

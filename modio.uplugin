@@ -24,26 +24,8 @@
 			]
 		},
 		{
-			"Name": "modioEditor",
-			"Type": "Editor",
-			"LoadingPhase": "Default",
-			"WhitelistPlatforms" :
-			[
-				"Win64"
-			]
-		},
-		{
 			"Name": "Int64",
 			"Type": "Runtime",
-			"LoadingPhase": "Default",
-			"WhitelistPlatforms" :
-			[
-				"Win64"
-			]
-		},
-		{
-			"Name": "Int64Editor",
-			"Type": "Editor",
 			"LoadingPhase": "Default",
 			"WhitelistPlatforms" :
 			[
