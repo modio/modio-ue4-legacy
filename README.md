@@ -61,6 +61,8 @@ void UModioManager::OnEmailExchange(FModioResponse Response)
 
 ### External Auth
 
+If your game is running inside a popular distribution platform such as Steam or GOG Galaxy you can authenticate 100% seamlessly.
+
 #### Galaxy Auth
 
 ```
@@ -87,9 +89,11 @@ void UModioManager::OnSteamAuth(FModioResponse Response)
 }
 ```
 
-### Subscribe
+### Subscriptions
 
-Subscribe to a mod and it will automatically install on the background.
+Download and remove mods locally by subribing and unsubscribing.
+
+#### Subscribe
 
 ```
 Modio->SubscribeToMod(153, FModioModDelegate::CreateUObject(ModioManager, &UModioManager::OnSubscribeToMod));
@@ -104,8 +108,6 @@ void UMyModioManager::OnSubscribeToMod(FModioResponse Response, FModioMod Mod)
 
 ### Unsubscribe
 
-Unsubscribe from a mod to uninstall it from local storage.
-
 ```
 Modio->UnsubscribeFromMod(153, FModioGenericDelegate::CreateUObject(ModioManager, &UModioManager::OnUnsubscribeFromMod));
 
@@ -118,6 +120,8 @@ void UMyModioManager::OnUnsubscribeFromMod(FModioResponse Response)
 ```
 
 ### Mod submission
+
+Share mods by creating a mod profile and attaching modfiles to it.
 
 #### Create a mod profile
 
@@ -137,7 +141,7 @@ void AModioManager::OnAddMod(FModioResponse Response, FModioMod Mod)
 }
 ```
 
-#### Upload a mod
+#### Upload a modfile
 
 ```
 FModioModfileCreator ModfileCreator;
