@@ -59,6 +59,21 @@ void UModioManager::OnEmailExchange(FModioResponse Response)
 }
 ```
 
+### Subscribe
+
+Subscribe to a mod and it will automatically install on the background.
+
+```
+Modio->SubscribeToMod(153, FModioGenericDelegate::CreateUObject(ModioManager, &UModioManager::OnEmailRequest));
+
+// ...
+
+void UMyModioManager::OnSubscribeToMod(FModioResponse Response, FModioMod Mod)
+{
+  // Response.code should be 200 if you subscribed to the mod successfully
+}
+```
+
 ### Create a mod profile
 
 ```
