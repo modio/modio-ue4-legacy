@@ -22,12 +22,12 @@ Modio->GetAllMods(EModioFilterType::SORT_BY_DATE_UPDATED,
 
 void UModioManager::OnGetAllMods(FModioResponse Response, const TArray<FModioMod> &Mods)
 {
-	for (FModioMod Mod : Mods)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Name: %s"), *Mod.Name);
-		UE_LOG(LogTemp, Warning, TEXT("Description: %s"), *Mod.Description);
-		UE_LOG(LogTemp, Warning, TEXT("Date updated: %d"), Mod.DateUpdated);
-	}
+  for (FModioMod Mod : Mods)
+  {
+    UE_LOG(LogTemp, Warning, TEXT("Name: %s"), *Mod.Name);
+    UE_LOG(LogTemp, Warning, TEXT("Description: %s"), *Mod.Description);
+    UE_LOG(LogTemp, Warning, TEXT("Date updated: %d"), Mod.DateUpdated);
+  }
 }
 ```
 
@@ -59,12 +59,40 @@ void UModioManager::OnEmailExchange(FModioResponse Response)
 }
 ```
 
+### External Auth
+
+#### Galaxy Auth
+
+```
+Modio->GalaxyAuth("csEYJ2MWR53QssNNqFgO87sRN", FModioGenericDelegate::CreateUObject(ModioManager, &UModioManager::OnGalaxyAuth));
+
+// ...
+
+void UModioManager::OnGalaxyAuth(FModioResponse Response)
+{
+  // Response.code should be 200 if you are now authenticated via Galaxy
+}
+```
+
+#### Steam Auth
+
+```
+Modio->SteamAuth("NDNuZmhnaWdyaGdqOWc0M2o5eTM0aGc", FModioGenericDelegate::CreateUObject(ModioManager, &UModioManager::OnSteamAuth));
+
+// ...
+
+void UModioManager::OnSteamAuth(FModioResponse Response)
+{
+  // Response.code should be 200 if you are now authenticated via Steam
+}
+```
+
 ### Subscribe
 
 Subscribe to a mod and it will automatically install on the background.
 
 ```
-Modio->SubscribeToMod(153, FModioGenericDelegate::CreateUObject(ModioManager, &UModioManager::OnEmailRequest));
+Modio->SubscribeToMod(153, FModioModDelegate::CreateUObject(ModioManager, &UModioManager::OnSubscribeToMod));
 
 // ...
 
@@ -74,7 +102,24 @@ void UMyModioManager::OnSubscribeToMod(FModioResponse Response, FModioMod Mod)
 }
 ```
 
-### Create a mod profile
+### Unsubscribe
+
+Unsubscribe from a mod to uninstall it from local storage.
+
+```
+Modio->UnsubscribeFromMod(153, FModioGenericDelegate::CreateUObject(ModioManager, &UModioManager::OnUnsubscribeFromMod));
+
+// ...
+
+void UMyModioManager::OnUnsubscribeFromMod(FModioResponse Response)
+{
+  // Response.code should be 200 if you unsubscribed from the mod successfully
+}
+```
+
+### Mod submission
+
+#### Create a mod profile
 
 ```
 FModioModCreator ModCreator;
@@ -89,6 +134,46 @@ Modio->AddMod(ModCreator, FModioModDelegate::CreateUObject(ModioManager, &UModio
 void AModioManager::OnAddMod(FModioResponse Response, FModioMod Mod)
 {
   // Response.code should be 200 if the mod profile was created
+}
+```
+
+#### Upload a mod
+
+```
+FModioModfileCreator ModfileCreator;
+ModfileCreator.Path = "ModExample/modfile/";
+ModfileCreator.Version = "v1.1.0";
+ModfileCreator.Changelog = "This is a change log...";
+
+Modio->AddModfile(132, ModfileCreator);
+```
+
+### Listeners
+
+#### Download listener
+
+```
+Modio->SetModDownloadListener(FModioOnModDownloadDelegate::CreateUObject(ModioManager, &UMyModioManager::OnModDownload));
+
+// ...
+
+void UMyModioManager::OnModDownload(int32 ResponseCode, int32 ModId)
+{
+  // ResponseCode should be 200 when a mod was just downloaded
+  Modio->InstallDownloadedMods();
+}
+```
+
+#### Upload listener
+
+```
+Modio->SetModUploadListener(FModioOnModDownloadDelegate::CreateUObject(ModioManager, &UMyModioManager::OnModUpload));
+
+// ...
+
+void UMyModioManager::OnModUpload(int32 ResponseCode, int32 ModId)
+{
+  // ResponseCode should be 200 when a mod was just uploaded
 }
 ```
 
