@@ -4,8 +4,23 @@
 [![Discord](https://img.shields.io/discord/389039439487434752.svg?label=Discord&logo=discord&color=7289DA&labelColor=2C2F33)](https://discord.mod.io)
 [![Master docs](https://img.shields.io/badge/docs-master-green.svg)](https://github.com/modio/UE4Plugin/wiki)
 
-
 Welcome to [mod.io](https://mod.io) Unreal Engine 4 Plugin. It allows game developers to easily control the browsing and installation of mod files in their games. It provides a C/blueprint interface built on the Unreal Engine to connect to the [mod.io API](https://docs.mod.io). We have a [test environment](https://test.mod.io) available which offers developers a private sandbox to try the Unreal Engine 4 Plugin out.
+
+## Features
+
+| Feature | Supported |
+|----------|------------ |
+| Windows / Linux / MacOS | ✔ |
+| Standalone | ✔ |
+| Open Source | ✔ |
+| Free | ✔ |
+| Async Callbacks | ✔ |
+| Events | ✔ |
+| Prebuilt download and upload queue | ✔ |
+| Automatic downloads and updates | ✔ |
+| Browse / search / tag mods | ✔ |
+| Mod dependencies / comments / reports | ✔ |
+| MIT license | ✔ |
 
 ## Usage
 
@@ -149,6 +164,18 @@ ModfileCreator.Version = "v1.1.0";
 ModfileCreator.Changelog = "This is a change log...";
 
 Modio->AddModfile(132, ModfileCreator);
+```
+
+### Mod ratings
+
+```
+modio_instance.addModRating(mod_id, 1 /* or -1 for negative votes*/, [&](const modio::Response& response)
+{
+  if(response.code == 201)
+  {
+    // Mod rating submitted successfully
+  }
+});
 ```
 
 ### Listeners
