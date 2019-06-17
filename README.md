@@ -31,7 +31,7 @@ void UModioManager::OnGetAllMods(FModioResponse Response, const TArray<FModioMod
 }
 ```
 
-### Auth
+### Auth (via email)
 
 First step is to request a security code to your email.
 
@@ -91,7 +91,7 @@ void UModioManager::OnSteamAuth(FModioResponse Response)
 
 ### Subscriptions
 
-Download and remove mods locally by subribing and unsubscribing.
+Download and remove mods locally by subscribing and unsubscribing.
 
 #### Subscribe
 
