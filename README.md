@@ -18,8 +18,6 @@ Welcome to [mod.io](https://mod.io) Unreal Engine 4 Plugin. It allows game devel
 | Events | ✔ |
 | Prebuilt download and upload queue | ✔ |
 | Automatic downloads and updates | ✔ |
-| Browse / search / tag mods | ✔ |
-| Mod dependencies / comments / reports | ✔ |
 | MIT license | ✔ |
 
 ## Usage
@@ -81,7 +79,7 @@ If your game is running inside a popular distribution platform such as Steam or 
 
 ```
 Modio->GalaxyAuth("csEYJ2MWR53QssNNqFgO87sRN", FModioGenericDelegate::CreateUObject(ModioManager, &UModioManager::OnGalaxyAuth));
-
+reports
 // ...
 
 void UModioManager::OnGalaxyAuth(FModioResponse Response)
@@ -123,7 +121,7 @@ void UMyModioManager::OnSubscribeToMod(FModioResponse Response, FModioMod Mod)
 ### Unsubscribe
 
 ```
-Modio->UnsubscribeFromMod(153, FModioGenericDelegate::CreateUObject(ModioManager, &UModioManager::OnUnsubscribeFromMod));
+Modio->UnsubscribeFromMod(mod_id, FModioGenericDelegate::CreateUObject(ModioManager, &UModioManager::OnUnsubscribeFromMod));
 
 // ...
 
@@ -164,18 +162,6 @@ ModfileCreator.Version = "v1.1.0";
 ModfileCreator.Changelog = "This is a change log...";
 
 Modio->AddModfile(132, ModfileCreator);
-```
-
-### Mod ratings
-
-```
-modio_instance.addModRating(mod_id, 1 /* or -1 for negative votes*/, [&](const modio::Response& response)
-{
-  if(response.code == 201)
-  {
-    // Mod rating submitted successfully
-  }
-});
 ```
 
 ### Listeners
