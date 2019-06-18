@@ -24,7 +24,7 @@ Welcome to [mod.io](https://mod.io) Unreal Engine 4 Plugin. It allows game devel
 
 ### Browse mods
 
-```
+```c++
 Modio->GetAllMods(EModioFilterType::SORT_BY_DATE_UPDATED,
                    4 /* Limit the number of results for a request. */,
                    0 /* Use the offset to skip over results and paginate through them */,
@@ -47,7 +47,7 @@ void UModioManager::OnGetAllMods(FModioResponse Response, const TArray<FModioMod
 
 First step is to request a security code to your email.
 
-```
+```c++
 Modio->EmailRequest("john.doe@email.com", FModioGenericDelegate::CreateUObject(ModioManager, &UModioManager::OnEmailRequest));
 
 // ...
@@ -60,7 +60,7 @@ void UModioManager::OnEmailRequest(FModioResponse Response)
 
 Finish authentication by submitting the 5-digit code.
 
-```
+```c++
 Modio->EmailExchange("VBY5A", FModioGenericDelegate::CreateUObject(ModioManager, &UModioManager::OnEmailExchange));
 
 // ...
@@ -77,7 +77,7 @@ If your game is running inside a popular distribution platform such as Steam or 
 
 #### Galaxy Auth
 
-```
+```c++
 Modio->GalaxyAuth("csEYJ2MWR53QssNNqFgO87sRN", FModioGenericDelegate::CreateUObject(ModioManager, &UModioManager::OnGalaxyAuth));
 reports
 // ...
@@ -90,7 +90,7 @@ void UModioManager::OnGalaxyAuth(FModioResponse Response)
 
 #### Steam Auth
 
-```
+```c++
 Modio->SteamAuth("NDNuZmhnaWdyaGdqOWc0M2o5eTM0aGc", FModioGenericDelegate::CreateUObject(ModioManager, &UModioManager::OnSteamAuth));
 
 // ...
@@ -107,7 +107,7 @@ Download and remove mods locally by subscribing and unsubscribing.
 
 #### Subscribe
 
-```
+```c++
 Modio->SubscribeToMod(153, FModioModDelegate::CreateUObject(ModioManager, &UModioManager::OnSubscribeToMod));
 
 // ...
@@ -120,7 +120,7 @@ void UMyModioManager::OnSubscribeToMod(FModioResponse Response, FModioMod Mod)
 
 ### Unsubscribe
 
-```
+```c++
 Modio->UnsubscribeFromMod(mod_id, FModioGenericDelegate::CreateUObject(ModioManager, &UModioManager::OnUnsubscribeFromMod));
 
 // ...
@@ -137,7 +137,7 @@ Share mods by creating a mod profile and attaching modfiles to it.
 
 #### Create a mod profile
 
-```
+```c++
 FModioModCreator ModCreator;
 ModCreator.Name = "My Mod";
 ModCreator.LogoPath = "ModExample/logo.png";
@@ -155,7 +155,7 @@ void AModioManager::OnAddMod(FModioResponse Response, FModioMod Mod)
 
 #### Upload a modfile
 
-```
+```c++
 FModioModfileCreator ModfileCreator;
 ModfileCreator.Path = "ModExample/modfile/";
 ModfileCreator.Version = "v1.1.0";
@@ -168,7 +168,7 @@ Modio->AddModfile(132, ModfileCreator);
 
 #### Download listener
 
-```
+```c++
 Modio->SetModDownloadListener(FModioOnModDownloadDelegate::CreateUObject(ModioManager, &UMyModioManager::OnModDownload));
 
 // ...
@@ -182,7 +182,7 @@ void UMyModioManager::OnModDownload(int32 ResponseCode, int32 ModId)
 
 #### Upload listener
 
-```
+```c++
 Modio->SetModUploadListener(FModioOnModDownloadDelegate::CreateUObject(ModioManager, &UMyModioManager::OnModUpload));
 
 // ...
@@ -199,7 +199,7 @@ Next, download the latest [UE4 release](https://github.com/modio/UE4Plugin/relea
 
 ![Alt text](img/settings.png?raw=true "Title")
 
-```
+```c++
 #include "ModioSubsystem.h"
 
 // ...
