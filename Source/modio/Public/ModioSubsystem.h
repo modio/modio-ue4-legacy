@@ -128,7 +128,7 @@ public:
 
   //Mod ratings
   /** Add a rating to a mod. 1 for positive ratings and -1 for negative */
-  void AddModRating(int32 ModId, int32 Rating, FModioGenericDelegate AddModRatingDelegate);
+  void AddModRating(int32 ModId, bool IsRatingPossitive, FModioGenericDelegate AddModRatingDelegate);
 
   //Mod Dependencies
   /** Request all the dependencies from a mod */

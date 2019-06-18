@@ -278,10 +278,10 @@ void FModioSubsystem::UnsubscribeFromMod(int32 ModId, FModioGenericDelegate Unsu
   QueueAsyncTask( Request );
 }
 
-void FModioSubsystem::AddModRating(int32 ModId, int32 Rating, FModioGenericDelegate AddModRatingDelegate)
+void FModioSubsystem::AddModRating(int32 ModId, bool IsRatingPossitive, FModioGenericDelegate AddModRatingDelegate)
 {
   FModioAsyncRequest_AddModRating *Request = new FModioAsyncRequest_AddModRating( this, AddModRatingDelegate );
-  modioAddModRating(Request, (u32)ModId, (i32)Rating, FModioAsyncRequest_AddModRating::Response);
+  modioAddModRating(Request, (u32)ModId, IsRatingPossitive, FModioAsyncRequest_AddModRating::Response);
   QueueAsyncTask( Request );
 }
 
