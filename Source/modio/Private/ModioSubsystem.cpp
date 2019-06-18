@@ -278,6 +278,13 @@ void FModioSubsystem::UnsubscribeFromMod(int32 ModId, FModioGenericDelegate Unsu
   QueueAsyncTask( Request );
 }
 
+void FModioSubsystem::AddModRating(int32 ModId, int32 Rating, FModioGenericDelegate AddModRatingDelegate)
+{
+  FModioAsyncRequest_AddModRating *Request = new FModioAsyncRequest_AddModRating( this, AddModRatingDelegate );
+  modioAddModRating(Request, (u32)ModId, (i32)Rating, FModioAsyncRequest_AddModRating::Response);
+  QueueAsyncTask( Request );
+}
+
 void FModioSubsystem::GetAllModDependencies(int32 ModId, FModioModDependencyArrayDelegate GetAllModDependenciesDelegate)
 {
   FModioAsyncRequest_GetAllModDependencies *Request = new FModioAsyncRequest_GetAllModDependencies( this, GetAllModDependenciesDelegate );

@@ -6,7 +6,7 @@ using UnrealBuildTool;
 
 public class modio : ModuleRules
 {
-	private String modio_directory = "mod.io-sdk-v0.11.0";
+	private String modio_directory = "mod.io-sdk-v0.11.2";
 
 	private string ModulePath
 	{
@@ -116,8 +116,10 @@ public class modio : ModuleRules
 		{
 			string ModioIncludePath = Path.Combine(ThirdPartyPath, modio_directory, "include");
 			string AdditionalDependenciesPath = Path.Combine(ThirdPartyPath, modio_directory, "additional_dependencies");
+			string MiniZPath = Path.Combine(ThirdPartyPath, modio_directory, "include/dependencies/miniz");
 			PublicIncludePaths.Add(ModioIncludePath);
 			PublicIncludePaths.Add(AdditionalDependenciesPath);
+			PublicIncludePaths.Add(MiniZPath);
 		}
 		
 		return isLibrarySupported;

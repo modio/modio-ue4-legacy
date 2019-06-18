@@ -27,6 +27,7 @@
 #include "AsyncRequest/ModioAsyncRequest_GetUserRatings.h"
 #include "AsyncRequest/ModioAsyncRequest_SubscribeToMod.h"
 #include "AsyncRequest/ModioAsyncRequest_UnsubscribeFromMod.h"
+#include "AsyncRequest/ModioAsyncRequest_AddModRating.h"
 #include "AsyncRequest/ModioAsyncRequest_SteamAuth.h"
 #include "AsyncRequest/ModioAsyncRequest_GalaxyAuth.h"
 #include "AsyncRequest/ModioAsyncRequest_AddModTags.h"
@@ -124,6 +125,10 @@ public:
   void SubscribeToMod(int32 ModId, FModioModDelegate SubscribeToModDelegate);
   /** Unsubscribes from the corresponding mod */
   void UnsubscribeFromMod(int32 ModId, FModioGenericDelegate UnsubscribeFromModDelegate);
+
+  //Mod ratings
+  /** Add a rating to a mod. 1 for positive ratings and -1 for negative */
+  void AddModRating(int32 ModId, int32 Rating, FModioGenericDelegate AddModRatingDelegate);
 
   //Mod Dependencies
   /** Request all the dependencies from a mod */
