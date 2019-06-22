@@ -19,7 +19,9 @@ static FName ModuleName( QUOTE(MODULE_NAME) );
 #undef QUOTE
 #undef Q
 
-IMPLEMENT_MODULE(FModioModule, MODULE_NAME)
+IMPLEMENT_MODULE(FModioModule, modio)
+// @todo: use MODULE_NAME again, functionality broke on v4.23.3
+// IMPLEMENT_MODULE(FModioModule, MODULE_NAME)
 
 DEFINE_LOG_CATEGORY(LogModio);
 
