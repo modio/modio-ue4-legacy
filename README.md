@@ -10,7 +10,7 @@ Welcome to [mod.io](https://mod.io) Unreal Engine 4 Plugin. It allows game devel
 
 | Feature | Supported |
 |----------|------------ |
-| Windows / Linux / MacOS | ✔ |
+| Windows 64bits (more platform are WIP) | ✔ |
 | Standalone | ✔ |
 | Open Source | ✔ |
 | Free | ✔ |
