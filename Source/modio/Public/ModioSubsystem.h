@@ -1,7 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "ModioResponse.h"
+#include "Schemas/ModioResponse.h"
 #include "Customizables/ModioModCreator.h"
 #include "Customizables/ModioModEditor.h"
 #include "Customizables/ModioModfileCreator.h"

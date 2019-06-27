@@ -1,7 +1,7 @@
 // Copyright 2019 modio. All Rights Reserved.
 // Released under MIT.
 
-#include "ModioInstalledMod.h"
+#include "Schemas/ModioInstalledMod.h"
 
 void InitializeInstalledMod(FModioInstalledMod &installed_mod, const ModioInstalledMod &modio_installed_mod)
 {

@@ -1,7 +1,7 @@
 // Copyright 2019 modio. All Rights Reserved.
 // Released under MIT.
 
-#include "ModioLogo.h"
+#include "Schemas/ModioLogo.h"
 
 void InitializeLogo(FModioLogo &Logo, const ModioLogo &modio_logo)
 {

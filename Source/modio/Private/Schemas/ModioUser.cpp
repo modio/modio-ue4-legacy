@@ -1,7 +1,7 @@
 // Copyright 2019 modio. All Rights Reserved.
 // Released under MIT.
 
-#include "ModioUser.h"
+#include "Schemas/ModioUser.h"
 
 void InitializeUser(FModioUser &User, const ModioUser &modio_user)
 {

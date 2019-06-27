@@ -1,7 +1,7 @@
 // Copyright 2019 modio. All Rights Reserved.
 // Released under MIT.
 
-#include "ModioMedia.h"
+#include "Schemas/ModioMedia.h"
 
 void InitializeMedia(FModioMedia &media, const ModioMedia &modio_media)
 {

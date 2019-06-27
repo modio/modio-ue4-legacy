@@ -1,7 +1,7 @@
 // Copyright 2019 modio. All Rights Reserved.
 // Released under MIT.
 
-#include "CallbackProxy_AddModYoutubeLinks.h"
+#include "BlueprintCallbackProxies/CallbackProxy_AddModYoutubeLinks.h"
 #include "ModioSubsystem.h"
 
 UCallbackProxy_AddModYoutubeLinks::UCallbackProxy_AddModYoutubeLinks(const FObjectInitializer &ObjectInitializer)

@@ -1,7 +1,7 @@
 // Copyright 2019 modio. All Rights Reserved.
 // Released under MIT.
 
-#include "CallbackProxy_GetAllModDependencies.h"
+#include "BlueprintCallbackProxies/CallbackProxy_GetAllModDependencies.h"
 #include "ModioSubsystem.h"
 
 UCallbackProxy_GetAllModDependencies::UCallbackProxy_GetAllModDependencies(const FObjectInitializer &ObjectInitializer)

@@ -1,7 +1,7 @@
 // Copyright 2019 modio. All Rights Reserved.
 // Released under MIT.
 
-#include "CallbackProxy_AddModSketchfabLinks.h"
+#include "BlueprintCallbackProxies/CallbackProxy_AddModSketchfabLinks.h"
 #include "ModioSubsystem.h"
 
 UCallbackProxy_AddModSketchfabLinks::UCallbackProxy_AddModSketchfabLinks(const FObjectInitializer &ObjectInitializer)

@@ -1,7 +1,7 @@
 // Copyright 2019 modio. All Rights Reserved.
 // Released under MIT.
 
-#include "CallbackProxy_EmailRequest.h"
+#include "BlueprintCallbackProxies/CallbackProxy_EmailRequest.h"
 #include "ModioSubsystem.h"
 
 UCallbackProxy_EmailRequest::UCallbackProxy_EmailRequest(const FObjectInitializer &ObjectInitializer)

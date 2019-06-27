@@ -1,7 +1,7 @@
 // Copyright 2019 modio. All Rights Reserved.
 // Released under MIT.
 
-#include "ModioError.h"
+#include "Schemas/ModioError.h"
 
 void InitializeError(FModioError &error, const ModioError &modio_error)
 {

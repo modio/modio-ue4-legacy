@@ -1,7 +1,7 @@
 // Copyright 2019 modio. All Rights Reserved.
 // Released under MIT.
 
-#include "ModioMetadataKVP.h"
+#include "Schemas/ModioMetadataKVP.h"
 
 void InitializeMetadataKVP(FModioMetadataKVP &MetadataKVP, const ModioMetadataKVP &modio_metadata_kvp)
 {

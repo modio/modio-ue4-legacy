@@ -1,7 +1,7 @@
 // Copyright 2019 modio. All Rights Reserved.
 // Released under MIT.
 
-#include "ModioResponse.h"
+#include "Schemas/ModioResponse.h"
 
 void InitializeResponse( FModioResponse &Out_Response, const ModioResponse &ModioResponse )
 {

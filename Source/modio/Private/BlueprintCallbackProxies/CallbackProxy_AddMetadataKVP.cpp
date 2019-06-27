@@ -1,7 +1,7 @@
 // Copyright 2019 modio. All Rights Reserved.
 // Released under MIT.
 
-#include "CallbackProxy_AddMetadataKVP.h"
+#include "BlueprintCallbackProxies/CallbackProxy_AddMetadataKVP.h"
 #include "ModioSubsystem.h"
 
 UCallbackProxy_AddMetadataKVP::UCallbackProxy_AddMetadataKVP(const FObjectInitializer &ObjectInitializer)

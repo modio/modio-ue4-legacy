@@ -3,8 +3,8 @@
 
 #pragma once
 
-#include "ModioResponse.h"
 #include "ModioHWrapper.h"
+#include "Schemas/ModioResponse.h"
 #include "ModioModTag.generated.h"
 
 USTRUCT(BlueprintType)

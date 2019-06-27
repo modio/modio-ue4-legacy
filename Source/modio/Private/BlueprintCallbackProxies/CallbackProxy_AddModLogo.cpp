@@ -1,7 +1,7 @@
 // Copyright 2019 modio. All Rights Reserved.
 // Released under MIT.
 
-#include "CallbackProxy_AddModLogo.h"
+#include "BlueprintCallbackProxies/CallbackProxy_AddModLogo.h"
 #include "ModioSubsystem.h"
 
 UCallbackProxy_AddModLogo::UCallbackProxy_AddModLogo(const FObjectInitializer &ObjectInitializer)

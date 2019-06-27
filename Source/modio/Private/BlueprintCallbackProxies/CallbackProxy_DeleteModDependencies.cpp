@@ -1,7 +1,7 @@
 // Copyright 2019 modio. All Rights Reserved.
 // Released under MIT.
 
-#include "CallbackProxy_DeleteModDependencies.h"
+#include "BlueprintCallbackProxies/CallbackProxy_DeleteModDependencies.h"
 #include "ModioSubsystem.h"
 
 UCallbackProxy_DeleteModDependencies::UCallbackProxy_DeleteModDependencies(const FObjectInitializer &ObjectInitializer)

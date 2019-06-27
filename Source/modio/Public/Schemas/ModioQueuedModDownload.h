@@ -5,7 +5,7 @@
 
 #include "Int64.h"
 #include "ModioHWrapper.h"
-#include "ModioMod.h"
+#include "Schemas/ModioMod.h"
 #include "ModioQueuedModDownload.generated.h"
 
 USTRUCT(BlueprintType)

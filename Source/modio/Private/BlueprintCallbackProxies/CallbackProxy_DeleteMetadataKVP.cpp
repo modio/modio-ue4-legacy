@@ -1,7 +1,7 @@
 // Copyright 2019 modio. All Rights Reserved.
 // Released under MIT.
 
-#include "CallbackProxy_DeleteMetadataKVP.h"
+#include "BlueprintCallbackProxies/CallbackProxy_DeleteMetadataKVP.h"
 #include "ModioSubsystem.h"
 
 UCallbackProxy_DeleteMetadataKVP::UCallbackProxy_DeleteMetadataKVP(const FObjectInitializer &ObjectInitializer)

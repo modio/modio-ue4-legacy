@@ -5,9 +5,9 @@
 
 #include "Int64.h"
 #include "ModioHWrapper.h"
-#include "ModioResponse.h"
-#include "ModioFilehash.h"
-#include "ModioDownload.h"
+#include "Schemas/ModioResponse.h"
+#include "Schemas/ModioFilehash.h"
+#include "Schemas/ModioDownload.h"
 #include "ModioModfile.generated.h"
 
 USTRUCT(BlueprintType)

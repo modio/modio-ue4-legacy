@@ -1,7 +1,7 @@
 // Copyright 2019 modio. All Rights Reserved.
 // Released under MIT.
 
-#include "ModioRating.h"
+#include "Schemas/ModioRating.h"
 
 void InitializeRating(FModioRating &Rating, const ModioRating &modio_rating)
 {

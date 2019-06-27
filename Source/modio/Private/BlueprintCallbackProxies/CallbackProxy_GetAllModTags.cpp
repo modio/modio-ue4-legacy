@@ -1,7 +1,7 @@
 // Copyright 2019 modio. All Rights Reserved.
 // Released under MIT.
 
-#include "CallbackProxy_GetAllModTags.h"
+#include "BlueprintCallbackProxies/CallbackProxy_GetAllModTags.h"
 #include "ModioSubsystem.h"
 
 UCallbackProxy_GetAllModTags::UCallbackProxy_GetAllModTags(const FObjectInitializer &ObjectInitializer)

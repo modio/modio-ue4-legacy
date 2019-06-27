@@ -1,7 +1,7 @@
 // Copyright 2019 modio. All Rights Reserved.
 // Released under MIT.
 
-#include "ModioModTag.h"
+#include "Schemas/ModioModTag.h"
 
 void InitializeModTag(FModioModTag &Tag, const ModioTag &modio_tag)
 {

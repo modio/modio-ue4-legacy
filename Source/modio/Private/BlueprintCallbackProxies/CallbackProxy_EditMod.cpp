@@ -1,7 +1,7 @@
 // Copyright 2019 modio. All Rights Reserved.
 // Released under MIT.
 
-#include "CallbackProxy_EditMod.h"
+#include "BlueprintCallbackProxies/CallbackProxy_EditMod.h"
 #include "ModioUE4Utility.h"
 #include "ModioSubsystem.h"
 

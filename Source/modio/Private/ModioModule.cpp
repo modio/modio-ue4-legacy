@@ -3,7 +3,7 @@
 
 #include "ModioModule.h"
 #include "ModioSubsystem.h"
-#include "ModioPublic.h"
+#include "../ModioPublic.h"
 #include "ModioSettings.h"
 #if WITH_EDITOR
 #include "ISettingsModule.h"

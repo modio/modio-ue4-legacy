@@ -1,7 +1,7 @@
 // Copyright 2019 modio. All Rights Reserved.
 // Released under MIT.
 
-#include "ModioMod.h"
+#include "Schemas/ModioMod.h"
 
 void InitializeMod(FModioMod &mod, const ModioMod &modio_mod)
 {

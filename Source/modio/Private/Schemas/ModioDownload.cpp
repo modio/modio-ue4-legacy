@@ -1,7 +1,7 @@
 // Copyright 2019 modio. All Rights Reserved.
 // Released under MIT.
 
-#include "ModioDownload.h"
+#include "Schemas/ModioDownload.h"
 
 void InitializeDownload(FModioDownload &Download, const ModioDownload &modio_download)
 {

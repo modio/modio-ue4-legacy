@@ -4,10 +4,10 @@
 #pragma once
 
 #include "ModioSubsystem.h"
-#include "ModioInstalledMod.h"
-#include "ModioQueuedModDownload.h"
-#include "ModioModfileCreator.h"
-#include "ModioQueuedModfileUpload.h"
+#include "Schemas/ModioInstalledMod.h"
+#include "Schemas/ModioQueuedModDownload.h"
+#include "Schemas/ModioQueuedModfileUpload.h"
+#include "Customizables/ModioModfileCreator.h"
 #include "ModioCallbacks.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "ModioFunctionLibrary.generated.h"

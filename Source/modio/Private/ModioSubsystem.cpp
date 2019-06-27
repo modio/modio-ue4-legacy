@@ -1,6 +1,6 @@
 #include "ModioSubsystem.h"
 #include "ModioHWrapper.h"
-#include "ModioPublic.h"
+#include "../ModioPublic.h"
 #include "ModioSettings.h"
 #include "ModioModule.h"
 #include "ModioUE4Utility.h"

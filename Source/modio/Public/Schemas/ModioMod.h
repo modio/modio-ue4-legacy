@@ -3,15 +3,15 @@
 
 #pragma once
 
-#include "ModioResponse.h"
 #include "ModioHWrapper.h"
-#include "ModioLogo.h"
-#include "ModioUser.h"
-#include "ModioModfile.h"
-#include "ModioMedia.h"
-#include "ModioStats.h"
-#include "ModioModTag.h"
-#include "ModioMetadataKVP.h"
+#include "Schemas/ModioResponse.h"
+#include "Schemas/ModioLogo.h"
+#include "Schemas/ModioUser.h"
+#include "Schemas/ModioModfile.h"
+#include "Schemas/ModioMedia.h"
+#include "Schemas/ModioStats.h"
+#include "Schemas/ModioModTag.h"
+#include "Schemas/ModioMetadataKVP.h"
 #include "ModioMod.generated.h"
 
 USTRUCT(BlueprintType)

@@ -1,7 +1,7 @@
 // Copyright 2019 modio. All Rights Reserved.
 // Released under MIT.
 
-#include "ModioStats.h"
+#include "Schemas/ModioStats.h"
 
 void InitializeStats(FModioStats &Stats, const ModioStats &modio_stats)
 {

@@ -1,7 +1,7 @@
 // Copyright 2019 modio. All Rights Reserved.
 // Released under MIT.
 
-#include "CallbackProxy_GalaxyAuth.h"
+#include "BlueprintCallbackProxies/CallbackProxy_GalaxyAuth.h"
 #include "ModioSubsystem.h"
 
 UCallbackProxy_GalaxyAuth::UCallbackProxy_GalaxyAuth(const FObjectInitializer &ObjectInitializer)

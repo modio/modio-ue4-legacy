@@ -4,8 +4,8 @@
 #pragma once
 
 #include "ModioHWrapper.h"
-#include "ModioAvatar.h"
-#include "ModioResponse.h"
+#include "Schemas/ModioAvatar.h"
+#include "Schemas/ModioResponse.h"
 #include "ModioUser.generated.h"
 
 USTRUCT(BlueprintType)

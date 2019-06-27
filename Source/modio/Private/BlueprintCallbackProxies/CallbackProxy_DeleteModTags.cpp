@@ -1,7 +1,7 @@
 // Copyright 2019 modio. All Rights Reserved.
 // Released under MIT.
 
-#include "CallbackProxy_DeleteModTags.h"
+#include "BlueprintCallbackProxies/CallbackProxy_DeleteModTags.h"
 #include "ModioSubsystem.h"
 
 UCallbackProxy_DeleteModTags::UCallbackProxy_DeleteModTags(const FObjectInitializer &ObjectInitializer)

@@ -4,7 +4,7 @@
 #pragma once
 
 #include "ModioHWrapper.h"
-#include "ModioMod.h"
+#include "Schemas/ModioMod.h"
 #include "ModioInstalledMod.generated.h"
 
 USTRUCT(BlueprintType)

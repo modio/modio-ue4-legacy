@@ -1,7 +1,7 @@
 // Copyright 2019 modio. All Rights Reserved.
 // Released under MIT.
 
-#include "ModioUserEvent.h"
+#include "Schemas/ModioUserEvent.h"
 
 void InitializeUserEvent(FModioUserEvent &UserEvent, const ModioUserEvent &ModioUserEvent)
 {

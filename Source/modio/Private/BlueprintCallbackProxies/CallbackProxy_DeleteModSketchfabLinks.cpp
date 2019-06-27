@@ -1,7 +1,7 @@
 // Copyright 2019 modio. All Rights Reserved.
 // Released under MIT.
 
-#include "CallbackProxy_DeleteModSketchfabLinks.h"
+#include "BlueprintCallbackProxies/CallbackProxy_DeleteModSketchfabLinks.h"
 #include "ModioSubsystem.h"
 
 UCallbackProxy_DeleteModSketchfabLinks::UCallbackProxy_DeleteModSketchfabLinks(const FObjectInitializer &ObjectInitializer)

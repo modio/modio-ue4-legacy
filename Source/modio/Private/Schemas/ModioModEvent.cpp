@@ -1,7 +1,7 @@
 // Copyright 2019 modio. All Rights Reserved.
 // Released under MIT.
 
-#include "ModioModEvent.h"
+#include "Schemas/ModioModEvent.h"
 
 void InitializeModEvent(FModioModEvent &event, const ModioModEvent &modio_mod_event)
 {

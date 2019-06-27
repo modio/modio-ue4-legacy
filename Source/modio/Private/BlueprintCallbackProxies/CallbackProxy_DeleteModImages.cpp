@@ -1,7 +1,7 @@
 // Copyright 2019 modio. All Rights Reserved.
 // Released under MIT.
 
-#include "CallbackProxy_DeleteModImages.h"
+#include "BlueprintCallbackProxies/CallbackProxy_DeleteModImages.h"
 #include "ModioSubsystem.h"
 
 UCallbackProxy_DeleteModImages::UCallbackProxy_DeleteModImages(const FObjectInitializer &ObjectInitializer)

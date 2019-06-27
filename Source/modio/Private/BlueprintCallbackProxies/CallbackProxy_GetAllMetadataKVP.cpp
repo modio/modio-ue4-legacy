@@ -1,7 +1,7 @@
 // Copyright 2019 modio. All Rights Reserved.
 // Released under MIT.
 
-#include "CallbackProxy_GetAllMetadataKVP.h"
+#include "BlueprintCallbackProxies/CallbackProxy_GetAllMetadataKVP.h"
 #include "ModioSubsystem.h"
 
 UCallbackProxy_GetAllMetadataKVP::UCallbackProxy_GetAllMetadataKVP(const FObjectInitializer &ObjectInitializer)

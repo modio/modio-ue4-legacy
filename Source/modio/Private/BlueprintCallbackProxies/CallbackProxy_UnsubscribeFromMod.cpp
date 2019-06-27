@@ -1,7 +1,7 @@
 // Copyright 2019 modio. All Rights Reserved.
 // Released under MIT.
 
-#include "CallbackProxy_UnsubscribeFromMod.h"
+#include "BlueprintCallbackProxies/CallbackProxy_UnsubscribeFromMod.h"
 #include "ModioSubsystem.h"
 
 UCallbackProxy_UnsubscribeFromMod::UCallbackProxy_UnsubscribeFromMod(const FObjectInitializer &ObjectInitializer)

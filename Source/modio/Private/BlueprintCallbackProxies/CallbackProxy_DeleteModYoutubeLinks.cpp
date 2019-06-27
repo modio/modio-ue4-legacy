@@ -1,7 +1,7 @@
 // Copyright 2019 modio. All Rights Reserved.
 // Released under MIT.
 
-#include "CallbackProxy_DeleteModYoutubeLinks.h"
+#include "BlueprintCallbackProxies/CallbackProxy_DeleteModYoutubeLinks.h"
 #include "ModioSubsystem.h"
 
 UCallbackProxy_DeleteModYoutubeLinks::UCallbackProxy_DeleteModYoutubeLinks(const FObjectInitializer &ObjectInitializer)

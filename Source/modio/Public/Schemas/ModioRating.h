@@ -5,7 +5,7 @@
 
 #include "Int64.h"
 #include "ModioHWrapper.h"
-#include "ModioResponse.h"
+#include "Schemas/ModioResponse.h"
 #include "ModioRating.generated.h"
 
 USTRUCT(BlueprintType)

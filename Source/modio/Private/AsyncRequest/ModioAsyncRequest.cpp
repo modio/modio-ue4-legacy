@@ -1,4 +1,4 @@
-#include "ModioAsyncRequest.h"
+#include "AsyncRequest/ModioAsyncRequest.h"
 #include "ModioSubsystem.h"
 
 FModioAsyncRequest::FModioAsyncRequest( FModioSubsystem *Modio ) :
