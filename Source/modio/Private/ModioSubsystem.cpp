@@ -5,7 +5,6 @@
 #include "ModioModule.h"
 #include "ModioUE4Utility.h"
 #include "Schemas/ModioResponse.h"
-#include "ModioCallbacks.h"
 
 FModioOnModDownloadDelegate FModioSubsystem::ModioOnModDownloadDelegate;
 FModioOnModUploadDelegate FModioSubsystem::ModioOnModUploadDelegate;
@@ -542,6 +541,16 @@ void FModioSubsystem::SetModUploadListener(FModioOnModUploadDelegate ModioOnModU
   FModioSubsystem::ModioOnModUploadDelegate = ModioOnModUploadDelegate;
 }
 
+void onModDownload(u32 response_code, u32 mod_id)
+{
+  FModioSubsystem::ModioOnModDownloadDelegate.ExecuteIfBound( (int32)response_code, (int32)mod_id );
+}
+
+void onModUpload(u32 response_code, u32 mod_id)
+{
+  FModioSubsystem::ModioOnModUploadDelegate.ExecuteIfBound( (int32)response_code, (int32)mod_id );
+}
+
 void FModioSubsystem::Init( const FString& RootDirectory, uint32 GameId, const FString& ApiKey, bool bIsLiveEnvironment )
 {
   check(!bInitialized);
@@ -582,9 +591,4 @@ void FModioSubsystem::Shutdown()
   modioSetUploadListener(nullptr);
 
   bInitialized = false;
-}
-
-
-namespace ModioCallback
-{
 }

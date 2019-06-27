@@ -4,7 +4,8 @@
 #pragma once
 
 #include "Int64.h"
-#include "ModioHWrapper.h"
+#include "Engine.h"
+#include "modio.h"
 #include "Schemas/ModioResponse.h"
 #include "Schemas/ModioFilehash.h"
 #include "Schemas/ModioDownload.h"
