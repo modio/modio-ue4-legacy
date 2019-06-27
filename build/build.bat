@@ -1,0 +1,1 @@
+"C:\Program Files\Epic Games\UE_4.22\Engine\Build\BatchFiles\RunUAT.bat" BuildPlugin -Plugin="%CD%\..\modio.uplugin" -TargetPlatforms=Win64 -Package="%CD%\PluginStaging_ALL\UE4_416" -Rocket

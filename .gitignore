@@ -2,3 +2,4 @@ Binaries/
 Intermediate/
 plugins.dat
 .vscode/
+build/PluginStaging_ALL/
