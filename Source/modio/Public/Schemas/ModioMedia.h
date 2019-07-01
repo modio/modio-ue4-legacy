@@ -3,8 +3,8 @@
 
 #pragma once
 
-#include "Engine.h"
-#include "modio.h"
+#include "CoreMinimal.h"
+#include "c/ModioC.h"
 #include "Schemas/ModioImage.h"
 #include "ModioMedia.generated.h"
 

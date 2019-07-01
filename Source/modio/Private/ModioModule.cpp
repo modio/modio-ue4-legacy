@@ -11,6 +11,9 @@
 #include "ISettingsSection.h"
 #endif
 
+#include "c/ModioC.h"
+#include "Engine.h"
+
 // Declare module name on one place so we don't have to retype it if we rename the module
 #define MODULE_NAME Modio
 #define Q(x) #x

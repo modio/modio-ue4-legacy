@@ -3,6 +3,7 @@
 
 #include "BlueprintCallbackProxies/CallbackProxy_DeleteModSketchfabLinks.h"
 #include "ModioSubsystem.h"
+#include "Engine.h"
 
 UCallbackProxy_DeleteModSketchfabLinks::UCallbackProxy_DeleteModSketchfabLinks(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)

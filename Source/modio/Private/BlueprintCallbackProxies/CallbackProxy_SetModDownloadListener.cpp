@@ -4,6 +4,7 @@
 #include "BlueprintCallbackProxies/CallbackProxy_SetModDownloadListener.h"
 #include "ModioUE4Utility.h"
 #include "ModioSubsystem.h"
+#include "Engine.h"
 
 UCallbackProxy_SetModDownloadListener::UCallbackProxy_SetModDownloadListener(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)

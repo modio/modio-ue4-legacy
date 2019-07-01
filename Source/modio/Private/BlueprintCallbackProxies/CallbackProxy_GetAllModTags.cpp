@@ -3,6 +3,7 @@
 
 #include "BlueprintCallbackProxies/CallbackProxy_GetAllModTags.h"
 #include "ModioSubsystem.h"
+#include "Engine.h"
 
 UCallbackProxy_GetAllModTags::UCallbackProxy_GetAllModTags(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)

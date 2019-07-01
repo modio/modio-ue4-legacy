@@ -3,6 +3,7 @@
 
 #include "BlueprintCallbackProxies/CallbackProxy_AddModSketchfabLinks.h"
 #include "ModioSubsystem.h"
+#include "Engine.h"
 
 UCallbackProxy_AddModSketchfabLinks::UCallbackProxy_AddModSketchfabLinks(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)

@@ -4,6 +4,7 @@
 #include "BlueprintCallbackProxies/CallbackProxy_GetUserMods.h"
 #include "ModioUE4Utility.h"
 #include "ModioSubsystem.h"
+#include "Engine.h"
 
 UCallbackProxy_GetUserMods::UCallbackProxy_GetUserMods(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)

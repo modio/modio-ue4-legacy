@@ -1,7 +1,7 @@
 #ifndef MODIO_INSTANCE_H
 #define MODIO_INSTANCE_H
 
-#include "../modio.h"
+#include "../c/ModioC.h"
 #include "creators/FilterCreator.h"
 #include "creators/ModCreator.h"
 #include "creators/ModEditor.h"

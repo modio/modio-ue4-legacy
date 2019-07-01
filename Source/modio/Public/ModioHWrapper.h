@@ -4,5 +4,5 @@
 #ifndef STRICT
 #define STRICT
 #endif
-#include "modio.h"
+#include "c/ModioC.h"
 #include "Windows/PostWindowsApi.h"

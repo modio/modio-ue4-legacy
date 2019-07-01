@@ -5,6 +5,7 @@
 #include "ModioModule.h"
 #include "ModioUE4Utility.h"
 #include "Schemas/ModioResponse.h"
+#include "Engine.h"
 
 FModioOnModDownloadDelegate FModioSubsystem::ModioOnModDownloadDelegate;
 FModioOnModUploadDelegate FModioSubsystem::ModioOnModUploadDelegate;
@@ -378,9 +379,9 @@ void FModioSubsystem::AddMetadataKVP(int32 ModId, const TMap<FString, FString> &
     i++;
   }
   modioAddMetadataKVP(Request, (u32)ModId, CMetadataKVP, (u32)MetadataKVP.Num(), FModioAsyncRequest_AddMetadataKVP::Response);
-  for(int i = 0; i < MetadataKVP.Num(); i++)
+  for(int j = 0; j < MetadataKVP.Num(); j++)
   {
-    delete[] CMetadataKVP[i];
+    delete[] CMetadataKVP[j];
   }
   delete[] CMetadataKVP;
 
@@ -401,9 +402,9 @@ void FModioSubsystem::DeleteMetadataKVP(int32 ModId, const TMap<FString, FString
     i++;
   }
   modioDeleteMetadataKVP(Request, (u32)ModId, CMetadataKVP, (u32)MetadataKVP.Num(), FModioAsyncRequest_DeleteModTags::Response);
-  for(int i = 0; i < MetadataKVP.Num(); i++)
+  for(int j = 0; j < MetadataKVP.Num(); j++)
   {
-    delete[] CMetadataKVP[i];
+    delete[] CMetadataKVP[j];
   }
   delete[] CMetadataKVP;
 
@@ -531,14 +532,14 @@ void FModioSubsystem::DeleteModSketchfabLinks(int32 ModId, const TArray<FString>
   QueueAsyncTask( Request );
 }
 
-void FModioSubsystem::SetModDownloadListener(FModioOnModDownloadDelegate ModioOnModDownloadDelegate)
+void FModioSubsystem::SetModDownloadListener(FModioOnModDownloadDelegate Delegate)
 {
-  FModioSubsystem::ModioOnModDownloadDelegate = ModioOnModDownloadDelegate;
+  FModioSubsystem::ModioOnModDownloadDelegate = Delegate;
 }
 
-void FModioSubsystem::SetModUploadListener(FModioOnModUploadDelegate ModioOnModUploadDelegate)
+void FModioSubsystem::SetModUploadListener(FModioOnModUploadDelegate Delegate)
 {
-  FModioSubsystem::ModioOnModUploadDelegate = ModioOnModUploadDelegate;
+  FModioSubsystem::ModioOnModUploadDelegate = Delegate;
 }
 
 void onModDownload(u32 response_code, u32 mod_id)

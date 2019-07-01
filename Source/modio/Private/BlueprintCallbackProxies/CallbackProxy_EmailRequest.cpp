@@ -3,6 +3,7 @@
 
 #include "BlueprintCallbackProxies/CallbackProxy_EmailRequest.h"
 #include "ModioSubsystem.h"
+#include "Engine.h"
 
 UCallbackProxy_EmailRequest::UCallbackProxy_EmailRequest(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)

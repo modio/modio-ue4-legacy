@@ -4,8 +4,8 @@
 #pragma once
 
 #include "Int64.h"
-#include "Engine.h"
-#include "modio.h"
+#include "CoreMinimal.h"
+#include "c/ModioC.h"
 #include "Schemas/ModioMod.h"
 #include "ModioQueuedModDownload.generated.h"
 

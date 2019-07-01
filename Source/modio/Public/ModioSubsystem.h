@@ -115,9 +115,9 @@ public:
   /** Returns an array containing the upload queue infromation */
   TArray<FModioQueuedModfileUpload> GetModfileUploadQueue();
   /** Callback triggered every time a mod is downloaded locally from mod.io */
-  void SetModDownloadListener(FModioOnModDownloadDelegate ModioOnModDownloadDelegate);
+  void SetModDownloadListener(FModioOnModDownloadDelegate Delegate);
   /** Callback triggered every time a local mod finished uploading to mod.io */
-  void SetModUploadListener(FModioOnModUploadDelegate ModioOnModUploadDelegate);
+  void SetModUploadListener(FModioOnModUploadDelegate Delegate);
 
   //Mod Subscription
   /** Subscribes to the corresponding mod */

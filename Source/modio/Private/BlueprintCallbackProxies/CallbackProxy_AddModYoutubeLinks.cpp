@@ -3,6 +3,7 @@
 
 #include "BlueprintCallbackProxies/CallbackProxy_AddModYoutubeLinks.h"
 #include "ModioSubsystem.h"
+#include "Engine.h"
 
 UCallbackProxy_AddModYoutubeLinks::UCallbackProxy_AddModYoutubeLinks(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)

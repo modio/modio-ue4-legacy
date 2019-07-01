@@ -3,6 +3,7 @@
 
 #include "BlueprintCallbackProxies/CallbackProxy_DeleteMetadataKVP.h"
 #include "ModioSubsystem.h"
+#include "Engine.h"
 
 UCallbackProxy_DeleteMetadataKVP::UCallbackProxy_DeleteMetadataKVP(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)

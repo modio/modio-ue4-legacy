@@ -3,6 +3,7 @@
 
 #include "BlueprintCallbackProxies/CallbackProxy_GalaxyAuth.h"
 #include "ModioSubsystem.h"
+#include "Engine.h"
 
 UCallbackProxy_GalaxyAuth::UCallbackProxy_GalaxyAuth(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)

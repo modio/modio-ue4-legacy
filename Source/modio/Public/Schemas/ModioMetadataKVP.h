@@ -3,8 +3,8 @@
 
 #pragma once
 
-#include "Engine.h"
-#include "modio.h"
+#include "CoreMinimal.h"
+#include "c/ModioC.h"
 #include "Schemas/ModioResponse.h"
 #include "ModioMetadataKVP.generated.h"
 

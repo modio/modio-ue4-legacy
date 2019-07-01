@@ -4,6 +4,7 @@
 #include "BlueprintCallbackProxies/CallbackProxy_GetUserEvents.h"
 #include "ModioUE4Utility.h"
 #include "ModioSubsystem.h"
+#include "Engine.h"
 
 UCallbackProxy_GetUserEvents::UCallbackProxy_GetUserEvents(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)

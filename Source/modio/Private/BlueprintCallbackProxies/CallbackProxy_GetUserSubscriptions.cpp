@@ -4,6 +4,7 @@
 #include "BlueprintCallbackProxies/CallbackProxy_GetUserSubscriptions.h"
 #include "ModioUE4Utility.h"
 #include "ModioSubsystem.h"
+#include "Engine.h"
 
 UCallbackProxy_GetUserSubscriptions::UCallbackProxy_GetUserSubscriptions(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)
