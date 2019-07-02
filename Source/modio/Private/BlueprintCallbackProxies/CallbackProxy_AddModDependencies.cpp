@@ -3,7 +3,7 @@
 
 #include "BlueprintCallbackProxies/CallbackProxy_AddModDependencies.h"
 #include "ModioSubsystem.h"
-#include "Engine.h"
+#include "Engine/Engine.h"
 
 UCallbackProxy_AddModDependencies::UCallbackProxy_AddModDependencies(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)

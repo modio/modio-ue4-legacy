@@ -3,7 +3,7 @@
 
 #include "BlueprintCallbackProxies/CallbackProxy_UnsubscribeFromMod.h"
 #include "ModioSubsystem.h"
-#include "Engine.h"
+#include "Engine/Engine.h"
 
 UCallbackProxy_UnsubscribeFromMod::UCallbackProxy_UnsubscribeFromMod(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)

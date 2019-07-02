@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ModioSubsystem.h"
-#include "Modules/ModuleInterface.h"
+#include "Modules/ModuleManager.h"
 
 class FModioModule : public IModuleInterface
 {

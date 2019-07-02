@@ -3,7 +3,7 @@
 
 #include "BlueprintCallbackProxies/CallbackProxy_AddMetadataKVP.h"
 #include "ModioSubsystem.h"
-#include "Engine.h"
+#include "Engine/Engine.h"
 
 UCallbackProxy_AddMetadataKVP::UCallbackProxy_AddMetadataKVP(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)

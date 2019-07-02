@@ -4,7 +4,7 @@
 #include "BlueprintCallbackProxies/CallbackProxy_SubscribeToMod.h"
 #include "ModioUE4Utility.h"
 #include "ModioSubsystem.h"
-#include "Engine.h"
+#include "Engine/Engine.h"
 
 UCallbackProxy_SubscribeToMod::UCallbackProxy_SubscribeToMod(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)

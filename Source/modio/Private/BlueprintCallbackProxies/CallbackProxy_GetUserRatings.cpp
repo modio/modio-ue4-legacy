@@ -4,7 +4,7 @@
 #include "BlueprintCallbackProxies/CallbackProxy_GetUserRatings.h"
 #include "ModioUE4Utility.h"
 #include "ModioSubsystem.h"
-#include "Engine.h"
+#include "Engine/Engine.h"
 
 UCallbackProxy_GetUserRatings::UCallbackProxy_GetUserRatings(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)

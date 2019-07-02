@@ -4,7 +4,7 @@
 #include "BlueprintCallbackProxies/CallbackProxy_EditMod.h"
 #include "ModioUE4Utility.h"
 #include "ModioSubsystem.h"
-#include "Engine.h"
+#include "Engine/Engine.h"
 
 UCallbackProxy_EditMod::UCallbackProxy_EditMod(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)

@@ -3,7 +3,7 @@
 
 #include "BlueprintCallbackProxies/CallbackProxy_SteamAuth.h"
 #include "ModioSubsystem.h"
-#include "Engine.h"
+#include "Engine/Engine.h"
 
 UCallbackProxy_SteamAuth::UCallbackProxy_SteamAuth(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)

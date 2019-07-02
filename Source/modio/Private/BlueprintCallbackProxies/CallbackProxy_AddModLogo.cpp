@@ -3,7 +3,7 @@
 
 #include "BlueprintCallbackProxies/CallbackProxy_AddModLogo.h"
 #include "ModioSubsystem.h"
-#include "Engine.h"
+#include "Engine/Engine.h"
 
 UCallbackProxy_AddModLogo::UCallbackProxy_AddModLogo(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)

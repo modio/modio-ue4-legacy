@@ -5,7 +5,8 @@
 #include "ModioModule.h"
 #include "ModioUE4Utility.h"
 #include "Schemas/ModioResponse.h"
-#include "Engine.h"
+#include "Engine/Engine.h"
+#include "Misc/Paths.h"
 
 FModioOnModDownloadDelegate FModioSubsystem::ModioOnModDownloadDelegate;
 FModioOnModUploadDelegate FModioSubsystem::ModioOnModUploadDelegate;

@@ -3,7 +3,7 @@
 
 #include "BlueprintCallbackProxies/CallbackProxy_DeleteModDependencies.h"
 #include "ModioSubsystem.h"
-#include "Engine.h"
+#include "Engine/Engine.h"
 
 UCallbackProxy_DeleteModDependencies::UCallbackProxy_DeleteModDependencies(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)

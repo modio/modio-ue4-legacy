@@ -3,7 +3,7 @@
 
 #include "BlueprintCallbackProxies/CallbackProxy_GetAuthenticatedUser.h"
 #include "ModioSubsystem.h"
-#include "Engine.h"
+#include "Engine/Engine.h"
 
 UCallbackProxy_GetAuthenticatedUser::UCallbackProxy_GetAuthenticatedUser(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)

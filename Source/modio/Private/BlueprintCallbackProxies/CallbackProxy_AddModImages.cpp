@@ -3,7 +3,7 @@
 
 #include "BlueprintCallbackProxies/CallbackProxy_AddModImages.h"
 #include "ModioSubsystem.h"
-#include "Engine.h"
+#include "Engine/Engine.h"
 
 UCallbackProxy_AddModImages::UCallbackProxy_AddModImages(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)
