@@ -215,16 +215,19 @@ void UModioManager::Tick(float DeltaTime)
 }
 ```
 
-## Building
+## Contributions Welcome
+Our Unreal Engine 4 plugin is public and open source. Game developers are welcome to utilize it directly, to add support for mods in their games, or fork it for their games customized use. Want to make changes to our plugin? Submit a pull request with your recommended changes to be reviewed.
 
-The mod.io UE4 plugin is open source and MIT licensed, you can use the standalone `build.bat` file to compile it. This is useful if you want to modify the plugin or contribute to this repo. If you're looking for integrating mod.io to your game refer to the [Getting started](#getting-started) guide instead.
+### Building
+
+You can use the standalone `build.bat` file to compile it after you have done modification to the plugin. If you're looking for integrating mod.io to your game refer to the [Getting started](#getting-started) guide instead.
 
 ```
 cd build
 build.bat [UE4 VERSION]
 ```
 
-Where [UE4 VERSION] is the UE4 version that will be used for building. The following versions are supported:
+Where [UE4 VERSION] is the UE4 version that will be used for building, it has to be installed on your system beforehand. The following versions are supported:
 
 ```
 :: Build with UE4 v19
@@ -242,9 +245,6 @@ build.bat 22
 :: Build with UE4 v19, v20, v21 and v22
 build.bat all
 ```
-
-## Contributions Welcome
-Our Unreal Engine 4 plugin is public and open source. Game developers are welcome to utilize it directly, to add support for mods in their games, or fork it for their games customized use. Want to make changes to our plugin? Submit a pull request with your recommended changes to be reviewed.
 
 ## Other Repositories
 Our aim with [mod.io](https://mod.io), is to provide an open modding API. You are welcome to [view, fork and contribute to our other codebases](https://github.com/modio) in use:
