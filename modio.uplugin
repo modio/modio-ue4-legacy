@@ -2,14 +2,14 @@
 	"FileVersion": 3,
 	"Version": 1,
 	"VersionName": "1.0",
-	"FriendlyName": "modio",
+	"FriendlyName": "mod.io",
 	"Description": "Powerful Mod API",
 	"Category": "Other",
 	"CreatedBy": "mod.io",
 	"CreatedByURL": "mod.io",
-	"DocsURL": "",
+	"DocsURL": "https://github.com/modio/UE4Plugin#usage",
 	"MarketplaceURL": "",
-	"SupportURL": "",
+	"SupportURL": "http://discord.mod.io",
 	"CanContainContent": true,
 	"IsBetaVersion": true,
 	"Installed": false,
@@ -18,8 +18,7 @@
 			"Name": "modio",
 			"Type": "Runtime",
 			"LoadingPhase": "Default",
-			"WhitelistPlatforms" :
-			[
+			"WhitelistPlatforms": [
 				"Win64"
 			]
 		},
@@ -27,8 +26,7 @@
 			"Name": "Int64",
 			"Type": "Runtime",
 			"LoadingPhase": "Default",
-			"WhitelistPlatforms" :
-			[
+			"WhitelistPlatforms": [
 				"Win64"
 			]
 		}
