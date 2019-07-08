@@ -108,7 +108,7 @@ Download and remove mods locally by subscribing and unsubscribing.
 #### Subscribe
 
 ```c++
-Modio->SubscribeToMod(153, FModioModDelegate::CreateUObject(ModioManager, &UModioManager::OnSubscribeToMod));
+Modio->SubscribeToMod(mod_id, FModioModDelegate::CreateUObject(ModioManager, &UModioManager::OnSubscribeToMod));
 
 // ...
 
@@ -161,7 +161,7 @@ ModfileCreator.Path = "ModExample/modfile/";
 ModfileCreator.Version = "v1.1.0";
 ModfileCreator.Changelog = "This is a change log...";
 
-Modio->AddModfile(132, ModfileCreator);
+Modio->AddModfile(mod_id, ModfileCreator);
 ```
 
 ### Listeners
@@ -198,11 +198,13 @@ If you are a game developer, first step is to add mod support to your Unreal Eng
 
 ![Alt text](img/settings.png?raw=true "Title")
 
-Once initialized, you are ready to use either the Blueprint layer or C++.
+Once initialized, you are ready to start interacting with either the Blueprint layer or C++. Both have the same funcionality so it's up to you choosing what fits better to your game.
 
 ### Blueprint layer
 
 Interact with mod.io by using the intuitive mod.io functions, callback proxies and structures. Don't forget to connect the `Process` node yo your `Tick` function for the callbacks can take effect.
+
+![Alt text](img/blueprint_process.png?raw=true "Title")
 
 ### C++ layer
 
