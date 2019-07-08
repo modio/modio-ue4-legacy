@@ -217,7 +217,7 @@ void UModioManager::Tick(float DeltaTime)
 
 ## Building
 
-Do the following to compile the mod.io plugin. If you're looking for integrating mod.io to your game refer to the [Getting started](#getting-started) guide instead.
+The mod.io UE4 plugin is open source and MIT licensed, you can use the standalone `build.bat` file to compile it. This is useful if you want to modify the plugin or contribute to this repo. If you're looking for integrating mod.io to your game refer to the [Getting started](#getting-started) guide instead.
 
 ```
 cd build
@@ -242,8 +242,6 @@ build.bat 22
 :: Build with UE4 v19, v20, v21 and v22
 build.bat all
 ```
-
-
 
 ## Contributions Welcome
 Our Unreal Engine 4 plugin is public and open source. Game developers are welcome to utilize it directly, to add support for mods in their games, or fork it for their games customized use. Want to make changes to our plugin? Submit a pull request with your recommended changes to be reviewed.
