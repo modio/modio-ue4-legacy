@@ -28,7 +28,7 @@ IF %1 == 19 (
     "C:\Program Files\Epic Games\UE_4.22\Engine\Build\BatchFiles\RunUAT.bat" BuildPlugin -Plugin="%CD%\..\modio.uplugin" -TargetPlatforms=Win64 -Package="%CD%\PluginStaging_ALL\modio_UE4_422" -Rocket
 ) ELSE (
     ECHO Version %1 not supported by this script
-    ECHO The following versions param is allowed v19, v20, v21, v22 and all
+    ECHO The following version param are allowed v19, v20, v21, v22 and all
 )
 
 GOTO DONE

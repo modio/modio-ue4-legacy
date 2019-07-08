@@ -194,10 +194,19 @@ void UMyModioManager::OnModUpload(int32 ResponseCode, int32 ModId)
 ```
 
 ## Getting started
-If you are a game developer, first step is to add mod support to your Unreal Engine 4 game. Once mod support is up and running, [create your games profile](https://mod.io/games/add) on mod.io, to get an API key and access to all [functionality mod.io offers](https://apps.mod.io/guides/getting-started).
-Next, download the latest [UE4 release](https://github.com/modio/UE4Plugin/releases) and unpack it into your project, then head over to the [GitHub Wiki](https://github.com/modio/UE4Plugin/wiki) and follow the guides to get it running within your game.
+If you are a game developer, first step is to add mod support to your Unreal Engine 4 game. Once mod support is up and running, [create your games profile](https://mod.io/games/add) on mod.io, to get an API key and access to all [functionality mod.io offers](https://apps.mod.io/guides/getting-started). Next, input your `Game ID` and `API Key` under the mod.io `Project Settings` in your UE4 editor.
 
 ![Alt text](img/settings.png?raw=true "Title")
+
+Once initialized, you are ready to use either the Blueprint layer or C++.
+
+### Blueprint layer
+
+Interact with mod.io by using the intuitive mod.io functions, callback proxies and structures. Don't forget to connect the `Process` node yo your `Tick` function for the callbacks can take effect.
+
+### C++ layer
+
+Import the mod.io subsystem and get the Subsystem pointer to start interacting with mod.io. Remeber to call `Modio->Process()` regularly to process the async funcionality.
 
 ```c++
 #include "ModioSubsystem.h"
@@ -217,6 +226,34 @@ void UModioManager::Tick(float DeltaTime)
 
 ## Contributions Welcome
 Our Unreal Engine 4 plugin is public and open source. Game developers are welcome to utilize it directly, to add support for mods in their games, or fork it for their games customized use. Want to make changes to our plugin? Submit a pull request with your recommended changes to be reviewed.
+
+### Building
+
+You can use the standalone `build.bat` file to compile it after you have done modification to the plugin. If you're looking for integrating mod.io to your game refer to the [Getting started](#getting-started) guide instead.
+
+```
+cd build
+build.bat [UE4 VERSION]
+```
+
+Where [UE4 VERSION] is the UE4 version that will be used for building, it has to be installed on your system beforehand. The following versions are supported:
+
+```
+:: Build with UE4 v19
+build.bat 19
+
+:: Build with UE4 v20
+build.bat 20
+
+:: Build with UE4 v21
+build.bat 21
+
+:: Build with UE4 v22
+build.bat 22
+
+:: Build with UE4 v19, v20, v21 and v22
+build.bat all
+```
 
 ## Other Repositories
 Our aim with [mod.io](https://mod.io), is to provide an open modding API. You are welcome to [view, fork and contribute to our other codebases](https://github.com/modio) in use:
