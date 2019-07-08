@@ -194,10 +194,19 @@ void UMyModioManager::OnModUpload(int32 ResponseCode, int32 ModId)
 ```
 
 ## Getting started
-If you are a game developer, first step is to add mod support to your Unreal Engine 4 game. Once mod support is up and running, [create your games profile](https://mod.io/games/add) on mod.io, to get an API key and access to all [functionality mod.io offers](https://apps.mod.io/guides/getting-started).
-Next, download the latest [UE4 release](https://github.com/modio/UE4Plugin/releases) and unpack it into your project, then head over to the [GitHub Wiki](https://github.com/modio/UE4Plugin/wiki) and follow the guides to get it running within your game.
+If you are a game developer, first step is to add mod support to your Unreal Engine 4 game. Once mod support is up and running, [create your games profile](https://mod.io/games/add) on mod.io, to get an API key and access to all [functionality mod.io offers](https://apps.mod.io/guides/getting-started). Next, input your `Game ID` and `API Key` under the mod.io `Project Settings` in your UE4 editor.
 
 ![Alt text](img/settings.png?raw=true "Title")
+
+Once initialized, you are ready to use either the Blueprint layer or C++.
+
+### Blueprint layer
+
+Interact with mod.io by using the intuitive mod.io functions, callback proxies and structures. Don't forget to connect the `Process` node yo your `Tick` function for the callbacks can take effect.
+
+### C++ layer
+
+Import the mod.io subsystem and get the Subsystem pointer to start interacting with mod.io. Remeber to call `Modio->Process()` regularly to process the async funcionality.
 
 ```c++
 #include "ModioSubsystem.h"
