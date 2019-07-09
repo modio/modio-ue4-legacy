@@ -16,8 +16,9 @@ Welcome to [mod.io](https://mod.io) Unreal Engine 4 Plugin. It allows game devel
 | Free | ✔ |
 | Async Callbacks | ✔ |
 | Events | ✔ |
+| Email / Steam / GOG authentication | ✔ |
 | Prebuilt download and upload queue | ✔ |
-| Automatic downloads and updates | ✔ |
+| Mod ratings / dependencies | ✔ |
 | MIT license | ✔ |
 
 ## Usage
