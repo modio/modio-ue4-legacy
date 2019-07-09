@@ -25,7 +25,7 @@ void UCallbackProxy_SetModUploadListener::Activate()
   FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
   if( Modio.IsValid() )
   {
-    Modio->SetModUploadListener( FModioOnModUploadDelegate::CreateUObject( this, &UCallbackProxy_SetModUploadListener::OnModUploadDelegate ) );
+    Modio->SetModUploadListener( FModioListenerDelegate::CreateUObject( this, &UCallbackProxy_SetModUploadListener::OnModUploadDelegate ) );
   }
   else
   {

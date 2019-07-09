@@ -8,8 +8,8 @@
 #include "Engine/Engine.h"
 #include "Misc/Paths.h"
 
-FModioOnModDownloadDelegate FModioSubsystem::ModioOnModDownloadDelegate;
-FModioOnModUploadDelegate FModioSubsystem::ModioOnModUploadDelegate;
+FModioListenerDelegate FModioSubsystem::ModioOnModDownloadDelegate;
+FModioListenerDelegate FModioSubsystem::ModioOnModUploadDelegate;
 
 FModioSubsystem::FModioSubsystem() :
   bInitialized(false)
@@ -533,12 +533,12 @@ void FModioSubsystem::DeleteModSketchfabLinks(int32 ModId, const TArray<FString>
   QueueAsyncTask( Request );
 }
 
-void FModioSubsystem::SetModDownloadListener(FModioOnModDownloadDelegate Delegate)
+void FModioSubsystem::SetModDownloadListener(FModioListenerDelegate Delegate)
 {
   FModioSubsystem::ModioOnModDownloadDelegate = Delegate;
 }
 
-void FModioSubsystem::SetModUploadListener(FModioOnModUploadDelegate Delegate)
+void FModioSubsystem::SetModUploadListener(FModioListenerDelegate Delegate)
 {
   FModioSubsystem::ModioOnModUploadDelegate = Delegate;
 }

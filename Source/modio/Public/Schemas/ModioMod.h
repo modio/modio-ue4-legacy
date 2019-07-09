@@ -72,5 +72,4 @@ extern void InitializeMod(FModioMod &mod, const ModioMod &modio_mod);
 
 DECLARE_DELEGATE_TwoParams( FModioModDelegate, FModioResponse, FModioMod );
 DECLARE_DELEGATE_TwoParams( FModioModArrayDelegate, FModioResponse, const TArray<FModioMod> & );
-DECLARE_DELEGATE_TwoParams( FModioOnModDownloadDelegate, int32, int32 );
-DECLARE_DELEGATE_TwoParams( FModioOnModUploadDelegate, int32, int32 );
+DECLARE_DELEGATE_TwoParams( FModioListenerDelegate, int32, int32 );

@@ -115,9 +115,9 @@ public:
   /** Returns an array containing the upload queue infromation */
   TArray<FModioQueuedModfileUpload> GetModfileUploadQueue();
   /** Callback triggered every time a mod is downloaded locally from mod.io */
-  void SetModDownloadListener(FModioOnModDownloadDelegate Delegate);
+  void SetModDownloadListener(FModioListenerDelegate Delegate);
   /** Callback triggered every time a local mod finished uploading to mod.io */
-  void SetModUploadListener(FModioOnModUploadDelegate Delegate);
+  void SetModUploadListener(FModioListenerDelegate Delegate);
 
   //Mod Subscription
   /** Subscribes to the corresponding mod */
@@ -166,8 +166,8 @@ public:
   void DeleteModSketchfabLinks(int32 ModId, const TArray<FString> &SketchfabLinks, FModioGenericDelegate AddModSketchfabLinksDelegate);
   
   /** Download and upload delegate listeners */
-  static FModioOnModDownloadDelegate ModioOnModDownloadDelegate;
-  static FModioOnModUploadDelegate ModioOnModUploadDelegate;
+  static FModioListenerDelegate ModioOnModDownloadDelegate;
+  static FModioListenerDelegate ModioOnModUploadDelegate;
 
 protected:
   friend class FModioModule;

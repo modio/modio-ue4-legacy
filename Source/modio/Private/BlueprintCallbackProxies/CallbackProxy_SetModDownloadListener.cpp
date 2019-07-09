@@ -25,7 +25,7 @@ void UCallbackProxy_SetModDownloadListener::Activate()
   FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
   if( Modio.IsValid() )
   {
-    Modio->SetModDownloadListener( FModioOnModDownloadDelegate::CreateUObject( this, &UCallbackProxy_SetModDownloadListener::OnModDownloadDelegate ) );
+    Modio->SetModDownloadListener( FModioListenerDelegate::CreateUObject( this, &UCallbackProxy_SetModDownloadListener::OnModDownloadDelegate ) );
   }
   else
   {

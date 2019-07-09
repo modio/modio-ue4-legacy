@@ -169,7 +169,7 @@ Modio->AddModfile(132, ModfileCreator);
 #### Download listener
 
 ```c++
-Modio->SetModDownloadListener(FModioOnModDownloadDelegate::CreateUObject(ModioManager, &UMyModioManager::OnModDownload));
+Modio->SetModDownloadListener(FModioListenerDelegate::CreateUObject(ModioManager, &UMyModioManager::OnModDownload));
 
 // ...
 
@@ -183,7 +183,7 @@ void UMyModioManager::OnModDownload(int32 ResponseCode, int32 ModId)
 #### Upload listener
 
 ```c++
-Modio->SetModUploadListener(FModioOnModDownloadDelegate::CreateUObject(ModioManager, &UMyModioManager::OnModUpload));
+Modio->SetModUploadListener(FModioListenerDelegate::CreateUObject(ModioManager, &UMyModioManager::OnModUpload));
 
 // ...
 
