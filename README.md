@@ -21,6 +21,10 @@ Welcome to [mod.io](https://mod.io) Unreal Engine 4 Plugin. It allows game devel
 | Mod ratings / dependencies | ✔ |
 | MIT license | ✔ |
 
+## Documentation
+
+A quick start guide is provided below, in addition to the more [detailed wiki](https://github.com/modio/UE4Plugin/wiki).
+
 ## Usage
 
 ### Browse mods
