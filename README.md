@@ -21,6 +21,10 @@ Welcome to [mod.io](https://mod.io) Unreal Engine 4 Plugin. It allows game devel
 | Mod ratings / dependencies | ✔ |
 | MIT license | ✔ |
 
+## Documentation
+
+A quick start guide is provided below, in addition to the more [detailed wiki](https://github.com/modio/UE4Plugin/wiki).
+
 ## Usage
 
 ### Browse mods
@@ -264,6 +268,7 @@ Our aim with [mod.io](https://mod.io), is to provide an open modding API. You ar
 * [Design](https://design.mod.io) is public and open source, the repository can be [found here](https://github.com/modio/WebDesign).
 * [API documentation](https://docs.mod.io) is public and open source, the repository can be [found here](https://github.com/modio/APIDocs).
 * [Browse engine tools](https://apps.mod.io), plugins and wrappers created by the community, or [share your own](https://apps.mod.io/add).
+* [Unreal Engine 4 plugin](https://github.com/modio/UE4Plugin), easily manage the browsing and install of mods in Unreal Engine 4 games
 * [Unity Engine plugin](https://github.com/modio/UnityPlugin), easily manage the browsing and install of mods in Unity Engine games
 * [Python wrapper](https://github.com/ClementJ18/mod.io), a python wrapper for the mod.io API
 * [Rust wrapper](https://github.com/nickelc/modio-rs), rust interface for mod.io
