@@ -8,11 +8,12 @@
 	"CreatedBy": "mod.io",
 	"CreatedByURL": "mod.io",
 	"DocsURL": "https://github.com/modio/UE4Plugin#usage",
-	"MarketplaceURL": "",
+	"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/content/1ab22ed2961a4cc19b9151bd072df998",
 	"SupportURL": "http://discord.mod.io",
 	"CanContainContent": true,
 	"IsBetaVersion": true,
 	"Installed": false,
+	"EngineVersion" : "4.22.0",
 	"Modules": [
 		{
 			"Name": "modio",
