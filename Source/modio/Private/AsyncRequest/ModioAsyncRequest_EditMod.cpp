@@ -1,3 +1,6 @@
+// Copyright 2019 modio. All Rights Reserved.
+// Released under MIT.
+
 #include "AsyncRequest/ModioAsyncRequest_EditMod.h"
 
 FModioAsyncRequest_EditMod::FModioAsyncRequest_EditMod( FModioSubsystem *Modio, FModioModDelegate Delegate ) :

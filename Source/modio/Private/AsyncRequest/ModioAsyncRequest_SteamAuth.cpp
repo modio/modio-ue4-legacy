@@ -1,3 +1,6 @@
+// Copyright 2019 modio. All Rights Reserved.
+// Released under MIT.
+
 #include "AsyncRequest/ModioAsyncRequest_SteamAuth.h"
 
 FModioAsyncRequest_SteamAuth::FModioAsyncRequest_SteamAuth( FModioSubsystem *Modio, FModioGenericDelegate Delegate ) :

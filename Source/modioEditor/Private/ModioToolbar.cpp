@@ -1,3 +1,6 @@
+// Copyright 2019 modio. All Rights Reserved.
+// Released under MIT.
+
 #include "ModioToolbar.h"
 #include "modioEditorCommands.h"
 #include "Framework/MultiBox/MultiBoxDefs.h"

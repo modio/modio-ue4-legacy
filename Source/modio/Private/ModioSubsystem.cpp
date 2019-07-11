@@ -1,3 +1,6 @@
+// Copyright 2019 modio. All Rights Reserved.
+// Released under MIT.
+
 #include "ModioSubsystem.h"
 #include "ModioHWrapper.h"
 #include "../ModioPublic.h"

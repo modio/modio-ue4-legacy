@@ -1,3 +1,6 @@
+// Copyright 2019 modio. All Rights Reserved.
+// Released under MIT.
+
 #include "AsyncRequest/ModioAsyncRequest_AddModTags.h"
 #include "ModioUE4Utility.h"
 

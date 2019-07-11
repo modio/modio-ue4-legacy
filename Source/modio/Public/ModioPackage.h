@@ -1,3 +1,6 @@
+// Copyright 2019 modio. All Rights Reserved.
+// Released under MIT.
+
 // Can't be #pragma once because other modules may define PACKAGE_SCOPE
 
 // Intended to be the last include in an exported class definition

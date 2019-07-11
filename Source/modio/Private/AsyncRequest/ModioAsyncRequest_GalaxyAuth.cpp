@@ -1,3 +1,6 @@
+// Copyright 2019 modio. All Rights Reserved.
+// Released under MIT.
+
 #include "AsyncRequest/ModioAsyncRequest_GalaxyAuth.h"
 
 FModioAsyncRequest_GalaxyAuth::FModioAsyncRequest_GalaxyAuth( FModioSubsystem *Modio, FModioGenericDelegate Delegate ) :
