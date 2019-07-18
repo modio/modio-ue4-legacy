@@ -1,3 +1,6 @@
+// Copyright 2019 modio. All Rights Reserved.
+// Released under MIT.
+
 #include "Int64FunctionLibrary.h"
 
 FString UInt64FunctionLibrary::Conv_Int64ToString( const FInt64& Int64 )
