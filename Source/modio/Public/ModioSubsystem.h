@@ -90,7 +90,7 @@ public:
 
   // Mod browsing
   /** Request mod information */
-  void GetAllMods(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, FModioModArrayDelegate GetAllModsDelegate);
+  void GetAllMods(TEnumAsByte<EModioFilterType> FilterType, const TArray<FString> &ModTags, int32 Limit, int32 Offset, FModioModArrayDelegate GetAllModsDelegate);
 
   // Get your own information
   /** Request the authenticated user information */

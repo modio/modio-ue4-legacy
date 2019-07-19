@@ -88,12 +88,12 @@ void FModioSubsystem::EmailRequest( const FString &Email, FModioGenericDelegate 
   QueueAsyncTask( Request );
 }
 
-void FModioSubsystem::GetAllMods(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, FModioModArrayDelegate GetAllModsDelegate)
+void FModioSubsystem::GetAllMods(TEnumAsByte<EModioFilterType> FilterType, const TArray<FString> &ModTags, int32 Limit, int32 Offset, FModioModArrayDelegate GetAllModsDelegate)
 {
   FModioAsyncRequest_GetAllMods *Request = new FModioAsyncRequest_GetAllMods( this, GetAllModsDelegate );
   ModioFilterCreator modio_filter_creator;
   modioInitFilter(&modio_filter_creator);
-  SetupModioFilterCreator(FilterType, Limit, Offset, modio_filter_creator);
+  SetupModioModFilterCreator(FilterType, ModTags, Limit, Offset, modio_filter_creator);
   modioGetAllMods(Request, modio_filter_creator, FModioAsyncRequest_GetAllMods::Response);
   modioFreeFilter(&modio_filter_creator);
   QueueAsyncTask( Request );
