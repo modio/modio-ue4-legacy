@@ -90,15 +90,15 @@ public:
 
   // Mod browsing
   /** Request mod information */
-  void GetAllMods(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, FModioModArrayDelegate GetAllModsDelegate);
+  void GetAllMods(TEnumAsByte<EModioFilterType> FilterType, const TArray<FString> &ModTags, int32 Limit, int32 Offset, FModioModArrayDelegate GetAllModsDelegate);
 
   // Get your own information
   /** Request the authenticated user information */
   void GetAuthenticatedUser(FModioUserDelegate GetAuthenticatedUserDelegate);
   /** Returns the mods the logged in user has subscribed */
-  void GetUserSubscriptions(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, FModioModArrayDelegate GetUserSubscriptionsDelegate);
+  void GetUserSubscriptions(TEnumAsByte<EModioFilterType> FilterType, const TArray<FString> ModTags, int32 Limit, int32 Offset, FModioModArrayDelegate GetUserSubscriptionsDelegate);
   /** Returns the mods the authenticated user owns */
-  void GetUserMods(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, FModioModArrayDelegate GetUserModsDelegate);
+  void GetUserMods(TEnumAsByte<EModioFilterType> FilterType, const TArray<FString> ModTags, int32 Limit, int32 Offset, FModioModArrayDelegate GetUserModsDelegate);
   /** Returns the modfiles the authenticated user owns */
   void GetUserModfiles(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, FModioModfileArrayDelegate GetUserModfilesDelegate);
   /** Returns the events related to the authenticated user */

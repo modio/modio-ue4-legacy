@@ -88,12 +88,12 @@ void FModioSubsystem::EmailRequest( const FString &Email, FModioGenericDelegate 
   QueueAsyncTask( Request );
 }
 
-void FModioSubsystem::GetAllMods(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, FModioModArrayDelegate GetAllModsDelegate)
+void FModioSubsystem::GetAllMods(TEnumAsByte<EModioFilterType> FilterType, const TArray<FString> &ModTags, int32 Limit, int32 Offset, FModioModArrayDelegate GetAllModsDelegate)
 {
   FModioAsyncRequest_GetAllMods *Request = new FModioAsyncRequest_GetAllMods( this, GetAllModsDelegate );
   ModioFilterCreator modio_filter_creator;
   modioInitFilter(&modio_filter_creator);
-  SetupModioFilterCreator(FilterType, Limit, Offset, modio_filter_creator);
+  SetupModioModFilterCreator(FilterType, ModTags, Limit, Offset, modio_filter_creator);
   modioGetAllMods(Request, modio_filter_creator, FModioAsyncRequest_GetAllMods::Response);
   modioFreeFilter(&modio_filter_creator);
   QueueAsyncTask( Request );
@@ -128,23 +128,23 @@ void FModioSubsystem::GetUserRatings(TEnumAsByte<EModioFilterType> FilterType, i
   QueueAsyncTask( Request );
 }
 
-void FModioSubsystem::GetUserSubscriptions(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, FModioModArrayDelegate GetUserSubscriptionsDelegate)
+void FModioSubsystem::GetUserSubscriptions(TEnumAsByte<EModioFilterType> FilterType, const TArray<FString> ModTags, int32 Limit, int32 Offset, FModioModArrayDelegate GetUserSubscriptionsDelegate)
 {
   FModioAsyncRequest_GetUserSubscriptions *Request = new FModioAsyncRequest_GetUserSubscriptions( this, GetUserSubscriptionsDelegate );
   ModioFilterCreator modio_filter_creator;
   modioInitFilter(&modio_filter_creator);
-  SetupModioFilterCreator(FilterType, Limit, Offset, modio_filter_creator);
+  SetupModioModFilterCreator(FilterType, ModTags, Limit, Offset, modio_filter_creator);
   modioGetUserSubscriptions(Request, modio_filter_creator, FModioAsyncRequest_GetUserSubscriptions::Response);
   modioFreeFilter(&modio_filter_creator);
   QueueAsyncTask( Request );
 }
 
-void FModioSubsystem::GetUserMods(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, FModioModArrayDelegate GetUserModsDelegate)
+void FModioSubsystem::GetUserMods(TEnumAsByte<EModioFilterType> FilterType, const TArray<FString> ModTags, int32 Limit, int32 Offset, FModioModArrayDelegate GetUserModsDelegate)
 {
   FModioAsyncRequest_GetUserMods *Request = new FModioAsyncRequest_GetUserMods( this, GetUserModsDelegate );
   ModioFilterCreator modio_filter_creator;
   modioInitFilter(&modio_filter_creator);
-  SetupModioFilterCreator(FilterType, Limit, Offset, modio_filter_creator);
+  SetupModioModFilterCreator(FilterType, ModTags, Limit, Offset, modio_filter_creator);
   modioGetUserMods(Request, modio_filter_creator, FModioAsyncRequest_GetUserMods::Response);
   modioFreeFilter(&modio_filter_creator);
   QueueAsyncTask( Request );

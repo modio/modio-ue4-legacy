@@ -123,6 +123,34 @@ void SetupModioFilterCreator(TEnumAsByte<EModioFilterType> FilterType, int32 Lim
   }
 }
 
+void SetupModioModFilterCreator(TEnumAsByte<EModioFilterType> FilterType, const TArray<FString> &ModTags, int32 Limit, int32 Offset, ModioFilterCreator& modio_filter_creator)
+{
+  modioSetFilterLimit(&modio_filter_creator, (u32)Limit);
+  modioSetFilterOffset(&modio_filter_creator, (u32)Offset);
+
+  for (int i = 0; i < ModTags.Num(); i++) {
+    modioAddFilterInField(&modio_filter_creator, "tags", TCHAR_TO_UTF8(*ModTags[i]) );
+  }
+
+  switch (FilterType)
+  {
+  case EModioFilterType::SORT_BY_ID:
+    break;
+  case EModioFilterType::SORT_BY_RATING:
+    modioSetFilterSort(&modio_filter_creator, (char *)"rating", false);
+    break;
+  case EModioFilterType::SORT_BY_DATE_LIVE:
+    modioSetFilterSort(&modio_filter_creator, (char *)"date_live", false);
+    break;
+  case EModioFilterType::SORT_BY_DATE_UPDATED:
+    modioSetFilterSort(&modio_filter_creator, (char *)"date_updated", false);
+    break;
+  default:
+    // @todo: handle error
+    break;
+  }
+}
+
 void SetupModioModCreator(FModioModCreator ModCreator, ModioModCreator& modio_mod_creator)
 {
   modioSetModCreatorMaturityOption(&modio_mod_creator, (u32)ModCreator.MaturityOption);
