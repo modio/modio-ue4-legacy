@@ -22,6 +22,7 @@ class MODIO_API UCallbackProxy_GetUserSubscriptions : public UOnlineBlueprintCal
   GENERATED_UCLASS_BODY()
 
   TEnumAsByte<EModioFilterType> FilterType;
+  TArray<FString> ModTags;
   int32 Limit;
   int32 Offset;
 
@@ -36,7 +37,7 @@ class MODIO_API UCallbackProxy_GetUserSubscriptions : public UOnlineBlueprintCal
   FGetUserSubscriptionsResult OnFailure;
 
   UFUNCTION(BlueprintCallable, Category = "mod.io", meta = (BlueprintInternalUseOnly = "true", DefaultToSelf="WorldContext"))
-  static UCallbackProxy_GetUserSubscriptions *GetUserSubscriptions(UObject *WorldContext, TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset);
+  static UCallbackProxy_GetUserSubscriptions *GetUserSubscriptions(UObject *WorldContext, TEnumAsByte<EModioFilterType> FilterType, TArray<FString> ModTags, int32 Limit, int32 Offset);
 
   virtual void Activate() override;
 
