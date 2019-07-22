@@ -21,7 +21,7 @@ public class modio : ModuleRules
 	
 	private string ThirdPartyPath
 	{
-		get { return Path.GetFullPath(Path.Combine(ModulePath, "../../ThirdParty/")); }
+		get { return Path.GetFullPath(Path.Combine(ModulePath, "../../Source/ThirdParty/")); }
 	}
 
 	public modio(ReadOnlyTargetRules Target) : base(Target)
