@@ -546,6 +546,12 @@ void FModioSubsystem::SetModUploadListener(FModioListenerDelegate Delegate)
   FModioSubsystem::ModioOnModUploadDelegate = Delegate;
 }
 
+TEnumAsByte<EModioModState> FModioSubsystem::GetModState(int32 ModId)
+{
+  u32 ModState = modioGetModState((u32)ModId);
+  return ConvertToModState(ModState);
+}
+
 void onModDownload(u32 response_code, u32 mod_id)
 {
   FModioSubsystem::ModioOnModDownloadDelegate.ExecuteIfBound( (int32)response_code, (int32)mod_id );

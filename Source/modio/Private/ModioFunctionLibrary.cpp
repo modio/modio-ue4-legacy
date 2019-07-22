@@ -100,3 +100,16 @@ void UModioFunctionLibrary::ModioGetModfileUploadQueue(UObject *WorldContextObje
     UploadQueue = Modio->GetModfileUploadQueue();
   }
 }
+
+void UModioFunctionLibrary::ModioGetModState(UObject *WorldContextObject, int32 ModId, uint8 &ModState)
+{
+  UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
+  FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
+  if( Modio.IsValid() )
+  {
+    ModState = Modio->GetModState(ModId);
+  }else
+  {
+    ModState = EModioModState::NOT_DEFINED;
+  }
+}

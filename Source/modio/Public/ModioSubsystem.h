@@ -12,6 +12,7 @@
 #include "Schemas/ModioQueuedModDownload.h"
 #include "Schemas/ModioQueuedModfileUpload.h"
 #include "Enums/ModioFilterType.h"
+#include "Enums/ModioModState.h"
 #include "ModioPackage.h"
 #include "ModioPackage.h"
 #include "AsyncRequest/ModioAsyncRequest_AddMod.h"
@@ -121,6 +122,8 @@ public:
   void SetModDownloadListener(FModioListenerDelegate Delegate);
   /** Callback triggered every time a local mod finished uploading to mod.io */
   void SetModUploadListener(FModioListenerDelegate Delegate);
+  /** Returns the state of the corresponding mod */  
+  TEnumAsByte<EModioModState> GetModState(int32 ModId);
 
   //Mod Subscription
   /** Subscribes to the corresponding mod */
