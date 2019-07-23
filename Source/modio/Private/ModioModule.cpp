@@ -13,6 +13,7 @@
 
 #include "c/ModioC.h"
 #include "Engine/Engine.h"
+#include "IPluginManager.h"
 
 // Declare module name on one place so we don't have to retype it if we rename the module
 #define MODULE_NAME Modio
@@ -81,6 +82,10 @@ FModioSubsystemPtr FModioModule::GetModioImp(UWorld *World) const
 
 void FModioModule::StartupModule()
 {
+  FString DllPath = IPluginManager::Get().FindPlugin("Modio")->GetBaseDir();
+  DllPath.Append("/Source/ThirdParty/mod.io-sdk-v0.11.3-DEV/bin/visualc++/x64/modio.dll");
+  DLLHandle = FPlatformProcess::GetDllHandle(*DllPath);
+  
   const UModioSettings *Settings = GetDefault<UModioSettings>();
   ModioImp = FModioSubsystem::Create(Settings->RootDirectory, Settings->GameId, Settings->ApiKey, Settings->bIsLiveEnvironment);
 
@@ -103,6 +108,11 @@ void FModioModule::ShutdownModule()
   {
     ModioImp->Shutdown();
     ModioImp = nullptr;
+  }
+  
+  if (DLLHandle != NULL)
+  {
+    FPlatformProcess::FreeDllHandle(DLLHandle);
   }
 }
 

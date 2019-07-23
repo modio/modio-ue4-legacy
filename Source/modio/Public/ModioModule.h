@@ -21,4 +21,5 @@ private:
   void UnregisterSettings();
 
   FModioSubsystemPtr ModioImp;
+  void* DLLHandle;
 };
