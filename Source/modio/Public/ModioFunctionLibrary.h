@@ -48,4 +48,7 @@ class MODIO_API UModioFunctionLibrary : public UBlueprintFunctionLibrary
 
   UFUNCTION(BlueprintPure, Category = "mod.io")
   static void ModioGetModfileUploadQueue(UObject *WorldContextObject, TArray<FModioQueuedModfileUpload> &UploadQueue);
+
+  UFUNCTION(BlueprintPure, Category = "mod.io")
+  static void ModioGetModState(UObject *WorldContextObject, int32 ModId, uint8 &ModState);
 };

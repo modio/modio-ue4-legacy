@@ -99,6 +99,41 @@ TArray<FModioModEvent> ConvertToTArrayModEvents(ModioModEvent* ModioModEvents, u
   return ModEvents;
 }
 
+TEnumAsByte<EModioModState> ConvertToModState(u32 ModioModState)
+{
+  switch (ModioModState)
+  {
+  case MODIO_MOD_UNDEFINED:
+    return EModioModState::NOT_DEFINED;
+  case MODIO_MOD_NOT_INSTALLED:
+    return EModioModState::NOT_INSTALLED;
+  case MODIO_MOD_QUEUED:
+    return EModioModState::QUEUED;
+  case MODIO_MOD_STARTING_DOWNLOAD:
+    return EModioModState::STARTING_DOWNLOAD;
+  case MODIO_MOD_DOWNLOADING:
+    return EModioModState::DOWNLOADING;
+  case MODIO_MOD_PAUSING:
+    return EModioModState::PAUSING;
+  case MODIO_MOD_PAUSED:
+    return EModioModState::PAUSED;
+  case MODIO_MOD_INSTALLED:
+    return EModioModState::INSTALLED;
+  case MODIO_PRIORITIZING_OTHER_DOWNLOAD:
+    return EModioModState::PRIORITIZING_OTHER_DOWNLOAD;
+  case MODIO_MOD_STARTING_UPLOAD:
+    return EModioModState::STARTING_UPLOAD;
+  case MODIO_MOD_UPLOADING:
+    return EModioModState::UPLOADING;
+  case MODIO_MOD_DOWNLOADED:
+    return EModioModState::DOWNLOADED;
+  default:
+    // @todo: handle error
+    break;
+  }
+  return EModioModState::NOT_DEFINED;
+}
+
 void SetupModioFilterCreator(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, ModioFilterCreator& modio_filter_creator)
 {
   modioSetFilterLimit(&modio_filter_creator, (u32)Limit);
