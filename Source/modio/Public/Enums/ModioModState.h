@@ -18,5 +18,6 @@ enum EModioModState
   INSTALLED                     UMETA(DisplayName = "Installed"),
   PRIORITIZING_OTHER_DOWNLOAD   UMETA(DisplayName = "Prioritizing other download"),
   STARTING_UPLOAD               UMETA(DisplayName = "Starting upload"),
+  DOWNLOADED                    UMETA(DisplayName = "Downloaded"),
   UPLOADING                     UMETA(DisplayName = "Uploading")
 };

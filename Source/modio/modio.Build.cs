@@ -7,7 +7,7 @@ using UnrealBuildTool;
 
 public class modio : ModuleRules
 {
-	private String modio_directory = "mod.io-sdk-v0.11.0";
+	private String modio_directory = "mod.io-sdk-v0.11.3-DEV";
 
 	private string ModulePath
 	{

@@ -111,16 +111,22 @@ TEnumAsByte<EModioModState> ConvertToModState(u32 ModioModState)
     return EModioModState::QUEUED;
   case MODIO_MOD_STARTING_DOWNLOAD:
     return EModioModState::STARTING_DOWNLOAD;
+  case MODIO_MOD_DOWNLOADING:
+    return EModioModState::DOWNLOADING;
   case MODIO_MOD_PAUSING:
     return EModioModState::PAUSING;
   case MODIO_MOD_PAUSED:
     return EModioModState::PAUSED;
+  case MODIO_MOD_INSTALLED:
+    return EModioModState::INSTALLED;
   case MODIO_PRIORITIZING_OTHER_DOWNLOAD:
     return EModioModState::PRIORITIZING_OTHER_DOWNLOAD;
   case MODIO_MOD_STARTING_UPLOAD:
     return EModioModState::STARTING_UPLOAD;
   case MODIO_MOD_UPLOADING:
     return EModioModState::UPLOADING;
+  case MODIO_MOD_DOWNLOADED:
+    return EModioModState::DOWNLOADED;
   default:
     // @todo: handle error
     break;
