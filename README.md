@@ -23,7 +23,7 @@ Welcome to [mod.io](https://mod.io) Unreal Engine 4 Plugin. It allows game devel
 
 ## Documentation
 
-A quick start guide is provided below, in addition to the more [detailed wiki](https://github.com/modio/UE4Plugin/wiki).
+A quick start guide is provided below, in addition to the more [detailed wiki](https://github.com/modio/UE4Plugin/wiki). There is also an [example project](https://github.com/modio/UE4Example) showing authentication and downloading mods.
 
 ## Usage
 
