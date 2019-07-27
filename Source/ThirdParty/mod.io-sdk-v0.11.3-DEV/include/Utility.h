@@ -68,6 +68,8 @@ std::string MODIO_DLL toString(u32 number);
 std::string MODIO_DLL toString(double number);
 std::string replaceSubstrings(const std::string &str, const std::string &from, const std::string &to);
 std::string addSlashIfNeeded(const std::string &directory_path);
+std::string getFilename(std::string file_path);
+std::string getFileExtension(std::string path);
 
 // Log methods
 void writeLogLine(const std::string &text, u32 debug_level);

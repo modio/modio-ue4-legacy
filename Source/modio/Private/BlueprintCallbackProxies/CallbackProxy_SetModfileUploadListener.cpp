@@ -1,31 +1,31 @@
 // Copyright 2019 modio. All Rights Reserved.
 // Released under MIT.
 
-#include "BlueprintCallbackProxies/CallbackProxy_SetModUploadListener.h"
+#include "BlueprintCallbackProxies/CallbackProxy_SetModfileUploadListener.h"
 #include "ModioUE4Utility.h"
 #include "ModioSubsystem.h"
 #include "Engine/Engine.h"
 
-UCallbackProxy_SetModUploadListener::UCallbackProxy_SetModUploadListener(const FObjectInitializer &ObjectInitializer)
+UCallbackProxy_SetModfileUploadListener::UCallbackProxy_SetModfileUploadListener(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)
 {
 }
 
-UCallbackProxy_SetModUploadListener *UCallbackProxy_SetModUploadListener::SetModUploadListener(UObject *WorldContext)
+UCallbackProxy_SetModfileUploadListener *UCallbackProxy_SetModfileUploadListener::SetModfileUploadListener(UObject *WorldContext)
 {
-  UCallbackProxy_SetModUploadListener *Proxy = NewObject<UCallbackProxy_SetModUploadListener>();
+  UCallbackProxy_SetModfileUploadListener *Proxy = NewObject<UCallbackProxy_SetModfileUploadListener>();
   Proxy->SetFlags(RF_StrongRefOnFrame);
   Proxy->WorldContextObject = WorldContext;
   return Proxy;
 }
 
-void UCallbackProxy_SetModUploadListener::Activate()
+void UCallbackProxy_SetModfileUploadListener::Activate()
 {
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
   FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
   if( Modio.IsValid() )
   {
-    Modio->SetModUploadListener( FModioListenerDelegate::CreateUObject( this, &UCallbackProxy_SetModUploadListener::OnModUploadDelegate ) );
+    Modio->SetModfileUploadListener( FModioListenerDelegate::CreateUObject( this, &UCallbackProxy_SetModfileUploadListener::OnModUploadDelegate ) );
   }
   else
   {
@@ -34,7 +34,7 @@ void UCallbackProxy_SetModUploadListener::Activate()
   }
 }
 
-void UCallbackProxy_SetModUploadListener::OnModUploadDelegate(int32 ResponseCode, int32 ModId)
+void UCallbackProxy_SetModfileUploadListener::OnModUploadDelegate(int32 ResponseCode, int32 ModId)
 {
   if (ResponseCode >= 200 && ResponseCode < 300)
   {

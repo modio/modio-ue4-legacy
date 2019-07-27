@@ -121,7 +121,7 @@ public:
   /** Callback triggered every time a mod is downloaded locally from mod.io */
   void SetModDownloadListener(FModioListenerDelegate Delegate);
   /** Callback triggered every time a local mod finished uploading to mod.io */
-  void SetModUploadListener(FModioListenerDelegate Delegate);
+  void SetModfileUploadListener(FModioListenerDelegate Delegate);
   /** Returns the state of the corresponding mod */  
   TEnumAsByte<EModioModState> GetModState(int32 ModId);
 

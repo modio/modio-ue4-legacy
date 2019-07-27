@@ -6,7 +6,7 @@
 #include "Schemas/ModioMod.h"
 #include "ModioSubsystem.h"
 #include "Net/OnlineBlueprintCallProxyBase.h"
-#include "CallbackProxy_SetModUploadListener.generated.h"
+#include "CallbackProxy_SetModfileUploadListener.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(
     FOnModUploadResult,
@@ -16,7 +16,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(
     ModId);
 
 UCLASS()
-class MODIO_API UCallbackProxy_SetModUploadListener : public UOnlineBlueprintCallProxyBase
+class MODIO_API UCallbackProxy_SetModfileUploadListener : public UOnlineBlueprintCallProxyBase
 {
   GENERATED_UCLASS_BODY()
 
@@ -31,7 +31,7 @@ class MODIO_API UCallbackProxy_SetModUploadListener : public UOnlineBlueprintCal
   FOnModUploadResult OnFailure;
 
   UFUNCTION(BlueprintCallable, Category = "mod.io", meta = (BlueprintInternalUseOnly = "true", DefaultToSelf="WorldContext"))
-  static UCallbackProxy_SetModUploadListener *SetModUploadListener(UObject *WorldContext);
+  static UCallbackProxy_SetModfileUploadListener *SetModfileUploadListener(UObject *WorldContext);
 
   virtual void Activate() override;
 

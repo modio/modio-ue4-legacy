@@ -541,7 +541,7 @@ void FModioSubsystem::SetModDownloadListener(FModioListenerDelegate Delegate)
   FModioSubsystem::ModioOnModDownloadDelegate = Delegate;
 }
 
-void FModioSubsystem::SetModUploadListener(FModioListenerDelegate Delegate)
+void FModioSubsystem::SetModfileUploadListener(FModioListenerDelegate Delegate)
 {
   FModioSubsystem::ModioOnModUploadDelegate = Delegate;
 }
