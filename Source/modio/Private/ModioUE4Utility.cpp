@@ -200,6 +200,10 @@ void SetupModioModCreator(FModioModCreator ModCreator, ModioModCreator& modio_mo
     break;
   }
 
+  for (int i = 0; i < ModCreator.Tags.Num(); i++) {
+    modioAddModCreatorTag(&modio_mod_creator, TCHAR_TO_UTF8(*ModCreator.Tags[i]) );
+  }
+
   if (ModCreator.LogoPath != "")
     modioSetModCreatorLogoPath(&modio_mod_creator, TCHAR_TO_UTF8(*ModCreator.LogoPath));
   if (ModCreator.Name != "")

@@ -27,7 +27,7 @@ struct FModioModCreator
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
   FString MetadataBlob = "";
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
-  FString CreatorTag = "";
+  TArray<FString> Tags;
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
   TEnumAsByte<EModioBooleanCustomizableType> Visible;
   // @todo Find a workaround to ue4 bitmask and enums issues
