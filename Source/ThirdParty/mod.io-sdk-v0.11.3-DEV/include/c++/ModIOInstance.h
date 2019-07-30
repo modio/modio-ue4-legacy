@@ -147,6 +147,7 @@ public:
   const std::list<QueuedModfileUpload *> getModfileUploadQueue();
   const modio::InstalledMod getInstalledMod(u32 mod_id);
   const std::vector<modio::InstalledMod> getAllInstalledMods();
+  const std::vector<u32> getAllDownloadedMods();
   u32 getModState(u32 mod_id);
 
   //Dependencies Methods

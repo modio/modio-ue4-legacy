@@ -229,6 +229,24 @@ TArray<FModioInstalledMod> FModioSubsystem::GetAllInstalledMods()
   return InstalledMods;
 }
 
+TArray<int32> FModioSubsystem::GetAllDownloadedMods()
+{
+  TArray<int32> DownloadedMods;
+
+  u32 downloaded_mods_count = modioGetAllDownloadedModsCount();
+  u32 *modio_downloaded_mods = new u32[downloaded_mods_count];
+  modioGetAllDownloadedMods(modio_downloaded_mods);
+
+  for (u32 i = 0; i < downloaded_mods_count; i++)
+  {
+    DownloadedMods.Add(modio_downloaded_mods[i]);
+  }
+
+  delete[] modio_downloaded_mods;
+
+  return DownloadedMods;
+}
+
 TArray<FModioQueuedModDownload> FModioSubsystem::GetModDownloadQueue()
 {
   TArray<FModioQueuedModDownload> QueuedMods;

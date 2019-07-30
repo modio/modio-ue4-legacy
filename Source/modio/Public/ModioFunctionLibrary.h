@@ -41,6 +41,9 @@ class MODIO_API UModioFunctionLibrary : public UBlueprintFunctionLibrary
   static void ModioGetAllInstalledMods(UObject *WorldContextObject, TArray<FModioInstalledMod> &InstalledMods);
 
   UFUNCTION(BlueprintPure, Category = "mod.io")
+  static void ModioGetAllDownloadedMods(UObject *WorldContextObject, TArray<int32> &DownloadedMods);
+
+  UFUNCTION(BlueprintPure, Category = "mod.io")
   static void ModioGetModDownloadQueue(UObject *WorldContextObject, TArray<FModioQueuedModDownload> &QueuedMods);
 
   UFUNCTION(BlueprintCallable, Category = "mod.io")

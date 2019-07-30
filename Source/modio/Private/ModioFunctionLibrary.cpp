@@ -73,6 +73,16 @@ void UModioFunctionLibrary::ModioGetAllInstalledMods(UObject *WorldContextObject
   }
 }
 
+void UModioFunctionLibrary::ModioGetAllDownloadedMods(UObject *WorldContextObject, TArray<int32> &DownloadedMods)
+{
+  UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
+  FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
+  if( Modio.IsValid() )
+  {
+    DownloadedMods = Modio->GetAllDownloadedMods();
+  }
+}
+
 void UModioFunctionLibrary::ModioGetModDownloadQueue(UObject *WorldContextObject, TArray<FModioQueuedModDownload> &QueuedMods)
 {
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );

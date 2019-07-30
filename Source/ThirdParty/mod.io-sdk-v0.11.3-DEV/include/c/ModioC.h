@@ -675,6 +675,8 @@ extern "C"
   void MODIO_DLL modioGetInstalledMod(u32 mod_id, ModioInstalledMod *installed_mods);
   u32 MODIO_DLL modioGetAllInstalledModsCount(void);
   void MODIO_DLL modioGetAllInstalledMods(ModioInstalledMod* installed_mods);
+  u32 MODIO_DLL modioGetAllDownloadedModsCount(void);
+  void MODIO_DLL modioGetAllDownloadedMods(u32* downloaded_mods);
   u32 MODIO_DLL modioGetModState(u32 mod_id);
 
   //Dependencies Methods

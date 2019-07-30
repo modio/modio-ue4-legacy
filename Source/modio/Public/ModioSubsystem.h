@@ -112,6 +112,8 @@ public:
   FModioInstalledMod GetInstalledMod(int32 ModId);
   /** Returns an array containing information of the mods installed locally */
   TArray<FModioInstalledMod> GetAllInstalledMods();
+  /** Returns an array containing the downloaded mods still not installed */
+  TArray<int32> GetAllDownloadedMods();
   /** Returns an array containing the download queue information */
   TArray<FModioQueuedModDownload> GetModDownloadQueue();
   /** Installs the downloaded mods, this is called automatically on startup but can be triggered at any time */
