@@ -108,7 +108,9 @@ public:
   void GetUserRatings(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, FModioRatingArrayDelegate GetUserRatingsDelegate);
 
   // Downloads and installs
-  /** Returns an array containing the installed mods information */
+  /** Returns information of a mod installed locally */
+  FModioInstalledMod GetInstalledMod(int32 ModId);
+  /** Returns an array containing information of the mods installed locally */
   TArray<FModioInstalledMod> GetAllInstalledMods();
   /** Returns an array containing the download queue information */
   TArray<FModioQueuedModDownload> GetModDownloadQueue();

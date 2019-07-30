@@ -195,6 +195,19 @@ FModioUser FModioSubsystem::CurrentUser()
   return User;
 }
 
+FModioInstalledMod FModioSubsystem::GetInstalledMod(int32 ModId)
+{
+  FModioInstalledMod InstalledMod;
+
+  ModioInstalledMod modio_installed_mod;
+  modioGetInstalledMod((u32)ModId, &modio_installed_mod);
+
+  InitializeInstalledMod(InstalledMod, modio_installed_mod);
+  modioFreeInstalledMod(&modio_installed_mod);
+
+  return InstalledMod;
+}
+
 TArray<FModioInstalledMod> FModioSubsystem::GetAllInstalledMods()
 {
   TArray<FModioInstalledMod> InstalledMods;

@@ -16,7 +16,7 @@ struct FModioInstalledMod
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
   FString Path;
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
-  FModioMod mod;
+  FModioMod Mod;
 };
 
 extern void InitializeInstalledMod(FModioInstalledMod &installed_mod, const ModioInstalledMod &modio_installed_mod);
