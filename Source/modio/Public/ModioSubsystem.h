@@ -17,6 +17,7 @@
 #include "ModioPackage.h"
 #include "AsyncRequest/ModioAsyncRequest_AddMod.h"
 #include "AsyncRequest/ModioAsyncRequest_AddModDependencies.h"
+#include "AsyncRequest/ModioAsyncRequest_AddModRating.h"
 #include "AsyncRequest/ModioAsyncRequest_DeleteModDependencies.h"
 #include "AsyncRequest/ModioAsyncRequest_EditMod.h"
 #include "AsyncRequest/ModioAsyncRequest_EmailExchange.h"
@@ -134,6 +135,10 @@ public:
   void SubscribeToMod(int32 ModId, FModioModDelegate SubscribeToModDelegate);
   /** Unsubscribes from the corresponding mod */
   void UnsubscribeFromMod(int32 ModId, FModioGenericDelegate UnsubscribeFromModDelegate);
+  
+  //Mod Rating
+    /** Rate the corresponding mod */
+  void AddModRating(int32 ModId, bool IsRatingPositive, FModioGenericDelegate AddModRatingDelegate);
 
   //Mod Dependencies
   /** Request all the dependencies from a mod */
