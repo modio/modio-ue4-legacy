@@ -186,7 +186,7 @@ public:
 
 protected:
   friend class FModioModule;
-  static FModioSubsystemPtr Create(const FString &RootDirectory, uint32 GameId, const FString &ApiKey, bool bIsLiveEnvironment);
+  static FModioSubsystemPtr Create(const FString &RootDirectory, uint32 GameId, const FString &ApiKey, bool bIsLiveEnvironment, bool bInstallOnModDownload);
 
   /** Queue up a new async request and take ownership of the memory */
   void QueueAsyncTask(struct FModioAsyncRequest *Request);
@@ -199,7 +199,7 @@ protected:
   FModioSubsystem();
 
   /** Can be called multiple times during a session, as long as it's properly paired with it's shutdown */
-  void Init(const FString &RootDirectory, uint32 GameId, const FString &ApiKey, bool bIsLiveEnvironent);
+  void Init(const FString &RootDirectory, uint32 GameId, const FString &ApiKey, bool bIsLiveEnvironent, bool bInstallOnModDownload);
 
   /** Properly shutdowns modio */
   void Shutdown();

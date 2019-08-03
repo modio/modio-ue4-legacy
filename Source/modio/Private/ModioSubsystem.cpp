@@ -24,7 +24,7 @@ FModioSubsystem::~FModioSubsystem()
   check(!bInitialized);
 }
 
-FModioSubsystemPtr FModioSubsystem::Create( const FString& RootDirectory, uint32 GameId, const FString& ApiKey, bool bIsLiveEnvironent )
+FModioSubsystemPtr FModioSubsystem::Create( const FString& RootDirectory, uint32 GameId, const FString& ApiKey, bool bIsLiveEnvironent, bool bInstallOnModDownload )
 {
   if( !RootDirectory.Len() )
   {
@@ -47,7 +47,7 @@ FModioSubsystemPtr FModioSubsystem::Create( const FString& RootDirectory, uint32
   GameDirectory += RootDirectory;
 
   FModioSubsystemPtr Modio = MakeShared<FModioSubsystem, ESPMode::Fast>();
-  Modio->Init( GameDirectory, GameId, ApiKey, bIsLiveEnvironent );
+  Modio->Init( GameDirectory, GameId, ApiKey, bIsLiveEnvironent, bInstallOnModDownload );
 
   return Modio;
 }
@@ -595,12 +595,18 @@ void onModDownload(u32 response_code, u32 mod_id)
   FModioSubsystem::ModioOnModDownloadDelegate.ExecuteIfBound( (int32)response_code, (int32)mod_id );
 }
 
+void onModDownloadWithAutomaticInstalls(u32 response_code, u32 mod_id)
+{
+  modioInstallDownloadedMods();
+  FModioSubsystem::ModioOnModDownloadDelegate.ExecuteIfBound( (int32)response_code, (int32)mod_id );
+}
+
 void onModUpload(u32 response_code, u32 mod_id)
 {
   FModioSubsystem::ModioOnModUploadDelegate.ExecuteIfBound( (int32)response_code, (int32)mod_id );
 }
 
-void FModioSubsystem::Init( const FString& RootDirectory, uint32 GameId, const FString& ApiKey, bool bIsLiveEnvironment )
+void FModioSubsystem::Init( const FString& RootDirectory, uint32 GameId, const FString& ApiKey, bool bIsLiveEnvironment, bool bInstallOnModDownload )
 {
   check(!bInitialized);
 
@@ -608,7 +614,11 @@ void FModioSubsystem::Init( const FString& RootDirectory, uint32 GameId, const F
   
   modioInit( Environment, (u32)GameId, TCHAR_TO_UTF8(*ApiKey), TCHAR_TO_UTF8(*RootDirectory) );
 
-  modioSetDownloadListener(&onModDownload);
+  if(bInstallOnModDownload)
+    modioSetDownloadListener(&onModDownloadWithAutomaticInstalls);
+  else
+    modioSetDownloadListener(&onModDownload);
+  
   modioSetUploadListener(&onModUpload);
 
   bInitialized = true;

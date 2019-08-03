@@ -46,4 +46,7 @@ public:
 
   UPROPERTY( EditAnywhere, config, Category = Custom )
   uint8 bIsLiveEnvironment:1;
+
+  UPROPERTY( EditAnywhere, config, Category = Custom )
+  uint8 bInstallOnModDownload:1;
 };

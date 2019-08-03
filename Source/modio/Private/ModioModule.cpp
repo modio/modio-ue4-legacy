@@ -87,7 +87,7 @@ void FModioModule::StartupModule()
   DLLHandle = FPlatformProcess::GetDllHandle(*DllPath);
   
   const UModioSettings *Settings = GetDefault<UModioSettings>();
-  ModioImp = FModioSubsystem::Create(Settings->RootDirectory, Settings->GameId, Settings->ApiKey, Settings->bIsLiveEnvironment);
+  ModioImp = FModioSubsystem::Create(Settings->RootDirectory, Settings->GameId, Settings->ApiKey, Settings->bIsLiveEnvironment, Settings->bInstallOnModDownload);
 
   // Need GIsEdtor check as this might run when running the game but not with the editor
   if (GIsEditor)
@@ -140,7 +140,7 @@ bool FModioModule::HandleSettingsSaved()
     Settings->SaveConfig();
   }
 
-  ModioImp = FModioSubsystem::Create(Settings->RootDirectory, Settings->GameId, Settings->ApiKey, Settings->bIsLiveEnvironment);
+  ModioImp = FModioSubsystem::Create(Settings->RootDirectory, Settings->GameId, Settings->ApiKey, Settings->bIsLiveEnvironment, Settings->bInstallOnModDownload);
 
   return true;
 }
