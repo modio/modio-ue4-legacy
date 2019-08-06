@@ -134,6 +134,21 @@ TEnumAsByte<EModioModState> ConvertToModState(u32 ModioModState)
   return EModioModState::NOT_DEFINED;
 }
 
+TEnumAsByte<EModioRatingType> ConvertToModRatingType(u32 ModioModRating)
+{
+  switch (ModioModRating)
+  {
+  case MODIO_RATING_NEGATIVE:
+    return EModioRatingType::RATING_NEGATIVE;
+  case MODIO_RATING_POSITIVE:
+    return EModioRatingType::RATING_POSITIVE;
+  default:
+    // @todo: handle error
+    break;
+  }
+  return EModioRatingType::RATING_NOT_DEFINED;
+}
+
 void SetupModioFilterCreator(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, ModioFilterCreator& modio_filter_creator)
 {
   modioSetFilterLimit(&modio_filter_creator, (u32)Limit);

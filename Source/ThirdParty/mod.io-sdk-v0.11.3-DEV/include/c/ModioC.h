@@ -108,6 +108,11 @@ typedef int i32;
 #define MODIO_SERVICE_STEAM   0
 #define MODIO_SERVICE_GALAXY  1
 
+// Rating type
+#define MODIO_RATING_UNDEFINED  0
+#define MODIO_RATING_NEGATIVE   1
+#define MODIO_RATING_POSITIVE   2
+
 #ifdef __cplusplus
 extern "C"
 {
@@ -557,6 +562,7 @@ extern "C"
 
   //Ratings Methods
   void MODIO_DLL modioAddModRating(void* object, u32 mod_id, bool vote_up, void (*callback)(void* object, ModioResponse response));
+  u32 MODIO_DLL modioGetUserModRating(u32 mod_id);
 
   //Subscription Methods
   void MODIO_DLL modioSubscribeToMod(void* object, u32 mod_id, void (*callback)(void* object, ModioResponse response, ModioMod mod));

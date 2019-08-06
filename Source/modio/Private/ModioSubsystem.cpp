@@ -320,6 +320,12 @@ void FModioSubsystem::AddModRating(int32 ModId, bool IsRatingPositive, FModioGen
   QueueAsyncTask( Request );
 }
 
+TEnumAsByte<EModioRatingType> FModioSubsystem::GetUserModRating(int32 ModId)
+{
+  u32 ModRating = modioGetUserModRating((u32)ModId);
+  return ConvertToModRatingType(ModRating);
+}
+
 void FModioSubsystem::GetAllModDependencies(int32 ModId, FModioModDependencyArrayDelegate GetAllModDependenciesDelegate)
 {
   FModioAsyncRequest_GetAllModDependencies *Request = new FModioAsyncRequest_GetAllModDependencies( this, GetAllModDependenciesDelegate );

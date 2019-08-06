@@ -120,6 +120,7 @@ public:
 
   //Ratings Methods
   void addModRating(u32 mod_id, bool vote_up, const std::function<void(const modio::Response &response)> &callback);
+  u32 getUserModRating(u32 mod_id);  
 
   //Subscription Methods
   void subscribeToMod(u32 mod_id, const std::function<void(const modio::Response &response, const modio::Mod &mod)> &callback);

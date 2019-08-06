@@ -11,6 +11,7 @@
 #include "Schemas/ModioUserEvent.h"
 #include "Enums/ModioFilterType.h"
 #include "Enums/ModioModState.h"
+#include "Enums/ModioRatingType.h"
 #include "Customizables/ModioModCreator.h"
 #include "Customizables/ModioModEditor.h"
 #include "Customizables/ModioModfileCreator.h"
@@ -24,6 +25,7 @@ extern TArray<FModioMetadataKVP> ConvertToTArrayMetadataKVP(ModioMetadataKVP* Mo
 extern TArray<FModioUserEvent> ConvertToTArrayUserEvents(ModioUserEvent* ModioUserEvents, u32 UserEventsSize);
 extern TArray<FModioModEvent> ConvertToTArrayModEvents(ModioModEvent* ModioModEvents, u32 ModEventsSize);
 extern TEnumAsByte<EModioModState> ConvertToModState(u32 ModioModState);
+extern TEnumAsByte<EModioRatingType> ConvertToModRatingType(u32 ModioModRating);
 extern void SetupModioFilterCreator(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, ModioFilterCreator& modio_filter_creator);
 extern void SetupModioModFilterCreator(TEnumAsByte<EModioFilterType> FilterType, const TArray<FString> &ModTags, int32 Limit, int32 Offset, ModioFilterCreator& modio_filter_creator);
 extern void SetupModioModCreator(FModioModCreator ModCreator, ModioModCreator& modio_mod_creator);

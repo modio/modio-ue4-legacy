@@ -135,3 +135,16 @@ void UModioFunctionLibrary::ModioGetModState(UObject *WorldContextObject, int32 
     ModState = EModioModState::NOT_DEFINED;
   }
 }
+
+void UModioFunctionLibrary::ModioGetUserModRating(UObject *WorldContextObject, int32 ModId, uint8 &ModRating)
+{
+  UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
+  FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
+  if( Modio.IsValid() )
+  {
+    ModRating = Modio->GetUserModRating(ModId);
+  }else
+  {
+    ModRating = EModioRatingType::RATING_NOT_DEFINED;
+  }
+}

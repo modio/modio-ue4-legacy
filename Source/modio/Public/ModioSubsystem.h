@@ -13,6 +13,7 @@
 #include "Schemas/ModioQueuedModfileUpload.h"
 #include "Enums/ModioFilterType.h"
 #include "Enums/ModioModState.h"
+#include "Enums/ModioRatingType.h"
 #include "ModioPackage.h"
 #include "ModioPackage.h"
 #include "AsyncRequest/ModioAsyncRequest_AddMod.h"
@@ -139,6 +140,7 @@ public:
   //Mod Rating
     /** Rate the corresponding mod */
   void AddModRating(int32 ModId, bool IsRatingPositive, FModioGenericDelegate AddModRatingDelegate);
+  TEnumAsByte<EModioRatingType> GetUserModRating(int32 ModId);
 
   //Mod Dependencies
   /** Request all the dependencies from a mod */

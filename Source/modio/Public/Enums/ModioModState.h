@@ -8,7 +8,7 @@
 UENUM(BlueprintType)
 enum EModioModState
 {
-  NOT_DEFINED                     UMETA(DisplayName = "Undefined"),
+  NOT_DEFINED                   UMETA(DisplayName = "Undefined"),
   NOT_INSTALLED                 UMETA(DisplayName = "Not installed"),
   QUEUED                        UMETA(DisplayName = "Queued"),
   STARTING_DOWNLOAD             UMETA(DisplayName = "Starting download"),
