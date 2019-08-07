@@ -15,6 +15,7 @@
 #include "Customizables/ModioModCreator.h"
 #include "Customizables/ModioModEditor.h"
 #include "Customizables/ModioModfileCreator.h"
+#include "Customizables/ModioFilterCreator.h"
 
 extern TArray<FModioMod> ConvertToTArrayMods(ModioMod* ModioMods, u32 ModsSize);
 extern TArray<FModioModfile> ConvertToTArrayModfiles(ModioModfile* ModioModfiles, u32 ModfilesSize);
@@ -28,6 +29,7 @@ extern TEnumAsByte<EModioModState> ConvertToModState(u32 ModioModState);
 extern TEnumAsByte<EModioRatingType> ConvertToModRatingType(u32 ModioModRating);
 extern void SetupModioFilterCreator(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, ModioFilterCreator& modio_filter_creator);
 extern void SetupModioModFilterCreator(TEnumAsByte<EModioFilterType> FilterType, const TArray<FString> &ModTags, int32 Limit, int32 Offset, ModioFilterCreator& modio_filter_creator);
+extern void SetupModioModFilterCreatorAdvanced(const FModioFilterCreator &FilterCreator, int32 Limit, int32 Offset, ModioFilterCreator& modio_filter_creator);
 extern void SetupModioModCreator(FModioModCreator ModCreator, ModioModCreator& modio_mod_creator);
 extern void SetupModioModEditor(FModioModEditor ModEditor, ModioModEditor& modio_mod_editor);
 extern void SetupModioModfileCreator(FModioModfileCreator ModfileCreator, ModioModfileCreator& modio_modfile_creator);

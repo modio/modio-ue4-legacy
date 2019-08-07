@@ -201,6 +201,55 @@ void SetupModioModFilterCreator(TEnumAsByte<EModioFilterType> FilterType, const 
   }
 }
 
+void SetupModioModFilterCreatorAdvanced(const FModioFilterCreator &FilterCreator, int32 Limit, int32 Offset, ModioFilterCreator& modio_filter_creator)
+{
+  modioSetFilterLimit(&modio_filter_creator, (u32)Limit);
+  modioSetFilterOffset(&modio_filter_creator, (u32)Offset);
+
+  if(FilterCreator.Sort.Field != "")
+    modioSetFilterSort(&modio_filter_creator, TCHAR_TO_UTF8(*FilterCreator.Sort.Field), FilterCreator.Sort.Ascending);
+  
+  if(FilterCreator.FullTextSearch != "")
+    modioSetFilterFullTextSearch(&modio_filter_creator, TCHAR_TO_UTF8(*FilterCreator.FullTextSearch));
+  
+  for (auto& FieldFilter : FilterCreator.FieldFilters)
+  {
+    switch (FieldFilter.Type)
+    {
+    case EModioFieldFilterType::FIELD_FILTER_EQUAL:
+      modioAddFilterFieldValue(&modio_filter_creator, TCHAR_TO_UTF8(*FieldFilter.Field), TCHAR_TO_UTF8(*FieldFilter.Value) );
+      break;
+    case EModioFieldFilterType::FIELD_FILTER_NOT_EQUAL:
+      modioAddFilterNotEqualField(&modio_filter_creator, TCHAR_TO_UTF8(*FieldFilter.Field), TCHAR_TO_UTF8(*FieldFilter.Value) );
+      break;
+    case EModioFieldFilterType::FIELD_FILTER_LIKE:
+      modioAddFilterLikeField(&modio_filter_creator, TCHAR_TO_UTF8(*FieldFilter.Field), TCHAR_TO_UTF8(*FieldFilter.Value) );
+      break;
+    case EModioFieldFilterType::FIELD_FILTER_NOT_LIKE:
+      modioAddFilterNotLikeField(&modio_filter_creator, TCHAR_TO_UTF8(*FieldFilter.Field), TCHAR_TO_UTF8(*FieldFilter.Value) );
+      break;
+    case EModioFieldFilterType::FIELD_FILTER_IN:
+      modioAddFilterInField(&modio_filter_creator, TCHAR_TO_UTF8(*FieldFilter.Field), TCHAR_TO_UTF8(*FieldFilter.Value) );
+      break;
+    case EModioFieldFilterType::FIELD_FILTER_NOT_IN:
+      modioAddFilterNotInField(&modio_filter_creator, TCHAR_TO_UTF8(*FieldFilter.Field), TCHAR_TO_UTF8(*FieldFilter.Value) );
+      break;
+    case EModioFieldFilterType::FIELD_FILTER_MIN:
+      modioAddFilterMinField(&modio_filter_creator, TCHAR_TO_UTF8(*FieldFilter.Field), TCHAR_TO_UTF8(*FieldFilter.Value) );
+      break;
+    case EModioFieldFilterType::FIELD_FILTER_MAX:
+      modioAddFilterMaxField(&modio_filter_creator, TCHAR_TO_UTF8(*FieldFilter.Field), TCHAR_TO_UTF8(*FieldFilter.Value) );
+      break;
+    case EModioFieldFilterType::FIELD_FILTER_SMALLER_THAN:
+      modioAddFilterSmallerThanField(&modio_filter_creator, TCHAR_TO_UTF8(*FieldFilter.Field), TCHAR_TO_UTF8(*FieldFilter.Value) );
+      break;
+    case EModioFieldFilterType::FIELD_FILTER_GREATER_THAN:
+      modioAddFilterGreaterThanField(&modio_filter_creator, TCHAR_TO_UTF8(*FieldFilter.Field), TCHAR_TO_UTF8(*FieldFilter.Value) );
+      break;
+    }
+  }
+}
+
 void SetupModioModCreator(FModioModCreator ModCreator, ModioModCreator& modio_mod_creator)
 {
   modioSetModCreatorMaturityOption(&modio_mod_creator, (u32)ModCreator.MaturityOption);

@@ -99,6 +99,17 @@ void FModioSubsystem::GetAllMods(TEnumAsByte<EModioFilterType> FilterType, const
   QueueAsyncTask( Request );
 }
 
+void FModioSubsystem::GetAllModsFiltered(const FModioFilterCreator &FilterCreator, int32 Limit, int32 Offset, FModioModArrayDelegate GetAllModsDelegate)
+{
+  FModioAsyncRequest_GetAllMods *Request = new FModioAsyncRequest_GetAllMods( this, GetAllModsDelegate );
+  ModioFilterCreator modio_filter_creator;
+  modioInitFilter(&modio_filter_creator);
+  SetupModioModFilterCreatorAdvanced(FilterCreator, Limit, Offset, modio_filter_creator);
+  modioGetAllMods(Request, modio_filter_creator, FModioAsyncRequest_GetAllMods::Response);
+  modioFreeFilter(&modio_filter_creator);
+  QueueAsyncTask( Request );
+}
+
 void FModioSubsystem::GetAuthenticatedUser(FModioUserDelegate GetAuthenticatedUserDelegate)
 {
   FModioAsyncRequest_GetAuthenticatedUser *Request = new FModioAsyncRequest_GetAuthenticatedUser( this, GetAuthenticatedUserDelegate );

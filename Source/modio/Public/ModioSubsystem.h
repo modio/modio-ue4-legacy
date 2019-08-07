@@ -6,6 +6,7 @@
 #include "CoreMinimal.h"
 #include "Schemas/ModioResponse.h"
 #include "Customizables/ModioModCreator.h"
+#include "Customizables/ModioFilterCreator.h"
 #include "Customizables/ModioModEditor.h"
 #include "Customizables/ModioModfileCreator.h"
 #include "Schemas/ModioInstalledMod.h"
@@ -94,6 +95,7 @@ public:
   // Mod browsing
   /** Request mod information */
   void GetAllMods(TEnumAsByte<EModioFilterType> FilterType, const TArray<FString> &ModTags, int32 Limit, int32 Offset, FModioModArrayDelegate GetAllModsDelegate);
+  void GetAllModsFiltered(const FModioFilterCreator &FilterCreator, int32 Limit, int32 Offset, FModioModArrayDelegate GetAllModsDelegate);
 
   // Get your own information
   /** Request the authenticated user information */
