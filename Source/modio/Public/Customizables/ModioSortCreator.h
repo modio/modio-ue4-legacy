@@ -12,5 +12,6 @@ struct FModioSortCreator
 
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
   FString Field;
+  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
   bool Ascending;
 };
