@@ -29,6 +29,7 @@ namespace modio
   void addModsToDownloadQueue(std::vector<u32> mod_ids);
   void pollEvents();
   void updateAuthenticatedUser(std::string access_token);
+  void updateUserRatings();
 
   // Error handling
   void handleDownloadImageError(void *object, void (*callback)(void *object, ModioResponse modioresponse));
