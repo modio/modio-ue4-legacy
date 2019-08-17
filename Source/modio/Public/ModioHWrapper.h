@@ -3,9 +3,13 @@
 
 #pragma once
 
-#include "Windows/PreWindowsApi.h"
+#ifdef MODIO_UE4_WINDOWS_BUILD
+  #include "Windows/PreWindowsApi.h"
+#endif
 #ifndef STRICT
 #define STRICT
 #endif
 #include "c/ModioC.h"
-#include "Windows/PostWindowsApi.h"
+#ifdef MODIO_UE4_WINDOWS_BUILD
+  #include "Windows/PostWindowsApi.h"
+#endif

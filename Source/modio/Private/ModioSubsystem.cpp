@@ -386,7 +386,12 @@ void FModioSubsystem::AddModTags(int32 ModId, const TArray<FString> &Tags, FModi
   for(int i = 0; i < Tags.Num(); i++)
   {
     ModTags[i] = new char[Tags[i].Len() + 1];
-    strcpy_s(ModTags[i], sizeof ModTags[i], TCHAR_TO_UTF8(*Tags[i]));
+    #ifdef MODIO_UE4_WINDOWS_BUILD
+      strcpy_s(ModTags[i], sizeof ModTags[i], TCHAR_TO_UTF8(*Tags[i]));
+    #endif
+    #ifdef MODIO_UE4_LINUX_BUILD
+      strcpy(ModTags[i], TCHAR_TO_UTF8(*Tags[i]));
+    #endif
   }
   modioAddModTags(Request, (u32)ModId, ModTags, (u32)Tags.Num(), FModioAsyncRequest_AddModTags::Response);
   for(int i = 0; i < Tags.Num(); i++)
@@ -405,7 +410,12 @@ void FModioSubsystem::DeleteModTags(int32 ModId, const TArray<FString> &Tags, FM
   for(int i = 0; i < Tags.Num(); i++)
   {
     ModTags[i] = new char[Tags[i].Len() + 1];
-    strcpy_s(ModTags[i], sizeof ModTags[i], TCHAR_TO_UTF8(*Tags[i]));
+    #ifdef MODIO_UE4_WINDOWS_BUILD
+      strcpy_s(ModTags[i], sizeof ModTags[i], TCHAR_TO_UTF8(*Tags[i]));
+    #endif
+    #ifdef MODIO_UE4_LINUX_BUILD
+      strcpy(ModTags[i], TCHAR_TO_UTF8(*Tags[i]));
+    #endif
   }
   modioDeleteModTags(Request, (u32)ModId, ModTags, (u32)Tags.Num(), FModioAsyncRequest_DeleteModTags::Response);
   for(int i = 0; i < Tags.Num(); i++)
@@ -434,7 +444,12 @@ void FModioSubsystem::AddMetadataKVP(int32 ModId, const TMap<FString, FString> &
   {
     FString StringfiedKVP = pair.Key + ":" + pair.Value;
     CMetadataKVP[i] = new char[StringfiedKVP.Len() + 1];
-    strcpy_s(CMetadataKVP[i], sizeof StringfiedKVP, TCHAR_TO_UTF8(*StringfiedKVP));
+    #ifdef MODIO_UE4_WINDOWS_BUILD
+      strcpy_s(CMetadataKVP[i], sizeof StringfiedKVP, TCHAR_TO_UTF8(*StringfiedKVP));
+    #endif
+    #ifdef MODIO_UE4_LINUX_BUILD
+      strcpy(CMetadataKVP[i], TCHAR_TO_UTF8(*StringfiedKVP));
+    #endif
     i++;
   }
   modioAddMetadataKVP(Request, (u32)ModId, CMetadataKVP, (u32)MetadataKVP.Num(), FModioAsyncRequest_AddMetadataKVP::Response);
@@ -457,7 +472,12 @@ void FModioSubsystem::DeleteMetadataKVP(int32 ModId, const TMap<FString, FString
   {
     FString StringfiedKVP = pair.Key + ":" + pair.Value;
     CMetadataKVP[i] = new char[StringfiedKVP.Len() + 1];
-    strcpy_s(CMetadataKVP[i], sizeof StringfiedKVP, TCHAR_TO_UTF8(*StringfiedKVP));
+    #ifdef MODIO_UE4_WINDOWS_BUILD
+      strcpy_s(CMetadataKVP[i], sizeof StringfiedKVP, TCHAR_TO_UTF8(*StringfiedKVP));
+    #endif
+    #ifdef MODIO_UE4_LINUX_BUILD
+      strcpy(CMetadataKVP[i], TCHAR_TO_UTF8(*StringfiedKVP));
+    #endif
     i++;
   }
   modioDeleteMetadataKVP(Request, (u32)ModId, CMetadataKVP, (u32)MetadataKVP.Num(), FModioAsyncRequest_DeleteModTags::Response);
@@ -484,7 +504,12 @@ void FModioSubsystem::AddModImages(int32 ModId, const TArray<FString> &ImagePath
   for(int i = 0; i < ImagePaths.Num(); i++)
   {
     CImagePaths[i] = new char[ImagePaths[i].Len() + 1];
-    strcpy_s(CImagePaths[i], sizeof CImagePaths[i], TCHAR_TO_UTF8(*ImagePaths[i]));
+    #ifdef MODIO_UE4_WINDOWS_BUILD
+      strcpy_s(CImagePaths[i], sizeof CImagePaths[i], TCHAR_TO_UTF8(*ImagePaths[i]));
+    #endif
+    #ifdef MODIO_UE4_LINUX_BUILD
+      strcpy(CImagePaths[i], TCHAR_TO_UTF8(*ImagePaths[i]));
+    #endif
   }
   modioAddModImages(Request, (u32)ModId, CImagePaths, (u32)ImagePaths.Num(), FModioAsyncRequest_AddModImages::Response);
   for(int i = 0; i < ImagePaths.Num(); i++)
@@ -503,7 +528,12 @@ void FModioSubsystem::AddModYoutubeLinks(int32 ModId, const TArray<FString> &You
   for(int i = 0; i < YoutubeLinks.Num(); i++)
   {
     CYoutubeLinks[i] = new char[YoutubeLinks[i].Len() + 1];
-    strcpy_s(CYoutubeLinks[i], sizeof CYoutubeLinks[i], TCHAR_TO_UTF8(*YoutubeLinks[i]));
+    #ifdef MODIO_UE4_WINDOWS_BUILD
+      strcpy_s(CYoutubeLinks[i], sizeof CYoutubeLinks[i], TCHAR_TO_UTF8(*YoutubeLinks[i]));
+    #endif
+    #ifdef MODIO_UE4_LINUX_BUILD
+      strcpy(CYoutubeLinks[i], TCHAR_TO_UTF8(*YoutubeLinks[i]));
+    #endif
   }
   modioAddModYoutubeLinks(Request, (u32)ModId, CYoutubeLinks, (u32)YoutubeLinks.Num(), FModioAsyncRequest_AddModYoutubeLinks::Response);
   for(int i = 0; i < YoutubeLinks.Num(); i++)
@@ -522,7 +552,12 @@ void FModioSubsystem::AddModSketchfabLinks(int32 ModId, const TArray<FString> &S
   for(int i = 0; i < SketchfabLinks.Num(); i++)
   {
     CSketchfabLinks[i] = new char[SketchfabLinks[i].Len() + 1];
-    strcpy_s(CSketchfabLinks[i], sizeof CSketchfabLinks[i], TCHAR_TO_UTF8(*SketchfabLinks[i]));
+    #ifdef MODIO_UE4_WINDOWS_BUILD
+      strcpy_s(CSketchfabLinks[i], sizeof CSketchfabLinks[i], TCHAR_TO_UTF8(*SketchfabLinks[i]));
+    #endif
+    #ifdef MODIO_UE4_LINUX_BUILD
+      strcpy(CSketchfabLinks[i], TCHAR_TO_UTF8(*SketchfabLinks[i]));
+    #endif
   }
   modioAddModSketchfabLinks(Request, (u32)ModId, CSketchfabLinks, (u32)SketchfabLinks.Num(), FModioAsyncRequest_AddModSketchfabLinks::Response);
   for(int i = 0; i < SketchfabLinks.Num(); i++)
@@ -541,7 +576,12 @@ void FModioSubsystem::DeleteModImages(int32 ModId, const TArray<FString> &ImageP
   for(int i = 0; i < ImagePaths.Num(); i++)
   {
     CImagePaths[i] = new char[ImagePaths[i].Len() + 1];
-    strcpy_s(CImagePaths[i], sizeof CImagePaths[i], TCHAR_TO_UTF8(*ImagePaths[i]));
+    #ifdef MODIO_UE4_WINDOWS_BUILD
+      strcpy_s(CImagePaths[i], sizeof CImagePaths[i], TCHAR_TO_UTF8(*ImagePaths[i]));
+    #endif
+    #ifdef MODIO_UE4_LINUX_BUILD
+      strcpy(CImagePaths[i], TCHAR_TO_UTF8(*ImagePaths[i]));
+    #endif
   }
   modioDeleteModImages(Request, (u32)ModId, CImagePaths, (u32)ImagePaths.Num(), FModioAsyncRequest_DeleteModImages::Response);
   for(int i = 0; i < ImagePaths.Num(); i++)
@@ -560,7 +600,12 @@ void FModioSubsystem::DeleteModYoutubeLinks(int32 ModId, const TArray<FString> &
   for(int i = 0; i < YoutubeLinks.Num(); i++)
   {
     CYoutubeLinks[i] = new char[YoutubeLinks[i].Len() + 1];
-    strcpy_s(CYoutubeLinks[i], sizeof CYoutubeLinks[i], TCHAR_TO_UTF8(*YoutubeLinks[i]));
+    #ifdef MODIO_UE4_WINDOWS_BUILD
+      strcpy_s(CYoutubeLinks[i], sizeof CYoutubeLinks[i], TCHAR_TO_UTF8(*YoutubeLinks[i]));
+    #endif
+    #ifdef MODIO_UE4_LINUX_BUILD
+      strcpy(CYoutubeLinks[i], TCHAR_TO_UTF8(*YoutubeLinks[i]));
+    #endif
   }
   modioDeleteModYoutubeLinks(Request, (u32)ModId, CYoutubeLinks, (u32)YoutubeLinks.Num(), FModioAsyncRequest_DeleteModYoutubeLinks::Response);
   for(int i = 0; i < YoutubeLinks.Num(); i++)
@@ -579,7 +624,12 @@ void FModioSubsystem::DeleteModSketchfabLinks(int32 ModId, const TArray<FString>
   for(int i = 0; i < SketchfabLinks.Num(); i++)
   {
     CSketchfabLinks[i] = new char[SketchfabLinks[i].Len() + 1];
-    strcpy_s(CSketchfabLinks[i], sizeof CSketchfabLinks[i], TCHAR_TO_UTF8(*SketchfabLinks[i]));
+    #ifdef MODIO_UE4_WINDOWS_BUILD
+      strcpy_s(CSketchfabLinks[i], sizeof CSketchfabLinks[i], TCHAR_TO_UTF8(*SketchfabLinks[i]));
+    #endif
+    #ifdef MODIO_UE4_LINUX_BUILD
+      strcpy(CSketchfabLinks[i], TCHAR_TO_UTF8(*SketchfabLinks[i]));
+    #endif
   }
   modioDeleteModSketchfabLinks(Request, (u32)ModId, CSketchfabLinks, (u32)SketchfabLinks.Num(), FModioAsyncRequest_DeleteModSketchfabLinks::Response);
   for(int i = 0; i < SketchfabLinks.Num(); i++)

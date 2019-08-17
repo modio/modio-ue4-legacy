@@ -95,6 +95,8 @@ public class modio : ModuleRules
 		bool isLibrarySupported = false;
 		if ((Target.Platform == UnrealTargetPlatform.Win64) || (Target.Platform == UnrealTargetPlatform.Win32))
 		{
+			PublicDefinitions.Add("MODIO_UE4_WINDOWS_BUILD");
+
 			isLibrarySupported = true;
 			
 			string LibrariesPath = Path.Combine(ThirdPartyPath, modio_directory, "lib", "visualc++", "x64");
@@ -111,6 +113,23 @@ public class modio : ModuleRules
 			string ModioDLLDestination = System.IO.Path.Combine(ProjectBinariesDirectory, "modio.dll");
 			CopyFile(Path.Combine(DLLPath, "modio.dll"), ModioDLLDestination);
 			PublicDelayLoadDLLs.AddRange(new string[] { "modio.dll" });
+		}
+
+		if ((Target.Platform == UnrealTargetPlatform.Linux) || (Target.Platform == UnrealTargetPlatform.Linux))
+		{
+			PublicDefinitions.Add("MODIO_UE4_LINUX_BUILD");
+
+			isLibrarySupported = true;
+
+
+			string LibrariesPath = Path.Combine(ThirdPartyPath, modio_directory, "lib", "linux", "x64");
+
+			PublicLibraryPaths.Add(LibrariesPath);
+			PublicAdditionalLibraries.Add("modio");
+
+			string ProjectBinariesDirectory = Path.Combine(ProjectPath, "Binaries", "Linux");
+			if (!Directory.Exists(ProjectBinariesDirectory))
+				System.IO.Directory.CreateDirectory(ProjectBinariesDirectory);
 		}
 		
 		if (isLibrarySupported)

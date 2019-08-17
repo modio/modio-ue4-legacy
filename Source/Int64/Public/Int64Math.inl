@@ -66,7 +66,9 @@ INT64_MATH_FORCEINLINE FInt64 UInt64MathLibrary::Max( FInt64 A, FInt64 B )
 
 INT64_MATH_FORCEINLINE FInt64 UInt64MathLibrary::Abs_Int( const FInt64& A )
 {
-	return FMath::Abs( A );
+	if(A < 0)
+		return A * -1;
+	return A;
 }
 
 

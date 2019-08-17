@@ -41,7 +41,7 @@ FModioSubsystemPtr FModioSubsystem::Get( UWorld *world )
   return nullptr;
 }
 
-static enum class EInstanceType : uint8
+enum class EInstanceType : uint8
 {
   Server,
   Client
@@ -72,7 +72,7 @@ static bool IsLowestInstanceOf(UWorld *World, EInstanceType InstanceType)
   {
     return WorldContext->PIEInstance == LowestPIEInstance;
   }
-  return nullptr;
+  return false;
 }
 
 FModioSubsystemPtr FModioModule::GetModioImp(UWorld *World) const

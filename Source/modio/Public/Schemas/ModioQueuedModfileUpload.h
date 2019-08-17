@@ -5,7 +5,7 @@
 
 #include "CoreMinimal.h"
 #include "c/ModioC.h"
-#include "ModioQUeuedModfileUpload.generated.h"
+#include "ModioQueuedModfileUpload.generated.h"
 
 USTRUCT(BlueprintType)
 struct FModioQueuedModfileUpload
