@@ -74,6 +74,7 @@ public:
   void logout() const;
   void emailRequest(const std::string &email, const std::function<void(const modio::Response &)> &callback);
   void emailExchange(const std::string &security_code, const std::function<void(const modio::Response &)> &callback);
+  void authenticateViaToken(const std::string &access_token);
   modio::User getCurrentUser();
 
   //External Authentication Methods

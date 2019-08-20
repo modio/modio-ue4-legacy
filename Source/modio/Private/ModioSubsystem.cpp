@@ -195,15 +195,22 @@ void FModioSubsystem::Logout()
 {
   modioLogout();
 }
+
 bool FModioSubsystem::IsLoggedIn()
 {
   return modioIsLoggedIn();
 }
+
 FModioUser FModioSubsystem::CurrentUser()
 {
   FModioUser User;
   InitializeUser(User, modioGetCurrentUser());
   return User;
+}
+
+void FModioSubsystem::AuthenticateViaToken(const FString& AccessToken)
+{
+  modioAuthenticateViaToken(TCHAR_TO_UTF8(*AccessToken));
 }
 
 FModioInstalledMod FModioSubsystem::GetInstalledMod(int32 ModId)

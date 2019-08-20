@@ -32,6 +32,9 @@ class MODIO_API UModioFunctionLibrary : public UBlueprintFunctionLibrary
   UFUNCTION(BlueprintPure, Category = "mod.io")
   static void ModioCurrentUser(UObject *WorldContextObject, FModioUser &User);
 
+  UFUNCTION(BlueprintCallable, Category = "mod.io")
+  static void AuthenticateViaToken(UObject *WorldContextObject, const FString& AccessToken);
+
   // Downloads and installs
 
   UFUNCTION(BlueprintPure, Category = "mod.io")

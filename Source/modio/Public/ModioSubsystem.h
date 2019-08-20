@@ -85,6 +85,8 @@ public:
   bool IsLoggedIn();
   /** Returns the currently logged in user */  
   FModioUser CurrentUser();
+  /** Authenticates by providing an user access token directly */  
+  void AuthenticateViaToken(const FString& AccessToken);
 
   // Mod creation and edition
   /** Creates a new mod profile on mod.io */

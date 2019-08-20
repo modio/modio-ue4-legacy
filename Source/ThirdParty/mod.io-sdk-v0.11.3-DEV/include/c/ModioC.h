@@ -522,6 +522,7 @@ extern "C"
   //Authentication Methods
   void MODIO_DLL modioEmailRequest(void* object, char const* email, void (*callback)(void* object, ModioResponse response));
   void MODIO_DLL modioEmailExchange(void* object, char const* security_code, void (*callback)(void* object, ModioResponse response));
+  void MODIO_DLL modioAuthenticateViaToken(char const* access_token);
   bool MODIO_DLL modioIsLoggedIn(void);
   void MODIO_DLL modioLogout(void);
   struct ModioUser MODIO_DLL modioGetCurrentUser(void);
