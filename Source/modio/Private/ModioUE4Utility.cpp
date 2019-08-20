@@ -149,23 +149,41 @@ TEnumAsByte<EModioRatingType> ConvertToModRatingType(u32 ModioModRating)
   return EModioRatingType::RATING_NOT_DEFINED;
 }
 
-void SetupModioFilterCreator(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, ModioFilterCreator& modio_filter_creator)
+void SetupModioFilterPagination(int32 Limit, int32 Offset, ModioFilterCreator& modio_filter_creator)
 {
   modioSetFilterLimit(&modio_filter_creator, (u32)Limit);
   modioSetFilterOffset(&modio_filter_creator, (u32)Offset);
+}
 
-  switch (FilterType)
+void SetupModSortingFilter(TEnumAsByte<EModioModSortType> ModSortType, ModioFilterCreator& modio_filter_creator, bool IsAscending)
+{
+  switch (ModSortType)
   {
-  case EModioFilterType::SORT_BY_ID:
+  case EModioModSortType::SORT_BY_ID:
     break;
-  case EModioFilterType::SORT_BY_RATING:
-    modioSetFilterSort(&modio_filter_creator, (char *)"rating", false);
+  case EModioModSortType::SORT_BY_DATE_ADDED:
+    modioSetFilterSort(&modio_filter_creator, (char *)"date_added", IsAscending);
     break;
-  case EModioFilterType::SORT_BY_DATE_LIVE:
-    modioSetFilterSort(&modio_filter_creator, (char *)"date_live", false);
+  case EModioModSortType::SORT_BY_DATE_UPDATED:
+    modioSetFilterSort(&modio_filter_creator, (char *)"date_updated", IsAscending);
     break;
-  case EModioFilterType::SORT_BY_DATE_UPDATED:
-    modioSetFilterSort(&modio_filter_creator, (char *)"date_updated", false);
+  case EModioModSortType::SORT_BY_DATE_LIVE:
+    modioSetFilterSort(&modio_filter_creator, (char *)"date_live", IsAscending);
+    break;
+  case EModioModSortType::SORT_BY_NAME:
+    modioSetFilterSort(&modio_filter_creator, (char *)"name", IsAscending);
+    break;
+  case EModioModSortType::SORT_BY_DOWNLOADS:
+    modioSetFilterSort(&modio_filter_creator, (char *)"downloads", IsAscending);
+    break;
+  case EModioModSortType::SORT_BY_POPULAR:
+    modioSetFilterSort(&modio_filter_creator, (char *)"popular", IsAscending);
+    break;
+  case EModioModSortType::SORT_BY_RATING:
+    modioSetFilterSort(&modio_filter_creator, (char *)"rating", IsAscending);
+    break;
+  case EModioModSortType::SORT_BY_SUBSCRIBERS:
+    modioSetFilterSort(&modio_filter_creator, (char *)"subscribers", IsAscending);
     break;
   default:
     // @todo: handle error
@@ -173,7 +191,7 @@ void SetupModioFilterCreator(TEnumAsByte<EModioFilterType> FilterType, int32 Lim
   }
 }
 
-void SetupModioModFilterCreator(TEnumAsByte<EModioFilterType> FilterType, const TArray<FString> &ModTags, int32 Limit, int32 Offset, ModioFilterCreator& modio_filter_creator)
+void SetupModioModFilterCreator(TEnumAsByte<EModioModSortType> ModSortType, const TArray<FString> &ModTags, int32 Limit, int32 Offset, ModioFilterCreator& modio_filter_creator)
 {
   modioSetFilterLimit(&modio_filter_creator, (u32)Limit);
   modioSetFilterOffset(&modio_filter_creator, (u32)Offset);
@@ -182,23 +200,7 @@ void SetupModioModFilterCreator(TEnumAsByte<EModioFilterType> FilterType, const 
     modioAddFilterInField(&modio_filter_creator, "tags", TCHAR_TO_UTF8(*ModTags[i]) );
   }
 
-  switch (FilterType)
-  {
-  case EModioFilterType::SORT_BY_ID:
-    break;
-  case EModioFilterType::SORT_BY_RATING:
-    modioSetFilterSort(&modio_filter_creator, (char *)"rating", false);
-    break;
-  case EModioFilterType::SORT_BY_DATE_LIVE:
-    modioSetFilterSort(&modio_filter_creator, (char *)"date_live", false);
-    break;
-  case EModioFilterType::SORT_BY_DATE_UPDATED:
-    modioSetFilterSort(&modio_filter_creator, (char *)"date_updated", false);
-    break;
-  default:
-    // @todo: handle error
-    break;
-  }
+  SetupModSortingFilter(ModSortType, modio_filter_creator, false);
 }
 
 void SetupModioModFilterCreatorAdvanced(const FModioFilterCreator &FilterCreator, int32 Limit, int32 Offset, ModioFilterCreator& modio_filter_creator)
@@ -206,9 +208,9 @@ void SetupModioModFilterCreatorAdvanced(const FModioFilterCreator &FilterCreator
   modioSetFilterLimit(&modio_filter_creator, (u32)Limit);
   modioSetFilterOffset(&modio_filter_creator, (u32)Offset);
 
-  if(FilterCreator.Sort.Field != "")
-    modioSetFilterSort(&modio_filter_creator, TCHAR_TO_UTF8(*FilterCreator.Sort.Field), FilterCreator.Sort.Ascending);
-  
+  bool IsAscending = FilterCreator.Sort.Ascending;
+  SetupModSortingFilter(FilterCreator.Sort.ModSortType, modio_filter_creator, IsAscending);
+
   if(FilterCreator.FullTextSearch != "")
     modioSetFilterFullTextSearch(&modio_filter_creator, TCHAR_TO_UTF8(*FilterCreator.FullTextSearch));
   

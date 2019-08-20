@@ -11,11 +11,10 @@ UCallbackProxy_GetUserEvents::UCallbackProxy_GetUserEvents(const FObjectInitiali
 {
 }
 
-UCallbackProxy_GetUserEvents *UCallbackProxy_GetUserEvents::GetUserEvents(UObject *WorldContext, TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset)
+UCallbackProxy_GetUserEvents *UCallbackProxy_GetUserEvents::GetUserEvents(UObject *WorldContext, int32 Limit, int32 Offset)
 {
   UCallbackProxy_GetUserEvents *Proxy = NewObject<UCallbackProxy_GetUserEvents>();
   Proxy->SetFlags(RF_StrongRefOnFrame);
-  Proxy->FilterType = FilterType;
   Proxy->Limit = Limit;
   Proxy->Offset = Offset;
   Proxy->WorldContextObject = WorldContext;
@@ -28,7 +27,7 @@ void UCallbackProxy_GetUserEvents::Activate()
   FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
   if( Modio.IsValid() )
   {
-    Modio->GetUserEvents( this->FilterType, this->Limit, this->Offset, FModioUserEventArrayDelegate::CreateUObject( this, &UCallbackProxy_GetUserEvents::OnGetUserEventsDelegate ) );
+    Modio->GetUserEvents( this->Limit, this->Offset, FModioUserEventArrayDelegate::CreateUObject( this, &UCallbackProxy_GetUserEvents::OnGetUserEventsDelegate ) );
   }
   else
   {

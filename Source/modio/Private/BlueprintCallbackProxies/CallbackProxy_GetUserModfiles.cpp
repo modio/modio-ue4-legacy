@@ -11,11 +11,10 @@ UCallbackProxy_GetUserModfiles::UCallbackProxy_GetUserModfiles(const FObjectInit
 {
 }
 
-UCallbackProxy_GetUserModfiles *UCallbackProxy_GetUserModfiles::GetUserModfiles(UObject *WorldContext, TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset)
+UCallbackProxy_GetUserModfiles *UCallbackProxy_GetUserModfiles::GetUserModfiles(UObject *WorldContext, int32 Limit, int32 Offset)
 {
   UCallbackProxy_GetUserModfiles *Proxy = NewObject<UCallbackProxy_GetUserModfiles>();
   Proxy->SetFlags(RF_StrongRefOnFrame);
-  Proxy->FilterType = FilterType;
   Proxy->Limit = Limit;
   Proxy->Offset = Offset;
   Proxy->WorldContextObject = WorldContext;
@@ -28,7 +27,7 @@ void UCallbackProxy_GetUserModfiles::Activate()
   FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
   if( Modio.IsValid() )
   {
-    Modio->GetUserModfiles( this->FilterType, this->Limit, this->Offset, FModioModfileArrayDelegate::CreateUObject( this, &UCallbackProxy_GetUserModfiles::OnGetUserModfilesDelegate ) );
+    Modio->GetUserModfiles( this->Limit, this->Offset, FModioModfileArrayDelegate::CreateUObject( this, &UCallbackProxy_GetUserModfiles::OnGetUserModfilesDelegate ) );
   }
   else
   {

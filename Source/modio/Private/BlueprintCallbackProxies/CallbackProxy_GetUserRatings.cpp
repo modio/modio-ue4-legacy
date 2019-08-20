@@ -11,11 +11,10 @@ UCallbackProxy_GetUserRatings::UCallbackProxy_GetUserRatings(const FObjectInitia
 {
 }
 
-UCallbackProxy_GetUserRatings *UCallbackProxy_GetUserRatings::GetUserRatings(UObject *WorldContext, TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset)
+UCallbackProxy_GetUserRatings *UCallbackProxy_GetUserRatings::GetUserRatings(UObject *WorldContext, int32 Limit, int32 Offset)
 {
   UCallbackProxy_GetUserRatings *Proxy = NewObject<UCallbackProxy_GetUserRatings>();
   Proxy->SetFlags(RF_StrongRefOnFrame);
-  Proxy->FilterType = FilterType;
   Proxy->Limit = Limit;
   Proxy->Offset = Offset;
   Proxy->WorldContextObject = WorldContext;
@@ -28,7 +27,7 @@ void UCallbackProxy_GetUserRatings::Activate()
   FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
   if( Modio.IsValid() )
   {
-    Modio->GetUserRatings( this->FilterType, this->Limit, this->Offset, FModioRatingArrayDelegate::CreateUObject( this, &UCallbackProxy_GetUserRatings::OnGetUserRatingsDelegate ) );
+    Modio->GetUserRatings( this->Limit, this->Offset, FModioRatingArrayDelegate::CreateUObject( this, &UCallbackProxy_GetUserRatings::OnGetUserRatingsDelegate ) );
   }
   else
   {

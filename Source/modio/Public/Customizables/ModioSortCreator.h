@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include "Enums/ModioModSortType.h"
 #include "ModioSortCreator.generated.h"
 
 USTRUCT(BlueprintType)
@@ -11,7 +12,7 @@ struct FModioSortCreator
   GENERATED_BODY()
 
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
-  FString Field;
+  TEnumAsByte<EModioModSortType> ModSortType;
   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "mod.io")
   bool Ascending;
 };

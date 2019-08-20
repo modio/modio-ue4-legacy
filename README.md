@@ -30,7 +30,7 @@ A quick start guide is provided below, in addition to the more [detailed wiki](h
 ### Browse mods
 
 ```c++
-Modio->GetAllMods(EModioFilterType::SORT_BY_DATE_UPDATED,
+Modio->GetAllMods(EModioModSortType::SORT_BY_DATE_UPDATED,
                    { TEXT("Hat"), TEXT("HD") } /* Filter by tags */,
                    4 /* Limit the number of results for a request. */,
                    0 /* Use the offset to skip over results and paginate through them */,

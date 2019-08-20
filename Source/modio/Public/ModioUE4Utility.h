@@ -9,7 +9,7 @@
 #include "Schemas/ModioRating.h"
 #include "Schemas/ModioModEvent.h"
 #include "Schemas/ModioUserEvent.h"
-#include "Enums/ModioFilterType.h"
+#include "Enums/ModioModSortType.h"
 #include "Enums/ModioModState.h"
 #include "Enums/ModioRatingType.h"
 #include "Customizables/ModioModCreator.h"
@@ -27,8 +27,8 @@ extern TArray<FModioUserEvent> ConvertToTArrayUserEvents(ModioUserEvent* ModioUs
 extern TArray<FModioModEvent> ConvertToTArrayModEvents(ModioModEvent* ModioModEvents, u32 ModEventsSize);
 extern TEnumAsByte<EModioModState> ConvertToModState(u32 ModioModState);
 extern TEnumAsByte<EModioRatingType> ConvertToModRatingType(u32 ModioModRating);
-extern void SetupModioFilterCreator(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, ModioFilterCreator& modio_filter_creator);
-extern void SetupModioModFilterCreator(TEnumAsByte<EModioFilterType> FilterType, const TArray<FString> &ModTags, int32 Limit, int32 Offset, ModioFilterCreator& modio_filter_creator);
+extern void SetupModioFilterPagination(int32 Limit, int32 Offset, ModioFilterCreator& modio_filter_creator);
+extern void SetupModioModFilterCreator(TEnumAsByte<EModioModSortType> ModSortType, const TArray<FString> &ModTags, int32 Limit, int32 Offset, ModioFilterCreator& modio_filter_creator);
 extern void SetupModioModFilterCreatorAdvanced(const FModioFilterCreator &FilterCreator, int32 Limit, int32 Offset, ModioFilterCreator& modio_filter_creator);
 extern void SetupModioModCreator(FModioModCreator ModCreator, ModioModCreator& modio_mod_creator);
 extern void SetupModioModEditor(FModioModEditor ModEditor, ModioModEditor& modio_mod_editor);

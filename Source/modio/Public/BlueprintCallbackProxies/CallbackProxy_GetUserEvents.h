@@ -5,7 +5,7 @@
 
 #include "Schemas/ModioResponse.h"
 #include "Schemas/ModioUserEvent.h"
-#include "Enums/ModioFilterType.h"
+#include "Enums/ModioModSortType.h"
 #include "Net/OnlineBlueprintCallProxyBase.h"
 #include "CallbackProxy_GetUserEvents.generated.h"
 
@@ -21,7 +21,6 @@ class MODIO_API UCallbackProxy_GetUserEvents : public UOnlineBlueprintCallProxyB
 {
   GENERATED_UCLASS_BODY()
 
-  TEnumAsByte<EModioFilterType> FilterType;
   int32 Limit;
   int32 Offset;
 
@@ -36,7 +35,7 @@ class MODIO_API UCallbackProxy_GetUserEvents : public UOnlineBlueprintCallProxyB
   FGetUserEventsResult OnFailure;
 
   UFUNCTION(BlueprintCallable, Category = "mod.io", meta = (BlueprintInternalUseOnly = "true", DefaultToSelf="WorldContext"))
-  static UCallbackProxy_GetUserEvents *GetUserEvents(UObject *WorldContext, TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset);
+  static UCallbackProxy_GetUserEvents *GetUserEvents(UObject *WorldContext, int32 Limit, int32 Offset);
 
   virtual void Activate() override;
 

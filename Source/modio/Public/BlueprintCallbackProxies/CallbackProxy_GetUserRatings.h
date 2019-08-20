@@ -5,7 +5,7 @@
 
 #include "Schemas/ModioResponse.h"
 #include "Schemas/ModioRating.h"
-#include "Enums/ModioFilterType.h"
+#include "Enums/ModioModSortType.h"
 #include "Net/OnlineBlueprintCallProxyBase.h"
 #include "CallbackProxy_GetUserRatings.generated.h"
 
@@ -21,7 +21,6 @@ class MODIO_API UCallbackProxy_GetUserRatings : public UOnlineBlueprintCallProxy
 {
   GENERATED_UCLASS_BODY()
 
-  TEnumAsByte<EModioFilterType> FilterType;
   int32 Limit;
   int32 Offset;
 
@@ -36,7 +35,7 @@ class MODIO_API UCallbackProxy_GetUserRatings : public UOnlineBlueprintCallProxy
   FGetUserRatingsResult OnFailure;
 
   UFUNCTION(BlueprintCallable, Category = "mod.io", meta = (BlueprintInternalUseOnly = "true", DefaultToSelf="WorldContext"))
-  static UCallbackProxy_GetUserRatings *GetUserRatings(UObject *WorldContext, TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset);
+  static UCallbackProxy_GetUserRatings *GetUserRatings(UObject *WorldContext, int32 Limit, int32 Offset);
 
   virtual void Activate() override;
 

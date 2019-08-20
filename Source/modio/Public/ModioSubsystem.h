@@ -12,7 +12,7 @@
 #include "Schemas/ModioInstalledMod.h"
 #include "Schemas/ModioQueuedModDownload.h"
 #include "Schemas/ModioQueuedModfileUpload.h"
-#include "Enums/ModioFilterType.h"
+#include "Enums/ModioModSortType.h"
 #include "Enums/ModioModState.h"
 #include "Enums/ModioRatingType.h"
 #include "ModioPackage.h"
@@ -94,22 +94,22 @@ public:
 
   // Mod browsing
   /** Request mod information */
-  void GetAllMods(TEnumAsByte<EModioFilterType> FilterType, const TArray<FString> &ModTags, int32 Limit, int32 Offset, FModioModArrayDelegate GetAllModsDelegate);
+  void GetAllMods(TEnumAsByte<EModioModSortType> ModSortType, const TArray<FString> &ModTags, int32 Limit, int32 Offset, FModioModArrayDelegate GetAllModsDelegate);
   void GetAllModsFiltered(const FModioFilterCreator &FilterCreator, int32 Limit, int32 Offset, FModioModArrayDelegate GetAllModsDelegate);
 
   // Get your own information
   /** Request the authenticated user information */
   void GetAuthenticatedUser(FModioUserDelegate GetAuthenticatedUserDelegate);
   /** Returns the mods the logged in user has subscribed */
-  void GetUserSubscriptions(TEnumAsByte<EModioFilterType> FilterType, const TArray<FString> ModTags, int32 Limit, int32 Offset, FModioModArrayDelegate GetUserSubscriptionsDelegate);
+  void GetUserSubscriptions(TEnumAsByte<EModioModSortType> ModSortType, const TArray<FString> ModTags, int32 Limit, int32 Offset, FModioModArrayDelegate GetUserSubscriptionsDelegate);
   /** Returns the mods the authenticated user owns */
-  void GetUserMods(TEnumAsByte<EModioFilterType> FilterType, const TArray<FString> ModTags, int32 Limit, int32 Offset, FModioModArrayDelegate GetUserModsDelegate);
+  void GetUserMods(TEnumAsByte<EModioModSortType> ModSortType, const TArray<FString> ModTags, int32 Limit, int32 Offset, FModioModArrayDelegate GetUserModsDelegate);
   /** Returns the modfiles the authenticated user owns */
-  void GetUserModfiles(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, FModioModfileArrayDelegate GetUserModfilesDelegate);
+  void GetUserModfiles(int32 Limit, int32 Offset, FModioModfileArrayDelegate GetUserModfilesDelegate);
   /** Returns the events related to the authenticated user */
-  void GetUserEvents(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, FModioUserEventArrayDelegate GetUserEventsDelegate);
+  void GetUserEvents(int32 Limit, int32 Offset, FModioUserEventArrayDelegate GetUserEventsDelegate);
   /** Returns the ratings submited by the authenticated user */
-  void GetUserRatings(TEnumAsByte<EModioFilterType> FilterType, int32 Limit, int32 Offset, FModioRatingArrayDelegate GetUserRatingsDelegate);
+  void GetUserRatings(int32 Limit, int32 Offset, FModioRatingArrayDelegate GetUserRatingsDelegate);
 
   // Downloads and installs
   /** Returns information of a mod installed locally */
