@@ -10,11 +10,11 @@ UCallbackProxy_GetAllMods::UCallbackProxy_GetAllMods(const FObjectInitializer &O
 {
 }
 
-UCallbackProxy_GetAllMods *UCallbackProxy_GetAllMods::GetAllMods(UObject *WorldContext, TEnumAsByte<EModioModSortType> ModSortType, TArray<FString> ModTags, int32 Limit, int32 Offset)
+UCallbackProxy_GetAllMods *UCallbackProxy_GetAllMods::GetAllMods(UObject *WorldContext, FModioFilterCreator Filter, TArray<FString> ModTags, int32 Limit, int32 Offset)
 {
   UCallbackProxy_GetAllMods *Proxy = NewObject<UCallbackProxy_GetAllMods>();
   Proxy->SetFlags(RF_StrongRefOnFrame);
-  Proxy->ModSortType = ModSortType;
+  Proxy->Filter = Filter;
   Proxy->ModTags = ModTags;
   Proxy->Limit = Limit;
   Proxy->Offset = Offset;
@@ -28,7 +28,7 @@ void UCallbackProxy_GetAllMods::Activate()
   FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
   if( Modio.IsValid() )
   {
-    Modio->GetAllMods( this->ModSortType, this->ModTags, this->Limit, this->Offset, FModioModArrayDelegate::CreateUObject( this, &UCallbackProxy_GetAllMods::OnGetAllModsDelegate ) );
+    Modio->GetAllMods( this->Filter, this->ModTags, this->Limit, this->Offset, FModioModArrayDelegate::CreateUObject( this, &UCallbackProxy_GetAllMods::OnGetAllModsDelegate ) );
   }
   else
   {

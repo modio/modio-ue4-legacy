@@ -96,16 +96,15 @@ public:
 
   // Mod browsing
   /** Request mod information */
-  void GetAllMods(TEnumAsByte<EModioModSortType> ModSortType, const TArray<FString> &ModTags, int32 Limit, int32 Offset, FModioModArrayDelegate GetAllModsDelegate);
-  void GetAllModsFiltered(const FModioFilterCreator &FilterCreator, int32 Limit, int32 Offset, FModioModArrayDelegate GetAllModsDelegate);
-
+  void GetAllMods(const FModioFilterCreator &FilterCreator, const TArray<FString> &ModTags, int32 Limit, int32 Offset, FModioModArrayDelegate GetAllModsDelegate);
+  
   // Get your own information
   /** Request the authenticated user information */
   void GetAuthenticatedUser(FModioUserDelegate GetAuthenticatedUserDelegate);
   /** Returns the mods the logged in user has subscribed */
-  void GetUserSubscriptions(TEnumAsByte<EModioModSortType> ModSortType, const TArray<FString> ModTags, int32 Limit, int32 Offset, FModioModArrayDelegate GetUserSubscriptionsDelegate);
+  void GetUserSubscriptions(const FModioFilterCreator &FilterCreator, const TArray<FString> &ModTags, int32 Limit, int32 Offset, FModioModArrayDelegate GetUserSubscriptionsDelegate);
   /** Returns the mods the authenticated user owns */
-  void GetUserMods(TEnumAsByte<EModioModSortType> ModSortType, const TArray<FString> ModTags, int32 Limit, int32 Offset, FModioModArrayDelegate GetUserModsDelegate);
+  void GetUserMods(const FModioFilterCreator &FilterCreator, const TArray<FString> &ModTags, int32 Limit, int32 Offset, FModioModArrayDelegate GetUserModsDelegate);
   /** Returns the modfiles the authenticated user owns */
   void GetUserModfiles(int32 Limit, int32 Offset, FModioModfileArrayDelegate GetUserModfilesDelegate);
   /** Returns the events related to the authenticated user */

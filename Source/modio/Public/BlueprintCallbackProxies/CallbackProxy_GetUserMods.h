@@ -3,10 +3,10 @@
 
 #pragma once
 
+#include "Net/OnlineBlueprintCallProxyBase.h"
+#include "Customizables/ModioFilterCreator.h"
 #include "Schemas/ModioResponse.h"
 #include "Schemas/ModioMod.h"
-#include "Enums/ModioModSortType.h"
-#include "Net/OnlineBlueprintCallProxyBase.h"
 #include "CallbackProxy_GetUserMods.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(
@@ -21,7 +21,7 @@ class MODIO_API UCallbackProxy_GetUserMods : public UOnlineBlueprintCallProxyBas
 {
   GENERATED_UCLASS_BODY()
 
-  TEnumAsByte<EModioModSortType> ModSortType;
+  FModioFilterCreator FilterCreator;
   TArray<FString> ModTags;
   int32 Limit;
   int32 Offset;
@@ -37,7 +37,7 @@ class MODIO_API UCallbackProxy_GetUserMods : public UOnlineBlueprintCallProxyBas
   FGetUserModsResult OnFailure;
 
   UFUNCTION(BlueprintCallable, Category = "mod.io", meta = (BlueprintInternalUseOnly = "true", DefaultToSelf="WorldContext"))
-  static UCallbackProxy_GetUserMods *GetUserMods(UObject *WorldContext, TEnumAsByte<EModioModSortType> ModSortType, TArray<FString> ModTags, int32 Limit, int32 Offset);
+  static UCallbackProxy_GetUserMods *GetUserMods(UObject *WorldContext, FModioFilterCreator FilterCreator, TArray<FString> ModTags, int32 Limit, int32 Offset);
 
   virtual void Activate() override;
 

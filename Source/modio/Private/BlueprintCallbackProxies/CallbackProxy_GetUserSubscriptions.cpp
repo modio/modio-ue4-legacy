@@ -11,11 +11,11 @@ UCallbackProxy_GetUserSubscriptions::UCallbackProxy_GetUserSubscriptions(const F
 {
 }
 
-UCallbackProxy_GetUserSubscriptions *UCallbackProxy_GetUserSubscriptions::GetUserSubscriptions(UObject *WorldContext, TEnumAsByte<EModioModSortType> ModSortType, TArray<FString> ModTags, int32 Limit, int32 Offset)
+UCallbackProxy_GetUserSubscriptions *UCallbackProxy_GetUserSubscriptions::GetUserSubscriptions(UObject *WorldContext, FModioFilterCreator FilterCreator, TArray<FString> ModTags, int32 Limit, int32 Offset)
 {
   UCallbackProxy_GetUserSubscriptions *Proxy = NewObject<UCallbackProxy_GetUserSubscriptions>();
   Proxy->SetFlags(RF_StrongRefOnFrame);
-  Proxy->ModSortType = ModSortType;
+  Proxy->FilterCreator = FilterCreator;
   Proxy->ModTags = ModTags;
   Proxy->Limit = Limit;
   Proxy->Offset = Offset;
@@ -29,7 +29,7 @@ void UCallbackProxy_GetUserSubscriptions::Activate()
   FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
   if( Modio.IsValid() )
   {
-    Modio->GetUserSubscriptions( this->ModSortType, this->ModTags, this->Limit, this->Offset, FModioModArrayDelegate::CreateUObject( this, &UCallbackProxy_GetUserSubscriptions::OnGetUserSubscriptionsDelegate ) );
+    Modio->GetUserSubscriptions( this->FilterCreator, this->ModTags, this->Limit, this->Offset, FModioModArrayDelegate::CreateUObject( this, &UCallbackProxy_GetUserSubscriptions::OnGetUserSubscriptionsDelegate ) );
   }
   else
   {

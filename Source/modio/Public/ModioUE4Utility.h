@@ -28,8 +28,7 @@ extern TArray<FModioModEvent> ConvertToTArrayModEvents(ModioModEvent* ModioModEv
 extern TEnumAsByte<EModioModState> ConvertToModState(u32 ModioModState);
 extern TEnumAsByte<EModioRatingType> ConvertToModRatingType(u32 ModioModRating);
 extern void SetupModioFilterPagination(int32 Limit, int32 Offset, ModioFilterCreator& modio_filter_creator);
-extern void SetupModioModFilterCreator(TEnumAsByte<EModioModSortType> ModSortType, const TArray<FString> &ModTags, int32 Limit, int32 Offset, ModioFilterCreator& modio_filter_creator);
-extern void SetupModioModFilterCreatorAdvanced(const FModioFilterCreator &FilterCreator, int32 Limit, int32 Offset, ModioFilterCreator& modio_filter_creator);
+extern void SetupModioModFilterCreator(const FModioFilterCreator &FilterCreator, const TArray<FString> &ModTags, int32 Limit, int32 Offset, ModioFilterCreator& modio_filter_creator);
 extern void SetupModioModCreator(FModioModCreator ModCreator, ModioModCreator& modio_mod_creator);
 extern void SetupModioModEditor(FModioModEditor ModEditor, ModioModEditor& modio_mod_editor);
 extern void SetupModioModfileCreator(FModioModfileCreator ModfileCreator, ModioModfileCreator& modio_modfile_creator);

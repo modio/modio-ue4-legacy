@@ -191,22 +191,13 @@ void SetupModSortingFilter(TEnumAsByte<EModioModSortType> ModSortType, ModioFilt
   }
 }
 
-void SetupModioModFilterCreator(TEnumAsByte<EModioModSortType> ModSortType, const TArray<FString> &ModTags, int32 Limit, int32 Offset, ModioFilterCreator& modio_filter_creator)
+void SetupModioModFilterCreator(const FModioFilterCreator &FilterCreator, const TArray<FString> &ModTags, int32 Limit, int32 Offset, ModioFilterCreator& modio_filter_creator)
 {
   modioSetFilterLimit(&modio_filter_creator, (u32)Limit);
   modioSetFilterOffset(&modio_filter_creator, (u32)Offset);
 
-  for (int i = 0; i < ModTags.Num(); i++) {
+  for (int i = 0; i < ModTags.Num(); i++)
     modioAddFilterInField(&modio_filter_creator, "tags", TCHAR_TO_UTF8(*ModTags[i]) );
-  }
-
-  SetupModSortingFilter(ModSortType, modio_filter_creator, false);
-}
-
-void SetupModioModFilterCreatorAdvanced(const FModioFilterCreator &FilterCreator, int32 Limit, int32 Offset, ModioFilterCreator& modio_filter_creator)
-{
-  modioSetFilterLimit(&modio_filter_creator, (u32)Limit);
-  modioSetFilterOffset(&modio_filter_creator, (u32)Offset);
 
   bool IsAscending = FilterCreator.Sort.Ascending;
   SetupModSortingFilter(FilterCreator.Sort.ModSortType, modio_filter_creator, IsAscending);
