@@ -92,7 +92,23 @@ If your game is running inside a popular distribution platform such as Steam or 
 
 ```c++
 Modio->GalaxyAuth("csEYJ2MWR53QssNNqFgO87sRN", FModioGenericDelegate::CreateUObject(ModioManager, &UModioManager::OnGalaxyAuth));
-reports
+// ...
+
+void UModioManager::OnGalaxyAuth(FModioResponse Response)
+{
+  // Response.code should be 200 if you are now authenticated via Galaxy
+}
+```
+
+#### Oculus Auth
+
+```c++
+Modio->OculusAuth("zBOBKszK..txDHJvjAC",// nonce proof
+  3485509464809317, // User id
+  "OCAf57IgZCf9JphLvM3dY...lVxWf5tenZBoOLAZDZD", // access token
+  "user@email.com", // Email, optional parameter, skip with ""
+  0, // Expiry date, skip with 0
+  FModioGenericDelegate::CreateUObject(ModioManager, &UModioManager::OnGalaxyAuth));
 // ...
 
 void UModioManager::OnGalaxyAuth(FModioResponse Response)

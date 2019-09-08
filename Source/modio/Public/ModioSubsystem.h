@@ -36,6 +36,7 @@
 #include "AsyncRequest/ModioAsyncRequest_UnsubscribeFromMod.h"
 #include "AsyncRequest/ModioAsyncRequest_SteamAuth.h"
 #include "AsyncRequest/ModioAsyncRequest_GalaxyAuth.h"
+#include "AsyncRequest/ModioAsyncRequest_OculusAuth.h"
 #include "AsyncRequest/ModioAsyncRequest_AddModTags.h"
 #include "AsyncRequest/ModioAsyncRequest_DeleteModTags.h"
 #include "AsyncRequest/ModioAsyncRequest_GetAllModTags.h"
@@ -79,6 +80,8 @@ public:
   void SteamAuth(const FString &Base64Ticket, FModioGenericDelegate SteamAuthDelegate);
   /** Log in to mod.io on behalf of a GOG Galaxy user */
   void GalaxyAuth(const FString &Appdata, FModioGenericDelegate GalaxyAuthDelegate);
+  /** Log in to mod.io on behalf of a Oculus user */
+  void OculusAuth(const FString &Nonce, int32 UserId, const FString &AccessToken, const FString &Email, int32 DateExpires, FModioGenericDelegate GalaxyAuthDelegate);
   /** Logs out the current user from mod.io */  
   void Logout();
   /** Returns true if there is a user currently logged in */  

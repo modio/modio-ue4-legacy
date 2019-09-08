@@ -529,6 +529,7 @@ extern "C"
 
   //External Authentication Methods
   void MODIO_DLL modioGalaxyAuth(void* object, char const* appdata, void (*callback)(void* object, ModioResponse response));
+  void MODIO_DLL modioOculusAuth(void* object, char const* nonce, u32 user_id, char const* access_token, char const* email, u32 date_expires, void (*callback)(void* object, ModioResponse response));
   void MODIO_DLL modioSteamAuth(void* object, unsigned char const* rgubTicket, u32 cubTicket, void (*callback)(void* object, ModioResponse response));
   void MODIO_DLL modioSteamAuthEncoded(void* object, char const* base64_ticket, void (*callback)(void* object, ModioResponse response));
   void MODIO_DLL modioLinkExternalAccount(void* object, u32 service, char const* service_id, char const* email, void (*callback)(void* object, ModioResponse response));
