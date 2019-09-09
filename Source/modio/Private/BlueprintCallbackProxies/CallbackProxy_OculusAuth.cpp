@@ -10,7 +10,7 @@ UCallbackProxy_OculusAuth::UCallbackProxy_OculusAuth(const FObjectInitializer &O
 {
 }
 
-UCallbackProxy_OculusAuth *UCallbackProxy_OculusAuth::OculusAuth( UObject *WorldContext, const FString& Nonce, int32 UserId, const FString& AccessToken, const FString& Email, int32 DateExpires )
+UCallbackProxy_OculusAuth *UCallbackProxy_OculusAuth::OculusAuth( UObject *WorldContext, const FString& Nonce, FInt64 UserId, const FString& AccessToken, const FString& Email, int32 DateExpires )
 {
   UCallbackProxy_OculusAuth *Proxy = NewObject<UCallbackProxy_OculusAuth>();
   Proxy->SetFlags(RF_StrongRefOnFrame);

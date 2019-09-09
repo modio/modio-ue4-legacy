@@ -6,6 +6,7 @@
 #include "ModioSubsystem.h"
 #include "Schemas/ModioResponse.h"
 #include "Net/OnlineBlueprintCallProxyBase.h"
+#include "Int64.h"
 #include "CallbackProxy_OculusAuth.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(
@@ -19,7 +20,7 @@ class MODIO_API UCallbackProxy_OculusAuth : public UOnlineBlueprintCallProxyBase
   GENERATED_UCLASS_BODY()
 
   FString Nonce;
-  int32 UserId;
+  FInt64 UserId;
   FString AccessToken;
   FString Email;
   int32 DateExpires;
@@ -35,7 +36,7 @@ class MODIO_API UCallbackProxy_OculusAuth : public UOnlineBlueprintCallProxyBase
   FOculusAuthResult OnFailure;
 
   UFUNCTION(BlueprintCallable, Category = "mod.io", meta = (BlueprintInternalUseOnly = "true", DefaultToSelf="WorldContext"))
-  static UCallbackProxy_OculusAuth *OculusAuth( UObject *WorldContext, const FString &Nonce, int32 UserId, const FString &AccessToken, const FString &Email, int32 DateExpires);
+  static UCallbackProxy_OculusAuth *OculusAuth( UObject *WorldContext, const FString &Nonce, FInt64 UserId, const FString &AccessToken, const FString &Email, int32 DateExpires);
 
   virtual void Activate() override;
 
