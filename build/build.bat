@@ -20,6 +20,9 @@ IF %1 == 19 (
 ) ELSE IF %1 == 22 (
     ECHO Building the mod.io plugin with UE4 v22
     "C:\Program Files\Epic Games\UE_4.22\Engine\Build\BatchFiles\RunUAT.bat" BuildPlugin -Plugin="%CD%\..\modio.uplugin" -TargetPlatforms=Win64 -Package="%CD%\PluginStaging_ALL\modio_UE4_422" -Rocket
+) ELSE IF %1 == 23 (
+    ECHO Building the mod.io plugin with UE4 v23
+    "C:\Program Files\Epic Games\UE_4.23\Engine\Build\BatchFiles\RunUAT.bat" BuildPlugin -Plugin="%CD%\..\modio.uplugin" -TargetPlatforms=Win64 -Package="%CD%\PluginStaging_ALL\modio_UE4_422" -Rocket
 ) ELSE IF %1 == all (
     ECHO Building the mod.io plugin with UE4 v19, v20, v21, v22
     "C:\Program Files\Epic Games\UE_4.19\Engine\Build\BatchFiles\RunUAT.bat" BuildPlugin -Plugin="%CD%\..\modio.uplugin" -TargetPlatforms=Win64 -Package="%CD%\PluginStaging_ALL\modio_UE4_419" -Rocket

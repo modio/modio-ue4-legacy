@@ -5,13 +5,13 @@
 
 #include "Int64.generated.h"
 
-USTRUCT(BlueprintType, meta=(HasNativeMake = "Int64.Int64FunctionLibrary.MakeInt64") )
+USTRUCT(BlueprintType, Category="Utilities", meta=(HasNativeMake = "Int64.Int64FunctionLibrary.MakeInt64") )
 struct FInt64
 {
 	GENERATED_BODY()
 
 	// The actual int64
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category="Utilities")
 	int64 Value;
 
 	/** Display a int64 as a string */
