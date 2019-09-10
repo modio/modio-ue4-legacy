@@ -510,7 +510,6 @@ extern "C"
   void MODIO_DLL modioSetDebugLevel(u32 debug_level);
   void MODIO_DLL modioProcess(void);
   void MODIO_DLL modioSleep(u32 milliseconds);
-  void MODIO_DLL compressFiles(char const* root_directory, char const* const filenames[], u32 filenames_size, char const* zip_path);
 
   //Events
   void MODIO_DLL modioSetEventListener(void (*callback)(ModioResponse response, ModioModEvent* events_array, u32 events_array_size));
@@ -710,6 +709,10 @@ extern "C"
   void MODIO_DLL modioFreeInstalledMod(ModioInstalledMod* installed_mod);
   void MODIO_DLL modioFreeQueuedModDownload(ModioQueuedModDownload* queued_mod_download);
   void MODIO_DLL modioFreeQueuedModfileUpload(ModioQueuedModfileUpload* queued_modfile_upload);
+
+  // General Utility Methods 
+  void MODIO_DLL compressFiles(char const* root_directory, char const* const filenames[], u32 filenames_size, char const* zip_path);
+  void MODIO_DLL windowsUTF8ToAnsi(const char* UTF8_string, char* ansi_string);
 #ifdef __cplusplus
 }
 #endif

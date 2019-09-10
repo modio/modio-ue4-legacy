@@ -313,7 +313,12 @@ void SetupModioModfileCreator(FModioModfileCreator ModfileCreator, ModioModfileC
   }
 
   if (ModfileCreator.Path != "")
-    modioSetModfileCreatorPath(&modio_modfile_creator, TCHAR_TO_UTF8(*ModfileCreator.Path));
+  {
+    char* AnsiModfilePath = new char[ModfileCreator.Path.Len()];
+    windowsUTF8ToAnsi(TCHAR_TO_UTF8(*ModfileCreator.Path), AnsiModfilePath);
+    modioSetModfileCreatorPath(&modio_modfile_creator, AnsiModfilePath);
+    delete[] AnsiModfilePath;
+  }
   if (ModfileCreator.Version != "")
     modioSetModfileCreatorVersion(&modio_modfile_creator, TCHAR_TO_UTF8(*ModfileCreator.Version));
   if (ModfileCreator.Changelog != "")
