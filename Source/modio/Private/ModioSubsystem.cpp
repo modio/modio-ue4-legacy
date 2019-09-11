@@ -175,10 +175,10 @@ void FModioSubsystem::GalaxyAuth(const FString &Appdata, FModioGenericDelegate G
   QueueAsyncTask( Request );
 }
 
-void FModioSubsystem::OculusAuth(const FString& Nonce, FInt64 UserId, const FString& AccessToken, const FString& Email, int32 DateExpires, FModioGenericDelegate OculusAuthDelegate)
+void FModioSubsystem::OculusAuth(const FString& Nonce, const FString& OculusUserId, const FString& AccessToken, const FString& Email, int32 DateExpires, FModioGenericDelegate OculusAuthDelegate)
 {
   FModioAsyncRequest_OculusAuth *Request = new FModioAsyncRequest_OculusAuth( this, OculusAuthDelegate );
-  modioOculusAuth( Request, TCHAR_TO_UTF8(*Nonce), (u32)UserId, TCHAR_TO_UTF8(*AccessToken), TCHAR_TO_UTF8(*Email), (u32)DateExpires, FModioAsyncRequest_GalaxyAuth::Response );
+  modioOculusAuth( Request, TCHAR_TO_UTF8(*Nonce), TCHAR_TO_UTF8(*OculusUserId), TCHAR_TO_UTF8(*AccessToken), TCHAR_TO_UTF8(*Email), (u32)DateExpires, FModioAsyncRequest_GalaxyAuth::Response );
   QueueAsyncTask( Request );
 }
 

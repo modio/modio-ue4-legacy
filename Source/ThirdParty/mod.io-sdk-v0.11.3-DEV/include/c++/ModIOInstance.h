@@ -79,7 +79,7 @@ public:
 
   //External Authentication Methods
   void galaxyAuth(const std::string &appdata, const std::function<void(const modio::Response &)> &callback);
-  void oculusAuth(const std::string &nonce, u32 user_id, const std::string &access_token, const std::string &email, u32 date_expires, const std::function<void(const modio::Response &)> &callback);
+  void oculusAuth(const std::string &nonce, const std::string &oculus_user_id, const std::string &access_token, const std::string &email, u32 date_expires, const std::function<void(const modio::Response &)> &callback);
   void steamAuth(const unsigned char* rgubTicket, u32 cubTicket, const std::function<void(const modio::Response &)> &callback);
   void steamAuthEncoded(const std::string &base64_token, const std::function<void(const modio::Response &)> &callback);
   void linkExternalAccount(u32 service, const std::string &service_id, const std::string &email, const std::function<void(const modio::Response &)> &callback);

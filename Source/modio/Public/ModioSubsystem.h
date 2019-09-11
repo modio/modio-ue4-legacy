@@ -82,7 +82,7 @@ public:
   /** Log in to mod.io on behalf of a GOG Galaxy user */
   void GalaxyAuth(const FString &Appdata, FModioGenericDelegate GalaxyAuthDelegate);
   /** Log in to mod.io on behalf of a Oculus user */
-  void OculusAuth(const FString &Nonce, FInt64 UserId, const FString &AccessToken, const FString &Email, int32 DateExpires, FModioGenericDelegate GalaxyAuthDelegate);
+  void OculusAuth(const FString &Nonce, const FString &OculusUserId, const FString &AccessToken, const FString &Email, int32 DateExpires, FModioGenericDelegate GalaxyAuthDelegate);
   /** Logs out the current user from mod.io */  
   void Logout();
   /** Returns true if there is a user currently logged in */  

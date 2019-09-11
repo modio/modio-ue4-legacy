@@ -20,7 +20,7 @@ class MODIO_API UCallbackProxy_OculusAuth : public UOnlineBlueprintCallProxyBase
   GENERATED_UCLASS_BODY()
 
   FString Nonce;
-  FInt64 UserId;
+  FString OculusUserId;
   FString AccessToken;
   FString Email;
   int32 DateExpires;
@@ -36,7 +36,7 @@ class MODIO_API UCallbackProxy_OculusAuth : public UOnlineBlueprintCallProxyBase
   FOculusAuthResult OnFailure;
 
   UFUNCTION(BlueprintCallable, Category = "mod.io", meta = (BlueprintInternalUseOnly = "true", DefaultToSelf="WorldContext"))
-  static UCallbackProxy_OculusAuth *OculusAuth( UObject *WorldContext, const FString &Nonce, FInt64 UserId, const FString &AccessToken, const FString &Email, int32 DateExpires);
+  static UCallbackProxy_OculusAuth *OculusAuth( UObject *WorldContext, const FString &Nonce, const FString &OculusUserId, const FString &AccessToken, const FString &Email, int32 DateExpires);
 
   virtual void Activate() override;
 
