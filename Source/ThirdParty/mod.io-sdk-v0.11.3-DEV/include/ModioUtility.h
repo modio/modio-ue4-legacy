@@ -30,6 +30,7 @@ namespace modio
   void pollEvents();
   void updateAuthenticatedUser(std::string access_token);
   void updateUserRatings();
+  void addGameIdFilter(ModioFilterCreator &filter);
 
   // Error handling
   void handleDownloadImageError(void *object, void (*callback)(void *object, ModioResponse modioresponse));

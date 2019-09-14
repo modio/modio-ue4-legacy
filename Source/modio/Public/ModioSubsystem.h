@@ -195,21 +195,21 @@ public:
 
 protected:
   friend class FModioModule;
-  static FModioSubsystemPtr Create(const FString &RootDirectory, uint32 GameId, const FString &ApiKey, bool bIsLiveEnvironment, bool bInstallOnModDownload);
+  static FModioSubsystemPtr Create(const FString &RootDirectory, uint32 GameId, const FString &ApiKey, bool bIsLiveEnvironment, bool bInstallOnModDownload, bool bRetrieveModsFromOtherGames);
 
   /** Queue up a new async request and take ownership of the memory */
   void QueueAsyncTask(struct FModioAsyncRequest *Request);
   PACKAGE_SCOPE :
-      /** Called by the async request when it's done */
-      void
-      AsyncRequestDone(struct FModioAsyncRequest *Request);
+  /** Called by the async request when it's done */
+  void
+  AsyncRequestDone(struct FModioAsyncRequest *Request);
 
   /** Should only be create from our create function */
   FModioSubsystem();
 
   /** Can be called multiple times during a session, as long as it's properly paired with it's shutdown */
-  void Init(const FString &RootDirectory, uint32 GameId, const FString &ApiKey, bool bIsLiveEnvironent, bool bInstallOnModDownload);
-
+  void Init(const FString &RootDirectory, uint32 GameId, const FString &ApiKey, bool bIsLiveEnvironment, bool bInstallOnModDownload, bool bRetrieveModsFromOtherGames);
+  
   /** Properly shutdowns modio */
   void Shutdown();
 

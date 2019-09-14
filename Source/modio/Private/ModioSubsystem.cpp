@@ -24,7 +24,7 @@ FModioSubsystem::~FModioSubsystem()
   check(!bInitialized);
 }
 
-FModioSubsystemPtr FModioSubsystem::Create( const FString& RootDirectory, uint32 GameId, const FString& ApiKey, bool bIsLiveEnvironent, bool bInstallOnModDownload )
+FModioSubsystemPtr FModioSubsystem::Create( const FString& RootDirectory, uint32 GameId, const FString& ApiKey, bool bIsLiveEnvironment, bool bInstallOnModDownload, bool bRetrieveModsFromOtherGames )
 {
   if( !RootDirectory.Len() )
   {
@@ -47,7 +47,7 @@ FModioSubsystemPtr FModioSubsystem::Create( const FString& RootDirectory, uint32
   GameDirectory += RootDirectory;
 
   FModioSubsystemPtr Modio = MakeShared<FModioSubsystem, ESPMode::Fast>();
-  Modio->Init( GameDirectory, GameId, ApiKey, bIsLiveEnvironent, bInstallOnModDownload );
+  Modio->Init( GameDirectory, GameId, ApiKey, bInstallOnModDownload, bRetrieveModsFromOtherGames, bRetrieveModsFromOtherGames );
 
   return Modio;
 }
@@ -676,13 +676,13 @@ void onModUpload(u32 response_code, u32 mod_id)
   FModioSubsystem::ModioOnModUploadDelegate.ExecuteIfBound( (int32)response_code, (int32)mod_id );
 }
 
-void FModioSubsystem::Init( const FString& RootDirectory, uint32 GameId, const FString& ApiKey, bool bIsLiveEnvironment, bool bInstallOnModDownload )
+void FModioSubsystem::Init( const FString& RootDirectory, uint32 GameId, const FString& ApiKey, bool bIsLiveEnvironment, bool bInstallOnModDownload, bool bRetrieveModsFromOtherGames )
 {
   check(!bInitialized);
 
   u32 Environment = bIsLiveEnvironment ? MODIO_ENVIRONMENT_LIVE : MODIO_ENVIRONMENT_TEST;
   
-  modioInit( Environment, (u32)GameId, TCHAR_TO_UTF8(*ApiKey), TCHAR_TO_UTF8(*RootDirectory) );
+  modioInit( Environment, (u32)GameId, bRetrieveModsFromOtherGames, TCHAR_TO_UTF8(*ApiKey), TCHAR_TO_UTF8(*RootDirectory) );
 
   if(bInstallOnModDownload)
     modioSetDownloadListener(&onModDownloadWithAutomaticInstalls);

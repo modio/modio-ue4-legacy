@@ -49,4 +49,7 @@ public:
 
   UPROPERTY( EditAnywhere, config, Category = Custom )
   uint8 bInstallOnModDownload:1;
+
+  UPROPERTY( EditAnywhere, config, Category = Custom )
+  uint8 bRetrieveModsFromOtherGames:1;
 };

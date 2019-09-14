@@ -55,12 +55,14 @@ class MODIO_DLL Instance
   Instance& operator=(const Instance&) = delete;
 public:
   Instance(u32 environment, u32 game_id, const std::string &api_key);
-  Instance(u32 environment, u32 game_id, const std::string &api_key, const std::string &root_path);
+  Instance(u32 environment, u32 game_id, bool retrieve_mods_from_other_games, const std::string &api_key, const std::string &root_path);
   ~Instance();
 
   //General Methods
   void process();
   void setDebugLevel(u32 debug_level);
+  void setModEventsPollInterval(u32 interval_in_seconds);
+  void setUserEventsPollInterval(u32 interval_in_seconds);
   void sleep(u32 milliseconds);
   void compressFiles(std::string root_directory, std::vector<std::string> filenames, std::string zip_path);
 
