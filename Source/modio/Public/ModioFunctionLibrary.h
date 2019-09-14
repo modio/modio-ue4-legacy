@@ -21,6 +21,14 @@ class MODIO_API UModioFunctionLibrary : public UBlueprintFunctionLibrary
   UFUNCTION(BlueprintCallable, Category = "mod.io")
   static void ModioProcess(UObject *WorldContextObject);
 
+  // Configuration
+
+  UFUNCTION(BlueprintCallable, Category = "mod.io")
+  static void ModioSetModEventsPollInterval(UObject *WorldContextObject, int32 IntervalInSeconds);
+
+  UFUNCTION(BlueprintCallable, Category = "mod.io")
+  static void ModioSetUserEventsPollInterval(UObject *WorldContextObject, int32 IntervalInSeconds);
+
   // Authentication
 
   UFUNCTION(BlueprintCallable, Category = "mod.io")

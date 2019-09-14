@@ -47,7 +47,7 @@ FModioSubsystemPtr FModioSubsystem::Create( const FString& RootDirectory, uint32
   GameDirectory += RootDirectory;
 
   FModioSubsystemPtr Modio = MakeShared<FModioSubsystem, ESPMode::Fast>();
-  Modio->Init( GameDirectory, GameId, ApiKey, bInstallOnModDownload, bRetrieveModsFromOtherGames, bRetrieveModsFromOtherGames );
+  Modio->Init( GameDirectory, GameId, ApiKey, bIsLiveEnvironment, bInstallOnModDownload, bRetrieveModsFromOtherGames );
 
   return Modio;
 }
@@ -185,6 +185,16 @@ void FModioSubsystem::OculusAuth(const FString& Nonce, const FString& OculusUser
 void FModioSubsystem::Process()
 {
   modioProcess();
+}
+
+void FModioSubsystem::SetModEventsPollInterval(int32 IntervalInSeconds)
+{
+  modioSetModEventsPollInterval((u32)IntervalInSeconds);
+}
+
+void FModioSubsystem::SetUserEventsPollInterval(int32 IntervalInSeconds)
+{
+  modioSetUserEventsPollInterval((u32)IntervalInSeconds);
 }
 
 void FModioSubsystem::Logout()

@@ -68,8 +68,16 @@ public:
   virtual ~FModioSubsystem();
   
   // Process
+  
   /** Process callbacks in an asyncronous way */
   void Process();
+
+  // Config
+
+  /** Change the the poll interval in wich mod updates will be processed */
+  void SetModEventsPollInterval(int32 IntervalInSeconds);
+  /** Change the the poll interval in wich user updates will be processed, such as mod installs and uninstalls */
+  void SetUserEventsPollInterval(int32 IntervalInSeconds);
 
   // Auth
   

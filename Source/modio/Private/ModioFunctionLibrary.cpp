@@ -21,6 +21,26 @@ void UModioFunctionLibrary::ModioProcess(UObject *WorldContextObject)
   }
 }
 
+void UModioFunctionLibrary::ModioSetModEventsPollInterval(UObject *WorldContextObject, int32 IntervalInSeconds)
+{
+  UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
+  FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
+  if( Modio.IsValid() )
+  {
+    Modio->SetModEventsPollInterval(IntervalInSeconds);
+  }
+}
+
+void UModioFunctionLibrary::ModioSetUserEventsPollInterval(UObject *WorldContextObject, int32 IntervalInSeconds)
+{
+  UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
+  FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
+  if( Modio.IsValid() )
+  {
+    Modio->SetUserEventsPollInterval(IntervalInSeconds);
+  }
+}
+
 void UModioFunctionLibrary::ModioLogout(UObject *WorldContextObject)
 {
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
