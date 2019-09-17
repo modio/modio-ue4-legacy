@@ -670,6 +670,11 @@ TEnumAsByte<EModioModState> FModioSubsystem::GetModState(int32 ModId)
   return ConvertToModState(ModState);
 }
 
+void FModioSubsystem::PrioritizeModDownload(int32 ModId)
+{
+  modioPrioritizeModDownload((u32)ModId);
+}
+
 void onModDownload(u32 response_code, u32 mod_id)
 {
   FModioSubsystem::ModioOnModDownloadDelegate.ExecuteIfBound( (int32)response_code, (int32)mod_id );

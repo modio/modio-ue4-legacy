@@ -178,3 +178,13 @@ void UModioFunctionLibrary::ModioGetUserModRating(UObject *WorldContextObject, i
     ModRating = EModioRatingType::RATING_NOT_DEFINED;
   }
 }
+
+void UModioFunctionLibrary::ModioPrioritizeModDownload(UObject *WorldContextObject, int32 ModId)
+{
+  UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
+  FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
+  if( Modio.IsValid() )
+  {
+    Modio->PrioritizeModDownload(ModId);
+  }
+}

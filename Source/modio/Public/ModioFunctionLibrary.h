@@ -71,4 +71,7 @@ class MODIO_API UModioFunctionLibrary : public UBlueprintFunctionLibrary
 
   UFUNCTION(BlueprintPure, Category = "mod.io")
   static void ModioGetUserModRating(UObject *WorldContextObject, int32 ModId, uint8 &ModRating);
+
+  UFUNCTION(BlueprintCallable, Category = "mod.io")
+  static void ModioPrioritizeModDownload(UObject *WorldContextObject, int32 ModId);
 };

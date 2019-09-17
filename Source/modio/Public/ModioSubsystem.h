@@ -145,6 +145,8 @@ public:
   void SetModfileUploadListener(FModioListenerDelegate Delegate);
   /** Returns the state of the corresponding mod */  
   TEnumAsByte<EModioModState> GetModState(int32 ModId);
+    /** Change the the poll interval in wich mod updates will be processed */
+  void PrioritizeModDownload(int32 ModId);
 
   //Mod Subscription
   /** Subscribes to the corresponding mod */
