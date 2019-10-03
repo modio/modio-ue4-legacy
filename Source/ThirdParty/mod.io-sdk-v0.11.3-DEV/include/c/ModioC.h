@@ -565,11 +565,14 @@ extern "C"
 
   //Ratings Methods
   void MODIO_DLL modioAddModRating(void* object, u32 mod_id, bool vote_up, void (*callback)(void* object, ModioResponse response));
-  u32 MODIO_DLL modioGetUserModRating(u32 mod_id);
+  u32 MODIO_DLL modioGetCurrentUserModRating(u32 mod_id);
 
   //Subscription Methods
   void MODIO_DLL modioSubscribeToMod(void* object, u32 mod_id, void (*callback)(void* object, ModioResponse response, ModioMod mod));
   void MODIO_DLL modioUnsubscribeFromMod(void* object, u32 mod_id, void (*callback)(void* object, ModioResponse response));
+  bool MODIO_DLL modioIsCurrentUserSubscribed(u32 mod_id);
+  u32 MODIO_DLL modioGetCurrentUserSubscriptionsCount();
+  void MODIO_DLL modioGetCurrentUserSubscriptions(u32 *mod_id_array);
 
   //Tags Methods
   void MODIO_DLL modioGetModTags(void* object, u32 mod_id, void (*callback)(void* object, ModioResponse response, ModioTag* tags_array, u32 tags_array_size));

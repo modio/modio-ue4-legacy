@@ -76,7 +76,7 @@ void writeLogLine(const std::string &text, u32 debug_level);
 void clearLog();
 
 // Time methods
-u32 getCurrentTime();
+u32 getCurrentTimeSeconds();
 double getCurrentTimeMillis();
 
 // Json methods

@@ -17,7 +17,7 @@ namespace modio
   extern bool RETRIEVE_MODS_FROM_OTHER_GAMES;
   extern std::string MODIO_URL;
   extern std::string MODIO_VERSION_PATH;
-  extern u32 MAX_CACHE_TIME;
+  extern u32 MAX_CACHE_TIME_SECONDS;
   extern u32 LAST_MOD_EVENT_POLL_ID;
   extern u32 LAST_MOD_EVENT_POLL_TIME;
   extern u32 MOD_EVENT_POLL_INTERVAL;
@@ -31,6 +31,7 @@ namespace modio
   extern ModioUser current_user;
   extern std::vector<u32> downloaded_mods;
   extern std::map<u32,u32> current_user_ratings; // maps[mod_id, rating_type]
+  extern std::set<u32> current_user_subscriptions; // set[mod_id]
   extern void (*event_listener_callback)(ModioResponse response, ModioModEvent* events_array, u32 events_array_size);
   extern void (*download_callback)(u32 response_code, u32 mod_id);
   extern void (*upload_callback)(u32 response_code, u32 mod_id);

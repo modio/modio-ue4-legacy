@@ -145,7 +145,7 @@ public:
   void SetModfileUploadListener(FModioListenerDelegate Delegate);
   /** Returns the state of the corresponding mod */  
   TEnumAsByte<EModioModState> GetModState(int32 ModId);
-    /** Change the the poll interval in wich mod updates will be processed */
+  /** Places the given mod at the top of the donload queue */
   void PrioritizeModDownload(int32 ModId);
 
   //Mod Subscription
@@ -153,11 +153,16 @@ public:
   void SubscribeToMod(int32 ModId, FModioModDelegate SubscribeToModDelegate);
   /** Unsubscribes from the corresponding mod */
   void UnsubscribeFromMod(int32 ModId, FModioGenericDelegate UnsubscribeFromModDelegate);
-  
+  /** Returns true if the current user is subscribed to the given mod */
+  bool IsCurrentUserSubscribed(int32 ModId);
+  /** Get the list of mods that the current user is subscribed */
+  TArray<int32> GetCurrentUserSubscriptions();
+
   //Mod Rating
-    /** Rate the corresponding mod */
+  /** Rate the corresponding mod */
   void AddModRating(int32 ModId, bool IsRatingPositive, FModioGenericDelegate AddModRatingDelegate);
-  TEnumAsByte<EModioRatingType> GetUserModRating(int32 ModId);
+  /** Get the current users rating corresponding to the given mod */
+  TEnumAsByte<EModioRatingType> GetCurrentUserModRating(int32 ModId);
 
   //Mod Dependencies
   /** Request all the dependencies from a mod */

@@ -70,8 +70,14 @@ class MODIO_API UModioFunctionLibrary : public UBlueprintFunctionLibrary
   static void ModioGetModState(UObject *WorldContextObject, int32 ModId, uint8 &ModState);
 
   UFUNCTION(BlueprintPure, Category = "mod.io")
-  static void ModioGetUserModRating(UObject *WorldContextObject, int32 ModId, uint8 &ModRating);
+  static void ModioGetCurrentUserModRating(UObject *WorldContextObject, int32 ModId, uint8 &ModRating);
 
   UFUNCTION(BlueprintCallable, Category = "mod.io")
   static void ModioPrioritizeModDownload(UObject *WorldContextObject, int32 ModId);
+
+  UFUNCTION(BlueprintPure, Category = "mod.io")
+  static void ModioIsCurrentUserSubscribed(UObject *WorldContextObject, int32 ModId, bool &IsSubscribed);
+
+  UFUNCTION(BlueprintPure, Category = "mod.io")
+  static void ModioGetCurrentUserSubscriptions(UObject *WorldContextObject, TArray<int32> &ModIds);
 };

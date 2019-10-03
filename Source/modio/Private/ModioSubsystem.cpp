@@ -337,6 +337,29 @@ void FModioSubsystem::UnsubscribeFromMod(int32 ModId, FModioGenericDelegate Unsu
   QueueAsyncTask( Request );
 }
 
+bool FModioSubsystem::IsCurrentUserSubscribed(int32 ModId)
+{
+  return modioIsCurrentUserSubscribed((u32)ModId);
+}
+
+TArray<int32> FModioSubsystem::GetCurrentUserSubscriptions()
+{
+  TArray<int32> CurrentUserSubscriptions;
+
+  u32 current_user_subscriptions_count = modioGetCurrentUserSubscriptionsCount();
+  u32 *current_user_subscriptions = new u32[current_user_subscriptions_count];
+  modioGetCurrentUserSubscriptions(current_user_subscriptions);
+
+  for (u32 i = 0; i < current_user_subscriptions_count; i++)
+  {
+    CurrentUserSubscriptions.Add(current_user_subscriptions[i]);
+  }
+
+  delete[] current_user_subscriptions;
+
+  return CurrentUserSubscriptions;
+}
+
 void FModioSubsystem::AddModRating(int32 ModId, bool IsRatingPositive, FModioGenericDelegate AddModRatingDelegate)
 {
   FModioAsyncRequest_AddModRating *Request = new FModioAsyncRequest_AddModRating( this, AddModRatingDelegate );
@@ -344,9 +367,9 @@ void FModioSubsystem::AddModRating(int32 ModId, bool IsRatingPositive, FModioGen
   QueueAsyncTask( Request );
 }
 
-TEnumAsByte<EModioRatingType> FModioSubsystem::GetUserModRating(int32 ModId)
+TEnumAsByte<EModioRatingType> FModioSubsystem::GetCurrentUserModRating(int32 ModId)
 {
-  u32 ModRating = modioGetUserModRating((u32)ModId);
+  u32 ModRating = modioGetCurrentUserModRating((u32)ModId);
   return ConvertToModRatingType(ModRating);
 }
 

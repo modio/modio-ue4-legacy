@@ -166,13 +166,13 @@ void UModioFunctionLibrary::ModioGetModState(UObject *WorldContextObject, int32 
   }
 }
 
-void UModioFunctionLibrary::ModioGetUserModRating(UObject *WorldContextObject, int32 ModId, uint8 &ModRating)
+void UModioFunctionLibrary::ModioGetCurrentUserModRating(UObject *WorldContextObject, int32 ModId, uint8 &ModRating)
 {
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
   FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
   if( Modio.IsValid() )
   {
-    ModRating = Modio->GetUserModRating(ModId);
+    ModRating = Modio->GetCurrentUserModRating(ModId);
   }else
   {
     ModRating = EModioRatingType::RATING_NOT_DEFINED;
@@ -186,5 +186,28 @@ void UModioFunctionLibrary::ModioPrioritizeModDownload(UObject *WorldContextObje
   if( Modio.IsValid() )
   {
     Modio->PrioritizeModDownload(ModId);
+  }
+}
+
+void UModioFunctionLibrary::ModioIsCurrentUserSubscribed(UObject *WorldContextObject, int32 ModId, bool &IsSubscribed)
+{
+  UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
+  FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
+  if( Modio.IsValid() )
+  {
+    IsSubscribed = Modio->IsCurrentUserSubscribed(ModId);
+  }else
+  {
+    IsSubscribed = false;
+  }
+}
+
+void UModioFunctionLibrary::ModioGetCurrentUserSubscriptions(UObject *WorldContextObject, TArray<int32> &ModIds)
+{
+  UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
+  FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
+  if( Modio.IsValid() )
+  {
+    ModIds = Modio->GetCurrentUserSubscriptions();
   }
 }
