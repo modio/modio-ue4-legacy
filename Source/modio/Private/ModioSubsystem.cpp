@@ -13,6 +13,7 @@
 
 FModioListenerDelegate FModioSubsystem::ModioOnModDownloadDelegate;
 FModioListenerDelegate FModioSubsystem::ModioOnModUploadDelegate;
+FModioModEventArrayDelegate FModioSubsystem::ModioOnModEventDelegate;
 
 FModioSubsystem::FModioSubsystem() :
   bInitialized(false)
@@ -687,6 +688,11 @@ void FModioSubsystem::SetModfileUploadListener(FModioListenerDelegate Delegate)
   FModioSubsystem::ModioOnModUploadDelegate = Delegate;
 }
 
+void FModioSubsystem::SetModEventListener(FModioModEventArrayDelegate Delegate)
+{
+  FModioSubsystem::ModioOnModEventDelegate = Delegate;
+}
+
 TEnumAsByte<EModioModState> FModioSubsystem::GetModState(int32 ModId)
 {
   u32 ModState = modioGetModState((u32)ModId);
@@ -714,6 +720,13 @@ void onModUpload(u32 response_code, u32 mod_id)
   FModioSubsystem::ModioOnModUploadDelegate.ExecuteIfBound( (int32)response_code, (int32)mod_id );
 }
 
+void onModEvent(ModioResponse ModioResponse, ModioModEvent* ModioEventsArray, u32 ModioEventsArraySize)
+{
+  FModioResponse Response;
+  InitializeResponse( Response, ModioResponse );
+  FModioSubsystem::ModioOnModEventDelegate.ExecuteIfBound( Response, ConvertToTArrayModEvents(ModioEventsArray, ModioEventsArraySize) );
+}
+
 void FModioSubsystem::Init( const FString& RootDirectory, uint32 GameId, const FString& ApiKey, bool bIsLiveEnvironment, bool bInstallOnModDownload, bool bRetrieveModsFromOtherGames )
 {
   check(!bInitialized);
@@ -728,6 +741,8 @@ void FModioSubsystem::Init( const FString& RootDirectory, uint32 GameId, const F
     modioSetDownloadListener(&onModDownload);
   
   modioSetUploadListener(&onModUpload);
+
+  modioSetEventListener(&onModEvent);
 
   bInitialized = true;
 }

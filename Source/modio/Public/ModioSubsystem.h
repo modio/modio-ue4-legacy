@@ -12,6 +12,7 @@
 #include "Schemas/ModioInstalledMod.h"
 #include "Schemas/ModioQueuedModDownload.h"
 #include "Schemas/ModioQueuedModfileUpload.h"
+#include "Schemas/ModioModEvent.h"
 #include "Enums/ModioModSortType.h"
 #include "Enums/ModioModState.h"
 #include "Enums/ModioRatingType.h"
@@ -143,6 +144,8 @@ public:
   void SetModDownloadListener(FModioListenerDelegate Delegate);
   /** Callback triggered every time a local mod finished uploading to mod.io */
   void SetModfileUploadListener(FModioListenerDelegate Delegate);
+  /** Callback triggered every time an event is found mod.io */
+  void SetModEventListener(FModioModEventArrayDelegate Delegate);
   /** Returns the state of the corresponding mod */  
   TEnumAsByte<EModioModState> GetModState(int32 ModId);
   /** Places the given mod at the top of the donload queue */
@@ -207,6 +210,7 @@ public:
   /** Download and upload delegate listeners */
   static FModioListenerDelegate ModioOnModDownloadDelegate;
   static FModioListenerDelegate ModioOnModUploadDelegate;
+  static FModioModEventArrayDelegate ModioOnModEventDelegate;
 
 protected:
   friend class FModioModule;
