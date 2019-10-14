@@ -6,6 +6,8 @@
 
 Welcome to [mod.io](https://mod.io) Unreal Engine 4 Plugin. It allows game developers to easily control the browsing and installation of mod files in their games. It provides a C/blueprint interface built on the Unreal Engine to connect to the [mod.io API](https://docs.mod.io). We have a [test environment](https://test.mod.io) available which offers developers a private sandbox to try the Unreal Engine 4 Plugin out.
 
+<p align="center"><a href="https://www.unrealengine.com/marketplace/en-US/slug/mod-browser-manager"><img src="https://image.mod.io/members/c4ca/1/profileguides/unreal.png" alt="unreal" width="380" height="133"></a></p>
+
 ## Features
 
 | Feature | Supported |
