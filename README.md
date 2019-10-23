@@ -31,6 +31,8 @@ A quick start guide is provided below, in addition to the more [detailed wiki](h
 
 ### Browse mods
 
+![Alt text](img/Readme/Browse.png?raw=true "Title")
+
 ```c++
 FModioSortCreator SortCreator;
 SortCreator.ModSortType = EModioModSortType::SORT_BY_DATE_UPDATED;
@@ -62,6 +64,8 @@ void UModioManager::OnGetAllMods(FModioResponse Response, const TArray<FModioMod
 
 First step is to request a security code to your email.
 
+![Alt text](img/Readme/EmailRequest.png?raw=true "Title")
+
 ```c++
 Modio->EmailRequest("john.doe@email.com", FModioGenericDelegate::CreateUObject(ModioManager, &UModioManager::OnEmailRequest));
 
@@ -74,6 +78,8 @@ void UModioManager::OnEmailRequest(FModioResponse Response)
 ```
 
 Finish authentication by submitting the 5-digit code.
+
+![Alt text](img/Readme/EmailExchange.png?raw=true "Title")
 
 ```c++
 Modio->EmailExchange("VBY5A", FModioGenericDelegate::CreateUObject(ModioManager, &UModioManager::OnEmailExchange));
@@ -92,6 +98,8 @@ If your game is running inside a popular distribution platform such as Steam or 
 
 #### Galaxy Auth
 
+![Alt text](img/Readme/GalaxyAuth.png?raw=true "Title")
+
 ```c++
 Modio->GalaxyAuth("csEYJ2MWR53QssNNqFgO87sRN", FModioGenericDelegate::CreateUObject(ModioManager, &UModioManager::OnGalaxyAuth));
 // ...
@@ -103,6 +111,8 @@ void UModioManager::OnGalaxyAuth(FModioResponse Response)
 ```
 
 #### Oculus Auth
+
+![Alt text](img/Readme/OculusAuth.png?raw=true "Title")
 
 ```c++
 Modio->OculusAuth("zBOBKszK..txDHJvjAC",// nonce proof
@@ -121,6 +131,8 @@ void UModioManager::OnGalaxyAuth(FModioResponse Response)
 
 #### Steam Auth
 
+![Alt text](img/Readme/SteamAuth.png?raw=true "Title")
+
 ```c++
 Modio->SteamAuth("NDNuZmhnaWdyaGdqOWc0M2o5eTM0aGc", FModioGenericDelegate::CreateUObject(ModioManager, &UModioManager::OnSteamAuth));
 
@@ -138,6 +150,8 @@ Download and remove mods locally by subscribing and unsubscribing.
 
 #### Subscribe
 
+![Alt text](img/Readme/Subscribe.png?raw=true "Title")
+
 ```c++
 Modio->SubscribeToMod(mod_id, FModioModDelegate::CreateUObject(ModioManager, &UModioManager::OnSubscribeToMod));
 
@@ -150,6 +164,8 @@ void UMyModioManager::OnSubscribeToMod(FModioResponse Response, FModioMod Mod)
 ```
 
 ### Unsubscribe
+
+![Alt text](img/Readme/Unsubscribe.png?raw=true "Title")
 
 ```c++
 Modio->UnsubscribeFromMod(mod_id, FModioGenericDelegate::CreateUObject(ModioManager, &UModioManager::OnUnsubscribeFromMod));
@@ -168,6 +184,8 @@ Share mods by creating a mod profile and attaching modfiles to it.
 
 #### Create a mod profile
 
+![Alt text](img/Readme/AddMod.png?raw=true "Title")
+
 ```c++
 FModioModCreator ModCreator;
 ModCreator.Name = "My Mod";
@@ -185,6 +203,8 @@ void AModioManager::OnAddMod(FModioResponse Response, FModioMod Mod)
 ```
 
 #### Upload a modfile
+
+![Alt text](img/Readme/AddModfile.png?raw=true "Title")
 
 ```c++
 FModioModfileCreator ModfileCreator;
