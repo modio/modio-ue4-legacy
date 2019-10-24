@@ -219,6 +219,8 @@ Modio->AddModfile(mod_id, ModfileCreator);
 
 #### Download listener
 
+![Alt text](img/Readme/DownloadListener.png?raw=true "Title")
+
 ```c++
 Modio->SetModDownloadListener(FModioListenerDelegate::CreateUObject(ModioManager, &UMyModioManager::OnModDownload));
 
@@ -232,6 +234,8 @@ void UMyModioManager::OnModDownload(int32 ResponseCode, int32 ModId)
 ```
 
 #### Upload listener
+
+![Alt text](img/Readme/UploadListener.png?raw=true "Title")
 
 ```c++
 Modio->SetModfileUploadListener(FModioListenerDelegate::CreateUObject(ModioManager, &UMyModioManager::OnModUpload));
@@ -304,7 +308,10 @@ build.bat 21
 :: Build with UE4 v22
 build.bat 22
 
-:: Build with UE4 v19, v20, v21 and v22
+:: Build with UE4 v23
+build.bat 22
+
+:: Build with the latest 3 UE4 versions supported
 build.bat all
 ```
 
