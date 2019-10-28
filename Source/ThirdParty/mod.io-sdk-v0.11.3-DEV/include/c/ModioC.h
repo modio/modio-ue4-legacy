@@ -684,7 +684,7 @@ extern "C"
   void MODIO_DLL modioGetModDownloadQueue(ModioQueuedModDownload* download_queue);
   u32 MODIO_DLL modioGetModfileUploadQueueCount(void);
   void MODIO_DLL modioGetModfileUploadQueue(ModioQueuedModfileUpload* upload_queue);
-  void MODIO_DLL modioGetInstalledMod(u32 mod_id, ModioInstalledMod *installed_mods);
+  void MODIO_DLL modioGetInstalledMod(u32 mod_id, ModioInstalledMod *installed_mod);
   u32 MODIO_DLL modioGetAllInstalledModsCount(void);
   void MODIO_DLL modioGetAllInstalledMods(ModioInstalledMod* installed_mods);
   u32 MODIO_DLL modioGetAllDownloadedModsCount(void);
@@ -717,6 +717,7 @@ extern "C"
 
   // General Utility Methods 
   void MODIO_DLL compressFiles(char const* root_directory, char const* const filenames[], u32 filenames_size, char const* zip_path);
+  void MODIO_DLL extractFiles(char const* zip_path, char const* directory_path);
   void MODIO_DLL windowsUTF8ToAnsi(const char* UTF8_string, char* ansi_string);
 #ifdef __cplusplus
 }
