@@ -25,7 +25,7 @@ FModioSubsystem::~FModioSubsystem()
   check(!bInitialized);
 }
 
-FModioSubsystemPtr FModioSubsystem::Create( const FString& RootDirectory, uint32 GameId, const FString& ApiKey, bool bIsLiveEnvironment, bool bInstallOnModDownload, bool bRetrieveModsFromOtherGames )
+FModioSubsystemPtr FModioSubsystem::Create( const FString& RootDirectory, bool bRootDirectoryIsInUserSettingsDirectory, uint32 GameId, const FString& ApiKey, bool bIsLiveEnvironment, bool bInstallOnModDownload, bool bRetrieveModsFromOtherGames )
 {
   if( !RootDirectory.Len() )
   {
@@ -44,11 +44,19 @@ FModioSubsystemPtr FModioSubsystem::Create( const FString& RootDirectory, uint32
     return nullptr;
   }
 
-  FString GameDirectory = FPaths::ConvertRelativePathToFull( FPaths::ProjectDir() );
-  GameDirectory += RootDirectory;
+  FString LocalRootDirectory = "";
+  if( bRootDirectoryIsInUserSettingsDirectory )
+  {
+    FString UserSettingsDir = FPlatformProcess::UserSettingsDir();
+    LocalRootDirectory = UserSettingsDir + RootDirectory;
+  } else
+  {
+    FString ProjectDirectory = FPaths::ConvertRelativePathToFull( FPaths::ProjectDir() );
+    LocalRootDirectory = ProjectDirectory + RootDirectory;
+  }
 
   FModioSubsystemPtr Modio = MakeShared<FModioSubsystem, ESPMode::Fast>();
-  Modio->Init( GameDirectory, GameId, ApiKey, bIsLiveEnvironment, bInstallOnModDownload, bRetrieveModsFromOtherGames );
+  Modio->Init( LocalRootDirectory, GameId, ApiKey, bIsLiveEnvironment, bInstallOnModDownload, bRetrieveModsFromOtherGames );
 
   return Modio;
 }

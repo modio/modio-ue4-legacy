@@ -34,6 +34,9 @@ public:
   UPROPERTY(EditAnywhere, config, Category = Custom)
   FString RootDirectory;
 
+  UPROPERTY( EditAnywhere, config, Category = Custom )
+  uint8 bRootDirectoryIsInUserSettingsDirectory:1;
+
 #if WITH_EDITORONLY_DATA
   /** Use this to define where in editor we want to run the modio instance, as we only support one logged in user per executable */
   UPROPERTY(EditAnywhere, config, Category = EditorDebug)

@@ -214,7 +214,7 @@ public:
 
 protected:
   friend class FModioModule;
-  static FModioSubsystemPtr Create(const FString &RootDirectory, uint32 GameId, const FString &ApiKey, bool bIsLiveEnvironment, bool bInstallOnModDownload, bool bRetrieveModsFromOtherGames);
+  static FModioSubsystemPtr Create(const FString &RootDirectory, bool bRootDirectoryIsInUserSettingsDirectory, uint32 GameId, const FString &ApiKey, bool bIsLiveEnvironment, bool bInstallOnModDownload, bool bRetrieveModsFromOtherGames);
 
   /** Queue up a new async request and take ownership of the memory */
   void QueueAsyncTask(struct FModioAsyncRequest *Request);
