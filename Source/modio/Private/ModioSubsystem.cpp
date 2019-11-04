@@ -417,6 +417,47 @@ void FModioSubsystem::DeleteModDependencies(int32 ModId, const TArray<int32> &De
   QueueAsyncTask( Request );
 }
 
+void FModioSubsystem::SubmitReport(TEnumAsByte<EModioResourceType> Resource, int32 Id, TEnumAsByte<EModioReportType> Type, const FString &Name, const FString &Summary, FModioGenericDelegate SubmitReportDelegate)
+{
+  FModioAsyncRequest_SubmitReport *Request = new FModioAsyncRequest_SubmitReport( this, SubmitReportDelegate );
+  
+  FString ResourceStr = "";
+  switch (Resource)
+  {
+  case EModioResourceType::GAMES:
+    ResourceStr = "games";
+    break;
+  case EModioResourceType::MODS:
+    ResourceStr = "mods";
+    break;
+  case EModioResourceType::USERS:
+    ResourceStr = "users";
+    break;
+  default:
+    // @todo: handle error
+    break;
+  }
+
+  u32 CType = 0;
+
+  switch (Type)
+  {
+  case EModioReportType::GENERIC:
+    CType = 0;
+    break;
+  case EModioReportType::DMCA:
+    CType = 1;
+    break;
+  default:
+    // @todo: handle error
+    break;
+  }
+
+  modioSubmitReport(Request, TCHAR_TO_UTF8(*ResourceStr), (u32)Id, CType, TCHAR_TO_UTF8(*Name), TCHAR_TO_UTF8(*Summary), FModioAsyncRequest_SubmitReport::Response);
+  
+  QueueAsyncTask( Request );
+}
+
 void FModioSubsystem::GetAllModTags(int32 ModId, FModioModTagArrayDelegate GetAllModTagsDelegate)
 {
   FModioAsyncRequest_GetAllModTags *Request = new FModioAsyncRequest_GetAllModTags( this, GetAllModTagsDelegate );

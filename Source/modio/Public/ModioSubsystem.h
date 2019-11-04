@@ -16,6 +16,8 @@
 #include "Enums/ModioModSortType.h"
 #include "Enums/ModioModState.h"
 #include "Enums/ModioRatingType.h"
+#include "Enums/ModioReportType.h"
+#include "Enums/ModioResourceType.h"
 #include "ModioPackage.h"
 #include "ModioPackage.h"
 #include "AsyncRequest/ModioAsyncRequest_AddMod.h"
@@ -36,6 +38,7 @@
 #include "AsyncRequest/ModioAsyncRequest_SubscribeToMod.h"
 #include "AsyncRequest/ModioAsyncRequest_UnsubscribeFromMod.h"
 #include "AsyncRequest/ModioAsyncRequest_SteamAuth.h"
+#include "AsyncRequest/ModioAsyncRequest_SubmitReport.h"
 #include "AsyncRequest/ModioAsyncRequest_GalaxyAuth.h"
 #include "AsyncRequest/ModioAsyncRequest_OculusAuth.h"
 #include "AsyncRequest/ModioAsyncRequest_AddModTags.h"
@@ -151,7 +154,7 @@ public:
   /** Places the given mod at the top of the donload queue */
   void PrioritizeModDownload(int32 ModId);
 
-  //Mod Subscription
+  // Mod Subscription
   /** Subscribes to the corresponding mod */
   void SubscribeToMod(int32 ModId, FModioModDelegate SubscribeToModDelegate);
   /** Unsubscribes from the corresponding mod */
@@ -161,13 +164,13 @@ public:
   /** Get the list of mods that the current user is subscribed */
   TArray<int32> GetCurrentUserSubscriptions();
 
-  //Mod Rating
+  // Mod Rating
   /** Rate the corresponding mod */
   void AddModRating(int32 ModId, bool IsRatingPositive, FModioGenericDelegate AddModRatingDelegate);
   /** Get the current users rating corresponding to the given mod */
   TEnumAsByte<EModioRatingType> GetCurrentUserModRating(int32 ModId);
 
-  //Mod Dependencies
+  // Mod Dependencies
   /** Request all the dependencies from a mod */
   void GetAllModDependencies(int32 ModId, FModioModDependencyArrayDelegate GetAllModDependenciesDelegate);
   /** Add the provided dependencies to a corresponding mod */
@@ -175,7 +178,11 @@ public:
   /** Deletes all the provided dependencies from the corresponding mod */
   void DeleteModDependencies(int32 ModId, const TArray<int32> &Dependencies, FModioGenericDelegate DeleteModDependenciesDelegate);
 
-  //Mod Tags
+  // Reports
+  /** Submits a report on any resource to mod.io */
+  void SubmitReport(TEnumAsByte<EModioResourceType> Resource, int32 Id, TEnumAsByte<EModioReportType> Report, const FString &Name, const FString &Summary, FModioGenericDelegate SubmitReportDelegate);
+
+  // Mod Tags
   /** Request all the tags from a mod */
   void GetAllModTags(int32 ModId, FModioModTagArrayDelegate GetAllModTagsDelegate);
   /** Assign the provided tags to a corresponding mod */
@@ -183,7 +190,7 @@ public:
   /** Deletes all the provided tags from the corresponding mod */
   void DeleteModTags(int32 ModId, const TArray<FString> &Tags, FModioGenericDelegate DeleteModTagsDelegate);
 
-  //Mod MetadataKVP
+  // Mod MetadataKVP
   /** Request all the metadata kvp from a mod */
   void GetAllMetadataKVP(int32 ModId, FModioMetadataKVPArrayDelegate GetAllMetadataKVPDelegate);
   /** Assign the provided metadata kvp to a corresponding mod */
@@ -191,7 +198,7 @@ public:
   /** Deletes all the provided metadata kvp from the corresponding mod */
   void DeleteMetadataKVP(int32 ModId, const TMap<FString, FString> &MetadataKVP, FModioGenericDelegate DeleteMetadataKVPDelegate);
 
-  //Media Methods
+  // Media Methods
   /** Adds a new logo image to the corresponding mod */
   void AddModLogo(int32 ModId, const FString &LogoPath, FModioGenericDelegate AddModLogoDelegate);
   /** Add images to the corresponding mod */
