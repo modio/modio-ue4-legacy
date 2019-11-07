@@ -13,7 +13,6 @@
 	"CanContainContent": true,
 	"IsBetaVersion": true,
 	"Installed": false,
-	"EngineVersion" : "4.23.0",
 	"Modules": [
 		{
 			"Name": "modio",
