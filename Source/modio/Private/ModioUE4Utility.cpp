@@ -273,6 +273,8 @@ void SetupModioModCreator(FModioModCreator ModCreator, ModioModCreator& modio_mo
     modioSetModCreatorDescription(&modio_mod_creator, TCHAR_TO_UTF8(*ModCreator.Description));
   if (ModCreator.HomepageUrl != "")
     modioSetModCreatorHomepageURL(&modio_mod_creator, TCHAR_TO_UTF8(*ModCreator.HomepageUrl));
+  if (ModCreator.MetadataBlob != "")
+	  modioSetModCreatorMetadataBlob(&modio_mod_creator, TCHAR_TO_UTF8(*ModCreator.MetadataBlob));
 }
 
 void SetupModioModEditor(FModioModEditor ModEditor, ModioModEditor& modio_mod_editor)
@@ -298,6 +300,8 @@ void SetupModioModEditor(FModioModEditor ModEditor, ModioModEditor& modio_mod_ed
     modioSetModEditorDescription(&modio_mod_editor, TCHAR_TO_UTF8(*ModEditor.Description));
   if (ModEditor.HomepageUrl != "")
     modioSetModEditorHomepageURL(&modio_mod_editor, TCHAR_TO_UTF8(*ModEditor.HomepageUrl));
+  if (ModEditor.MetadataBlob != "")
+	  modioSetModEditorMetadataBlob(&modio_mod_editor, TCHAR_TO_UTF8(*ModEditor.MetadataBlob));
 }
 
 void SetupModioModfileCreator(FModioModfileCreator ModfileCreator, ModioModfileCreator& modio_modfile_creator)
