@@ -108,6 +108,13 @@ void FModioSubsystem::GetAllMods(const FModioFilterCreator &FilterCreator, const
   QueueAsyncTask( Request );
 }
 
+void FModioSubsystem::GetMod(uint32 ModId, const FModioModDelegate ModDelegate)
+{
+	FModioAsyncRequest_EditMod *Request = new FModioAsyncRequest_EditMod( this, ModDelegate );
+	modioGetMod(Request, (u32)ModId, FModioAsyncRequest_EditMod::Response);
+	QueueAsyncTask( Request );
+}
+
 void FModioSubsystem::GetAuthenticatedUser(FModioUserDelegate GetAuthenticatedUserDelegate)
 {
   FModioAsyncRequest_GetAuthenticatedUser *Request = new FModioAsyncRequest_GetAuthenticatedUser( this, GetAuthenticatedUserDelegate );

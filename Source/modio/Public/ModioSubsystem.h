@@ -111,8 +111,10 @@ public:
   void EditMod(uint32 ModId, const FModioModEditor &ModEditor, FModioModDelegate EditModDelegate);
 
   // Mod browsing
-  /** Request mod information */
+  /** Request mod information for a search */
   void GetAllMods(const FModioFilterCreator &FilterCreator, const TArray<FString> &ModTags, int32 Limit, int32 Offset, FModioModArrayDelegate GetAllModsDelegate);
+  /** Request mod information for a single mod */
+  void GetMod(uint32 ModId, const FModioModDelegate ModDelegate);
   
   // Get your own information
   /** Request the authenticated user information */
