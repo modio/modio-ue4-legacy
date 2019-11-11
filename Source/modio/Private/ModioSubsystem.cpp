@@ -110,8 +110,8 @@ void FModioSubsystem::GetAllMods(const FModioFilterCreator &FilterCreator, const
 
 void FModioSubsystem::GetMod(uint32 ModId, const FModioModDelegate ModDelegate)
 {
-	FModioAsyncRequest_EditMod *Request = new FModioAsyncRequest_EditMod( this, ModDelegate );
-	modioGetMod(Request, (u32)ModId, FModioAsyncRequest_EditMod::Response);
+	FModioAsyncRequest_GetMod *Request = new FModioAsyncRequest_GetMod( this, ModDelegate );
+	modioGetMod(Request, (u32)ModId, FModioAsyncRequest_GetMod::Response);
 	QueueAsyncTask( Request );
 }
 

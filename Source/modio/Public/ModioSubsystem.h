@@ -30,6 +30,7 @@
 #include "AsyncRequest/ModioAsyncRequest_GetAllModDependencies.h"
 #include "AsyncRequest/ModioAsyncRequest_GetAllMods.h"
 #include "AsyncRequest/ModioAsyncRequest_GetAuthenticatedUser.h"
+#include "AsyncRequest/ModioAsyncRequest_GetMod.h"
 #include "AsyncRequest/ModioAsyncRequest_GetUserEvents.h"
 #include "AsyncRequest/ModioAsyncRequest_GetUserSubscriptions.h"
 #include "AsyncRequest/ModioAsyncRequest_GetUserMods.h"

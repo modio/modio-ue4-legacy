@@ -4,7 +4,6 @@
 #pragma once
 
 #include "ModioUE4Utility.h"
-#include "Customizables/ModioFilterCreator.h"
 #include "Schemas/ModioResponse.h"
 #include "Schemas/ModioMod.h"
 #include "Net/OnlineBlueprintCallProxyBase.h"
