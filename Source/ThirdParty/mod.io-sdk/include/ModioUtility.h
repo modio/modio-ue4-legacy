@@ -1,0 +1,38 @@
+#ifndef MODIO_MODIOUTILITY_H
+#define MODIO_MODIOUTILITY_H
+
+#include <functional>  // for function
+#include <string>      // for string
+#include <vector>      // for vector
+#include "c/ModioC.h"  // for ModioResponse, u32, ModioFilterCreator, ModioMod
+namespace modio { class Response; }
+
+struct GenericRequestParams
+{
+  void* object;
+  void (*callback)(void* object, ModioResponse response);
+};
+
+struct GenericCall
+{
+  const std::function<void(const modio::Response &)> callback;
+};
+
+
+namespace modio
+{
+  void onUpdateCurrentUser(void *object, ModioResponse response, ModioUser user);
+  void onUpdateCurrentUserRatings(void* object, ModioResponse response, ModioRating ratings[], u32 ratings_size);
+  void onUpdateCurrentUserSubscriptions(void* object, ModioResponse response, ModioMod mods[], u32 mods_size);
+  void addModsToDownloadQueue(std::vector<u32> mod_ids);
+  void pollEvents();
+  void updateAuthenticatedUser(std::string access_token);
+  void updateUserRatings();
+  void updateUserSubscriptions();
+  void addGameIdFilter(ModioFilterCreator &filter);
+
+  // Error handling
+  void handleDownloadImageError(void *object, void (*callback)(void *object, ModioResponse modioresponse));
+}
+
+#endif

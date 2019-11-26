@@ -7,7 +7,7 @@ using UnrealBuildTool;
 
 public class modio : ModuleRules
 {
-	private String modio_directory = "mod.io-sdk-v0.11.3-DEV";
+	private String modio_directory = "mod.io-sdk";
 
 	private string ModulePath
 	{
@@ -99,8 +99,8 @@ public class modio : ModuleRules
 
 			isLibrarySupported = true;
 			
-			string LibrariesPath = Path.Combine(ThirdPartyPath, modio_directory, "lib", "visualc++", "x64");
-			string DLLPath = Path.Combine(ThirdPartyPath, modio_directory, "bin", "visualc++", "x64");
+			string LibrariesPath = Path.Combine(ThirdPartyPath, modio_directory, "lib", "win64");
+			string DLLPath = Path.Combine(ThirdPartyPath, modio_directory, "bin", "win64");
 
 			PublicLibraryPaths.Add(LibrariesPath);
 			PublicAdditionalLibraries.Add("modio.lib");
@@ -115,19 +115,34 @@ public class modio : ModuleRules
 			PublicDelayLoadDLLs.AddRange(new string[] { "modio.dll" });
 		}
 
-		if ((Target.Platform == UnrealTargetPlatform.Linux) || (Target.Platform == UnrealTargetPlatform.Linux))
+		if (Target.Platform == UnrealTargetPlatform.Linux)
 		{
 			PublicDefinitions.Add("MODIO_UE4_LINUX_BUILD");
 
 			isLibrarySupported = true;
 
-
-			string LibrariesPath = Path.Combine(ThirdPartyPath, modio_directory, "lib", "linux", "x64");
+			string LibrariesPath = Path.Combine(ThirdPartyPath, modio_directory, "lib", "linux-x64");
 
 			PublicLibraryPaths.Add(LibrariesPath);
 			PublicAdditionalLibraries.Add("modio");
 
 			string ProjectBinariesDirectory = Path.Combine(ProjectPath, "Binaries", "Linux");
+			if (!Directory.Exists(ProjectBinariesDirectory))
+				System.IO.Directory.CreateDirectory(ProjectBinariesDirectory);
+		}
+
+		if (Target.Platform == UnrealTargetPlatform.Mac)
+		{
+			PublicDefinitions.Add("MODIO_UE4_MAC_BUILD");
+
+			isLibrarySupported = true;
+
+			string LibrariesPath = Path.Combine(ThirdPartyPath, modio_directory, "lib", "macOS-x64");
+
+			PublicLibraryPaths.Add(LibrariesPath);
+			PublicAdditionalLibraries.Add("modio");
+
+			string ProjectBinariesDirectory = Path.Combine(ProjectPath, "Binaries", "Mac");
 			if (!Directory.Exists(ProjectBinariesDirectory))
 				System.IO.Directory.CreateDirectory(ProjectBinariesDirectory);
 		}

@@ -82,7 +82,7 @@ FModioSubsystemPtr FModioModule::GetModioImp(UWorld *World) const
 void FModioModule::StartupModule()
 {
   FString DllPath = IPluginManager::Get().FindPlugin("Modio")->GetBaseDir();
-  DllPath.Append("/Source/ThirdParty/mod.io-sdk-v0.11.3-DEV/bin/visualc++/x64/modio.dll");
+  DllPath.Append("/Source/ThirdParty/mod.io-sdk/bin/win64/modio.dll");
   DLLHandle = FPlatformProcess::GetDllHandle(*DllPath);
   
   const UModioSettings *Settings = GetDefault<UModioSettings>();
