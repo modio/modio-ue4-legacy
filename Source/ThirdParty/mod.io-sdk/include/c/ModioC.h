@@ -1,6 +1,13 @@
 #ifndef MODIO_MODIO_C_H
 #define MODIO_MODIO_C_H
 
+#ifdef _WIN32
+#define MODIO_WINDOWS_DETECTED
+#endif
+#ifdef _WIN64
+#define MODIO_WINDOWS_DETECTED
+#endif
+
 #ifdef MODIO_STATICLIB
 #  define MODIO_DLL
 #elif defined(MODIO_WINDOWS_DETECTED)
