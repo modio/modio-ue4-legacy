@@ -72,6 +72,7 @@ std::vector<std::string> getHeaders();
 std::vector<std::string> getHeadersNoToken();
 std::vector<std::string> getUrlEncodedHeaders();
 std::string base64Encode(unsigned char const* bytes_to_encode, unsigned int in_len);
+bool isNewerVersionInstalled(u32 mod_id, u32 date_added);
 } // namespace modio
 
 #endif
