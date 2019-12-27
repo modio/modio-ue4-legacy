@@ -44,6 +44,7 @@ public:
 
   //General Methods
   void process();
+  void pollEvents();
   void setDebugLevel(u32 debug_level);
   void setModEventsPollInterval(u32 interval_in_seconds);
   void setUserEventsPollInterval(u32 interval_in_seconds);

@@ -518,6 +518,7 @@ extern "C"
   void MODIO_DLL modioSetModEventsPollInterval(u32 interval_in_seconds);
   void MODIO_DLL modioSetUserEventsPollInterval(u32 interval_in_seconds);
   void MODIO_DLL modioProcess(void);
+  void MODIO_DLL modioPollEvents(void);
   void MODIO_DLL modioSleep(u32 milliseconds);
 
   //Events

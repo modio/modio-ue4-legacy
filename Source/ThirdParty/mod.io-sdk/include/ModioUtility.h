@@ -25,7 +25,8 @@ namespace modio
   void onUpdateCurrentUserRatings(void* object, ModioResponse response, ModioRating ratings[], u32 ratings_size);
   void onUpdateCurrentUserSubscriptions(void* object, ModioResponse response, ModioMod mods[], u32 mods_size);
   void addModsToDownloadQueue(std::vector<u32> mod_ids);
-  void pollEvents();
+  void pollUserEvents(u32 poll_time);
+  void pollInstalledModsEvents(u32 poll_time);
   void updateAuthenticatedUser(std::string access_token);
   void updateUserRatings();
   void updateUserSubscriptions();
