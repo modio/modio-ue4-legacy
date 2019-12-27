@@ -21,6 +21,16 @@ void UModioFunctionLibrary::ModioProcess(UObject *WorldContextObject)
   }
 }
 
+void UModioFunctionLibrary::ModioPollEvents(UObject *WorldContextObject)
+{
+  UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
+  FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
+  if( Modio.IsValid() )
+  {
+    Modio->PollEvents();
+  }
+}
+
 void UModioFunctionLibrary::ModioSetModEventsPollInterval(UObject *WorldContextObject, int32 IntervalInSeconds)
 {
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );

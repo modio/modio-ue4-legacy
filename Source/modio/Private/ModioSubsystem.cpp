@@ -203,6 +203,11 @@ void FModioSubsystem::Process()
   modioProcess();
 }
 
+void FModioSubsystem::PollEvents()
+{
+  modioPollEvents();
+}
+
 void FModioSubsystem::SetModEventsPollInterval(int32 IntervalInSeconds)
 {
   modioSetModEventsPollInterval((u32)IntervalInSeconds);

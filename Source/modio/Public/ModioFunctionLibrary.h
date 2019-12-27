@@ -21,6 +21,9 @@ class MODIO_API UModioFunctionLibrary : public UBlueprintFunctionLibrary
   UFUNCTION(BlueprintCallable, Category = "mod.io", meta = (WorldContext="WorldContextObject"))
   static void ModioProcess(UObject *WorldContextObject);
 
+  UFUNCTION(BlueprintCallable, Category = "mod.io", meta = (WorldContext="WorldContextObject"))
+  static void ModioPollEvents(UObject *WorldContextObject);
+
   // Configuration
 
   UFUNCTION(BlueprintCallable, Category = "mod.io", meta = (WorldContext="WorldContextObject"))

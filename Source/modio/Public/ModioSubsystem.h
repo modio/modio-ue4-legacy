@@ -77,6 +77,9 @@ public:
   /** Process callbacks in an asyncronous way */
   void Process();
 
+  /** Manually poll user and installed mods events */
+  void PollEvents();
+
   // Config
 
   /** Change the the poll interval in wich mod updates will be processed */
