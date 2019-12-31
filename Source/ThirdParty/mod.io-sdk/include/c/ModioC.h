@@ -103,6 +103,7 @@ typedef int i32;
 #define MODIO_MOD_STARTING_UPLOAD         9
 #define MODIO_MOD_UPLOADING               10
 #define MODIO_MOD_DOWNLOADED              11
+#define MODIO_MOD_CANCELLING              12
 
 // Maturity options
 #define MODIO_MATURITY_NONE     0
@@ -684,6 +685,7 @@ extern "C"
   void MODIO_DLL modioInstallDownloadedMods(void);
   bool MODIO_DLL modioUninstallMod(u32 mod_id);
   void MODIO_DLL modioPauseDownloads(void);
+  void MODIO_DLL modioCancelModDownload(u32 mod_id);
   void MODIO_DLL modioResumeDownloads(void);
   void MODIO_DLL modioPrioritizeModDownload(u32 mod_id);
   void MODIO_DLL modioSetDownloadListener(void (*callback)(u32 response_code, u32 mod_id));  
