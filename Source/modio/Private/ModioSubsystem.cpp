@@ -10,10 +10,23 @@
 #include "Schemas/ModioResponse.h"
 #include "Engine/Engine.h"
 #include "Misc/Paths.h"
+#include <sstream>
+#include <iostream>
 
 FModioListenerDelegate FModioSubsystem::ModioOnModDownloadDelegate;
 FModioListenerDelegate FModioSubsystem::ModioOnModUploadDelegate;
 FModioModEventArrayDelegate FModioSubsystem::ModioOnModEventDelegate;
+
+class LStream : public std::stringbuf {
+protected:
+	int sync() {
+		UE_LOG(LogTemp, Log, TEXT("%s"), *FString(str().c_str()));
+		str("");
+		return std::stringbuf::sync();
+	}
+};
+
+LStream UE4Stream;
 
 FModioSubsystem::FModioSubsystem() :
   bInitialized(false)
@@ -780,10 +793,20 @@ void onModEvent(ModioResponse ModioResponse, ModioModEvent* ModioEventsArray, u3
 
 void FModioSubsystem::Init( const FString& RootDirectory, uint32 GameId, const FString& ApiKey, bool bIsLiveEnvironment, bool bInstallOnModDownload, bool bRetrieveModsFromOtherGames )
 {
+  std::streambuf *clog_backup, *cerr_backup;
+  clog_backup = std::clog.rdbuf();
+  cerr_backup = std::cerr.rdbuf();
+
+  LStream Stream;
+  std::clog.rdbuf(&Stream); 
+  std::cerr.rdbuf(&Stream); 
+
+  std::clog << "[mod.io] Initializing mod.io UE4 plugin.\n";
+
   check(!bInitialized);
 
   u32 Environment = bIsLiveEnvironment ? MODIO_ENVIRONMENT_LIVE : MODIO_ENVIRONMENT_TEST;
-  
+
   modioInit( Environment, (u32)GameId, bRetrieveModsFromOtherGames, TCHAR_TO_UTF8(*ApiKey), TCHAR_TO_UTF8(*RootDirectory) );
 
   if(bInstallOnModDownload)
@@ -796,6 +819,12 @@ void FModioSubsystem::Init( const FString& RootDirectory, uint32 GameId, const F
   modioSetEventListener(&onModEvent);
 
   bInitialized = true;
+
+  std::clog << "[mod.io] Finished initializing mod.io UE4 plugin.";
+  std::clog.flush();
+  std::cerr.flush();
+  std::clog.rdbuf(clog_backup);
+  std::cerr.rdbuf(cerr_backup);
 }
 
 void FModioSubsystem::QueueAsyncTask( struct FModioAsyncRequest* Request )

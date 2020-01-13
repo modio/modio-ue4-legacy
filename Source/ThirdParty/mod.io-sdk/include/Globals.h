@@ -34,13 +34,13 @@ namespace modio
   extern u32 BACKGROUND_DOWNLOADS;
   extern u32 RETRY_AFTER;
   extern ModioUser current_user;
-  extern std::vector<u32> downloaded_mods;
   extern std::map<u32,u32> current_user_ratings; // maps[mod_id, rating_type]
   extern std::set<u32> current_user_subscriptions; // set[mod_id]
   extern void (*event_listener_callback)(ModioResponse response, ModioModEvent* events_array, u32 events_array_size);
   extern void (*download_callback)(u32 response_code, u32 mod_id);
   extern void (*upload_callback)(u32 response_code, u32 mod_id);
   extern nlohmann::json installed_mods;
+  extern nlohmann::json g_downloaded_mods;
 }
 
 #endif
