@@ -91,6 +91,16 @@ void UModioFunctionLibrary::AuthenticateViaToken(UObject *WorldContextObject, co
   }
 }
 
+void UModioFunctionLibrary::ModioDownloadMod(UObject *WorldContextObject, int32 ModId)
+{
+  UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
+  FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
+  if( Modio.IsValid() )
+  {
+    Modio->DownloadMod(ModId);
+  }
+}
+
 void UModioFunctionLibrary::ModioGetInstalledMod(UObject *WorldContextObject, int32 ModId, FString &Path, FModioMod &Mod)
 {
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );

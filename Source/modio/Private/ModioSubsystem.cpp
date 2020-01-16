@@ -253,6 +253,11 @@ void FModioSubsystem::AuthenticateViaToken(const FString& AccessToken)
   modioAuthenticateViaToken(TCHAR_TO_UTF8(*AccessToken));
 }
 
+void FModioSubsystem::DownloadMod(int32 ModId)
+{
+  modioDownloadMod((u32)ModId);
+}
+
 FModioInstalledMod FModioSubsystem::GetInstalledMod(int32 ModId)
 {
   FModioInstalledMod InstalledMod;
