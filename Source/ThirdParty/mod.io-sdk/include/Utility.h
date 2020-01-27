@@ -63,7 +63,7 @@ bool isDirectory(const std::string &directory);
 bool directoryExists(const std::string &path);
 bool fileExists(const std::string &directory);
 std::string getDirectoryPath(const std::string &filename);
-void createDirectory(const std::string &directory);
+bool createDirectory(const std::string &directory);
 bool removeDirectory(const std::string &directory);
 void removeFile(const std::string &filename);
 double getFileSize(const std::string &file_path);
@@ -72,6 +72,7 @@ std::vector<std::string> getHeaders();
 std::vector<std::string> getHeadersNoToken();
 std::vector<std::string> getUrlEncodedHeaders();
 std::string base64Encode(unsigned char const* bytes_to_encode, unsigned int in_len);
+std::string getMyDocumentsPath();
 } // namespace modio
 
 #endif
