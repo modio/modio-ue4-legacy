@@ -16,6 +16,7 @@ namespace modio
   extern bool IS_LOGGED_IN;
   extern u32 GAME_ID;
   extern std::string ROOT_PATH;
+  extern std::string ADDITIONAL_GAMEDIR_PATH;
   extern u32 DEBUG_LEVEL;
   extern bool RETRIEVE_MODS_FROM_OTHER_GAMES;
   extern std::string MODIO_URL;

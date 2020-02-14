@@ -700,6 +700,7 @@ extern "C"
   u32 MODIO_DLL modioGetAllDownloadedModsCount(void);
   void MODIO_DLL modioGetAllDownloadedMods(u32* downloaded_mods);
   u32 MODIO_DLL modioGetModState(u32 mod_id);
+  void MODIO_DLL modioCheckIfModsAreUpdated(void* object, u32 const* mod_id_array, u32 mod_id_array_size, void(*callback)(void* object, ModioResponse response, bool mods_are_updated));
 
   //Dependencies Methods
   void MODIO_DLL modioGetAllModDependencies(void* object, u32 mod_id, void(*callback)(void* object, ModioResponse response, ModioDependency* dependencies_array, u32 dependencies_array_size));

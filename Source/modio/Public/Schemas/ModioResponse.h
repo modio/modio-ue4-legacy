@@ -32,3 +32,4 @@ struct FModioResponse
 extern void InitializeResponse( FModioResponse &Out_Response, const ModioResponse &ModioResponse);
 
 DECLARE_DELEGATE_OneParam( FModioGenericDelegate, FModioResponse );
+DECLARE_DELEGATE_TwoParams( FModioBooleanDelegate, FModioResponse, bool );

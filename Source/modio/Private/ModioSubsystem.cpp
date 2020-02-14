@@ -773,6 +773,20 @@ void FModioSubsystem::PrioritizeModDownload(int32 ModId)
   modioPrioritizeModDownload((u32)ModId);
 }
 
+void FModioSubsystem::CheckIfModsAreUpdated(const TArray<int32> &ModIds, FModioBooleanDelegate CheckIfModsAreUpdatedDelegate)
+{
+  FModioAsyncRequest_CheckIfModsAreUpdated *Request = new FModioAsyncRequest_CheckIfModsAreUpdated( this, CheckIfModsAreUpdatedDelegate );
+  u32 *CModIds = new u32[ModIds.Num()];
+  for(int i = 0; i < ModIds.Num(); i++)
+  {
+    CModIds[i] = ModIds[i];
+  }
+  modioCheckIfModsAreUpdated(Request, CModIds, (u32)ModIds.Num(), FModioAsyncRequest_CheckIfModsAreUpdated::Response);
+  delete[] CModIds;
+
+  QueueAsyncTask( Request );
+}
+
 void onModDownload(u32 response_code, u32 mod_id)
 {
   FModioSubsystem::ModioOnModDownloadDelegate.ExecuteIfBound( (int32)response_code, (int32)mod_id );
@@ -803,14 +817,18 @@ void FModioSubsystem::Init( const FString& RootDirectory, uint32 GameId, const F
   cerr_backup = std::cerr.rdbuf();
 
   LStream Stream;
-  std::clog.rdbuf(&Stream); 
-  std::cerr.rdbuf(&Stream); 
+  std::clog.rdbuf(&Stream);
+  std::cerr.rdbuf(&Stream);
 
   std::clog << "[mod.io] Initializing mod.io UE4 plugin.\n";
 
   check(!bInitialized);
 
   u32 Environment = bIsLiveEnvironment ? MODIO_ENVIRONMENT_LIVE : MODIO_ENVIRONMENT_TEST;
+
+  TCHAR_TO_UTF8(*RootDirectory) ;
+  std::clog << "[mod.io] UTF8 root path:" << TCHAR_TO_UTF8(*RootDirectory) << std::endl;
+  UE_LOG(LogTemp, Log, TEXT("[mod.io] root path %s"), *RootDirectory);
 
   modioInit( Environment, (u32)GameId, bRetrieveModsFromOtherGames, TCHAR_TO_UTF8(*ApiKey), TCHAR_TO_UTF8(*RootDirectory) );
 
