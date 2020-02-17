@@ -131,6 +131,12 @@ void UModioManager::OnGalaxyAuth(FModioResponse Response)
 
 #### Steam Auth
 
+You will need to setup the following:
+
+* Add your Encrypted App Ticket Key from your Steam Partner game into your game options on the mod.io web
+* In your game code, retrieve the Encrypted App Ticket from the Steamwoks SDK (or by using a Steamworks plugin of your choice)
+* Also encrypt the Encrypted App Ticket under base 64 before using the mod.io `Steam Auth` function
+
 ![Alt text](img/Readme/SteamAuth.png?raw=true "Title")
 
 ```c++
