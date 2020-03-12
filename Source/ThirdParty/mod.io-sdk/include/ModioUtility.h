@@ -18,6 +18,10 @@ struct GenericCall
   const std::function<void(const modio::Response &)> callback;
 };
 
+struct GetBoolCall
+{
+  const std::function<void(const modio::Response &, const bool)> callback;
+};
 
 namespace modio
 {

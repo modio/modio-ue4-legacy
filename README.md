@@ -119,6 +119,7 @@ Modio->OculusAuth("zBOBKszK..txDHJvjAC",// nonce proof
   3485509464809317, // User id
   "OCAf57IgZCf9JphLvM3dY...lVxWf5tenZBoOLAZDZD", // access token
   "user@email.com", // Email, optional parameter, skip with ""
+  "rift", // rift and quest authentication supported
   0, // Expiry date, skip with 0
   FModioGenericDelegate::CreateUObject(ModioManager, &UModioManager::OnGalaxyAuth));
 // ...

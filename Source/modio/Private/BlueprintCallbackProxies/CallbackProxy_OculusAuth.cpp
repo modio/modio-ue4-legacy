@@ -10,7 +10,7 @@ UCallbackProxy_OculusAuth::UCallbackProxy_OculusAuth(const FObjectInitializer &O
 {
 }
 
-UCallbackProxy_OculusAuth *UCallbackProxy_OculusAuth::OculusAuth( UObject *WorldContext, const FString& Nonce, const FString& OculusUserId, const FString& AccessToken, const FString& Email, int32 DateExpires )
+UCallbackProxy_OculusAuth *UCallbackProxy_OculusAuth::OculusAuth( UObject *WorldContext, const FString& Nonce, const FString& OculusUserId, const FString& AccessToken, const FString& Email, const FString& Device, int32 DateExpires )
 {
   UCallbackProxy_OculusAuth *Proxy = NewObject<UCallbackProxy_OculusAuth>();
   Proxy->SetFlags(RF_StrongRefOnFrame);
@@ -18,6 +18,7 @@ UCallbackProxy_OculusAuth *UCallbackProxy_OculusAuth::OculusAuth( UObject *World
   Proxy->OculusUserId = OculusUserId;
   Proxy->AccessToken = AccessToken;
   Proxy->Email = Email;
+  Proxy->Device = Device;
   Proxy->DateExpires = DateExpires;
   Proxy->WorldContextObject = WorldContext;
   return Proxy;
@@ -29,7 +30,7 @@ void UCallbackProxy_OculusAuth::Activate()
   FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
   if( Modio.IsValid() )
   {
-    Modio->OculusAuth( Nonce, OculusUserId, AccessToken, Email, DateExpires, FModioGenericDelegate::CreateUObject( this, &UCallbackProxy_OculusAuth::OnOculusAuthDelegate ) );
+    Modio->OculusAuth( Nonce, OculusUserId, AccessToken, Email, Device, DateExpires, FModioGenericDelegate::CreateUObject( this, &UCallbackProxy_OculusAuth::OnOculusAuthDelegate ) );
   }
   else
   {
