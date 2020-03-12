@@ -52,6 +52,7 @@
 #include "AsyncRequest/ModioAsyncRequest_AddModImages.h"
 #include "AsyncRequest/ModioAsyncRequest_AddModYoutubeLinks.h"
 #include "AsyncRequest/ModioAsyncRequest_AddModSketchfabLinks.h"
+#include "AsyncRequest/ModioAsyncRequest_CheckIfModsAreUpdated.h"
 #include "AsyncRequest/ModioAsyncRequest_DeleteModImages.h"
 #include "AsyncRequest/ModioAsyncRequest_DeleteModYoutubeLinks.h"
 #include "AsyncRequest/ModioAsyncRequest_DeleteModSketchfabLinks.h"
@@ -161,6 +162,8 @@ public:
   TEnumAsByte<EModioModState> GetModState(int32 ModId);
   /** Places the given mod at the top of the donload queue */
   void PrioritizeModDownload(int32 ModId);
+  /** The returns True in case all mods are up to date. If not, returns false and the mods that needs an update are added to the download queue. */
+  void CheckIfModsAreUpdated(const TArray<int32> &ModIds, FModioBooleanDelegate CheckIfModsAreUpdatedDelegate);
 
   // Mod Subscription
   /** Subscribes to the corresponding mod */
