@@ -2,7 +2,7 @@
 #define MODIO_GAME_H
 
 #include <string>                                 // for string
-#include <vector>                                 // for string
+#include <list>                                   // for list
 #include "../../dependencies/nlohmann/json.hpp"   // for json
 #include "../../c/ModioC.h"                       // for ModioGame
 #include "User.h"
@@ -39,7 +39,7 @@ public:
   Icon icon;
   Logo logo;
   Header header;
-  std::vector<GameTagOption> game_tag_options;
+  std::list<GameTagOption> game_tag_options;
 
   void initialize(ModioGame game);
 };
