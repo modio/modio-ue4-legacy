@@ -258,6 +258,16 @@ void FModioSubsystem::DownloadMod(int32 ModId)
   modioDownloadMod((u32)ModId);
 }
 
+void FModioSubsystem::PauseDownloads()
+{
+  modioPauseDownloads();
+}
+
+void FModioSubsystem::ResumeDownloads()
+{
+  modioResumeDownloads();
+}
+
 FModioInstalledMod FModioSubsystem::GetInstalledMod(int32 ModId)
 {
   FModioInstalledMod InstalledMod;

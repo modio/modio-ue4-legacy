@@ -138,6 +138,10 @@ public:
   // Downloads and installs
   /** Downloads an specific mod */
   void DownloadMod(int32 ModId);
+  /** Pauses mod downloads */
+  void PauseDownloads();
+  /** Resumes mod downloads */
+  void ResumeDownloads();
   /** Returns information of a mod installed locally */
   FModioInstalledMod GetInstalledMod(int32 ModId);
   /** Returns an array containing information of the mods installed locally */
