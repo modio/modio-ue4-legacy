@@ -11,10 +11,10 @@
 * @param bool - True if all mods are updated, otherwise returns false
 */
 
-class FModioAsyncRequest_CheckIfModsAreUpdated : public FModioAsyncRequest
+class FModioAsyncRequest_DownloadModfilesById : public FModioAsyncRequest
 {
 public:
-  FModioAsyncRequest_CheckIfModsAreUpdated( FModioSubsystem *Modio, FModioBooleanDelegate Delegate );
+  FModioAsyncRequest_DownloadModfilesById( FModioSubsystem *Modio, FModioBooleanDelegate Delegate );
 
   static void Response(void *Object, ModioResponse ModioResponse, bool ModsAreUpdated );
 

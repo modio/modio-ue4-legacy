@@ -39,7 +39,7 @@ class MODIO_DLL Instance
   Instance& operator=(const Instance&) = delete;
 public:
   Instance(u32 environment, u32 game_id, const std::string &api_key);
-  Instance(u32 environment, u32 game_id, bool retrieve_mods_from_other_games, const std::string &api_key, const std::string &root_path);
+  Instance(u32 environment, u32 game_id, bool retrieve_mods_from_other_games, bool polling_enabled, const std::string &api_key, const std::string &root_path);
   ~Instance();
 
   //General Methods
@@ -135,7 +135,7 @@ public:
   void prioritizeModDownload(u32 mod_id);  
   void setDownloadListener(const std::function<void(u32 response_code, u32 mod_id)> &callback);
   void setUploadListener(const std::function<void(u32 response_code, u32 mod_id)> &callback);
-  void checkIfModsAreUpdated(const std::vector<u32> mod_ids, const std::function<void(const modio::Response &, const bool mods_are_updated)> &callback);
+  void downloadModfilesById(const std::vector<u32> mod_ids, const std::function<void(const modio::Response &, const bool mods_are_updated)> &callback);
   const std::list<QueuedModDownload *> getModDownloadQueue();
   const std::list<QueuedModfileUpload *> getModfileUploadQueue();
   const modio::InstalledMod getInstalledMod(u32 mod_id);

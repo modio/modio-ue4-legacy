@@ -81,6 +81,9 @@ class MODIO_API UModioFunctionLibrary : public UBlueprintFunctionLibrary
   UFUNCTION(BlueprintPure, Category = "mod.io", meta = (WorldContext="WorldContextObject"))
   static void ModioGetModState(UObject *WorldContextObject, int32 ModId, uint8 &ModState);
 
+  UFUNCTION(BlueprintCallable, Category = "mod.io", meta = (WorldContext="WorldContextObject"))
+  static void ModioUninstallMod(UObject *WorldContextObject, int32 ModId, bool &SuccessfullyUninstalled);
+
   UFUNCTION(BlueprintPure, Category = "mod.io", meta = (WorldContext="WorldContextObject"))
   static void ModioGetCurrentUserModRating(UObject *WorldContextObject, int32 ModId, uint8 &ModRating);
 

@@ -1,31 +1,31 @@
 // Copyright 2019 modio. All Rights Reserved.
 // Released under MIT.
 
-#include "BlueprintCallbackProxies/CallbackProxy_CheckIfModsAreUpdated.h"
+#include "BlueprintCallbackProxies/CallbackProxy_DownloadModfilesById.h"
 #include "ModioSubsystem.h"
 #include "Engine/Engine.h"
 
-UCallbackProxy_CheckIfModsAreUpdated::UCallbackProxy_CheckIfModsAreUpdated(const FObjectInitializer &ObjectInitializer)
+UCallbackProxy_DownloadModfilesById::UCallbackProxy_DownloadModfilesById(const FObjectInitializer &ObjectInitializer)
     : Super(ObjectInitializer)
 {
 }
 
-UCallbackProxy_CheckIfModsAreUpdated *UCallbackProxy_CheckIfModsAreUpdated::CheckIfModsAreUpdated( UObject *WorldContext, const TArray<int32> &ModIds )
+UCallbackProxy_DownloadModfilesById *UCallbackProxy_DownloadModfilesById::DownloadModfilesById( UObject *WorldContext, const TArray<int32> &ModIds )
 {
-  UCallbackProxy_CheckIfModsAreUpdated *Proxy = NewObject<UCallbackProxy_CheckIfModsAreUpdated>();
+  UCallbackProxy_DownloadModfilesById *Proxy = NewObject<UCallbackProxy_DownloadModfilesById>();
   Proxy->SetFlags(RF_StrongRefOnFrame);
   Proxy->ModIds = ModIds;
   Proxy->WorldContextObject = WorldContext;
   return Proxy;
 }
 
-void UCallbackProxy_CheckIfModsAreUpdated::Activate()
+void UCallbackProxy_DownloadModfilesById::Activate()
 {
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
   FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
   if( Modio.IsValid() )
   {
-    Modio->CheckIfModsAreUpdated( ModIds, FModioBooleanDelegate::CreateUObject( this, &UCallbackProxy_CheckIfModsAreUpdated::OnCheckIfModsAreUpdatedDelegate ) );
+    Modio->DownloadModfilesById( ModIds, FModioBooleanDelegate::CreateUObject( this, &UCallbackProxy_DownloadModfilesById::OnDownloadModfilesByIdDelegate ) );
   }
   else
   {
@@ -35,7 +35,7 @@ void UCallbackProxy_CheckIfModsAreUpdated::Activate()
   }
 }
 
-void UCallbackProxy_CheckIfModsAreUpdated::OnCheckIfModsAreUpdatedDelegate(FModioResponse Response, bool ModsAreUpdated)
+void UCallbackProxy_DownloadModfilesById::OnDownloadModfilesByIdDelegate(FModioResponse Response, bool ModsAreUpdated)
 {
   if (Response.Code >= 200 && Response.Code < 300)
   {

@@ -86,7 +86,7 @@ void FModioModule::StartupModule()
   DLLHandle = FPlatformProcess::GetDllHandle(*DllPath);
   
   const UModioSettings *Settings = GetDefault<UModioSettings>();
-  ModioImp = FModioSubsystem::Create(Settings->RootDirectory, Settings->bRootDirectoryIsInUserSettingsDirectory, Settings->GameId, Settings->ApiKey, Settings->bIsLiveEnvironment, Settings->bInstallOnModDownload, Settings->bRetrieveModsFromOtherGames);
+  ModioImp = FModioSubsystem::Create(Settings->RootDirectory, Settings->bRootDirectoryIsInUserSettingsDirectory, Settings->GameId, Settings->ApiKey, Settings->bIsLiveEnvironment, Settings->bInstallOnModDownload, Settings->bRetrieveModsFromOtherGames, Settings->bEnablePolling);
 
   // Need GIsEdtor check as this might run when running the game but not with the editor
   if (GIsEditor)
@@ -139,7 +139,7 @@ bool FModioModule::HandleSettingsSaved()
     Settings->SaveConfig();
   }
 
-  ModioImp = FModioSubsystem::Create(Settings->RootDirectory, Settings->bRootDirectoryIsInUserSettingsDirectory, Settings->GameId, Settings->ApiKey, Settings->bIsLiveEnvironment, Settings->bInstallOnModDownload, Settings->bRetrieveModsFromOtherGames);
+  ModioImp = FModioSubsystem::Create(Settings->RootDirectory, Settings->bRootDirectoryIsInUserSettingsDirectory, Settings->GameId, Settings->ApiKey, Settings->bIsLiveEnvironment, Settings->bInstallOnModDownload, Settings->bRetrieveModsFromOtherGames, Settings->bEnablePolling);
 
   return true;
 }

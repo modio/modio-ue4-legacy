@@ -19,6 +19,7 @@ namespace modio
   extern std::string ADDITIONAL_GAMEDIR_PATH;
   extern u32 DEBUG_LEVEL;
   extern bool RETRIEVE_MODS_FROM_OTHER_GAMES;
+  extern bool POLLING_ENABLED;
   extern std::string MODIO_URL;
   extern std::string MODIO_VERSION_PATH;
   extern u32 MAX_CACHE_TIME_SECONDS;

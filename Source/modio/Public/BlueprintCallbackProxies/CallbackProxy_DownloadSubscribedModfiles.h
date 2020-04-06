@@ -6,36 +6,36 @@
 #include "ModioSubsystem.h"
 #include "Schemas/ModioResponse.h"
 #include "Net/OnlineBlueprintCallProxyBase.h"
-#include "CallbackProxy_CheckIfModsAreUpdated.generated.h"
+#include "CallbackProxy_DownloadSubscribedModfiles.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(
-FCheckIfModsAreUpdatedResult,
+FDownloadSubscribedModfilesResult,
 FModioResponse,
 response,
 bool,
 mods_are_updated );
 
 UCLASS()
-class MODIO_API UCallbackProxy_CheckIfModsAreUpdated : public UOnlineBlueprintCallProxyBase
+class MODIO_API UCallbackProxy_DownloadSubscribedModfiles : public UOnlineBlueprintCallProxyBase
 {
   GENERATED_UCLASS_BODY()
 
-  TArray<int32> ModIds;
+  bool UninstallUnsubscribed;
 
   // The world context object in which this call is taking place
   UPROPERTY()
   UObject* WorldContextObject;
 
   UPROPERTY(BlueprintAssignable)
-  FCheckIfModsAreUpdatedResult OnSuccess;
+  FDownloadSubscribedModfilesResult OnSuccess;
 
   UPROPERTY(BlueprintAssignable)
-  FCheckIfModsAreUpdatedResult OnFailure;
+  FDownloadSubscribedModfilesResult OnFailure;
 
   UFUNCTION(BlueprintCallable, Category = "mod.io", meta = (BlueprintInternalUseOnly = "true", DefaultToSelf="WorldContext"))
-  static UCallbackProxy_CheckIfModsAreUpdated *CheckIfModsAreUpdated( UObject *WorldContext, const TArray<int32> &ModIds);
+  static UCallbackProxy_DownloadSubscribedModfiles *DownloadSubscribedModfiles( UObject *WorldContext, bool UninstallUnsubscribed );
 
   virtual void Activate() override;
 
-  virtual void OnCheckIfModsAreUpdatedDelegate(FModioResponse Response, bool ModsAreUpdated);
+  virtual void OnDownloadSubscribedModfilesDelegate(FModioResponse Response, bool ModsAreUpdated);
 };

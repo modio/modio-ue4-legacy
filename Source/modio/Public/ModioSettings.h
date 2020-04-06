@@ -55,4 +55,7 @@ public:
 
   UPROPERTY( EditAnywhere, config, Category = Custom )
   uint8 bRetrieveModsFromOtherGames:1;
+
+  UPROPERTY( EditAnywhere, config, Category = Custom )
+  uint8 bEnablePolling:1;
 };

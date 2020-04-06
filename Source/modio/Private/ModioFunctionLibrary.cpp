@@ -206,6 +206,16 @@ void UModioFunctionLibrary::ModioGetModState(UObject *WorldContextObject, int32 
   }
 }
 
+void UModioFunctionLibrary::ModioUninstallMod(UObject *WorldContextObject, int32 ModId, bool &SuccessfullyUninstalled)
+{
+  UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
+  FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
+  if( Modio.IsValid() )
+  {
+    SuccessfullyUninstalled = Modio->UninstallMod(ModId);
+  }
+}
+
 void UModioFunctionLibrary::ModioGetCurrentUserModRating(UObject *WorldContextObject, int32 ModId, uint8 &ModRating)
 {
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );

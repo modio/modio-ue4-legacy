@@ -38,7 +38,7 @@ FModioSubsystem::~FModioSubsystem()
   check(!bInitialized);
 }
 
-FModioSubsystemPtr FModioSubsystem::Create( const FString& RootDirectory, bool bRootDirectoryIsInUserSettingsDirectory, uint32 GameId, const FString& ApiKey, bool bIsLiveEnvironment, bool bInstallOnModDownload, bool bRetrieveModsFromOtherGames )
+FModioSubsystemPtr FModioSubsystem::Create( const FString& RootDirectory, bool bRootDirectoryIsInUserSettingsDirectory, uint32 GameId, const FString& ApiKey, bool bIsLiveEnvironment, bool bInstallOnModDownload, bool bRetrieveModsFromOtherGames, bool bEnablePolling )
 {
   if( !RootDirectory.Len() )
   {
@@ -69,7 +69,7 @@ FModioSubsystemPtr FModioSubsystem::Create( const FString& RootDirectory, bool b
   }
 
   FModioSubsystemPtr Modio = MakeShared<FModioSubsystem, ESPMode::Fast>();
-  Modio->Init( LocalRootDirectory, GameId, ApiKey, bIsLiveEnvironment, bInstallOnModDownload, bRetrieveModsFromOtherGames );
+  Modio->Init( LocalRootDirectory, GameId, ApiKey, bIsLiveEnvironment, bInstallOnModDownload, bRetrieveModsFromOtherGames, bEnablePolling );
 
   return Modio;
 }
@@ -783,18 +783,30 @@ void FModioSubsystem::PrioritizeModDownload(int32 ModId)
   modioPrioritizeModDownload((u32)ModId);
 }
 
-void FModioSubsystem::CheckIfModsAreUpdated(const TArray<int32> &ModIds, FModioBooleanDelegate CheckIfModsAreUpdatedDelegate)
+void FModioSubsystem::DownloadModfilesById(const TArray<int32> &ModIds, FModioBooleanDelegate DownloadModfilesByIdDelegate)
 {
-  FModioAsyncRequest_CheckIfModsAreUpdated *Request = new FModioAsyncRequest_CheckIfModsAreUpdated( this, CheckIfModsAreUpdatedDelegate );
+  FModioAsyncRequest_DownloadModfilesById *Request = new FModioAsyncRequest_DownloadModfilesById( this, DownloadModfilesByIdDelegate );
   u32 *CModIds = new u32[ModIds.Num()];
   for(int i = 0; i < ModIds.Num(); i++)
   {
     CModIds[i] = ModIds[i];
   }
-  modioCheckIfModsAreUpdated(Request, CModIds, (u32)ModIds.Num(), FModioAsyncRequest_CheckIfModsAreUpdated::Response);
+  modioDownloadModfilesById(Request, CModIds, (u32)ModIds.Num(), FModioAsyncRequest_DownloadModfilesById::Response);
   delete[] CModIds;
 
   QueueAsyncTask( Request );
+}
+
+void FModioSubsystem::DownloadSubscribedModfiles(bool UninstallUnsubscribed, FModioBooleanDelegate DownloadSubscribedModfilesDelegate)
+{
+  FModioAsyncRequest_DownloadSubscribedModfiles *Request = new FModioAsyncRequest_DownloadSubscribedModfiles( this, DownloadSubscribedModfilesDelegate );
+  modioDownloadSubscribedModfiles(Request, UninstallUnsubscribed, FModioAsyncRequest_DownloadSubscribedModfiles::Response);
+  QueueAsyncTask( Request );
+}
+
+bool FModioSubsystem::UninstallMod(int32 ModId)
+{
+  return modioUninstallMod((u32)ModId);
 }
 
 void onModDownload(u32 response_code, u32 mod_id)
@@ -820,7 +832,7 @@ void onModEvent(ModioResponse ModioResponse, ModioModEvent* ModioEventsArray, u3
   FModioSubsystem::ModioOnModEventDelegate.ExecuteIfBound( Response, ConvertToTArrayModEvents(ModioEventsArray, ModioEventsArraySize) );
 }
 
-void FModioSubsystem::Init( const FString& RootDirectory, uint32 GameId, const FString& ApiKey, bool bIsLiveEnvironment, bool bInstallOnModDownload, bool bRetrieveModsFromOtherGames )
+void FModioSubsystem::Init( const FString& RootDirectory, uint32 GameId, const FString& ApiKey, bool bIsLiveEnvironment, bool bInstallOnModDownload, bool bRetrieveModsFromOtherGames, bool bEnablePolling)
 {
   std::streambuf *clog_backup, *cerr_backup;
   clog_backup = std::clog.rdbuf();
@@ -840,7 +852,7 @@ void FModioSubsystem::Init( const FString& RootDirectory, uint32 GameId, const F
   std::clog << "[mod.io] UTF8 root path:" << TCHAR_TO_UTF8(*RootDirectory) << std::endl;
   UE_LOG(LogTemp, Log, TEXT("[mod.io] root path %s"), *RootDirectory);
 
-  modioInit( Environment, (u32)GameId, bRetrieveModsFromOtherGames, TCHAR_TO_UTF8(*ApiKey), TCHAR_TO_UTF8(*RootDirectory) );
+  modioInit( Environment, (u32)GameId, bRetrieveModsFromOtherGames, bEnablePolling, TCHAR_TO_UTF8(*ApiKey), TCHAR_TO_UTF8(*RootDirectory) );
 
   if(bInstallOnModDownload)
     modioSetDownloadListener(&onModDownloadWithAutomaticInstalls);

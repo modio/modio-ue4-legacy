@@ -513,7 +513,7 @@ extern "C"
   };
 
   //General Methods
-  void MODIO_DLL modioInit(u32 environment, u32 game_id, bool retrieve_mods_from_other_games, char const* api_key, char const* root_path);
+  void MODIO_DLL modioInit(u32 environment, u32 game_id, bool retrieve_mods_from_other_games, bool polling_enabled, char const* api_key, char const* root_path);
   void MODIO_DLL modioShutdown(void);
   void MODIO_DLL modioSetDebugLevel(u32 debug_level);
   void MODIO_DLL modioSetModEventsPollInterval(u32 interval_in_seconds);
@@ -700,7 +700,8 @@ extern "C"
   u32 MODIO_DLL modioGetAllDownloadedModsCount(void);
   void MODIO_DLL modioGetAllDownloadedMods(u32* downloaded_mods);
   u32 MODIO_DLL modioGetModState(u32 mod_id);
-  void MODIO_DLL modioCheckIfModsAreUpdated(void* object, u32 const* mod_id_array, u32 mod_id_array_size, void(*callback)(void* object, ModioResponse response, bool mods_are_updated));
+  void MODIO_DLL modioDownloadModfilesById(void* object, u32 const* mod_id_array, u32 mod_id_array_size, void(*callback)(void* object, ModioResponse response, bool mods_are_updated));
+  void MODIO_DLL modioDownloadSubscribedModfiles(void* object, bool uninstall_unsubscribed, void(*callback)(void* object, ModioResponse response, bool mods_are_updated));
 
   //Dependencies Methods
   void MODIO_DLL modioGetAllModDependencies(void* object, u32 mod_id, void(*callback)(void* object, ModioResponse response, ModioDependency* dependencies_array, u32 dependencies_array_size));
