@@ -73,6 +73,7 @@ std::vector<std::string> getHeadersNoToken();
 std::vector<std::string> getUrlEncodedHeaders();
 std::string base64Encode(unsigned char const* bytes_to_encode, unsigned int in_len);
 std::string getMyDocumentsPath();
+std::string randomString(u32 length);
 } // namespace modio
 
 #endif

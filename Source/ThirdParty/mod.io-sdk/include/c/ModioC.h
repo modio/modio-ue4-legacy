@@ -515,6 +515,7 @@ extern "C"
   //General Methods
   void MODIO_DLL modioInit(u32 environment, u32 game_id, bool retrieve_mods_from_other_games, bool polling_enabled, char const* api_key, char const* root_path);
   void MODIO_DLL modioShutdown(void);
+  void MODIO_DLL modioClearCache(void);
   void MODIO_DLL modioSetDebugLevel(u32 debug_level);
   void MODIO_DLL modioSetModEventsPollInterval(u32 interval_in_seconds);
   void MODIO_DLL modioSetUserEventsPollInterval(u32 interval_in_seconds);

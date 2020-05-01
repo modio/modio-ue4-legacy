@@ -13,7 +13,6 @@ namespace modio
   extern std::string VERSION;
   extern std::string API_KEY;
   extern std::string ACCESS_TOKEN;
-  extern bool IS_LOGGED_IN;
   extern u32 GAME_ID;
   extern std::string ROOT_PATH;
   extern std::string ADDITIONAL_GAMEDIR_PATH;
