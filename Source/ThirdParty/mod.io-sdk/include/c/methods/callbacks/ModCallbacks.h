@@ -17,10 +17,10 @@ struct GetModParams
 
 struct GetAllModsParams
 {
-  void* object;
   std::string url;
   bool is_cache;
-  void (*callback)(void* object, ModioResponse response, ModioMod mods[], u32 mods_size);
+  std::vector<void*> objects;
+  std::vector<void(*)(void* object, ModioResponse response, ModioMod mods[], u32 mods_size)> callbacks;
 };
 
 struct AddModParams
