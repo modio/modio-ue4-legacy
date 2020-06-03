@@ -101,6 +101,16 @@ void UModioFunctionLibrary::ModioDownloadMod(UObject *WorldContextObject, int32 
   }
 }
 
+void UModioFunctionLibrary::ModioCancelModDownload(UObject *WorldContextObject, int32 ModId)
+{
+  UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );
+  FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
+  if( Modio.IsValid() )
+  {
+    Modio->CancelModDownload(ModId);
+  }
+}
+
 void UModioFunctionLibrary::ModioPauseDownloads(UObject *WorldContextObject)
 {
   UWorld* World = GEngine->GetWorldFromContextObject( WorldContextObject, EGetWorldErrorMode::LogAndReturnNull );

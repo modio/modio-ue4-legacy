@@ -258,6 +258,11 @@ void FModioSubsystem::DownloadMod(int32 ModId)
   modioDownloadMod((u32)ModId);
 }
 
+void FModioSubsystem::CancelModDownload(int32 ModId)
+{
+  modioCancelModDownload((u32)ModId);
+}
+
 void FModioSubsystem::PauseDownloads()
 {
   modioPauseDownloads();
