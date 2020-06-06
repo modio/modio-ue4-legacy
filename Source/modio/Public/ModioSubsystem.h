@@ -139,6 +139,8 @@ public:
   // Downloads and installs
   /** Downloads an specific mod */
   void DownloadMod(int32 ModId);
+  /** Cancels a mod download */
+  void CancelModDownload(int32 ModId);
   /** Pauses mod downloads */
   void PauseDownloads();
   /** Resumes mod downloads */
