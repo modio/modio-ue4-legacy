@@ -810,6 +810,42 @@ bool FModioSubsystem::UninstallMod(int32 ModId)
   return modioUninstallMod((u32)ModId);
 }
 
+void FModioSubsystem::UninstallUnavailableMods(FModioGenericDelegate UninstallUnavailableModsDelegate)
+{
+  UE_LOG(LogTemp, Warning, TEXT("[mod.io] Uninstalling unavailable mods"));
+  int32 ResponseLimit = 100;
+  int32 PendingCalls = 1 + (this->GetAllInstalledMods().Num() / ResponseLimit);
+  UE_LOG(LogTemp, Warning, TEXT("[mod.io] A total of %i calls will be made to the mod.io API"), PendingCalls);
+  FModioAsyncRequest_UninstallUnavailableMods *Request = new FModioAsyncRequest_UninstallUnavailableMods( this, UninstallUnavailableModsDelegate, PendingCalls );
+
+  ModioFilterCreator modio_filter_creator;
+  modioInitFilter(&modio_filter_creator);
+  int32 CurrentCallCount = 0;
+  TArray<int32> ModIds;
+  QueueAsyncTask( Request );
+  for(auto InstalledMod : this->GetAllInstalledMods())
+  {
+    ModIds.Push(InstalledMod.Mod.Id);
+    CurrentCallCount ++;
+    modioAddFilterInField(&modio_filter_creator, "id", toString(InstalledMod.Mod.Id).c_str());
+    if(CurrentCallCount % 100 == 0)
+    {
+      UE_LOG(LogTemp, Warning, TEXT("[mod.io] Calling modioGetAllMods"));
+      CurrentCallCount = 0;
+      modioGetAllMods(Request, modio_filter_creator, FModioAsyncRequest_UninstallUnavailableMods::Response);
+
+      modioFreeFilter(&modio_filter_creator);
+      modioInitFilter(&modio_filter_creator);
+    }
+  }
+  if(CurrentCallCount > 0)
+  {
+    UE_LOG(LogTemp, Warning, TEXT("[mod.io] Calling final modioGetAllMods"));
+    modioGetAllMods(Request, modio_filter_creator, FModioAsyncRequest_UninstallUnavailableMods::Response);
+    modioFreeFilter(&modio_filter_creator);
+  }
+}
+
 void onModDownload(u32 response_code, u32 mod_id)
 {
   FModioSubsystem::ModioOnModDownloadDelegate.ExecuteIfBound( (int32)response_code, (int32)mod_id );
