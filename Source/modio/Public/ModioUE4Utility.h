@@ -16,6 +16,7 @@
 #include "Customizables/ModioModEditor.h"
 #include "Customizables/ModioModfileCreator.h"
 #include "Customizables/ModioFilterCreator.h"
+#include <string>
 
 extern TArray<FModioMod> ConvertToTArrayMods(ModioMod* ModioMods, u32 ModsSize);
 extern TArray<FModioModfile> ConvertToTArrayModfiles(ModioModfile* ModioModfiles, u32 ModfilesSize);
@@ -32,3 +33,4 @@ extern void SetupModioModFilterCreator(const FModioFilterCreator &FilterCreator,
 extern void SetupModioModCreator(FModioModCreator ModCreator, ModioModCreator& modio_mod_creator);
 extern void SetupModioModEditor(FModioModEditor ModEditor, ModioModEditor& modio_mod_editor);
 extern void SetupModioModfileCreator(FModioModfileCreator ModfileCreator, ModioModfileCreator& modio_modfile_creator);
+std::string toString(int32 number);

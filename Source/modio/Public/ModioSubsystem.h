@@ -37,6 +37,7 @@
 #include "AsyncRequest/ModioAsyncRequest_GetUserModfiles.h"
 #include "AsyncRequest/ModioAsyncRequest_GetUserRatings.h"
 #include "AsyncRequest/ModioAsyncRequest_SubscribeToMod.h"
+#include "AsyncRequest/ModioAsyncRequest_UninstallUnavailableMods.h"
 #include "AsyncRequest/ModioAsyncRequest_UnsubscribeFromMod.h"
 #include "AsyncRequest/ModioAsyncRequest_SteamAuth.h"
 #include "AsyncRequest/ModioAsyncRequest_SubmitReport.h"
@@ -175,6 +176,8 @@ public:
   void DownloadSubscribedModfiles(bool UninstallUnsubscribed, FModioBooleanDelegate DownloadSubscribedModfilesDelegate);
   /** Uninstalls a mod from local storage */  
   bool UninstallMod(int32 ModId);
+  /** Uninstall all deleted or hidden mods */
+  void UninstallUnavailableMods(FModioGenericDelegate UninstallUnavailableModsDelegate);
 
   // Mod Subscription
   /** Subscribes to the corresponding mod */
