@@ -330,3 +330,23 @@ void SetupModioModfileCreator(FModioModfileCreator ModfileCreator, ModioModfileC
   if (ModfileCreator.Filehash != "")
     modioSetModfileCreatorFilehash(&modio_modfile_creator, TCHAR_TO_UTF8(*ModfileCreator.Filehash));
 }
+
+std::string toString(int32 number)
+{
+  if (number == 0)
+    return "0";
+
+  if (number < 0)
+    return "-" + toString(-number);
+
+  std::string temp = "";
+  std::string returnvalue = "";
+  while (number > 0)
+  {
+    temp += number % 10 + 48;
+    number /= 10;
+  }
+  for (size_t i = 0; i < temp.length(); i++)
+    returnvalue += temp[temp.length() - i - 1];
+  return returnvalue;
+}
