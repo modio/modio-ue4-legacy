@@ -52,6 +52,9 @@ class MODIO_API UModioFunctionLibrary : public UBlueprintFunctionLibrary
   static void ModioDownloadMod(UObject *WorldContextObject, int32 ModId);
 
   UFUNCTION(BlueprintCallable, Category = "mod.io", meta = (WorldContext="WorldContextObject"))
+  static void ModioCancelModDownload(UObject *WorldContextObject, int32 ModId);
+
+  UFUNCTION(BlueprintCallable, Category = "mod.io", meta = (WorldContext="WorldContextObject"))
   static void ModioPauseDownloads(UObject *WorldContextObject);
 
   UFUNCTION(BlueprintCallable, Category = "mod.io", meta = (WorldContext="WorldContextObject"))
