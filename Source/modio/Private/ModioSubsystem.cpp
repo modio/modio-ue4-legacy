@@ -792,17 +792,17 @@ void FModioSubsystem::DownloadModfilesById(const TArray<int32> &ModIds, FModioBo
   {
     CModIds[i] = ModIds[i];
   }
+  QueueAsyncTask( Request );
   modioDownloadModfilesById(Request, CModIds, (u32)ModIds.Num(), FModioAsyncRequest_DownloadModfilesById::Response);
   delete[] CModIds;
 
-  QueueAsyncTask( Request );
 }
 
 void FModioSubsystem::DownloadSubscribedModfiles(bool UninstallUnsubscribed, FModioBooleanDelegate DownloadSubscribedModfilesDelegate)
 {
   FModioAsyncRequest_DownloadSubscribedModfiles *Request = new FModioAsyncRequest_DownloadSubscribedModfiles( this, DownloadSubscribedModfilesDelegate );
-  modioDownloadSubscribedModfiles(Request, UninstallUnsubscribed, FModioAsyncRequest_DownloadSubscribedModfiles::Response);
   QueueAsyncTask( Request );
+  modioDownloadSubscribedModfiles(Request, UninstallUnsubscribed, FModioAsyncRequest_DownloadSubscribedModfiles::Response);
 }
 
 bool FModioSubsystem::UninstallMod(int32 ModId)
