@@ -52,6 +52,7 @@ typedef int i32;
 #define MODIO_EVENT_USER_TEAM_LEAVE   6
 #define MODIO_EVENT_USER_SUBSCRIBE    7
 #define MODIO_EVENT_USER_UNSUBSCRIBE  8
+#define MODIO_EVENT_MOD_DELETED       9
 
 // Presentation Option Constants
 #define MODIO_GRID_VIEW   0
@@ -266,7 +267,7 @@ extern "C"
     char* thumb_640x360;
     char* thumb_1280x720;
   };
-  
+
   struct ModioIcon
   {
     char* filename;
@@ -469,7 +470,7 @@ extern "C"
 	  char* path;
 	  ModioMod mod;
   };
-  
+
   struct ModioQueuedModDownload
   {
     u32 state;
@@ -689,8 +690,8 @@ extern "C"
   void MODIO_DLL modioCancelModDownload(u32 mod_id);
   void MODIO_DLL modioResumeDownloads(void);
   void MODIO_DLL modioPrioritizeModDownload(u32 mod_id);
-  void MODIO_DLL modioSetDownloadListener(void (*callback)(u32 response_code, u32 mod_id));  
-  void MODIO_DLL modioSetUploadListener(void (*callback)(u32 response_code, u32 mod_id));  
+  void MODIO_DLL modioSetDownloadListener(void (*callback)(u32 response_code, u32 mod_id));
+  void MODIO_DLL modioSetUploadListener(void (*callback)(u32 response_code, u32 mod_id));
   u32 MODIO_DLL modioGetModDownloadQueueCount(void);
   void MODIO_DLL modioGetModDownloadQueue(ModioQueuedModDownload* download_queue);
   u32 MODIO_DLL modioGetModfileUploadQueueCount(void);
@@ -712,7 +713,7 @@ extern "C"
   //Comment Methods
   void MODIO_DLL modioGetAllModComments(void* object, u32 mod_id, ModioFilterCreator filter, void (*callback)(void* object, ModioResponse response, ModioComment comments[], u32 comments_size));
   void MODIO_DLL modioGetAllModCommentsFilterString(void* object, u32 mod_id, char const* filter_string, u32 cache_max_age_seconds, void (*callback)(void* object, ModioResponse response, ModioComment comments[], u32 comments_size));
-  void MODIO_DLL modioGetModComment(void* object, u32 mod_id, u32 comment_id, void (*callback)(void* object, ModioResponse response, ModioComment comment));  
+  void MODIO_DLL modioGetModComment(void* object, u32 mod_id, u32 comment_id, void (*callback)(void* object, ModioResponse response, ModioComment comment));
   void MODIO_DLL modioDeleteModComment(void* object, u32 mod_id, u32 comment_id, void(*callback)(void* object, ModioResponse response));
 
   //Reports Methods
@@ -728,7 +729,7 @@ extern "C"
   void MODIO_DLL modioFreeQueuedModDownload(ModioQueuedModDownload* queued_mod_download);
   void MODIO_DLL modioFreeQueuedModfileUpload(ModioQueuedModfileUpload* queued_modfile_upload);
 
-  // General Utility Methods 
+  // General Utility Methods
   void MODIO_DLL compressFiles(char const* root_directory, char const* const filenames[], u32 filenames_size, char const* zip_path);
   void MODIO_DLL extractFiles(char const* zip_path, char const* directory_path);
   void MODIO_DLL windowsUTF8ToAnsi(const char* UTF8_string, char* ansi_string);
