@@ -41,7 +41,7 @@ void downloadMod(QueuedModDownload *queued_mod_download);
 void queueModDownload(ModioMod& modio_mod);
 void uploadModfile(QueuedModfileUpload *queued_modfile_upload);
 void queueModfileUpload(u32 mod_id, ModioModfileCreator *modio_modfile_creator);
-void removeDownloadedModfile(u32 mod_id);
+void removeDownloadedMod(u32 mod_id);
 
 }
 }

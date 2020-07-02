@@ -12,6 +12,7 @@ class Error
 {
 public:
   u32 code;
+  u32 error_ref;
   std::string message;
   std::vector<std::string> errors;
 
