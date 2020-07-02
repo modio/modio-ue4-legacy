@@ -305,6 +305,7 @@ extern "C"
   struct ModioError
   {
     u32 code;
+    u32 error_ref;
     char* message;
     char** errors_array;
     u32 errors_array_size;
