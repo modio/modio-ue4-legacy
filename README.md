@@ -170,7 +170,7 @@ void UMyModioManager::OnSubscribeToMod(FModioResponse Response, FModioMod Mod)
 }
 ```
 
-### Unsubscribe
+#### Unsubscribe
 
 ![Alt text](img/Readme/Unsubscribe.png?raw=true "Title")
 
@@ -184,6 +184,24 @@ void UMyModioManager::OnUnsubscribeFromMod(FModioResponse Response)
   // Response.code should be 200 if you unsubscribed from the mod successfully
 }
 ```
+
+### Functions compatible with Polling Disabled
+
+#### DownloadModfilesById
+
+`Mods are updated` returns `true` if all provied mods are updated, if at least one mod is not updated `false` is returned and the mods are added to the download queue.
+
+⚠️ Don't call this or any other callback proxy repeatdly (in loops or tick events) to avoid bad performance.
+
+![Alt text](img/Readme/DownloadModfilesById.png?raw=true "Title")
+
+#### DownloadSubscribedModfiles
+
+`Mods are updated` returns `true` if the current user's subscriptions are updated, if at least one mod is not updated `false` is returned and the mod is added to the download queue.
+
+⚠️ Don't call this or any other callback proxy repeatdly (in loops or tick events) to avoid bad performance.
+
+![Alt text](img/Readme/DownloadSubscribedModfiles.png?raw=true "Title")
 
 ### Mod submission
 
