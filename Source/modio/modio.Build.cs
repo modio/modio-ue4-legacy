@@ -102,8 +102,12 @@ public class modio : ModuleRules
 			string LibrariesPath = Path.Combine(ThirdPartyPath, modio_directory, "lib", "win64");
 			string DLLPath = Path.Combine(ThirdPartyPath, modio_directory, "bin", "win64");
 
+#if UE_4_24_OR_LATER
+			PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "modio.lib"));
+#else
 			PublicLibraryPaths.Add(LibrariesPath);
-			PublicAdditionalLibraries.Add("modio.lib");
+			PublicAdditionalLibraries.Add("modio");
+#endif
 			RuntimeDependencies.Add(Path.Combine(DLLPath, "modio.dll"));
 
 			string ProjectBinariesDirectory = Path.Combine(ProjectPath, "Binaries", "Win64");
@@ -123,8 +127,12 @@ public class modio : ModuleRules
 
 			string LibrariesPath = Path.Combine(ThirdPartyPath, modio_directory, "lib", "linux-x64");
 
+#if UE_4_24_OR_LATER
+			PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "modio.lib"));
+#else
 			PublicLibraryPaths.Add(LibrariesPath);
 			PublicAdditionalLibraries.Add("modio");
+#endif
 
 			string ProjectBinariesDirectory = Path.Combine(ProjectPath, "Binaries", "Linux");
 			if (!Directory.Exists(ProjectBinariesDirectory))
@@ -139,8 +147,12 @@ public class modio : ModuleRules
 
 			string LibrariesPath = Path.Combine(ThirdPartyPath, modio_directory, "lib", "macOS-x64");
 
+#if UE_4_24_OR_LATER
+			PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "modio.lib"));
+#else
 			PublicLibraryPaths.Add(LibrariesPath);
 			PublicAdditionalLibraries.Add("modio");
+#endif
 
 			string ProjectBinariesDirectory = Path.Combine(ProjectPath, "Binaries", "Mac");
 			if (!Directory.Exists(ProjectBinariesDirectory))
