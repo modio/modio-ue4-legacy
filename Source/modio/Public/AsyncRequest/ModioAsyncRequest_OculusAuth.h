@@ -13,10 +13,14 @@
 class FModioAsyncRequest_OculusAuth : public FModioAsyncRequest
 {
 public:
-  FModioAsyncRequest_OculusAuth( FModioSubsystem *Modio, FModioGenericDelegate Delegate );
-
   static void Response( void *Object, ModioResponse ModioResponse );
 
+protected:
+  FModioAsyncRequest_OculusAuth( FModioSubsystem* Modio, FModioGenericDelegate Delegate );
+
+  /** This should be the only way to create and queue async requests */
+  template<typename RequestType, typename CallbackType>
+  friend RequestType* CreateAsyncRequest( FModioSubsystem* Subsystem, CallbackType CallbackDelegate );
 private:
   FModioGenericDelegate ResponseDelegate;
 };

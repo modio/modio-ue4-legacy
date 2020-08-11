@@ -15,10 +15,14 @@
 class FModioAsyncRequest_GetUserRatings : public FModioAsyncRequest
 {
 public:
-  FModioAsyncRequest_GetUserRatings( FModioSubsystem *Modio, FModioRatingArrayDelegate Delegate );
-
   static void Response(void *Object, ModioResponse ModioResponse, ModioRating *ModioRatings, u32 ModioRatingsSize);
 
+protected:
+  FModioAsyncRequest_GetUserRatings( FModioSubsystem* Modio, FModioRatingArrayDelegate Delegate );
+
+  /** This should be the only way to create and queue async requests */
+  template<typename RequestType, typename CallbackType>
+  friend RequestType* CreateAsyncRequest( FModioSubsystem* Subsystem, CallbackType CallbackDelegate );
 private:
   FModioRatingArrayDelegate ResponseDelegate;
 };

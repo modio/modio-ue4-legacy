@@ -15,9 +15,14 @@
 class FModioAsyncRequest_GetAllModTags : public FModioAsyncRequest
 {
 public:
-  FModioAsyncRequest_GetAllModTags( FModioSubsystem *Modio, FModioModTagArrayDelegate Delegate );
-
   static void Response(void *Object, ModioResponse ModioResponse, ModioTag *ModioTags, u32 ModioTagsSize);
+
+protected:
+  FModioAsyncRequest_GetAllModTags( FModioSubsystem* Modio, FModioModTagArrayDelegate Delegate );
+
+  /** This should be the only way to create and queue async requests */
+  template<typename RequestType, typename CallbackType>
+  friend RequestType* CreateAsyncRequest( FModioSubsystem* Subsystem, CallbackType CallbackDelegate );
 private:
   FModioModTagArrayDelegate ResponseDelegate;
 };

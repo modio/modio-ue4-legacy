@@ -248,12 +248,9 @@ protected:
   friend class FModioModule;
   static FModioSubsystemPtr Create(const FString &RootDirectory, bool bRootDirectoryIsInUserSettingsDirectory, uint32 GameId, const FString &ApiKey, bool bIsLiveEnvironment, bool bInstallOnModDownload, bool bRetrieveModsFromOtherGames, bool bEnablePolling);
 
-  /** Queue up a new async request and take ownership of the memory */
-  void QueueAsyncTask(struct FModioAsyncRequest *Request);
-  PACKAGE_SCOPE :
+PACKAGE_SCOPE:
   /** Called by the async request when it's done */
-  void
-  AsyncRequestDone(struct FModioAsyncRequest *Request);
+  void AsyncRequestDone(struct FModioAsyncRequest *Request);
 
   /** Should only be create from our create function */
   FModioSubsystem();
@@ -263,11 +260,30 @@ protected:
   
   /** Properly shutdowns modio */
   void Shutdown();
-
 private:
+  /** This should be the only way to create and queue async requests */
+  template<typename RequestType, typename CallbackType>
+  friend RequestType* CreateAsyncRequest( FModioSubsystem* Subsystem, CallbackType CallbackDelegate );
+
+  /** Queue up a new async request and take ownership of the memory */
+  void QueueAsyncTask( struct FModioAsyncRequest* Request );
+
   /** All running async requests */
   TArray<TSharedPtr<struct FModioAsyncRequest>> AsyncRequests;
 
   /** Are we initialized */
   uint8 bInitialized : 1;
 };
+
+/**
+  * Create function for async requests, as they need to be queued immediately to ensure that they are queued
+  * before the callback from mod.io API comes in
+  */
+template<typename RequestType, typename CallbackType>
+RequestType* CreateAsyncRequest( FModioSubsystem* Subsystem, CallbackType CallbackDelegate )
+{
+  RequestType* Request = new RequestType( Subsystem, CallbackDelegate );
+  Subsystem->QueueAsyncTask( Request );
+
+  return Request;
+}

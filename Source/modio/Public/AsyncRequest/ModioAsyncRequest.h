@@ -15,9 +15,9 @@ struct FModioAsyncRequest :
 public:
   FModioAsyncRequest() = delete;
   FModioAsyncRequest(const FModioAsyncRequest& Other) = delete;
-  
-  FModioAsyncRequest( struct FModioSubsystem *Modio );
 protected:
+  FModioAsyncRequest(struct FModioSubsystem* Modio);
+
   /** Call this in your subclass when you are done with your object */
   void Done();
 
