@@ -262,8 +262,8 @@ PACKAGE_SCOPE:
   void Shutdown();
 private:
   /** This should be the only way to create and queue async requests */
-  template<typename RequestType, typename CallbackType>
-  friend RequestType* CreateAsyncRequest( FModioSubsystem* Subsystem, CallbackType CallbackDelegate );
+  template<typename RequestType, typename CallbackType, typename... Params>
+  friend RequestType* CreateAsyncRequest( FModioSubsystem* Subsystem, CallbackType CallbackDelegate, Params... Parameters );
 
   /** Queue up a new async request and take ownership of the memory */
   void QueueAsyncTask( struct FModioAsyncRequest* Request );
@@ -279,10 +279,10 @@ private:
   * Create function for async requests, as they need to be queued immediately to ensure that they are queued
   * before the callback from mod.io API comes in
   */
-template<typename RequestType, typename CallbackType>
-RequestType* CreateAsyncRequest( FModioSubsystem* Subsystem, CallbackType CallbackDelegate )
+template<typename RequestType, typename CallbackType, typename... Params>
+RequestType* CreateAsyncRequest( FModioSubsystem* Subsystem, CallbackType CallbackDelegate, Params... Parameters)
 {
-  RequestType* Request = new RequestType( Subsystem, CallbackDelegate );
+  RequestType* Request = new RequestType( Subsystem, CallbackDelegate, Parameters... );
   Subsystem->QueueAsyncTask( Request );
 
   return Request;

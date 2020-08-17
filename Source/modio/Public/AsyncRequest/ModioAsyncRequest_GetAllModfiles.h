@@ -4,23 +4,24 @@
 #pragma once
 #include "AsyncRequest/ModioAsyncRequest.h"
 #include "Schemas/ModioResponse.h"
+#include "Schemas/ModioModfile.h"
 
 /**
-* Callback for when new images were added to a mod
+* Callback returning all the mod files information requested
 * @param ModioResponse - Response from Modio backend
 */
 
-class FModioAsyncRequest_AddModImages : public FModioAsyncRequest
+class FModioAsyncRequest_GetAllModfiles : public FModioAsyncRequest
 {
 public:
-  static void Response(void *Object, ModioResponse ModioResponse );
+  static void Response(void* Object, ModioResponse ModioResponse);
 
 protected:
-  FModioAsyncRequest_AddModImages( FModioSubsystem* Modio, FModioGenericDelegate Delegate );
+  FModioAsyncRequest_GetAllModfiles(FModioSubsystem* Modio, FModioModfileArrayDelegate Delegate);
 
   /** This should be the only way to create and queue async requests */
   template<typename RequestType, typename CallbackType, typename... Params>
-  friend RequestType* CreateAsyncRequest( FModioSubsystem* Subsystem, CallbackType CallbackDelegate, Params... Parameters );
+  friend RequestType* CreateAsyncRequest(FModioSubsystem* Subsystem, CallbackType CallbackDelegate);
 private:
   FModioGenericDelegate ResponseDelegate;
 };
