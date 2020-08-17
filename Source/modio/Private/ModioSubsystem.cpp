@@ -76,138 +76,125 @@ FModioSubsystemPtr FModioSubsystem::Create( const FString& RootDirectory, bool b
 
 void FModioSubsystem::AddMod(const FModioModCreator& ModCreator, FModioModDelegate AddModDelegate)
 {
-  FModioAsyncRequest_AddMod *Request = new FModioAsyncRequest_AddMod( this, AddModDelegate );
+  FModioAsyncRequest_AddMod *Request = CreateAsyncRequest<FModioAsyncRequest_AddMod>( this, AddModDelegate );
   ModioModCreator mod_creator;
   modioInitModCreator(&mod_creator);
   SetupModioModCreator(ModCreator, mod_creator);
-  QueueAsyncTask( Request );
   modioAddMod(Request, mod_creator, FModioAsyncRequest_AddMod::Response);
   modioFreeModCreator(&mod_creator);
 }
 
 void FModioSubsystem::EditMod(uint32 ModId, const FModioModEditor &ModEditor, FModioModDelegate EditModDelegate)
 {
-  FModioAsyncRequest_EditMod *Request = new FModioAsyncRequest_EditMod( this, EditModDelegate );
+  FModioAsyncRequest_EditMod *Request = CreateAsyncRequest<FModioAsyncRequest_EditMod>( this, EditModDelegate );
   ModioModEditor mod_editor;
   modioInitModEditor(&mod_editor);
   SetupModioModEditor(ModEditor, mod_editor);
-  QueueAsyncTask( Request );
   modioEditMod(Request , (u32)ModId, mod_editor, FModioAsyncRequest_EditMod::Response);
   modioFreeModEditor(&mod_editor);
 }
 
 void FModioSubsystem::EmailExchange( const FString &SecurityCode, FModioGenericDelegate EmailExchangeDelegate )
 {
-  FModioAsyncRequest_EmailExchange *Request = new FModioAsyncRequest_EmailExchange( this, EmailExchangeDelegate );
-  QueueAsyncTask( Request );
+  FModioAsyncRequest_EmailExchange *Request = CreateAsyncRequest<FModioAsyncRequest_EmailExchange>( this, EmailExchangeDelegate );
   modioEmailExchange( Request, TCHAR_TO_UTF8(*SecurityCode), FModioAsyncRequest_EmailExchange::Response );
 }
 
 void FModioSubsystem::EmailRequest( const FString &Email, FModioGenericDelegate EmailRequestDelegate )
 {
-  FModioAsyncRequest_EmailRequest *Request = new FModioAsyncRequest_EmailRequest( this, EmailRequestDelegate );
-  QueueAsyncTask( Request );
+  FModioAsyncRequest_EmailRequest *Request = CreateAsyncRequest<FModioAsyncRequest_EmailRequest>( this, EmailRequestDelegate );
   modioEmailRequest( Request, TCHAR_TO_UTF8(*Email), FModioAsyncRequest_EmailRequest::Response );
 }
 
 void FModioSubsystem::GetAllMods(const FModioFilterCreator &FilterCreator, const TArray<FString> &ModTags, int32 Limit, int32 Offset, FModioModArrayDelegate GetAllModsDelegate)
 {
-  FModioAsyncRequest_GetAllMods *Request = new FModioAsyncRequest_GetAllMods( this, GetAllModsDelegate );
+  FModioAsyncRequest_GetAllMods *Request = CreateAsyncRequest<FModioAsyncRequest_GetAllMods>( this, GetAllModsDelegate );
+
   ModioFilterCreator modio_filter_creator;
   modioInitFilter(&modio_filter_creator);
   SetupModioModFilterCreator(FilterCreator, ModTags, Limit, Offset, modio_filter_creator);
-  QueueAsyncTask( Request );
+
   modioGetAllMods(Request, modio_filter_creator, FModioAsyncRequest_GetAllMods::Response);
   modioFreeFilter(&modio_filter_creator);
 }
 
 void FModioSubsystem::GetMod(uint32 ModId, const FModioModDelegate ModDelegate)
 {
-	FModioAsyncRequest_GetMod *Request = new FModioAsyncRequest_GetMod( this, ModDelegate );
-	QueueAsyncTask( Request );
+	FModioAsyncRequest_GetMod *Request = CreateAsyncRequest<FModioAsyncRequest_GetMod>( this, ModDelegate );
 	modioGetMod(Request, (u32)ModId, FModioAsyncRequest_GetMod::Response);
 }
 
 void FModioSubsystem::GetAuthenticatedUser(FModioUserDelegate GetAuthenticatedUserDelegate)
 {
-  FModioAsyncRequest_GetAuthenticatedUser *Request = new FModioAsyncRequest_GetAuthenticatedUser( this, GetAuthenticatedUserDelegate );
-  QueueAsyncTask( Request );
+  FModioAsyncRequest_GetAuthenticatedUser *Request = CreateAsyncRequest<FModioAsyncRequest_GetAuthenticatedUser>( this, GetAuthenticatedUserDelegate );
   modioGetAuthenticatedUser(Request, FModioAsyncRequest_GetAuthenticatedUser::Response);
 }
 
 void FModioSubsystem::GetUserEvents(int32 Limit, int32 Offset, FModioUserEventArrayDelegate GetUserEventsDelegate)
 {
-  FModioAsyncRequest_GetUserEvents *Request = new FModioAsyncRequest_GetUserEvents( this, GetUserEventsDelegate );
+  FModioAsyncRequest_GetUserEvents *Request = CreateAsyncRequest<FModioAsyncRequest_GetUserEvents>( this, GetUserEventsDelegate );
   ModioFilterCreator modio_filter_creator;
   modioInitFilter(&modio_filter_creator);
   SetupModioFilterPagination(Limit, Offset, modio_filter_creator);
-  QueueAsyncTask( Request );
   modioGetUserEvents(Request, modio_filter_creator, FModioAsyncRequest_GetUserEvents::Response);
   modioFreeFilter(&modio_filter_creator);
 }
 
 void FModioSubsystem::GetUserRatings(int32 Limit, int32 Offset, FModioRatingArrayDelegate GetUserRatingsDelegate)
 {
-  FModioAsyncRequest_GetUserRatings *Request = new FModioAsyncRequest_GetUserRatings( this, GetUserRatingsDelegate );
+  FModioAsyncRequest_GetUserRatings *Request = CreateAsyncRequest<FModioAsyncRequest_GetUserRatings>( this, GetUserRatingsDelegate );
   ModioFilterCreator modio_filter_creator;
   modioInitFilter(&modio_filter_creator);
   SetupModioFilterPagination(Limit, Offset, modio_filter_creator);
-  QueueAsyncTask( Request );
   modioGetUserRatings(Request, modio_filter_creator, FModioAsyncRequest_GetUserRatings::Response);
   modioFreeFilter(&modio_filter_creator);
 }
 
 void FModioSubsystem::GetUserSubscriptions(const FModioFilterCreator &FilterCreator, const TArray<FString> &ModTags, int32 Limit, int32 Offset, FModioModArrayDelegate GetUserSubscriptionsDelegate)
 {
-  FModioAsyncRequest_GetUserSubscriptions *Request = new FModioAsyncRequest_GetUserSubscriptions( this, GetUserSubscriptionsDelegate );
+  FModioAsyncRequest_GetUserSubscriptions *Request = CreateAsyncRequest<FModioAsyncRequest_GetUserSubscriptions>( this, GetUserSubscriptionsDelegate );
   ModioFilterCreator modio_filter_creator;
   modioInitFilter(&modio_filter_creator);
   SetupModioModFilterCreator(FilterCreator, ModTags, Limit, Offset, modio_filter_creator);
-  QueueAsyncTask( Request );
   modioGetUserSubscriptions(Request, modio_filter_creator, FModioAsyncRequest_GetUserSubscriptions::Response);
   modioFreeFilter(&modio_filter_creator);
 }
 
 void FModioSubsystem::GetUserMods(const FModioFilterCreator &FilterCreator, const TArray<FString> &ModTags, int32 Limit, int32 Offset, FModioModArrayDelegate GetUserModsDelegate)
 {
-  FModioAsyncRequest_GetUserMods *Request = new FModioAsyncRequest_GetUserMods( this, GetUserModsDelegate );
+  FModioAsyncRequest_GetUserMods *Request = CreateAsyncRequest<FModioAsyncRequest_GetUserMods>( this, GetUserModsDelegate );
   ModioFilterCreator modio_filter_creator;
   modioInitFilter(&modio_filter_creator);
   SetupModioModFilterCreator(FilterCreator, ModTags, Limit, Offset, modio_filter_creator);
-  QueueAsyncTask( Request );
   modioGetUserMods(Request, modio_filter_creator, FModioAsyncRequest_GetUserMods::Response);
   modioFreeFilter(&modio_filter_creator);
 }
 
 void FModioSubsystem::GetUserModfiles(int32 Limit, int32 Offset, FModioModfileArrayDelegate GetUserModfilesDelegate)
 {
-  FModioAsyncRequest_GetUserModfiles *Request = new FModioAsyncRequest_GetUserModfiles( this, GetUserModfilesDelegate );
+  FModioAsyncRequest_GetUserModfiles *Request = CreateAsyncRequest<FModioAsyncRequest_GetUserModfiles>( this, GetUserModfilesDelegate );
   ModioFilterCreator modio_filter_creator;
   modioInitFilter(&modio_filter_creator);
   SetupModioFilterPagination(Limit, Offset, modio_filter_creator);
-  QueueAsyncTask( Request );
   modioGetUserModfiles(Request, modio_filter_creator, FModioAsyncRequest_GetUserModfiles::Response);
   modioFreeFilter(&modio_filter_creator);
 }
 
 void FModioSubsystem::SteamAuth(const FString &Base64Ticket, FModioGenericDelegate SteamAuthDelegate)
 {
-  FModioAsyncRequest_SteamAuth *Request = new FModioAsyncRequest_SteamAuth( this, SteamAuthDelegate );
-  QueueAsyncTask( Request );
+  FModioAsyncRequest_SteamAuth *Request = CreateAsyncRequest<FModioAsyncRequest_SteamAuth>( this, SteamAuthDelegate );
   modioSteamAuthEncoded( Request, TCHAR_TO_UTF8(*Base64Ticket), FModioAsyncRequest_SteamAuth::Response );
 }
 
 void FModioSubsystem::GalaxyAuth(const FString &Appdata, FModioGenericDelegate GalaxyAuthDelegate)
 {
-  FModioAsyncRequest_GalaxyAuth *Request = new FModioAsyncRequest_GalaxyAuth( this, GalaxyAuthDelegate );
-  QueueAsyncTask( Request );
+  FModioAsyncRequest_GalaxyAuth *Request = CreateAsyncRequest<FModioAsyncRequest_GalaxyAuth>( this, GalaxyAuthDelegate );
   modioGalaxyAuth( Request, TCHAR_TO_UTF8(*Appdata), FModioAsyncRequest_GalaxyAuth::Response );
 }
 
 void FModioSubsystem::OculusAuth(const FString& Nonce, const FString& OculusUserId, const FString& AccessToken, const FString& Email, const FString& Device, int32 DateExpires, FModioGenericDelegate OculusAuthDelegate)
 {
-  FModioAsyncRequest_OculusAuth *Request = new FModioAsyncRequest_OculusAuth( this, OculusAuthDelegate );
-  QueueAsyncTask( Request );
+  FModioAsyncRequest_OculusAuth *Request = CreateAsyncRequest<FModioAsyncRequest_OculusAuth>( this, OculusAuthDelegate );
   modioOculusAuth( Request, TCHAR_TO_UTF8(*Nonce), TCHAR_TO_UTF8(*OculusUserId), TCHAR_TO_UTF8(*AccessToken), TCHAR_TO_UTF8(*Email), TCHAR_TO_UTF8(*Device), (u32)DateExpires, FModioAsyncRequest_GalaxyAuth::Response );
 }
 
@@ -379,15 +366,14 @@ TArray<FModioQueuedModfileUpload> FModioSubsystem::GetModfileUploadQueue()
 
 void FModioSubsystem::SubscribeToMod(int32 ModId, FModioModDelegate SubscribeToModDelegate)
 {
-  FModioAsyncRequest_SubscribeToMod *Request = new FModioAsyncRequest_SubscribeToMod( this, SubscribeToModDelegate );
-  QueueAsyncTask( Request );
+  FModioAsyncRequest_SubscribeToMod *Request = CreateAsyncRequest<FModioAsyncRequest_SubscribeToMod>( this, SubscribeToModDelegate );
   modioSubscribeToMod(Request, (u32)ModId, FModioAsyncRequest_SubscribeToMod::Response);
 }
 
 void FModioSubsystem::UnsubscribeFromMod(int32 ModId, FModioGenericDelegate UnsubscribeFromModDelegate)
 {
-  FModioAsyncRequest_UnsubscribeFromMod *Request = new FModioAsyncRequest_UnsubscribeFromMod( this, UnsubscribeFromModDelegate );
-  QueueAsyncTask( Request );
+  FModioAsyncRequest_UnsubscribeFromMod *Request = CreateAsyncRequest<FModioAsyncRequest_UnsubscribeFromMod>( this, UnsubscribeFromModDelegate );
+
   modioUnsubscribeFromMod(Request, (u32)ModId, FModioAsyncRequest_UnsubscribeFromMod::Response);
 }
 
@@ -416,8 +402,7 @@ TArray<int32> FModioSubsystem::GetCurrentUserSubscriptions()
 
 void FModioSubsystem::AddModRating(int32 ModId, bool IsRatingPositive, FModioGenericDelegate AddModRatingDelegate)
 {
-  FModioAsyncRequest_AddModRating *Request = new FModioAsyncRequest_AddModRating( this, AddModRatingDelegate );
-  QueueAsyncTask( Request );
+  FModioAsyncRequest_AddModRating *Request = CreateAsyncRequest<FModioAsyncRequest_AddModRating>( this, AddModRatingDelegate );
   modioAddModRating(Request, (u32)ModId, IsRatingPositive, FModioAsyncRequest_AddModRating::Response);
 }
 
@@ -429,40 +414,39 @@ TEnumAsByte<EModioRatingType> FModioSubsystem::GetCurrentUserModRating(int32 Mod
 
 void FModioSubsystem::GetAllModDependencies(int32 ModId, FModioModDependencyArrayDelegate GetAllModDependenciesDelegate)
 {
-  FModioAsyncRequest_GetAllModDependencies *Request = new FModioAsyncRequest_GetAllModDependencies( this, GetAllModDependenciesDelegate );
-  QueueAsyncTask( Request );
+  FModioAsyncRequest_GetAllModDependencies *Request = CreateAsyncRequest<FModioAsyncRequest_GetAllModDependencies>( this, GetAllModDependenciesDelegate );
+
   modioGetAllModDependencies(Request, (u32)ModId, FModioAsyncRequest_GetAllModDependencies::Response);
 }
 
 void FModioSubsystem::AddModDependencies(int32 ModId, const TArray<int32> &Dependencies, FModioGenericDelegate AddModDependenciesDelegate)
 {
-  FModioAsyncRequest_AddModDependencies *Request = new FModioAsyncRequest_AddModDependencies( this, AddModDependenciesDelegate );
+  FModioAsyncRequest_AddModDependencies *Request = CreateAsyncRequest<FModioAsyncRequest_AddModDependencies>( this, AddModDependenciesDelegate );
   u32 *ModIds = new u32[Dependencies.Num()];
   for(int i = 0; i < Dependencies.Num(); i++)
   {
     ModIds[i] = Dependencies[i];
   }
-  QueueAsyncTask( Request );
   modioAddModDependencies(Request, (u32)ModId, ModIds, (u32)Dependencies.Num(), FModioAsyncRequest_AddModDependencies::Response);
   delete[] ModIds;
 }
 
 void FModioSubsystem::DeleteModDependencies(int32 ModId, const TArray<int32> &Dependencies, FModioGenericDelegate DeleteModDependenciesDelegate)
 {
-  FModioAsyncRequest_DeleteModDependencies *Request = new FModioAsyncRequest_DeleteModDependencies( this, DeleteModDependenciesDelegate );
+  FModioAsyncRequest_DeleteModDependencies *Request = CreateAsyncRequest<FModioAsyncRequest_DeleteModDependencies>( this, DeleteModDependenciesDelegate );
+
   u32 *ModIds = new u32[Dependencies.Num()];
   for(int i = 0; i < Dependencies.Num(); i++)
   {
     ModIds[i] = Dependencies[i];
   }
-  QueueAsyncTask( Request );
   modioDeleteModDependencies(Request, (u32)ModId, ModIds, (u32)Dependencies.Num(), FModioAsyncRequest_DeleteModDependencies::Response);
   delete[] ModIds;
 }
 
 void FModioSubsystem::SubmitReport(TEnumAsByte<EModioResourceType> Resource, int32 Id, TEnumAsByte<EModioReportType> Type, const FString &Name, const FString &Summary, FModioGenericDelegate SubmitReportDelegate)
 {
-  FModioAsyncRequest_SubmitReport *Request = new FModioAsyncRequest_SubmitReport( this, SubmitReportDelegate );
+  FModioAsyncRequest_SubmitReport *Request = CreateAsyncRequest<FModioAsyncRequest_SubmitReport>( this, SubmitReportDelegate );
   
   FString ResourceStr = "";
   switch (Resource)
@@ -496,24 +480,23 @@ void FModioSubsystem::SubmitReport(TEnumAsByte<EModioResourceType> Resource, int
     break;
   }
 
-  QueueAsyncTask( Request );
   modioSubmitReport(Request, TCHAR_TO_UTF8(*ResourceStr), (u32)Id, CType, TCHAR_TO_UTF8(*Name), TCHAR_TO_UTF8(*Summary), FModioAsyncRequest_SubmitReport::Response);
 }
 
 void FModioSubsystem::GetAllModTags(int32 ModId, FModioModTagArrayDelegate GetAllModTagsDelegate)
 {
-  FModioAsyncRequest_GetAllModTags *Request = new FModioAsyncRequest_GetAllModTags( this, GetAllModTagsDelegate );
-  QueueAsyncTask( Request );
+  FModioAsyncRequest_GetAllModTags *Request = CreateAsyncRequest<FModioAsyncRequest_GetAllModTags>( this, GetAllModTagsDelegate );
   modioGetModTags(Request, (u32)ModId, FModioAsyncRequest_GetAllModTags::Response);
 }
 
 void FModioSubsystem::AddModTags(int32 ModId, const TArray<FString> &Tags, FModioGenericDelegate AddModTagsDelegate)
 {
-  FModioAsyncRequest_AddModTags *Request = new FModioAsyncRequest_AddModTags( this, AddModTagsDelegate );
+  FModioAsyncRequest_AddModTags *Request = CreateAsyncRequest<FModioAsyncRequest_AddModTags>( this, AddModTagsDelegate );
   char **ModTags = new char*[Tags.Num()];
   for(int i = 0; i < Tags.Num(); i++)
   {
     ModTags[i] = new char[Tags[i].Len() + 1];
+
     #ifdef MODIO_UE4_WINDOWS_BUILD
       strcpy_s(ModTags[i], Tags[i].Len() + 1, TCHAR_TO_UTF8(*Tags[i]));
     #elif defined(MODIO_UE4_MAC_BUILD) || defined(MODIO_UE4_LINUX_BUILD)
@@ -521,7 +504,6 @@ void FModioSubsystem::AddModTags(int32 ModId, const TArray<FString> &Tags, FModi
     #endif
   }
 
-  QueueAsyncTask( Request );
   modioAddModTags(Request, (u32)ModId, ModTags, (u32)Tags.Num(), FModioAsyncRequest_AddModTags::Response);
   for(int i = 0; i < Tags.Num(); i++)
   {
@@ -532,7 +514,7 @@ void FModioSubsystem::AddModTags(int32 ModId, const TArray<FString> &Tags, FModi
 
 void FModioSubsystem::DeleteModTags(int32 ModId, const TArray<FString> &Tags, FModioGenericDelegate DeleteModTagsDelegate)
 {
-  FModioAsyncRequest_DeleteModTags *Request = new FModioAsyncRequest_DeleteModTags( this, DeleteModTagsDelegate );
+  FModioAsyncRequest_DeleteModTags *Request = CreateAsyncRequest<FModioAsyncRequest_DeleteModTags>( this, DeleteModTagsDelegate );
   char **ModTags = new char*[Tags.Num()];
   for(int i = 0; i < Tags.Num(); i++)
   {
@@ -544,7 +526,6 @@ void FModioSubsystem::DeleteModTags(int32 ModId, const TArray<FString> &Tags, FM
     #endif
   }
 
-  QueueAsyncTask( Request );
   modioDeleteModTags(Request, (u32)ModId, ModTags, (u32)Tags.Num(), FModioAsyncRequest_DeleteModTags::Response);
   for(int i = 0; i < Tags.Num(); i++)
   {
@@ -555,14 +536,13 @@ void FModioSubsystem::DeleteModTags(int32 ModId, const TArray<FString> &Tags, FM
 
 void FModioSubsystem::GetAllMetadataKVP(int32 ModId, FModioMetadataKVPArrayDelegate GetAllMetadataKVPDelegate)
 {
-  FModioAsyncRequest_GetAllMetadataKVP *Request = new FModioAsyncRequest_GetAllMetadataKVP( this, GetAllMetadataKVPDelegate );
-  QueueAsyncTask( Request );
+  FModioAsyncRequest_GetAllMetadataKVP *Request = CreateAsyncRequest<FModioAsyncRequest_GetAllMetadataKVP>( this, GetAllMetadataKVPDelegate );
   modioGetAllMetadataKVP(Request, (u32)ModId, FModioAsyncRequest_GetAllMetadataKVP::Response);
 }
 
 void FModioSubsystem::AddMetadataKVP(int32 ModId, const TMap<FString, FString> &MetadataKVP, FModioGenericDelegate AddMetadataKVPDelegate)
 {
-  FModioAsyncRequest_AddMetadataKVP *Request = new FModioAsyncRequest_AddMetadataKVP( this, AddMetadataKVPDelegate );
+  FModioAsyncRequest_AddMetadataKVP *Request = CreateAsyncRequest<FModioAsyncRequest_AddMetadataKVP>( this, AddMetadataKVPDelegate );
   char **CMetadataKVP = new char*[MetadataKVP.Num()];
 
   uint32 i = 0;
@@ -577,7 +557,6 @@ void FModioSubsystem::AddMetadataKVP(int32 ModId, const TMap<FString, FString> &
     #endif
     i++;
   }
-  QueueAsyncTask( Request );
   modioAddMetadataKVP(Request, (u32)ModId, CMetadataKVP, (u32)MetadataKVP.Num(), FModioAsyncRequest_AddMetadataKVP::Response);
   for(int j = 0; j < MetadataKVP.Num(); j++)
   {
@@ -588,7 +567,7 @@ void FModioSubsystem::AddMetadataKVP(int32 ModId, const TMap<FString, FString> &
 
 void FModioSubsystem::DeleteMetadataKVP(int32 ModId, const TMap<FString, FString> &MetadataKVP, FModioGenericDelegate DeleteMetadataKVPDelegate)
 {
-  FModioAsyncRequest_DeleteMetadataKVP *Request = new FModioAsyncRequest_DeleteMetadataKVP( this, DeleteMetadataKVPDelegate );
+  FModioAsyncRequest_DeleteMetadataKVP *Request = CreateAsyncRequest<FModioAsyncRequest_DeleteMetadataKVP>( this, DeleteMetadataKVPDelegate );
   char **CMetadataKVP = new char*[MetadataKVP.Num()];
   
   uint32 i = 0;
@@ -604,7 +583,6 @@ void FModioSubsystem::DeleteMetadataKVP(int32 ModId, const TMap<FString, FString
     i++;
   }
 
-  QueueAsyncTask( Request );
   modioDeleteMetadataKVP(Request, (u32)ModId, CMetadataKVP, (u32)MetadataKVP.Num(), FModioAsyncRequest_DeleteModTags::Response);
   for(int j = 0; j < MetadataKVP.Num(); j++)
   {
@@ -615,14 +593,13 @@ void FModioSubsystem::DeleteMetadataKVP(int32 ModId, const TMap<FString, FString
 
 void FModioSubsystem::AddModLogo(int32 ModId, const FString &LogoPath, FModioGenericDelegate AddModLogoDelegate)
 {
-  FModioAsyncRequest_AddModLogo *Request = new FModioAsyncRequest_AddModLogo( this, AddModLogoDelegate );
-  QueueAsyncTask( Request );
+  FModioAsyncRequest_AddModLogo *Request = CreateAsyncRequest<FModioAsyncRequest_AddModLogo>( this, AddModLogoDelegate );
   modioAddModLogo( Request, ModId, TCHAR_TO_UTF8(*LogoPath), FModioAsyncRequest_AddModLogo::Response );
 }
 
 void FModioSubsystem::AddModImages(int32 ModId, const TArray<FString> &ImagePaths, FModioGenericDelegate AddModImagesDelegate)
 {
-  FModioAsyncRequest_AddModImages *Request = new FModioAsyncRequest_AddModImages( this, AddModImagesDelegate );
+  FModioAsyncRequest_AddModImages *Request = CreateAsyncRequest<FModioAsyncRequest_AddModImages>( this, AddModImagesDelegate );
   char **CImagePaths = new char*[ImagePaths.Num()];
   for(int i = 0; i < ImagePaths.Num(); i++)
   {
@@ -633,8 +610,6 @@ void FModioSubsystem::AddModImages(int32 ModId, const TArray<FString> &ImagePath
       strcpy(CImagePaths[i], TCHAR_TO_UTF8(*ImagePaths[i]));
     #endif
   }
-
-  QueueAsyncTask( Request );
   modioAddModImages(Request, (u32)ModId, CImagePaths, (u32)ImagePaths.Num(), FModioAsyncRequest_AddModImages::Response);
   for(int i = 0; i < ImagePaths.Num(); i++)
   {
@@ -645,7 +620,7 @@ void FModioSubsystem::AddModImages(int32 ModId, const TArray<FString> &ImagePath
 
 void FModioSubsystem::AddModYoutubeLinks(int32 ModId, const TArray<FString> &YoutubeLinks, FModioGenericDelegate AddModYoutubeLinksDelegate)
 {
-  FModioAsyncRequest_AddModYoutubeLinks *Request = new FModioAsyncRequest_AddModYoutubeLinks( this, AddModYoutubeLinksDelegate );
+  FModioAsyncRequest_AddModYoutubeLinks *Request = CreateAsyncRequest<FModioAsyncRequest_AddModYoutubeLinks>( this, AddModYoutubeLinksDelegate );
   char **CYoutubeLinks = new char*[YoutubeLinks.Num()];
   for(int i = 0; i < YoutubeLinks.Num(); i++)
   {
@@ -656,8 +631,6 @@ void FModioSubsystem::AddModYoutubeLinks(int32 ModId, const TArray<FString> &You
       strcpy(CYoutubeLinks[i], TCHAR_TO_UTF8(*YoutubeLinks[i]));
     #endif
   }
-
-  QueueAsyncTask( Request );
   modioAddModYoutubeLinks(Request, (u32)ModId, CYoutubeLinks, (u32)YoutubeLinks.Num(), FModioAsyncRequest_AddModYoutubeLinks::Response);
   for(int i = 0; i < YoutubeLinks.Num(); i++)
   {
@@ -668,7 +641,7 @@ void FModioSubsystem::AddModYoutubeLinks(int32 ModId, const TArray<FString> &You
 
 void FModioSubsystem::AddModSketchfabLinks(int32 ModId, const TArray<FString> &SketchfabLinks, FModioGenericDelegate AddModSketchfabLinksDelegate)
 {
-  FModioAsyncRequest_AddModSketchfabLinks *Request = new FModioAsyncRequest_AddModSketchfabLinks( this, AddModSketchfabLinksDelegate );
+  FModioAsyncRequest_AddModSketchfabLinks *Request = CreateAsyncRequest<FModioAsyncRequest_AddModSketchfabLinks>( this, AddModSketchfabLinksDelegate );
   char **CSketchfabLinks = new char*[SketchfabLinks.Num()];
   for(int i = 0; i < SketchfabLinks.Num(); i++)
   {
@@ -679,8 +652,6 @@ void FModioSubsystem::AddModSketchfabLinks(int32 ModId, const TArray<FString> &S
       strcpy(CSketchfabLinks[i], TCHAR_TO_UTF8(*SketchfabLinks[i]));
     #endif
   }
-
-  QueueAsyncTask( Request );
   modioAddModSketchfabLinks(Request, (u32)ModId, CSketchfabLinks, (u32)SketchfabLinks.Num(), FModioAsyncRequest_AddModSketchfabLinks::Response);
   for(int i = 0; i < SketchfabLinks.Num(); i++)
   {
@@ -691,7 +662,7 @@ void FModioSubsystem::AddModSketchfabLinks(int32 ModId, const TArray<FString> &S
 
 void FModioSubsystem::DeleteModImages(int32 ModId, const TArray<FString> &ImagePaths, FModioGenericDelegate DeleteModImagesDelegate)
 {
-  FModioAsyncRequest_DeleteModImages *Request = new FModioAsyncRequest_DeleteModImages( this, DeleteModImagesDelegate );
+  FModioAsyncRequest_DeleteModImages *Request = CreateAsyncRequest<FModioAsyncRequest_DeleteModImages>( this, DeleteModImagesDelegate );
   char **CImagePaths = new char*[ImagePaths.Num()];
   for(int i = 0; i < ImagePaths.Num(); i++)
   {
@@ -702,8 +673,6 @@ void FModioSubsystem::DeleteModImages(int32 ModId, const TArray<FString> &ImageP
       strcpy(CImagePaths[i], TCHAR_TO_UTF8(*ImagePaths[i]));
     #endif
   }
-
-  QueueAsyncTask( Request );
   modioDeleteModImages(Request, (u32)ModId, CImagePaths, (u32)ImagePaths.Num(), FModioAsyncRequest_DeleteModImages::Response);
   for(int i = 0; i < ImagePaths.Num(); i++)
   {
@@ -714,7 +683,7 @@ void FModioSubsystem::DeleteModImages(int32 ModId, const TArray<FString> &ImageP
 
 void FModioSubsystem::DeleteModYoutubeLinks(int32 ModId, const TArray<FString> &YoutubeLinks, FModioGenericDelegate DeleteModYoutubeLinksDelegate)
 {
-  FModioAsyncRequest_DeleteModYoutubeLinks *Request = new FModioAsyncRequest_DeleteModYoutubeLinks( this, DeleteModYoutubeLinksDelegate );
+  FModioAsyncRequest_DeleteModYoutubeLinks *Request = CreateAsyncRequest<FModioAsyncRequest_DeleteModYoutubeLinks>( this, DeleteModYoutubeLinksDelegate );
   char **CYoutubeLinks = new char*[YoutubeLinks.Num()];
   for(int i = 0; i < YoutubeLinks.Num(); i++)
   {
@@ -725,8 +694,6 @@ void FModioSubsystem::DeleteModYoutubeLinks(int32 ModId, const TArray<FString> &
       strcpy(CYoutubeLinks[i], TCHAR_TO_UTF8(*YoutubeLinks[i]));
     #endif
   }
-
-  QueueAsyncTask( Request );
   modioDeleteModYoutubeLinks(Request, (u32)ModId, CYoutubeLinks, (u32)YoutubeLinks.Num(), FModioAsyncRequest_DeleteModYoutubeLinks::Response);
   for(int i = 0; i < YoutubeLinks.Num(); i++)
   {
@@ -737,7 +704,7 @@ void FModioSubsystem::DeleteModYoutubeLinks(int32 ModId, const TArray<FString> &
 
 void FModioSubsystem::DeleteModSketchfabLinks(int32 ModId, const TArray<FString> &SketchfabLinks, FModioGenericDelegate DeleteModSketchfabLinksDelegate)
 {
-  FModioAsyncRequest_DeleteModSketchfabLinks *Request = new FModioAsyncRequest_DeleteModSketchfabLinks( this, DeleteModSketchfabLinksDelegate );
+  FModioAsyncRequest_DeleteModSketchfabLinks *Request = CreateAsyncRequest<FModioAsyncRequest_DeleteModSketchfabLinks>( this, DeleteModSketchfabLinksDelegate );
   char **CSketchfabLinks = new char*[SketchfabLinks.Num()];
   for(int i = 0; i < SketchfabLinks.Num(); i++)
   {
@@ -748,8 +715,6 @@ void FModioSubsystem::DeleteModSketchfabLinks(int32 ModId, const TArray<FString>
       strcpy(CSketchfabLinks[i], TCHAR_TO_UTF8(*SketchfabLinks[i]));
     #endif
   }
-
-  QueueAsyncTask( Request );
   modioDeleteModSketchfabLinks(Request, (u32)ModId, CSketchfabLinks, (u32)SketchfabLinks.Num(), FModioAsyncRequest_DeleteModSketchfabLinks::Response);
   for(int i = 0; i < SketchfabLinks.Num(); i++)
   {
@@ -792,7 +757,6 @@ void FModioSubsystem::DownloadModfilesById(const TArray<int32> &ModIds, FModioBo
   {
     CModIds[i] = ModIds[i];
   }
-  QueueAsyncTask( Request );
   modioDownloadModfilesById(Request, CModIds, (u32)ModIds.Num(), FModioAsyncRequest_DownloadModfilesById::Response);
   delete[] CModIds;
 
@@ -801,7 +765,6 @@ void FModioSubsystem::DownloadModfilesById(const TArray<int32> &ModIds, FModioBo
 void FModioSubsystem::DownloadSubscribedModfiles(bool UninstallUnsubscribed, FModioBooleanDelegate DownloadSubscribedModfilesDelegate)
 {
   FModioAsyncRequest_DownloadSubscribedModfiles *Request = new FModioAsyncRequest_DownloadSubscribedModfiles( this, DownloadSubscribedModfilesDelegate );
-  QueueAsyncTask( Request );
   modioDownloadSubscribedModfiles(Request, UninstallUnsubscribed, FModioAsyncRequest_DownloadSubscribedModfiles::Response);
 }
 
@@ -822,7 +785,6 @@ void FModioSubsystem::UninstallUnavailableMods(FModioGenericDelegate UninstallUn
   modioInitFilter(&modio_filter_creator);
   int32 CurrentCallCount = 0;
   TArray<int32> ModIds;
-  QueueAsyncTask( Request );
   for(auto InstalledMod : this->GetAllInstalledMods())
   {
     ModIds.Push(InstalledMod.Mod.Id);

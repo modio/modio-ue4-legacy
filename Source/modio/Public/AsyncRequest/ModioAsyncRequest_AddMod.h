@@ -15,10 +15,14 @@
 class FModioAsyncRequest_AddMod : public FModioAsyncRequest
 {
 public:
-  FModioAsyncRequest_AddMod( FModioSubsystem *Modio, FModioModDelegate Delegate );
-
   static void Response( void *Object, ModioResponse ModioResponse, ModioMod ModioMod );
 
+protected:
+  FModioAsyncRequest_AddMod( FModioSubsystem* Modio, FModioModDelegate Delegate );
+
+  /** This should be the only way to create and queue async requests */
+  template<typename RequestType, typename CallbackType>
+  friend RequestType* CreateAsyncRequest( FModioSubsystem* Subsystem, CallbackType CallbackDelegate );
 private:
   FModioModDelegate ResponseDelegate;
 };

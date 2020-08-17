@@ -15,10 +15,14 @@
 class FModioAsyncRequest_GetUserEvents : public FModioAsyncRequest
 {
 public:
-  FModioAsyncRequest_GetUserEvents( FModioSubsystem *Modio, FModioUserEventArrayDelegate Delegate );
-
   static void Response(void *Object, ModioResponse ModioResponse, ModioUserEvent *ModioUserEvents, u32 ModioUserEventsSize);
 
+protected:
+  FModioAsyncRequest_GetUserEvents( FModioSubsystem* Modio, FModioUserEventArrayDelegate Delegate );
+
+  /** This should be the only way to create and queue async requests */
+  template<typename RequestType, typename CallbackType>
+  friend RequestType* CreateAsyncRequest( FModioSubsystem* Subsystem, CallbackType CallbackDelegate );
 private:
   FModioUserEventArrayDelegate ResponseDelegate;
 };

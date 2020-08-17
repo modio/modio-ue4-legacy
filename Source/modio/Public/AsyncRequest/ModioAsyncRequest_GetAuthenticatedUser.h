@@ -15,10 +15,14 @@
 class FModioAsyncRequest_GetAuthenticatedUser : public FModioAsyncRequest
 {
 public:
-  FModioAsyncRequest_GetAuthenticatedUser( FModioSubsystem *Modio, FModioUserDelegate Delegate );
-
   static void Response(void *Object, ModioResponse ModioResponse, ModioUser ModioUser);
 
+protected:
+  FModioAsyncRequest_GetAuthenticatedUser( FModioSubsystem* Modio, FModioUserDelegate Delegate );
+
+  /** This should be the only way to create and queue async requests */
+  template<typename RequestType, typename CallbackType>
+  friend RequestType* CreateAsyncRequest( FModioSubsystem* Subsystem, CallbackType CallbackDelegate );
 private:
   FModioUserDelegate ResponseDelegate;
 };
