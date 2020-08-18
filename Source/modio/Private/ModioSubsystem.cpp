@@ -759,7 +759,16 @@ void FModioSubsystem::DownloadModfilesById(const TArray<int32> &ModIds, FModioBo
   }
   modioDownloadModfilesById(Request, CModIds, (u32)ModIds.Num(), FModioAsyncRequest_DownloadModfilesById::Response);
   delete[] CModIds;
+}
 
+void FModioSubsystem::GetAllModfiles(int32 ModId, FModioModfileArrayDelegate GetAllModfilesDelegate)
+{
+  FModioAsyncRequest_GetAllModfiles *Request = CreateAsyncRequest<FModioAsyncRequest_GetAllModfiles>( this, GetAllModfilesDelegate );
+  
+  ModioFilterCreator LocalModioFilterCreator;
+  modioInitFilter(&LocalModioFilterCreator);
+
+  modioGetAllModfiles( Request, ModId, LocalModioFilterCreator, FModioAsyncRequest_GetAllModfiles::Response );
 }
 
 void FModioSubsystem::DownloadSubscribedModfiles(bool UninstallUnsubscribed, FModioBooleanDelegate DownloadSubscribedModfilesDelegate)
