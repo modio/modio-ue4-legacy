@@ -242,8 +242,7 @@ void FModioSubsystem::AuthenticateViaToken(const FString& AccessToken)
 
 void FModioSubsystem::GetGame(uint32 GameId, FModioGameDelegate GetGameDelegate)
 {
-  FModioAsyncRequest_GetGame* Request = new FModioAsyncRequest_GetGame(this, GetGameDelegate);
-  QueueAsyncTask(Request);
+  FModioAsyncRequest_GetGame* Request = CreateAsyncRequest<FModioAsyncRequest_GetGame>(this, GetGameDelegate);
 
   modioGetGame(Request, GameId, FModioAsyncRequest_GetGame::Response);
 }
