@@ -240,6 +240,13 @@ void FModioSubsystem::AuthenticateViaToken(const FString& AccessToken)
   modioAuthenticateViaToken(TCHAR_TO_UTF8(*AccessToken));
 }
 
+void FModioSubsystem::GetGame(uint32 GameId, FModioGameDelegate GetGameDelegate)
+{
+  FModioAsyncRequest_GetGame* Request = CreateAsyncRequest<FModioAsyncRequest_GetGame>(this, GetGameDelegate);
+
+  modioGetGame(Request, GameId, FModioAsyncRequest_GetGame::Response);
+}
+
 void FModioSubsystem::DownloadMod(int32 ModId)
 {
   modioDownloadMod((u32)ModId);
