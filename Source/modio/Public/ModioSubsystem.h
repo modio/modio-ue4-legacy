@@ -58,6 +58,7 @@
 #include "AsyncRequest/ModioAsyncRequest_DeleteModImages.h"
 #include "AsyncRequest/ModioAsyncRequest_DeleteModYoutubeLinks.h"
 #include "AsyncRequest/ModioAsyncRequest_DeleteModSketchfabLinks.h"
+#include "AsyncRequest/ModioAsyncRequest_GetAllModfiles.h"
 #include "Int64.h"
 
 typedef TSharedPtr<struct FModioSubsystem, ESPMode::Fast> FModioSubsystemPtr;
@@ -172,6 +173,8 @@ public:
   void PrioritizeModDownload(int32 ModId);
   /** Downloads or updates a list of mods. */
   void DownloadModfilesById(const TArray<int32> &ModIds, FModioBooleanDelegate DownloadModfilesByIdDelegate);
+  /** Get metadata from all modfies for a mod */
+  void GetAllModfiles( int32 ModId, FModioModfileArrayDelegate GetAllModfilesDelegate);
   /** Downloads or updates all mods the current user has subscribed */  
   void DownloadSubscribedModfiles(bool UninstallUnsubscribed, FModioBooleanDelegate DownloadSubscribedModfilesDelegate);
   /** Uninstalls a mod from local storage */  
