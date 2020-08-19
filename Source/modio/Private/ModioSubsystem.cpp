@@ -751,7 +751,7 @@ void FModioSubsystem::PrioritizeModDownload(int32 ModId)
 
 void FModioSubsystem::DownloadModfilesById(const TArray<int32> &ModIds, FModioBooleanDelegate DownloadModfilesByIdDelegate)
 {
-  FModioAsyncRequest_DownloadModfilesById *Request = new FModioAsyncRequest_DownloadModfilesById( this, DownloadModfilesByIdDelegate );
+  FModioAsyncRequest_DownloadModfilesById *Request = CreateAsyncRequest<FModioAsyncRequest_DownloadModfilesById>( this, DownloadModfilesByIdDelegate );
   u32 *CModIds = new u32[ModIds.Num()];
   for(int i = 0; i < ModIds.Num(); i++)
   {
@@ -773,7 +773,7 @@ void FModioSubsystem::GetAllModfiles(int32 ModId, FModioModfileArrayDelegate Get
 
 void FModioSubsystem::DownloadSubscribedModfiles(bool UninstallUnsubscribed, FModioBooleanDelegate DownloadSubscribedModfilesDelegate)
 {
-  FModioAsyncRequest_DownloadSubscribedModfiles *Request = new FModioAsyncRequest_DownloadSubscribedModfiles( this, DownloadSubscribedModfilesDelegate );
+  FModioAsyncRequest_DownloadSubscribedModfiles *Request = CreateAsyncRequest<FModioAsyncRequest_DownloadSubscribedModfiles>( this, DownloadSubscribedModfilesDelegate );
   modioDownloadSubscribedModfiles(Request, UninstallUnsubscribed, FModioAsyncRequest_DownloadSubscribedModfiles::Response);
 }
 
@@ -788,7 +788,7 @@ void FModioSubsystem::UninstallUnavailableMods(FModioGenericDelegate UninstallUn
   int32 ResponseLimit = 100;
   int32 PendingCalls = 1 + (this->GetAllInstalledMods().Num() / ResponseLimit);
   UE_LOG(LogTemp, Warning, TEXT("[mod.io] A total of %i calls will be made to the mod.io API"), PendingCalls);
-  FModioAsyncRequest_UninstallUnavailableMods *Request = new FModioAsyncRequest_UninstallUnavailableMods( this, UninstallUnavailableModsDelegate, PendingCalls );
+  FModioAsyncRequest_UninstallUnavailableMods *Request = CreateAsyncRequest<FModioAsyncRequest_UninstallUnavailableMods>( this, UninstallUnavailableModsDelegate, PendingCalls );
 
   ModioFilterCreator modio_filter_creator;
   modioInitFilter(&modio_filter_creator);

@@ -21,8 +21,8 @@ protected:
   FModioAsyncRequest_GetUserMods( FModioSubsystem* Modio, FModioModArrayDelegate Delegate );
 
   /** This should be the only way to create and queue async requests */
-  template<typename RequestType, typename CallbackType>
-  friend RequestType* CreateAsyncRequest( FModioSubsystem* Subsystem, CallbackType CallbackDelegate );
+  template<typename RequestType, typename CallbackType, typename... Params>
+  friend RequestType* CreateAsyncRequest( FModioSubsystem* Subsystem, CallbackType CallbackDelegate, Params... Parameters );
 private:
   FModioModArrayDelegate ResponseDelegate;
 };
