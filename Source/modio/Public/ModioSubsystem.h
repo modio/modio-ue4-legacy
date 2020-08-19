@@ -13,6 +13,7 @@
 #include "Schemas/ModioQueuedModDownload.h"
 #include "Schemas/ModioQueuedModfileUpload.h"
 #include "Schemas/ModioModEvent.h"
+#include "Schemas/ModioGame.h"
 #include "Enums/ModioModSortType.h"
 #include "Enums/ModioModState.h"
 #include "Enums/ModioRatingType.h"
@@ -59,6 +60,7 @@
 #include "AsyncRequest/ModioAsyncRequest_DeleteModYoutubeLinks.h"
 #include "AsyncRequest/ModioAsyncRequest_DeleteModSketchfabLinks.h"
 #include "AsyncRequest/ModioAsyncRequest_GetAllModfiles.h"
+#include "AsyncRequest/ModioAsyncRequest_GetGame.h"
 #include "Int64.h"
 
 typedef TSharedPtr<struct FModioSubsystem, ESPMode::Fast> FModioSubsystemPtr;
@@ -111,6 +113,10 @@ public:
   FModioUser CurrentUser();
   /** Authenticates by providing an user access token directly */  
   void AuthenticateViaToken(const FString& AccessToken);
+
+  // Game functions
+  /** Get the game information from id */
+  void GetGame(uint32 GameId, FModioGameDelegate GetGameDelegate);
 
   // Mod creation and edition
   /** Creates a new mod profile on mod.io */
