@@ -71,6 +71,9 @@ public:
   void steamAuthEncoded(const std::string &base64_token, const std::function<void(const modio::Response &)> &callback);
   void linkExternalAccount(u32 service, const std::string &service_id, const std::string &email, const std::function<void(const modio::Response &)> &callback);
 
+  // Game Methods
+  void getGame(u32 game_id, const std::function<void(const modio::Response&, const modio::Game& game)>& callback);
+
   //Media Methods
   void downloadImage(const std::string &image_url, const std::string &path, const std::function<void(const modio::Response &)> &callback);
 

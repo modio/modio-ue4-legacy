@@ -540,6 +540,9 @@ extern "C"
   void MODIO_DLL modioLogout(void);
   struct ModioUser MODIO_DLL modioGetCurrentUser(void);
 
+  //Game methods
+  void MODIO_DLL modioGetGame(void* object, u32 game_id, void (*callback)(void* object, ModioResponse response, ModioGame game) );
+
   //External Authentication Methods
   void MODIO_DLL modioGalaxyAuth(void* object, char const* appdata, void (*callback)(void* object, ModioResponse response));
   void MODIO_DLL modioOculusAuth(void* object, char const* nonce, char const* oculus_user_id, char const* access_token, char const* email, char const* device, u32 date_expires, void (*callback)(void* object, ModioResponse response));
