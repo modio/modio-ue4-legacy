@@ -1,7 +1,7 @@
 // Copyright 2019 modio. All Rights Reserved.
 // Released under MIT.
 
-#include "BlueprintCallbackProxies/CallbackProxy_GetAllModfiles.h"
+#include "BlueprintCallbackProxies/CallbackProxy_GetAllModFiles.h"
 #include "ModioSubsystem.h"
 #include "Engine/Engine.h"
 

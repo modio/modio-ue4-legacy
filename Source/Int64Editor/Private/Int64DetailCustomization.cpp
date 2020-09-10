@@ -5,7 +5,7 @@
 #include "PropertyEditing.h"
 #include "Int64.h"
 #include "Widgets/SBoxPanel.h"
-#include "Input/SEditableTextBox.h"
+#include "Widgets/Input/SEditableTextBox.h"
 
 #define LOCTEXT_NAMESPACE "FInt64DetailCustomization"
 
