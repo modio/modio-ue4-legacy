@@ -8,7 +8,7 @@
 #include "Schemas/ModioResponse.h"
 #include "Schemas/ModioModfile.h"
 #include "Net/OnlineBlueprintCallProxyBase.h"
-#include "CallbackProxy_GetAllModfiles.generated.h"
+#include "CallbackProxy_GetAllModFiles.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(
 FGetAllModfilesResult,

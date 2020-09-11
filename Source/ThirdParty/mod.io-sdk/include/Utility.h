@@ -59,15 +59,22 @@ void writeJson(const std::string &file_path, nlohmann::json json_object);
 std::string getModIODirectory();
 std::vector<std::string> getFilenames(const std::string &directory);
 std::vector<std::string> getDirectoryNames(const std::string &root_directory);
-bool isDirectory(const std::string &directory);
-bool directoryExists(const std::string &path);
+bool isDirectory(const std::string& directory);
+bool directoryExists(const std::string& path);
 bool fileExists(const std::string &directory);
 std::string getDirectoryPath(const std::string &filename);
-bool createDirectory(const std::string &directory);
+bool createDirectory(const std::string& directory);
 bool removeDirectory(const std::string &directory);
 void removeFile(const std::string &filename);
 double getFileSize(const std::string &file_path);
-void createPath(const std::string &strPathAndFile);
+/**
+ * Creates the paths up to the file/folder. So if it's a folder name, ensure that you have a slash at end of the path
+ *
+ * Example: Sending in /home/cool_username/a/b creates the folder /home/cool_username/a as it expects that b is a file
+ * Example: Sending in /home/cool_username/a/b.txt creates the folder /home/cool_username/a as b is a file
+ * Example: Sending in /home/cool_username/a/b/ creates the folder /home/cool_username/a/b
+ */
+bool createPath(const std::string &strPathAndFile);
 std::vector<std::string> getHeaders();
 std::vector<std::string> getHeadersNoToken();
 std::vector<std::string> getUrlEncodedHeaders();

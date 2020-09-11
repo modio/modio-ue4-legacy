@@ -2,7 +2,7 @@
 // Released under MIT.
 
 #include "Int64EditorModule.h"
-#include "ModuleManager.h"
+#include "Modules/ModuleManager.h"
 #include "Int64DetailCustomization.h"
 #include "PropertyEditorModule.h"
 #include "Int64.h"

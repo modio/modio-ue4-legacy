@@ -23,7 +23,7 @@ public class modio : ModuleRules
 	{
 		get { return Path.GetFullPath(Path.Combine(ModulePath, "../../Source/ThirdParty/")); }
 	}
-
+ 
 	public modio(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PublicDefinitions.Add("JSON_NOEXCEPTION");
@@ -102,8 +102,7 @@ public class modio : ModuleRules
 			string LibrariesPath = Path.Combine(ThirdPartyPath, modio_directory, "lib", "win64");
 			string DLLPath = Path.Combine(ThirdPartyPath, modio_directory, "bin", "win64");
 
-			PublicLibraryPaths.Add(LibrariesPath);
-			PublicAdditionalLibraries.Add("modio.lib");
+			PublicAdditionalLibraries.Add(LibrariesPath + "/modio.lib");
 			RuntimeDependencies.Add(Path.Combine(DLLPath, "modio.dll"));
 
 			string ProjectBinariesDirectory = Path.Combine(ProjectPath, "Binaries", "Win64");
@@ -123,8 +122,8 @@ public class modio : ModuleRules
 
 			string LibrariesPath = Path.Combine(ThirdPartyPath, modio_directory, "lib", "linux-x64");
 
-			PublicLibraryPaths.Add(LibrariesPath);
-			PublicAdditionalLibraries.Add("modio");
+			PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "libmodio.so") );
+			RuntimeDependencies.Add(Path.Combine(LibrariesPath, "libmodio.so"));
 
 			string ProjectBinariesDirectory = Path.Combine(ProjectPath, "Binaries", "Linux");
 			if (!Directory.Exists(ProjectBinariesDirectory))
@@ -138,13 +137,16 @@ public class modio : ModuleRules
 			isLibrarySupported = true;
 
 			string LibrariesPath = Path.Combine(ThirdPartyPath, modio_directory, "lib", "macOS-x64");
+            string OrigPath = Path.Combine(LibrariesPath, "libmodio.dylib");
+            string DylibPath = "Binaries/Mac/libmodio.dylib";
+			PublicAdditionalLibraries.Add(Path.Combine(ProjectPath, DylibPath) );
+			RuntimeDependencies.Add("$(BinaryOutputDir)/libmodio.dylib", OrigPath);
+            
+            string ProjectBinariesDirectory = Path.Combine(ProjectPath, "Binaries", "Mac");
+            if (!Directory.Exists(ProjectBinariesDirectory))
+                System.IO.Directory.CreateDirectory(ProjectBinariesDirectory);
 
-			PublicLibraryPaths.Add(LibrariesPath);
-			PublicAdditionalLibraries.Add("modio");
-
-			string ProjectBinariesDirectory = Path.Combine(ProjectPath, "Binaries", "Mac");
-			if (!Directory.Exists(ProjectBinariesDirectory))
-				System.IO.Directory.CreateDirectory(ProjectBinariesDirectory);
+            CopyFile(OrigPath, Path.Combine(ProjectPath, "Binaries/Mac/libmodio.dylib"));
 		}
 		
 		if (isLibrarySupported)
