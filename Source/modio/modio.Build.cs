@@ -23,7 +23,7 @@ public class modio : ModuleRules
 	{
 		get { return Path.GetFullPath(Path.Combine(ModulePath, "../../Source/ThirdParty/")); }
 	}
-
+ 
 	public modio(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PublicDefinitions.Add("JSON_NOEXCEPTION");
@@ -137,13 +137,16 @@ public class modio : ModuleRules
 			isLibrarySupported = true;
 
 			string LibrariesPath = Path.Combine(ThirdPartyPath, modio_directory, "lib", "macOS-x64");
+            string OrigPath = Path.Combine(LibrariesPath, "libmodio.dylib");
+            string DylibPath = "Binaries/Mac/libmodio.dylib";
+			PublicAdditionalLibraries.Add(Path.Combine(ProjectPath, DylibPath) );
+			RuntimeDependencies.Add("$(BinaryOutputDir)/libmodio.dylib", OrigPath);
+            
+            string ProjectBinariesDirectory = Path.Combine(ProjectPath, "Binaries", "Mac");
+            if (!Directory.Exists(ProjectBinariesDirectory))
+                System.IO.Directory.CreateDirectory(ProjectBinariesDirectory);
 
-			PublicAdditionalLibraries.Add(LibrariesPath + "libmodio.dylib");
-			RuntimeDependencies.Add(Path.Combine(LibrariesPath, "libmodio.dylib"));
-
-			string ProjectBinariesDirectory = Path.Combine(ProjectPath, "Binaries", "Mac");
-			if (!Directory.Exists(ProjectBinariesDirectory))
-				System.IO.Directory.CreateDirectory(ProjectBinariesDirectory);
+            CopyFile(OrigPath, Path.Combine(ProjectPath, "Binaries/Mac/libmodio.dylib"));
 		}
 		
 		if (isLibrarySupported)
