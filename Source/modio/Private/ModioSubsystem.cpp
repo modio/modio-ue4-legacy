@@ -1,4 +1,4 @@
-// Copyright 2019 modio. All Rights Reserved.
+// Copyright 2020 modio. All Rights Reserved.
 // Released under MIT.
 
 #include "ModioSubsystem.h"
@@ -849,23 +849,9 @@ void onModEvent(ModioResponse ModioResponse, ModioModEvent* ModioEventsArray, u3
 
 void FModioSubsystem::Init( const FString& RootDirectory, uint32 GameId, const FString& ApiKey, bool bIsLiveEnvironment, bool bInstallOnModDownload, bool bRetrieveModsFromOtherGames, bool bEnablePolling)
 {
-  std::streambuf *clog_backup, *cerr_backup;
-  clog_backup = std::clog.rdbuf();
-  cerr_backup = std::cerr.rdbuf();
-
-  LStream Stream;
-  std::clog.rdbuf(&Stream);
-  std::cerr.rdbuf(&Stream);
-
-  std::clog << "[mod.io] Initializing mod.io UE4 plugin.\n";
-
   check(!bInitialized);
 
   u32 Environment = bIsLiveEnvironment ? MODIO_ENVIRONMENT_LIVE : MODIO_ENVIRONMENT_TEST;
-
-  TCHAR_TO_UTF8(*RootDirectory) ;
-  std::clog << "[mod.io] UTF8 root path:" << TCHAR_TO_UTF8(*RootDirectory) << std::endl;
-  UE_LOG(LogTemp, Log, TEXT("[mod.io] root path %s"), *RootDirectory);
 
   modioInit( Environment, (u32)GameId, bRetrieveModsFromOtherGames, bEnablePolling, TCHAR_TO_UTF8(*ApiKey), TCHAR_TO_UTF8(*RootDirectory) );
 
@@ -879,12 +865,6 @@ void FModioSubsystem::Init( const FString& RootDirectory, uint32 GameId, const F
   modioSetEventListener(&onModEvent);
 
   bInitialized = true;
-
-  std::clog << "[mod.io] Finished initializing mod.io UE4 plugin.";
-  std::clog.flush();
-  std::cerr.flush();
-  std::clog.rdbuf(clog_backup);
-  std::cerr.rdbuf(cerr_backup);
 }
 
 void FModioSubsystem::QueueAsyncTask( struct FModioAsyncRequest* Request )
@@ -907,6 +887,8 @@ void FModioSubsystem::AsyncRequestDone( struct FModioAsyncRequest *Request )
 void FModioSubsystem::Shutdown()
 {
   check(bInitialized);
+
+  modioShutdown();
 
   // I would assume that nullptr is valid to stop the callbacks comming in
   modioSetDownloadListener(nullptr);

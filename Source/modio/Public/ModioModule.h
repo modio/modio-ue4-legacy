@@ -1,4 +1,4 @@
-// Copyright 2019 modio. All Rights Reserved.
+// Copyright 2020 modio. All Rights Reserved.
 // Released under MIT.
 
 #pragma once
@@ -21,5 +21,7 @@ private:
   void UnregisterSettings();
 
   FModioSubsystemPtr ModioImp;
+#if PLATFORM_WINDOWS
   void* DLLHandle;
+ #endif
 };

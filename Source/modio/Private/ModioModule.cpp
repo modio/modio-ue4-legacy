@@ -1,4 +1,4 @@
-// Copyright 2019 modio. All Rights Reserved.
+// Copyright 2020 modio. All Rights Reserved.
 // Released under MIT.
 
 #include "ModioModule.h"
@@ -81,9 +81,12 @@ FModioSubsystemPtr FModioModule::GetModioImp(UWorld *World) const
 
 void FModioModule::StartupModule()
 {
+  // Load the DLL on windows
+#if PLATFORM_WINDOWS
   FString DllPath = IPluginManager::Get().FindPlugin("Modio")->GetBaseDir();
   DllPath.Append("/Source/ThirdParty/mod.io-sdk/bin/win64/modio.dll");
   DLLHandle = FPlatformProcess::GetDllHandle(*DllPath);
+#endif
   
   const UModioSettings *Settings = GetDefault<UModioSettings>();
   ModioImp = FModioSubsystem::Create(Settings->RootDirectory, Settings->bRootDirectoryIsInUserSettingsDirectory, Settings->GameId, Settings->ApiKey, Settings->bIsLiveEnvironment, Settings->bInstallOnModDownload, Settings->bRetrieveModsFromOtherGames, Settings->bEnablePolling);
@@ -139,6 +142,7 @@ bool FModioModule::HandleSettingsSaved()
     Settings->SaveConfig();
   }
 
+  UE_LOG(LogTemp, Log, TEXT("Settings->bIsLiveEnvironment = %s"), Settings->bIsLiveEnvironment ? TEXT("TRUE") : TEXT("FALSE") );
   ModioImp = FModioSubsystem::Create(Settings->RootDirectory, Settings->bRootDirectoryIsInUserSettingsDirectory, Settings->GameId, Settings->ApiKey, Settings->bIsLiveEnvironment, Settings->bInstallOnModDownload, Settings->bRetrieveModsFromOtherGames, Settings->bEnablePolling);
 
   return true;
