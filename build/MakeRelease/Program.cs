@@ -65,6 +65,7 @@ namespace MakeRelease
 		{
 			// Register the handler
 			MakeRelease.Process.AddCleanupHandler(Cleanup);
+			Environment.CurrentDirectory = "../../../";
 
 			Parser.Default.ParseArguments<Options>(args)
 				.WithParsed(RunOptions)
