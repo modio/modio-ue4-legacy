@@ -10,6 +10,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath>../</OutputPath>
     <DocumentationFile></DocumentationFile>
+    <DefineConstants>TRACE</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -30,7 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Directory.cs" />
+    <None Include="Filesystem.cs" />
     <None Include="Program.cs" />
   </ItemGroup>
 

@@ -7,6 +7,22 @@ namespace MakeRelease
 {
 	static class Filesystem
 	{
+		public static void SafeDeleteDirectory(string DirectoryToDelete, bool Recursive)
+		{
+			if (Directory.Exists(DirectoryToDelete))
+			{
+				Directory.Delete(DirectoryToDelete, Recursive);
+			}
+		}
+
+		public static void SafeCreateDirectory(string DirectoryToCreate)
+		{
+			if (!Directory.Exists(DirectoryToCreate))
+			{
+				Directory.CreateDirectory(DirectoryToCreate);
+			}
+		}
+
 		// From https://docs.microsoft.com/en-us/dotnet/standard/io/how-to-copy-directories
 		public static void DirectoryCopy(string sourceDirName, string destDirName, bool copySubDirs)
 		{
@@ -30,7 +46,7 @@ namespace MakeRelease
 			foreach (FileInfo file in files)
 			{
 				string tempPath = Path.Combine(destDirName, file.Name);
-				file.CopyTo(tempPath, false);
+				file.CopyTo(tempPath, true);
 			}
 
 			// If copying subdirectories, copy them and their contents to new location.

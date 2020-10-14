@@ -1,59 +1,20 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using CommandLine;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
+using System.IO.Compression;
 
 namespace MakeRelease
 {
 	class Program
 	{
-		static UE4Installs InstalledVersions = null;
-
-		static UE4Installs RequiredUE4Versions = null;
-
 		static int StaticResult = -1;
 
 		static string GetUATPath( UE4InstallInfo Install )
 		{
 			return Install.InstallLocation + @"/Engine/Build/BatchFiles/RunUAT.bat";
-		}
-
-		static private UE4Installs GetInstalledLauncherVersions()
-		{
-			if (InstalledVersions == null)
-			{
-				// On windows, this path is to where to know what installed engine versions are installed
-				string Path = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "/Epic/UnrealEngineLauncher/LauncherInstalled.dat";
-				if (!File.Exists(Path))
-				{
-					throw new System.ApplicationException("Can't find installed launcher file, please install at least on UE4 engine before running this script");
-				}
-
-				InstalledVersions = JsonConvert.DeserializeObject<UE4Installs>(File.ReadAllText(Path));
-			}
-
-			return InstalledVersions;
-		}
-
-		static private UE4Installs GetRequiredVersionList()
-		{
-			if(RequiredUE4Versions == null )
-			{
-				RequiredUE4Versions = new UE4Installs();
-				foreach (Install RequiredInstall in UE4.GetRequiredUE4Installs())
-				{
-					UE4InstallInfo Installation = GetInstalledLauncherVersions().InstallationList.Find(InstalledVersion => InstalledVersion.AppName == "UE_" + RequiredInstall.Version);
-					if (Installation == null)
-					{
-						throw new System.ApplicationException("You don't have the required version " + RequiredInstall.Version + " of UE4 installed");
-					}
-
-					RequiredUE4Versions.InstallationList.Add(Installation);
-				}
-			}
-
-			return RequiredUE4Versions;
 		}
 
 		static string BuildPluginForInstall(UE4InstallInfo Install)
@@ -81,9 +42,9 @@ namespace MakeRelease
 
 		static void CleanupInstallDirectory(string PluginDirectory)
 		{
-			SafeDeleteDirectory(PluginDirectory + "/Binaries", true);
-			SafeDeleteDirectory(PluginDirectory + "/img", true);
-			SafeDeleteDirectory(PluginDirectory + "/Intermediate", true);
+			Filesystem.SafeDeleteDirectory(PluginDirectory + "/Binaries", true);
+			Filesystem.SafeDeleteDirectory(PluginDirectory + "/img", true);
+			Filesystem.SafeDeleteDirectory(PluginDirectory + "/Intermediate", true);
 		}
 
 		static void AddConfigFiles(string PluginDirectory)
@@ -91,8 +52,20 @@ namespace MakeRelease
 			Filesystem.DirectoryCopy(@"../Config/", PluginDirectory + @"/Config/", true);
 		}
 
+		protected static void Cleanup()
+		{
+			// Kill any running process we might have
+			if (Process.RunningProcess != null)
+			{
+				Process.RunningProcess.Kill();
+			}
+		}
+
 		static int Main(string[] args)
 		{
+			// Register the handler
+			MakeRelease.Process.AddCleanupHandler(Cleanup);
+
 			Parser.Default.ParseArguments<Options>(args)
 				.WithParsed(RunOptions)
 				.WithNotParsed(HandleParseError);
@@ -105,30 +78,37 @@ namespace MakeRelease
 			StaticResult = -1;
 		}
 
+		static void SetupClean()
+		{
+			Filesystem.SafeDeleteDirectory( Environment.CurrentDirectory + "/PluginStaging_ALL", true);
+		}
+
 		static void RunOptions(Options Opts)
 		{
-			foreach (UE4InstallInfo Install in GetRequiredVersionList().InstallationList)
+			SetupClean();
+
+			foreach (UE4InstallInfo Install in UE4.GetRequiredVersionList().InstallationList)
 			{
 				string DestinationDirectory = BuildPluginForInstall(Install);
 				CleanupInstallDirectory(DestinationDirectory);
 				AddConfigFiles(DestinationDirectory);
-				CompressPlugin(DestinationDirectory, Opts.UE4PluginVersion);
+				CompressPlugin(Install, DestinationDirectory, Opts.UE4PluginVersion);
 			}
 
 			StaticResult = 0;
 		}
 
-		static void CompressPlugin(string PluginDirectory, string PluginVersion)
+		static void CompressPlugin(UE4InstallInfo Install, string PluginDirectory, string PluginVersion)
 		{
+			Filesystem.SafeCreateDirectory("tmp");
+			Filesystem.DirectoryCopy(PluginDirectory, "tmp/modio", true);
 
-		}
+			ZipFile.CreateFromDirectory("tmp/modio", string.Format("PluginStaging_ALL/modio-{0}-{1}.zip",
+				PluginVersion,
+				Install.GetCleanAppName())
+			);
 
-		private static void SafeDeleteDirectory(string DirectoryToDelete, bool Recursive)
-		{
-			if (Directory.Exists(DirectoryToDelete))
-			{
-				Directory.Delete(DirectoryToDelete, Recursive);
-			}
+			Directory.Delete("tmp", true);
 		}
 	}
 }
