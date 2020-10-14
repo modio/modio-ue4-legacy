@@ -7,3 +7,5 @@ build/MakeRelease/.vs/
 build/MakeRelease/bin/
 build/MakeRelease/obj/
 build/runtimes/
+build/MakeRelease.*
+build/*.dll
