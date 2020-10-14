@@ -55,12 +55,26 @@ namespace MakeRelease
 			throw new System.ApplicationException("Running the tool on a unknown platform");
 		}
 
+		static public string GetApplicationSettingsDir()
+		{
+			if (Platform.IsWindows())
+			{
+				return Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+			}
+			if (Platform.IsMacOS())
+			{
+				return "/Users/" + Environment.UserName + "/Library/Application Support";
+			}
+
+			throw new System.ApplicationException("Unknown platform trying to aquire Application Settings Dir");
+		}
+
 		static public UE4Installs GetInstalledLauncherVersions()
 		{
 			if (InstalledVersions == null)
 			{
 				// On windows, this path is to where to know what installed engine versions are installed
-				string Path = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "/Epic/UnrealEngineLauncher/LauncherInstalled.dat";
+				string Path = GetApplicationSettingsDir() + "/Epic/UnrealEngineLauncher/LauncherInstalled.dat";
 				if (!File.Exists(Path))
 				{
 					throw new System.ApplicationException("Can't find installed launcher file, please install at least on UE4 engine before running this script");

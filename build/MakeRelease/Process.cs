@@ -24,6 +24,14 @@ namespace MakeRelease
 			CTRL_SHUTDOWN_EVENT = 6
 		}
 
+		private static void CallCleanupMacLinux(object sender, ConsoleCancelEventArgs e)
+		{
+			if (Cleanup != null)
+			{
+				Cleanup();
+			}
+		}
+
 		private static bool Handler(CtrlType signal)
 		{
 			switch (signal)
@@ -47,16 +55,37 @@ namespace MakeRelease
 		public static void AddCleanupHandler(CleanupDelegate Del)
 		{
 			Cleanup = Del;
-			SetConsoleCtrlHandler(Handler, true);
+			if (Platform.IsWindows())
+			{
+				SetConsoleCtrlHandler(Handler, true);
+			}
+			else
+			{
+                Console.CancelKeyPress += CallCleanupMacLinux;
+			}
+		}
+
+		private static ProcessStartInfo CreateProcessStartInfo(string Executable, string Arguments)
+		{
+			if (Platform.IsWindows())
+			{
+				// Append "" around the executable so that it can be run
+				Executable = "\"\"" + Executable + "\"\"";
+
+				// On windows, run it in the command prompt
+				return new ProcessStartInfo("cmd", "/c " + Executable + " " + Arguments);
+			}
+			else if (Platform.IsMacOS())
+			{
+				return new ProcessStartInfo(Executable, Arguments);
+			}
+
+			throw new System.ApplicationException("Calling CreateProcessStartInfo on unsupported platform");
 		}
 
 		public static bool RunCommand(string Executable, string Arguments, string Tag)
 		{
-			// Convert spaces to acceptable spaces
-			// Append "" around the executable so that it can be run
-			Executable = "\"\"" + Executable + "\"\"";
-
-			var ProcessInfo = new ProcessStartInfo("cmd.exe", "/c " + Executable + " " + Arguments);
+			var ProcessInfo = CreateProcessStartInfo(Executable, Arguments);
 			ProcessInfo.CreateNoWindow = true;
 			ProcessInfo.UseShellExecute = false;
 			ProcessInfo.RedirectStandardError = true;

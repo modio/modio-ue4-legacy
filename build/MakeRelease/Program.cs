@@ -14,7 +14,11 @@ namespace MakeRelease
 
 		static string GetUATPath( UE4InstallInfo Install )
 		{
-			return Install.InstallLocation + @"/Engine/Build/BatchFiles/RunUAT.bat";
+			string TemplateUATPath = @"{0}/Engine/Build/BatchFiles/RunUAT.{1}";
+
+			return string.Format(TemplateUATPath,
+				Install.InstallLocation,
+				Platform.IsWindows() ? "bat" : "sh");
 		}
 
 		static string BuildPluginForInstall(UE4InstallInfo Install)
@@ -23,7 +27,7 @@ namespace MakeRelease
 				Directory.GetCurrentDirectory(),
 				Install.AppName);
 
-			string BuildTemplate = @"BuildPlugin -Plugin={0}\..\modio.uplugin -TargetPlatforms={1} -Package={2} -Rocket";
+			string BuildTemplate = @"BuildPlugin -Plugin={0}/../modio.uplugin -TargetPlatforms={1} -Package={2} -Rocket";
 
 			if (!Process.RunCommand( GetUATPath(Install),
 								String.Format(BuildTemplate,
