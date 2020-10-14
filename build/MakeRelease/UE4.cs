@@ -40,7 +40,8 @@ namespace MakeRelease
 		{
 			if (Platform.IsWindows())
 			{
-				return "Win64";
+				// This might look wrong, but it's actually correct, sending in Linux also compiles Win64 binaries so we can see that both Win64 and Linux works by using this
+				return "Linux";
 			}
 			if (Platform.IsMacOS())
 			{
