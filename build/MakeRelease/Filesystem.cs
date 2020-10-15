@@ -7,6 +7,14 @@ namespace MakeRelease
 {
 	static class Filesystem
 	{
+		public static void SafeDeleteFile(string FileToDelete)
+		{
+			if (File.Exists(FileToDelete))
+			{
+				File.Delete(FileToDelete);
+			}
+		}
+
 		/** Ensure that Directory.Delete doesn't throw if the directory doesn't exist */
 		public static void SafeDeleteDirectory(string DirectoryToDelete, bool Recursive)
 		{
@@ -61,6 +69,25 @@ namespace MakeRelease
 					Filesystem.DirectoryCopy(subdir.FullName, tempPath, copySubDirs);
 				}
 			}
+		}
+
+		/// <summary>
+        /// Creates a symbolic link
+        /// </summary>
+        /// <param name="PathToOriginal"></param>
+        /// <param name="PathToLink"></param>
+        /// <returns></returns>
+		public static bool CreateSymbolicLink(string PathToOriginal, string PathToLink)
+		{
+			if (Platform.IsMacOS())
+			{
+				return Process.RunCommand("ln", string.Format("-s {0} {1}",
+					PathToOriginal,
+					PathToLink)
+				);
+			}
+
+			throw new System.ApplicationException("Calling CreateSymbolicLink on unimplemented platform");
 		}
 	}
 }

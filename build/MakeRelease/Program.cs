@@ -73,6 +73,9 @@ namespace MakeRelease
 
 		static int Main(string[] args)
 		{
+			Stopwatch Timer = new Stopwatch();
+			Timer.Start();
+
 			// Register the handler
 			MakeRelease.Process.AddCleanupHandler(Cleanup);
 			Environment.CurrentDirectory = "../../../";
@@ -80,6 +83,13 @@ namespace MakeRelease
 			Parser.Default.ParseArguments<Options>(args)
 				.WithParsed(RunWithOptions)
 				.WithNotParsed(IncorrectArugmentsSupplied);
+
+			Timer.Stop();
+			Console.WriteLine(string.Format("{0}: Took: {1:00}min {2:0.##}s",
+				StaticResult == 0 ? "SUCCESS" : "FAILURE",
+				Timer.Elapsed.TotalMinutes,
+				Timer.Elapsed.TotalSeconds -  Math.Floor(Timer.Elapsed.TotalMinutes) * 60.0f)
+			); ;
 
 			return StaticResult;
 		}
@@ -103,13 +113,8 @@ namespace MakeRelease
 
 			foreach (UE4InstallInfo Install in UE4.GetRequiredVersionList().InstallationList)
 			{
-				// On windows, we compile linux so need to ensure that the environment is properly setup
-				if (Platform.IsWindows())
-				{
-					// Ensure that we are using the correct clang version for each engine install
-					Environment.SetEnvironmentVariable("LINUX_MULTIARCH_ROOT", Install.Metadata.ClangInstallPath, EnvironmentVariableTarget.Process);
-				}
-
+				PlatformSetup(Install);
+				
 				string DestinationDirectory = BuildPluginForInstall(Install);
 				CleanupInstallDirectory(DestinationDirectory);
 				AddConfigFiles(DestinationDirectory);
@@ -132,6 +137,28 @@ namespace MakeRelease
 			Directory.Delete("tmp", true);
 			// We have no need of the plugin directory after this
 			Directory.Delete(PluginDirectory, true);
+		}
+
+		/// <summary>
+        /// Platform specific code depending on what platform we currently are running
+        /// </summary>
+		static void PlatformSetup(UE4InstallInfo Install)
+		{
+			// @todo: Next instance we need to check for the platform, make a platform object that we can use to
+			// move the platform specific code in a specific object
+			// On windows, we compile linux so need to ensure that the environment is properly setup
+			if (Platform.IsWindows())
+			{
+				// Ensure that we are using the correct clang version for each engine install
+				Environment.SetEnvironmentVariable("LINUX_MULTIARCH_ROOT", Install.Metadata.ClangInstallPath, EnvironmentVariableTarget.Process);
+			}
+			// On OS X, we require different Xcode-versions to compile all versions. Switch X-code version depending
+			// on the current UE4 version
+			if (Platform.IsMacOS())
+			{
+				Filesystem.SafeDeleteDirectory("/Applications/Xcode.app", true);
+				Filesystem.CreateSymbolicLink(Install.Metadata.XCodeInstallPath, "/Applications/Xcode.app");
+			}
 		}
 	}
 }
