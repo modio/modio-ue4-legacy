@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "MakeRelease": {
+      "commandName": "Project",
+      "commandLineArgs": "-v0.5.1"
+    }
+  }
+}

@@ -36,6 +36,7 @@ public class modio : ModuleRules
 
 		LoadModio(Target);
 
+		// @todo: Can we disable exceptions again?
 		bEnableExceptions = true;
 		// Made sure to disable unity builds, as exclusion of some files causes the project to explode
 		// this was we atleast get deterministic builds even if they are slower
@@ -93,7 +94,8 @@ public class modio : ModuleRules
 	public bool LoadModio(ReadOnlyTargetRules Target)
 	{
 		bool isLibrarySupported = false;
-		if ((Target.Platform == UnrealTargetPlatform.Win64) || (Target.Platform == UnrealTargetPlatform.Win32))
+		
+		if (Target.Platform == UnrealTargetPlatform.Win64)
 		{
 			PublicDefinitions.Add("MODIO_UE4_WINDOWS_BUILD");
 

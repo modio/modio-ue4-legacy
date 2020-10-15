@@ -112,10 +112,12 @@ void FModioModule::ShutdownModule()
     ModioImp = nullptr;
   }
   
+#if PLATFORM_WINDOWS
   if (DLLHandle != NULL)
   {
     FPlatformProcess::FreeDllHandle(DLLHandle);
   }
+#endif
 }
 
 bool FModioModule::SupportsDynamicReloading()

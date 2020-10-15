@@ -3,3 +3,7 @@ Intermediate/
 plugins.dat
 .vscode/
 build/PluginStaging_ALL/
+build/MakeRelease/.vs/
+build/MakeRelease/bin/
+build/MakeRelease/obj/
+build/MakeRelease/*.csproj.user
