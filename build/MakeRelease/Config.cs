@@ -10,22 +10,32 @@ namespace MakeRelease
 	{
 		public object Create(object parent, object configContext, XmlNode Section)
 		{
-			List<Install> MyConfigObject = new List<Install>();
+			List<InstallMetadata> MyConfigObject = new List<InstallMetadata>();
 
 			foreach (XmlNode ChildNode in Section.ChildNodes)
 			{
-				foreach (XmlAttribute Attrib in ChildNode.Attributes)
+				if( ChildNode.Attributes["Version"] == null )
 				{
-					MyConfigObject.Add(new Install() { Version = Attrib.Value });
+					continue;	
 				}
+				if (ChildNode.Attributes["ClangInstall"] == null)
+				{
+					continue;
+				}
+				MyConfigObject.Add( new InstallMetadata()
+				{ 
+					Version = ChildNode.Attributes["Version"].Value,
+					ClangInstallPath = ChildNode.Attributes["ClangInstall"].Value 
+				});
 			}
 			return MyConfigObject;
 		}		
 	}
 
-	public class Install
+	public class InstallMetadata
 	{
 		public string Version { get; set; }
+		public string ClangInstallPath { get; set; }
 	}
 
 }

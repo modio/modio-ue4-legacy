@@ -7,6 +7,7 @@ namespace MakeRelease
 {
 	static class Filesystem
 	{
+		/** Ensure that Directory.Delete doesn't throw if the directory doesn't exist */
 		public static void SafeDeleteDirectory(string DirectoryToDelete, bool Recursive)
 		{
 			if (Directory.Exists(DirectoryToDelete))
@@ -15,6 +16,7 @@ namespace MakeRelease
 			}
 		}
 
+		/** Ensure that Directory.CreateDirectory doesn't throw if the directory exists */
 		public static void SafeCreateDirectory(string DirectoryToCreate)
 		{
 			if (!Directory.Exists(DirectoryToCreate))
@@ -23,6 +25,7 @@ namespace MakeRelease
 			}
 		}
 
+		// Copies a directory and all it's subdirectories
 		// From https://docs.microsoft.com/en-us/dotnet/standard/io/how-to-copy-directories
 		public static void DirectoryCopy(string sourceDirName, string destDirName, bool copySubDirs)
 		{

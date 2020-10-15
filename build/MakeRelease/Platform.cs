@@ -5,6 +5,7 @@ using System.Text;
 
 namespace MakeRelease
 {
+	/** Simple helpers for cleaner syntax when we want to check the platform */
 	class Platform
 	{
 		public static bool IsWindows() => RuntimeInformation.IsOSPlatform(OSPlatform.Windows);

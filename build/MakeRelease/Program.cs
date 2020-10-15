@@ -10,8 +10,10 @@ namespace MakeRelease
 {
 	class Program
 	{
+		// As the entire program is static, we need to to store the result in a static variable
 		static int StaticResult = -1;
 
+		/** Get the path to UAT depending on what UE4 version we are aiming for */
 		static string GetUATPath( UE4InstallInfo Install )
 		{
 			string TemplateUATPath = @"{0}/Engine/Build/BatchFiles/RunUAT.{1}";
@@ -21,6 +23,7 @@ namespace MakeRelease
 				Platform.IsWindows() ? "bat" : "sh");
 		}
 
+		/** Build the plugin for a specific UE4 install */
 		static string BuildPluginForInstall(UE4InstallInfo Install)
 		{
 			string InstallDirectory = String.Format(@"{0}/PluginStaging_ALL/modio_UE4_{1}",
@@ -32,7 +35,7 @@ namespace MakeRelease
 			if (!Process.RunCommand( GetUATPath(Install),
 								String.Format(BuildTemplate,
 									Directory.GetCurrentDirectory(),
-									UE4.GetPlatformString(),
+									UE4.GetPlatformBuildString(),
 									InstallDirectory),
 								Install.AppName
 							)
@@ -44,6 +47,7 @@ namespace MakeRelease
 			return InstallDirectory;
 		}
 
+		/** After the plugin has been built, cleanup the output directory so we only have the desired files */
 		static void CleanupInstallDirectory(string PluginDirectory)
 		{
 			Filesystem.SafeDeleteDirectory(PluginDirectory + "/Binaries", true);
@@ -51,11 +55,13 @@ namespace MakeRelease
 			Filesystem.SafeDeleteDirectory(PluginDirectory + "/Intermediate", true);
 		}
 
+		/** Add the config to the plugin as we has redistrubuted this config directory with each plugin */
 		static void AddConfigFiles(string PluginDirectory)
 		{
 			Filesystem.DirectoryCopy(@"../Config/", PluginDirectory + @"/Config/", true);
 		}
 
+		/** Called when someone closes the window, terminate any running processes we have so that we can run the tool again easier */
 		protected static void Cleanup()
 		{
 			// Kill any running process we might have
@@ -72,28 +78,38 @@ namespace MakeRelease
 			Environment.CurrentDirectory = "../../../";
 
 			Parser.Default.ParseArguments<Options>(args)
-				.WithParsed(RunOptions)
-				.WithNotParsed(HandleParseError);
+				.WithParsed(RunWithOptions)
+				.WithNotParsed(IncorrectArugmentsSupplied);
 
 			return StaticResult;
 		}
 
-		static void HandleParseError(IEnumerable<Error> Errors)
+		static void IncorrectArugmentsSupplied(IEnumerable<Error> Errors)
 		{
+			// Terminate with error code
 			StaticResult = -1;
 		}
 
+		/** Cleanup the output directory so that we start with a clean output directory */
 		static void SetupClean()
 		{
 			Filesystem.SafeDeleteDirectory( Environment.CurrentDirectory + "/PluginStaging_ALL", true);
 		}
 
-		static void RunOptions(Options Opts)
+		/** Basically a main with parsed options */
+		static void RunWithOptions(Options Opts)
 		{
 			SetupClean();
 
 			foreach (UE4InstallInfo Install in UE4.GetRequiredVersionList().InstallationList)
 			{
+				// On windows, we compile linux so need to ensure that the environment is properly setup
+				if (Platform.IsWindows())
+				{
+					// Ensure that we are using the correct clang version for each engine install
+					Environment.SetEnvironmentVariable("LINUX_MULTIARCH_ROOT", Install.Metadata.ClangInstallPath, EnvironmentVariableTarget.Process);
+				}
+
 				string DestinationDirectory = BuildPluginForInstall(Install);
 				CleanupInstallDirectory(DestinationDirectory);
 				AddConfigFiles(DestinationDirectory);
@@ -114,6 +130,8 @@ namespace MakeRelease
 			);
 
 			Directory.Delete("tmp", true);
+			// We have no need of the plugin directory after this
+			Directory.Delete(PluginDirectory, true);
 		}
 	}
 }
