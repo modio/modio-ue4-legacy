@@ -34,6 +34,10 @@ public class modio : ModuleRules
 
 		PrivateDependencyModuleNames.AddRange(new string[] { });
 
+#if UE_4_24_OR_LATER
+		DefaultBuildSettings = BuildSettingsVersion.V2;
+#endif
+
 		LoadModio(Target);
 
 		// @todo: Can we disable exceptions again?
@@ -102,9 +106,9 @@ public class modio : ModuleRules
 			isLibrarySupported = true;
 			
 			string LibrariesPath = Path.Combine(ThirdPartyPath, modio_directory, "lib", "msvc", "x64");
-			string DLLPath = Path.Combine(ThirdPartyPath, modio_directory, "bin", "win64");
-
-			PublicAdditionalLibraries.Add(LibrariesPath + "/modio.lib");
+			string DLLPath = Path.Combine(ThirdPartyPath, modio_directory, "bin", "msvc", "x64");
+			
+			PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "modio.lib"));
 			RuntimeDependencies.Add(Path.Combine(DLLPath, "modio.dll"));
 
 			string ProjectBinariesDirectory = Path.Combine(ProjectPath, "Binaries", "Win64");
@@ -153,10 +157,8 @@ public class modio : ModuleRules
 		
 		if (isLibrarySupported)
 		{
-			string ModioIncludePath = Path.Combine(ThirdPartyPath, modio_directory, "include");
-			string AdditionalDependenciesPath = Path.Combine(ThirdPartyPath, modio_directory, "additional_dependencies");
-			PublicIncludePaths.Add(ModioIncludePath);
-			PublicIncludePaths.Add(AdditionalDependenciesPath);
+			PublicIncludePaths.Add(Path.Combine(ThirdPartyPath, modio_directory, "include"));
+			PublicIncludePaths.Add(Path.Combine(ThirdPartyPath, modio_directory, "additional_dependencies"));
 		}
 		
 		return isLibrarySupported;
