@@ -8,7 +8,11 @@ public class modioEditor : ModuleRules
 	public modioEditor(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
-		
+
+#if UE_4_24_OR_LATER
+		DefaultBuildSettings = BuildSettingsVersion.V2;
+#endif
+
 		PublicIncludePaths.AddRange(
 			new string[] {
 				// ... add public include paths required here ...

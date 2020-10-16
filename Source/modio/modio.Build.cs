@@ -34,6 +34,10 @@ public class modio : ModuleRules
 
 		PrivateDependencyModuleNames.AddRange(new string[] { });
 
+#if UE_4_24_OR_LATER
+		DefaultBuildSettings = BuildSettingsVersion.V2;
+#endif
+
 		LoadModio(Target);
 
 		// @todo: Can we disable exceptions again?
