@@ -138,7 +138,7 @@ public class modio : ModuleRules
 
 			isLibrarySupported = true;
 
-			string LibrariesPath = Path.Combine(ThirdPartyPath, modio_directory, "lib", "macOS-x64");
+			string LibrariesPath = Path.Combine(ThirdPartyPath, modio_directory, "lib", "macOS", "x64");
             string OrigPath = Path.Combine(LibrariesPath, "libmodio.dylib");
             string DylibPath = "Binaries/Mac/libmodio.dylib";
 			PublicAdditionalLibraries.Add(Path.Combine(ProjectPath, DylibPath) );
