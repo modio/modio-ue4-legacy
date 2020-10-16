@@ -71,30 +71,34 @@ static bool Disabled() { return false; }
 
 void FmodioEditorModule::MapCommands()
 {
-  PluginCommands->MapAction(
-    FmodioEditorCommands::Get().Login,
-    FExecuteAction::CreateRaw(this, &FmodioEditorModule::PluginButtonClicked),
-    FCanExecuteAction::CreateStatic( &FmodioEditorModule::Enabled_LoginButton ) );
+  // We have disabled all the plugin commands as the button isn't there anymore
+  if(0)
+  {
+    PluginCommands->MapAction(
+      FmodioEditorCommands::Get().Login,
+      FExecuteAction::CreateRaw(this, &FmodioEditorModule::PluginButtonClicked),
+      FCanExecuteAction::CreateStatic( &FmodioEditorModule::Enabled_LoginButton ) );
 
-  PluginCommands->MapAction(
-    FmodioEditorCommands::Get().Logout,
-    FExecuteAction::CreateRaw( this, &FmodioEditorModule::PluginButtonClicked ),
-    FCanExecuteAction::CreateStatic( &FmodioEditorModule::Enabled_LogoutButton ) );
+    PluginCommands->MapAction(
+      FmodioEditorCommands::Get().Logout,
+      FExecuteAction::CreateRaw( this, &FmodioEditorModule::PluginButtonClicked ),
+      FCanExecuteAction::CreateStatic( &FmodioEditorModule::Enabled_LogoutButton ) );
 
-  PluginCommands->MapAction(
-    FmodioEditorCommands::Get().UploadMod,
-    FExecuteAction::CreateRaw( this, &FmodioEditorModule::PluginButtonClicked ),
-    FCanExecuteAction::CreateStatic( &Disabled ) );
+    PluginCommands->MapAction(
+      FmodioEditorCommands::Get().UploadMod,
+      FExecuteAction::CreateRaw( this, &FmodioEditorModule::PluginButtonClicked ),
+      FCanExecuteAction::CreateStatic( &Disabled ) );
 
-  PluginCommands->MapAction(
-    FmodioEditorCommands::Get().NewModWizard,
-    FExecuteAction::CreateRaw( this, &FmodioEditorModule::PluginButtonClicked ),
-    FCanExecuteAction::CreateStatic( &Disabled ) );
+    PluginCommands->MapAction(
+      FmodioEditorCommands::Get().NewModWizard,
+      FExecuteAction::CreateRaw( this, &FmodioEditorModule::PluginButtonClicked ),
+      FCanExecuteAction::CreateStatic( &Disabled ) );
 
-  PluginCommands->MapAction(
-    FmodioEditorCommands::Get().Settings,
-    FExecuteAction::CreateRaw( this, &FmodioEditorModule::PluginButtonClicked ),
-    FCanExecuteAction::CreateStatic( &Disabled ) );
+    PluginCommands->MapAction(
+      FmodioEditorCommands::Get().Settings,
+      FExecuteAction::CreateRaw( this, &FmodioEditorModule::PluginButtonClicked ),
+      FCanExecuteAction::CreateStatic( &Disabled ) );
+    }
 }
 
 void FmodioEditorModule::PluginButtonClicked()
