@@ -101,7 +101,7 @@ public class modio : ModuleRules
 
 			isLibrarySupported = true;
 			
-			string LibrariesPath = Path.Combine(ThirdPartyPath, modio_directory, "lib", "win64");
+			string LibrariesPath = Path.Combine(ThirdPartyPath, modio_directory, "lib", "msvc", "x64");
 			string DLLPath = Path.Combine(ThirdPartyPath, modio_directory, "bin", "win64");
 
 			PublicAdditionalLibraries.Add(LibrariesPath + "/modio.lib");
@@ -122,7 +122,7 @@ public class modio : ModuleRules
 
 			isLibrarySupported = true;
 
-			string LibrariesPath = Path.Combine(ThirdPartyPath, modio_directory, "lib", "linux-x64");
+			string LibrariesPath = Path.Combine(ThirdPartyPath, modio_directory, "lib", "linux", "x64");
 
 			PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "libmodio.so") );
 			RuntimeDependencies.Add(Path.Combine(LibrariesPath, "libmodio.so"));
@@ -138,7 +138,7 @@ public class modio : ModuleRules
 
 			isLibrarySupported = true;
 
-			string LibrariesPath = Path.Combine(ThirdPartyPath, modio_directory, "lib", "macOS-x64");
+			string LibrariesPath = Path.Combine(ThirdPartyPath, modio_directory, "lib", "macOS", "x64");
             string OrigPath = Path.Combine(LibrariesPath, "libmodio.dylib");
             string DylibPath = "Binaries/Mac/libmodio.dylib";
 			PublicAdditionalLibraries.Add(Path.Combine(ProjectPath, DylibPath) );
