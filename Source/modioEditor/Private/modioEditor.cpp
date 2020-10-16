@@ -30,6 +30,8 @@ void FmodioEditorModule::StartupModule()
 		
 	FLevelEditorModule& LevelEditorModule = FModuleManager::LoadModuleChecked<FLevelEditorModule>("LevelEditor");
 		
+	// Remove the dropdown for now, as it's not used and just comfuses people
+	if(0)
 	{
 		TSharedPtr<FExtender> ToolbarExtender = MakeShareable(new FExtender);
 		ToolbarExtender->AddToolBarExtension("Content", EExtensionHook::After, PluginCommands, FToolBarExtensionDelegate::CreateRaw(this, &FmodioEditorModule::AddToolbarExtension));
