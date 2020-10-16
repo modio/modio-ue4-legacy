@@ -102,9 +102,9 @@ public class modio : ModuleRules
 			isLibrarySupported = true;
 			
 			string LibrariesPath = Path.Combine(ThirdPartyPath, modio_directory, "lib", "msvc", "x64");
-			string DLLPath = Path.Combine(ThirdPartyPath, modio_directory, "bin", "win64");
-
-			PublicAdditionalLibraries.Add(LibrariesPath + "/modio.lib");
+			string DLLPath = Path.Combine(ThirdPartyPath, modio_directory, "bin", "msvc", "x64");
+			
+			PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "modio.lib"));
 			RuntimeDependencies.Add(Path.Combine(DLLPath, "modio.dll"));
 
 			string ProjectBinariesDirectory = Path.Combine(ProjectPath, "Binaries", "Win64");
