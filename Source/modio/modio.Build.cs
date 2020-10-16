@@ -153,10 +153,8 @@ public class modio : ModuleRules
 		
 		if (isLibrarySupported)
 		{
-			string ModioIncludePath = Path.Combine(ThirdPartyPath, modio_directory, "include");
-			string AdditionalDependenciesPath = Path.Combine(ThirdPartyPath, modio_directory, "additional_dependencies");
-			PublicIncludePaths.Add(ModioIncludePath);
-			PublicIncludePaths.Add(AdditionalDependenciesPath);
+			PublicIncludePaths.Add(Path.Combine(ThirdPartyPath, modio_directory, "include"));
+			PublicIncludePaths.Add(Path.Combine(ThirdPartyPath, modio_directory, "additional_dependencies"));
 		}
 		
 		return isLibrarySupported;
