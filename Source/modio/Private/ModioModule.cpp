@@ -84,8 +84,9 @@ void FModioModule::StartupModule()
   // Load the DLL on windows
 #if PLATFORM_WINDOWS
   FString DllPath = IPluginManager::Get().FindPlugin("Modio")->GetBaseDir();
-  DllPath.Append("/Source/ThirdParty/mod.io-sdk/bin/win64/modio.dll");
+  DllPath.Append("/Source/ThirdParty/mod.io-sdk/bin/msvc/x64/modio.dll");
   DLLHandle = FPlatformProcess::GetDllHandle(*DllPath);
+  check(DLLHandle); // This should only happen in our testing environment the path the dll has changed
 #endif
   
   const UModioSettings *Settings = GetDefault<UModioSettings>();
@@ -113,7 +114,7 @@ void FModioModule::ShutdownModule()
   }
   
 #if PLATFORM_WINDOWS
-  if (DLLHandle != NULL)
+  if (DLLHandle != nullptr)
   {
     FPlatformProcess::FreeDllHandle(DLLHandle);
   }
@@ -144,7 +145,6 @@ bool FModioModule::HandleSettingsSaved()
     Settings->SaveConfig();
   }
 
-  UE_LOG(LogTemp, Log, TEXT("Settings->bIsLiveEnvironment = %s"), Settings->bIsLiveEnvironment ? TEXT("TRUE") : TEXT("FALSE") );
   ModioImp = FModioSubsystem::Create(Settings->RootDirectory, Settings->bRootDirectoryIsInUserSettingsDirectory, Settings->GameId, Settings->ApiKey, Settings->bIsLiveEnvironment, Settings->bInstallOnModDownload, Settings->bRetrieveModsFromOtherGames, Settings->bEnablePolling);
 
   return true;
