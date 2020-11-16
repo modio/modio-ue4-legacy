@@ -22,6 +22,6 @@ private:
 
   FModioSubsystemPtr ModioImp;
 #if PLATFORM_WINDOWS
-  void* DLLHandle;
+  void* DLLHandle = nullptr;
  #endif
 };
