@@ -18,7 +18,7 @@ enum class ERunInEditorOn : uint8
 };
 
 UCLASS(config = Game, defaultconfig)
-class UModioSettings : public UObject
+class MODIO_API UModioSettings : public UObject
 {
   GENERATED_BODY()
 
