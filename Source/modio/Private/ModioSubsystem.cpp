@@ -58,7 +58,13 @@ FModioSubsystemPtr FModioSubsystem::Create( const FString& RootDirectory, bool b
   }
 
   FString LocalRootDirectory = "";
-  if( bRootDirectoryIsInUserSettingsDirectory )
+
+  // Check for absolute path
+  if (!FPaths::IsRelative(RootDirectory))
+  {
+	  LocalRootDirectory = RootDirectory;
+  }
+  else if( bRootDirectoryIsInUserSettingsDirectory )
   {
     FString UserSettingsDir = FPlatformProcess::UserSettingsDir();
     LocalRootDirectory = UserSettingsDir + RootDirectory;
