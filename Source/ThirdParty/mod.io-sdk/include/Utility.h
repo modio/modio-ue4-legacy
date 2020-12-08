@@ -49,6 +49,8 @@ void clearLog();
 u32 getCurrentTimeSeconds();
 double getCurrentTimeMillis();
 
+std::string CP437ToUTF8(const std::string& string);
+
 // Json methods
 bool hasKey(nlohmann::json json_object, const std::string &key);
 nlohmann::json toJson(const std::string &json_str);
