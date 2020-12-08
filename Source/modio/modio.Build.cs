@@ -110,13 +110,14 @@ public class modio : ModuleRules
 			
 			PublicAdditionalLibraries.Add(Path.Combine(LibrariesPath, "modio.lib"));
 			RuntimeDependencies.Add(Path.Combine(DLLPath, "modio.dll"));
+			RuntimeDependencies.Add(Path.Combine(DLLPath, "modio.pdb"));
 
 			string ProjectBinariesDirectory = Path.Combine(ProjectPath, "Binaries", "Win64");
 			if (!Directory.Exists(ProjectBinariesDirectory))
 				System.IO.Directory.CreateDirectory(ProjectBinariesDirectory);
 			
-			string ModioDLLDestination = System.IO.Path.Combine(ProjectBinariesDirectory, "modio.dll");
-			CopyFile(Path.Combine(DLLPath, "modio.dll"), ModioDLLDestination);
+			CopyFile(Path.Combine(DLLPath, "modio.dll"), Path.Combine(ProjectBinariesDirectory, "modio.dll"));
+			CopyFile(Path.Combine(DLLPath, "modio.pdb"), Path.Combine(ProjectBinariesDirectory, "modio.pdb"));
 			PublicDelayLoadDLLs.AddRange(new string[] { "modio.dll" });
 		}
 
