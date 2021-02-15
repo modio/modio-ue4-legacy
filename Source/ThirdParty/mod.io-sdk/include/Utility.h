@@ -36,6 +36,7 @@ namespace modio
 std::string MODIO_DLL toString(i32 number);
 std::string MODIO_DLL toString(u32 number);
 std::string MODIO_DLL toString(double number);
+std::string MODIO_DLL toString(bool boolean);
 std::string replaceSubstrings(const std::string &str, const std::string &from, const std::string &to);
 std::string addSlashIfNeeded(const std::string &directory_path);
 std::string getFilename(std::string file_path);

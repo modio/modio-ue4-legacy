@@ -116,6 +116,7 @@ typedef int i32;
 // Extenal Authentication Services
 #define MODIO_SERVICE_STEAM   0
 #define MODIO_SERVICE_GALAXY  1
+#define MODIO_SERVICE_OCULUS  2
 
 // Rating type
 #define MODIO_RATING_UNDEFINED  0
@@ -161,6 +162,11 @@ extern "C"
   // Editors
   typedef struct ModioModEditor ModioModEditor;
   typedef struct ModioModfileEditor ModioModfileEditor;
+  // Terms
+  typedef struct ModioLink ModioLink;
+  typedef struct ModioButton ModioButton;
+  typedef struct ModioTerms ModioTerms;
+
 
   struct ModioListNode
   {
@@ -465,11 +471,11 @@ extern "C"
 
   struct ModioInstalledMod
   {
-	  u32 mod_id;
-	  u32 modfile_id;
-	  u32 date_updated;
-	  char* path;
-	  ModioMod mod;
+    u32 mod_id;
+    u32 modfile_id;
+    u32 date_updated;
+    char* path;
+    ModioMod mod;
   };
 
   struct ModioQueuedModDownload
@@ -514,6 +520,32 @@ extern "C"
     u32 date_added;
   };
 
+  struct ModioButton
+  {
+    char* text;
+  };
+
+  struct ModioLink
+  {
+    char* text;
+    char* url;
+    bool required;
+  };
+  
+  struct ModioTerms
+  {
+    char* plaintext;
+    char* html;
+
+    ModioButton agree;
+    ModioButton disagree;
+
+    ModioLink website;
+    ModioLink terms;
+    ModioLink privacy;
+    ModioLink manage;
+  };
+
   //General Methods
   void MODIO_DLL modioInit(u32 environment, u32 game_id, bool retrieve_mods_from_other_games, bool polling_enabled, char const* api_key, char const* root_path);
   void MODIO_DLL modioShutdown(void);
@@ -538,17 +570,19 @@ extern "C"
   void MODIO_DLL modioAuthenticateViaToken(char const* access_token);
   bool MODIO_DLL modioIsLoggedIn(void);
   void MODIO_DLL modioLogout(void);
-  struct ModioUser MODIO_DLL modioGetCurrentUser(void);
+  struct ModioUser MODIO_DLL modioGetCurrentUser(void);  
 
   //Game methods
   void MODIO_DLL modioGetGame(void* object, u32 game_id, void (*callback)(void* object, ModioResponse response, ModioGame game) );
 
   //External Authentication Methods
-  void MODIO_DLL modioGalaxyAuth(void* object, char const* appdata, void (*callback)(void* object, ModioResponse response));
-  void MODIO_DLL modioOculusAuth(void* object, char const* nonce, char const* oculus_user_id, char const* access_token, char const* email, char const* device, u32 date_expires, void (*callback)(void* object, ModioResponse response));
-  void MODIO_DLL modioSteamAuth(void* object, unsigned char const* rgubTicket, u32 cubTicket, void (*callback)(void* object, ModioResponse response));
-  void MODIO_DLL modioSteamAuthEncoded(void* object, char const* base64_ticket, void (*callback)(void* object, ModioResponse response));
+  void MODIO_DLL modioGalaxyAuth(void* object, char const* appdata, bool terms_agreed, void (*callback)(void* object, ModioResponse response));
+  void MODIO_DLL modioOculusAuth(void* object, char const* nonce, char const* oculus_user_id, char const* access_token, char const* email, char const* device, u32 date_expires, bool terms_agreed, void (*callback)(void* object, ModioResponse response));
+  void MODIO_DLL modioSteamAuth(void* object, unsigned char const* rgubTicket, u32 cubTicket, bool terms_agreed, void (*callback)(void* object, ModioResponse response));
+  void MODIO_DLL modioSteamAuthEncoded(void* object, char const* base64_ticket, bool terms_agreed, void (*callback)(void* object, ModioResponse response));
   void MODIO_DLL modioLinkExternalAccount(void* object, u32 service, char const* service_id, char const* email, void (*callback)(void* object, ModioResponse response));
+  // Valid values fpr service is MODIO_SERVICE_STEAM, MODIO_SERVICE_GALAXY, MODIO_SERVICE_OCULUS
+  void MODIO_DLL modioGetTerms(void* object, u32 service, void (*callback)(void* object, ModioResponse response, ModioTerms* terms));
 
   //Image Methods
   void MODIO_DLL modioDownloadImage(void* object, char const* image_url, char const* path, void (*callback)(void* object, ModioResponse response));

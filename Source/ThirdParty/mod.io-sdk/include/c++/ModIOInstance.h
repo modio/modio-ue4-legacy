@@ -31,6 +31,8 @@ namespace modio { class UserEvent; }
 
 namespace modio
 {
+class Terms;
+
 class MODIO_DLL Instance
 {
   u32 current_call_id;
@@ -65,11 +67,12 @@ public:
   modio::User getCurrentUser();
 
   //External Authentication Methods
-  void galaxyAuth(const std::string &appdata, const std::function<void(const modio::Response &)> &callback);
-  void oculusAuth(const std::string &nonce, const std::string &oculus_user_id, const std::string &access_token, const std::string &email, const std::string &device, u32 date_expires, const std::function<void(const modio::Response &)> &callback);
-  void steamAuth(const unsigned char* rgubTicket, u32 cubTicket, const std::function<void(const modio::Response &)> &callback);
-  void steamAuthEncoded(const std::string &base64_token, const std::function<void(const modio::Response &)> &callback);
+  void galaxyAuth(const std::string &appdata, bool terms_agreed, const std::function<void(const modio::Response &)> &callback);
+  void oculusAuth(const std::string &nonce, const std::string &oculus_user_id, const std::string &access_token, const std::string &email, const std::string &device, u32 date_expires, bool terms_agreed, const std::function<void(const modio::Response &)> &callback);
+  void steamAuth(const unsigned char* rgubTicket, u32 cubTicket, bool terms_agreed, const std::function<void(const modio::Response &)> &callback);
+  void steamAuthEncoded(const std::string &base64_token, bool terms_agreed, const std::function<void(const modio::Response &)> &callback);
   void linkExternalAccount(u32 service, const std::string &service_id, const std::string &email, const std::function<void(const modio::Response &)> &callback);
+  void getTerms(u32 service, const std::function<void(const modio::Response&, const modio::Terms&)>& callback);
 
   // Game Methods
   void getGame(u32 game_id, const std::function<void(const modio::Response&, const modio::Game& game)>& callback);
