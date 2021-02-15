@@ -100,11 +100,11 @@ public:
   /** Send your Security code to the backend */
   void EmailExchange(const FString &SecurityCode, FModioGenericDelegate EmailExchangeDelegate);
   /** Log in to mod.io on behalf of a Steam Galaxy user */
-  void SteamAuth(const FString &Base64Ticket, FModioGenericDelegate SteamAuthDelegate);
+  void SteamAuth(const FString &Base64Ticket, bool TermsAgreed, FModioGenericDelegate SteamAuthDelegate);
   /** Log in to mod.io on behalf of a GOG Galaxy user */
-  void GalaxyAuth(const FString &Appdata, FModioGenericDelegate GalaxyAuthDelegate);
+  void GalaxyAuth(const FString &Appdata, bool TermsAgreed, FModioGenericDelegate GalaxyAuthDelegate);
   /** Log in to mod.io on behalf of a Oculus user */
-  void OculusAuth(const FString &Nonce, const FString &OculusUserId, const FString &AccessToken, const FString &Email, const FString &Device, int32 DateExpires, FModioGenericDelegate GalaxyAuthDelegate);
+  void OculusAuth(const FString &Nonce, const FString &OculusUserId, const FString &AccessToken, const FString &Email, const FString &Device, int32 DateExpires, bool TermsAgreed, FModioGenericDelegate GalaxyAuthDelegate);
   /** Logs out the current user from mod.io */  
   void Logout();
   /** Returns true if there is a user currently logged in */  

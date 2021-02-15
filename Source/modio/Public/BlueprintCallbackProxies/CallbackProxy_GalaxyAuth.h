@@ -19,6 +19,7 @@ class MODIO_API UCallbackProxy_GalaxyAuth : public UOnlineBlueprintCallProxyBase
   GENERATED_UCLASS_BODY()
 
   FString Appdata;
+  bool bTermsAgreed;
 
   // The world context object in which this call is taking place
   UPROPERTY()
@@ -31,7 +32,7 @@ class MODIO_API UCallbackProxy_GalaxyAuth : public UOnlineBlueprintCallProxyBase
   FGalaxyAuthResult OnFailure;
 
   UFUNCTION(BlueprintCallable, Category = "mod.io", meta = (BlueprintInternalUseOnly = "true", DefaultToSelf="WorldContext"))
-  static UCallbackProxy_GalaxyAuth *GalaxyAuth( UObject *WorldContext, const FString &Appdata);
+  static UCallbackProxy_GalaxyAuth *GalaxyAuth( UObject *WorldContext, const FString &Appdata, bool bTermsAgreed = false);
 
   virtual void Activate() override;
 

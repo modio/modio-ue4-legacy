@@ -19,6 +19,7 @@ class MODIO_API UCallbackProxy_SteamAuth : public UOnlineBlueprintCallProxyBase
   GENERATED_UCLASS_BODY()
 
   FString Base64Ticket;
+  bool bTermsAgreed;
 
   // The world context object in which this call is taking place
   UPROPERTY()
@@ -31,7 +32,7 @@ class MODIO_API UCallbackProxy_SteamAuth : public UOnlineBlueprintCallProxyBase
   FSteamAuthResult OnFailure;
 
   UFUNCTION(BlueprintCallable, Category = "mod.io", meta = (BlueprintInternalUseOnly = "true", DefaultToSelf="WorldContext"))
-  static UCallbackProxy_SteamAuth *SteamAuth( UObject *WorldContext, const FString &Base64Ticket);
+  static UCallbackProxy_SteamAuth *SteamAuth( UObject *WorldContext, const FString &Base64Ticket, bool bTermsAgreed);
 
   virtual void Activate() override;
 

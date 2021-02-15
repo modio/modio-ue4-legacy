@@ -10,12 +10,13 @@ UCallbackProxy_SteamAuth::UCallbackProxy_SteamAuth(const FObjectInitializer &Obj
 {
 }
 
-UCallbackProxy_SteamAuth *UCallbackProxy_SteamAuth::SteamAuth( UObject *WorldContext, const FString& Base64Ticket )
+UCallbackProxy_SteamAuth *UCallbackProxy_SteamAuth::SteamAuth( UObject *WorldContext, const FString& Base64Ticket, bool bTermsAgreed)
 {
   UCallbackProxy_SteamAuth *Proxy = NewObject<UCallbackProxy_SteamAuth>();
   Proxy->SetFlags(RF_StrongRefOnFrame);
   Proxy->Base64Ticket = Base64Ticket;
   Proxy->WorldContextObject = WorldContext;
+  Proxy->bTermsAgreed = bTermsAgreed;
   return Proxy;
 }
 
@@ -25,7 +26,7 @@ void UCallbackProxy_SteamAuth::Activate()
   FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
   if( Modio.IsValid() )
   {
-    Modio->SteamAuth( Base64Ticket, FModioGenericDelegate::CreateUObject( this, &UCallbackProxy_SteamAuth::OnSteamAuthDelegate ) );
+    Modio->SteamAuth( Base64Ticket, bTermsAgreed, FModioGenericDelegate::CreateUObject( this, &UCallbackProxy_SteamAuth::OnSteamAuthDelegate ) );
   }
   else
   {

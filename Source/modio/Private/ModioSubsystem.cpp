@@ -186,22 +186,22 @@ void FModioSubsystem::GetUserModfiles(int32 Limit, int32 Offset, FModioModfileAr
   modioFreeFilter(&modio_filter_creator);
 }
 
-void FModioSubsystem::SteamAuth(const FString &Base64Ticket, FModioGenericDelegate SteamAuthDelegate)
+void FModioSubsystem::SteamAuth(const FString &Base64Ticket, bool TermsAgreed, FModioGenericDelegate SteamAuthDelegate)
 {
   FModioAsyncRequest_SteamAuth *Request = CreateAsyncRequest<FModioAsyncRequest_SteamAuth>( this, SteamAuthDelegate );
-  modioSteamAuthEncoded( Request, TCHAR_TO_UTF8(*Base64Ticket), FModioAsyncRequest_SteamAuth::Response );
+  modioSteamAuthEncoded( Request, TCHAR_TO_UTF8(*Base64Ticket), TermsAgreed, FModioAsyncRequest_SteamAuth::Response );
 }
 
-void FModioSubsystem::GalaxyAuth(const FString &Appdata, FModioGenericDelegate GalaxyAuthDelegate)
+void FModioSubsystem::GalaxyAuth(const FString &Appdata, bool TermsAgreed, FModioGenericDelegate GalaxyAuthDelegate)
 {
   FModioAsyncRequest_GalaxyAuth *Request = CreateAsyncRequest<FModioAsyncRequest_GalaxyAuth>( this, GalaxyAuthDelegate );
-  modioGalaxyAuth( Request, TCHAR_TO_UTF8(*Appdata), FModioAsyncRequest_GalaxyAuth::Response );
+  modioGalaxyAuth( Request, TCHAR_TO_UTF8(*Appdata), TermsAgreed, FModioAsyncRequest_GalaxyAuth::Response );
 }
 
-void FModioSubsystem::OculusAuth(const FString& Nonce, const FString& OculusUserId, const FString& AccessToken, const FString& Email, const FString& Device, int32 DateExpires, FModioGenericDelegate OculusAuthDelegate)
+void FModioSubsystem::OculusAuth(const FString& Nonce, const FString& OculusUserId, const FString& AccessToken, const FString& Email, const FString& Device, int32 DateExpires, bool TermsAgreed, FModioGenericDelegate OculusAuthDelegate)
 {
   FModioAsyncRequest_OculusAuth *Request = CreateAsyncRequest<FModioAsyncRequest_OculusAuth>( this, OculusAuthDelegate );
-  modioOculusAuth( Request, TCHAR_TO_UTF8(*Nonce), TCHAR_TO_UTF8(*OculusUserId), TCHAR_TO_UTF8(*AccessToken), TCHAR_TO_UTF8(*Email), TCHAR_TO_UTF8(*Device), (u32)DateExpires, FModioAsyncRequest_GalaxyAuth::Response );
+  modioOculusAuth( Request, TCHAR_TO_UTF8(*Nonce), TCHAR_TO_UTF8(*OculusUserId), TCHAR_TO_UTF8(*AccessToken), TCHAR_TO_UTF8(*Email), TCHAR_TO_UTF8(*Device), (u32)DateExpires, TermsAgreed, FModioAsyncRequest_GalaxyAuth::Response );
 }
 
 void FModioSubsystem::Process()

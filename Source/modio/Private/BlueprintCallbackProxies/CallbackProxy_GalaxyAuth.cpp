@@ -10,12 +10,13 @@ UCallbackProxy_GalaxyAuth::UCallbackProxy_GalaxyAuth(const FObjectInitializer &O
 {
 }
 
-UCallbackProxy_GalaxyAuth *UCallbackProxy_GalaxyAuth::GalaxyAuth( UObject *WorldContext, const FString& Appdata )
+UCallbackProxy_GalaxyAuth *UCallbackProxy_GalaxyAuth::GalaxyAuth( UObject *WorldContext, const FString& Appdata, bool bTermsAgreed)
 {
   UCallbackProxy_GalaxyAuth *Proxy = NewObject<UCallbackProxy_GalaxyAuth>();
   Proxy->SetFlags(RF_StrongRefOnFrame);
   Proxy->Appdata = Appdata;
   Proxy->WorldContextObject = WorldContext;
+  Proxy->bTermsAgreed = bTermsAgreed;
   return Proxy;
 }
 
@@ -25,7 +26,7 @@ void UCallbackProxy_GalaxyAuth::Activate()
   FModioSubsystemPtr Modio = FModioSubsystem::Get( World );
   if( Modio.IsValid() )
   {
-    Modio->GalaxyAuth( Appdata, FModioGenericDelegate::CreateUObject( this, &UCallbackProxy_GalaxyAuth::OnGalaxyAuthDelegate ) );
+    Modio->GalaxyAuth( Appdata, bTermsAgreed, FModioGenericDelegate::CreateUObject( this, &UCallbackProxy_GalaxyAuth::OnGalaxyAuthDelegate ) );
   }
   else
   {
