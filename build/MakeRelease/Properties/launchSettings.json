@@ -2,7 +2,7 @@
   "profiles": {
     "MakeRelease": {
       "commandName": "Project",
-      "commandLineArgs": "-v0.5.1"
+      "commandLineArgs": "-v0.6.0"
     }
   }
 }
