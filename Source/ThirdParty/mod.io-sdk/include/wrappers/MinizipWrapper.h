@@ -15,6 +15,8 @@ namespace modio
     void extract(std::string zip_path, std::string directory_path);
     void compressDirectory(std::string directory, std::string zip_path);
     void compressFiles(std::string root_directory, std::vector<std::string> filenames, std::string zip_path);
+    // Internal function used for testing only
+    std::vector<std::string> getZipFilenames(const std::string& zip_path);
   }
 }
 
