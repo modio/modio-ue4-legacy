@@ -1,5 +1,5 @@
 ## NOTE: This codebase is now deprecated.
-We are currently developing the next version of the mod.io UE4 plugin which will be released in Q2 2021. For access to the alpha, please contact us at [IntegrationTeam@mod.io] with details about your product including target platforms.
+We are currently developing the next version of the mod.io UE4 plugin which will be released in Q2 2021. For access to the alpha, please contact us at [developers@mod.io] with details about your product including target platforms.
 
 <a href="https://mod.io"><img src="https://static.mod.io/v1/images/branding/modio-color-dark.svg" alt="mod.io" width="360" align="right"/></a>
 # Unreal Engine 4 Plugin
